@@ -1,8 +1,5 @@
 package gui.framePrincipal;
 
-import gui.abasPrincipal.AbasPrincipal;
-import gui.painelPrincipal.PainelPrincipal;
-
 import javax.swing.JFrame;
 
 public class GuiPrincipal extends JFrame{
