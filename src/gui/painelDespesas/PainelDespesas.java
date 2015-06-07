@@ -13,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import eventos.TEPainelDespesas;
+
 public class PainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
 	public final int TAM_PAINEL_Y = 600;
@@ -20,8 +22,14 @@ public class PainelDespesas extends JPanel{
 	AbaCategoria abaCategoria = new AbaCategoria();
 	JPanel painelBotoes = new JPanel();
 	JPanel painelTitulo = new JPanel();
-
+	TEPainelDespesas trataEventosDespesas;
+	
+	JButton botaoAdicionarDespesa;
+	JButton botaoNovaCategoria;
+	
 	public PainelDespesas() {
+		trataEventosDespesas = new TEPainelDespesas(this);
+		
 		setLayout(new BorderLayout(0,5));
 		
 		criaAbaCategoria("Esportes");
@@ -63,16 +71,17 @@ public class PainelDespesas extends JPanel{
 		//botao Nova Categoria
 		ImageIcon iconeNovaCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
 		String labelBotaoNovaCategoria = "Nova Categoria";
-		JButton botaoNovaCategoria = new JButton(labelBotaoNovaCategoria, iconeNovaCategoria);
+		botaoNovaCategoria = new JButton(labelBotaoNovaCategoria, iconeNovaCategoria);
 		botaoNovaCategoria.setMargin(new Insets(0,-20,0,0));
 		botaoNovaCategoria.setHorizontalTextPosition(JButton.RIGHT);
 		botaoNovaCategoria.setBackground(Color.GREEN);
 		botaoNovaCategoria.setPreferredSize(new Dimension(150,50));
+		botaoNovaCategoria.addActionListener(trataEventosDespesas);
 		
 		//Botão Nova Despesa
 		ImageIcon iconeAdicionarDespesa = new ImageIcon("imagens/img_botaoNovaCategoria.png");
 		String labelBotaoAdicionarDespesa = "Adicionar Despesa";
-		JButton botaoAdicionarDespesa = new JButton(labelBotaoAdicionarDespesa, iconeAdicionarDespesa);
+		botaoAdicionarDespesa = new JButton(labelBotaoAdicionarDespesa, iconeAdicionarDespesa);
 		botaoAdicionarDespesa.setMargin(new Insets(0,0,0,0));
 		botaoAdicionarDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoAdicionarDespesa.setBackground(Color.GREEN);
@@ -98,6 +107,14 @@ public class PainelDespesas extends JPanel{
 		painelTitulo.setBackground(Color.LIGHT_GRAY);
 		painelTitulo.setBorder(borda);
 		painelTitulo.setVisible(true);
+	}
+
+	public JButton getBotaoAdicionarDespesa() {
+		return botaoAdicionarDespesa;
+	}
+
+	public JButton getBotaoNovaCategoria() {
+		return botaoNovaCategoria;
 	}
 	
 }
