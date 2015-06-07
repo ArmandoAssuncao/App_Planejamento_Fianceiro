@@ -104,7 +104,7 @@ public class JanelaCriarCategoria extends JDialog{
 		
 		
 		painelCampos.add(labelDescricao, constraints);
-		constraints.gridx = 1;
+		constraints.gridx = 0;
 		painelCampos.add(textFieldDescricao, constraints);
 		constraints.gridx = 0;
 		constraints.gridy = 1;
