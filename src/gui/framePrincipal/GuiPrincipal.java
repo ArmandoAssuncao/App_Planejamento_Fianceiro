@@ -7,7 +7,7 @@ public class GuiPrincipal extends JFrame{
 	public final int TAM_JANELA_PRINCIPAL_X = 1200;
 	public final int TAM_JANELA_PRINCIPAL_Y = 700;
 
-	PainelPrincipal painelPrincipal = new PainelPrincipal();
+	PainelPrincipal painelPrincipal = new PainelPrincipal(this);
 	GuiMenu guiMenu = new GuiMenu();
 	
 	public GuiPrincipal() {

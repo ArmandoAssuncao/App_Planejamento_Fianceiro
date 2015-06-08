@@ -3,27 +3,26 @@ package eventos;
 import gui.Categoria.JanelaCriarCategoria;
 import gui.painelDespesas.PainelDespesas;
 
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TEPainelDespesas implements ActionListener{
-	
 	private PainelDespesas painelDespesas;
+	Window janelaPai;
 	
-
-	public TEPainelDespesas(PainelDespesas painelDespesas) {
-		super();
+	public TEPainelDespesas(PainelDespesas painelDespesas, Window janelaPai) {
+		this.janelaPai = janelaPai;
 		this.painelDespesas = painelDespesas;
 	}
 
-
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		if(arg0.getSource() == painelDespesas.getBotaoNovaCategoria()){
-			System.out.println(arg0.getSource());
-			new JanelaCriarCategoria();
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == painelDespesas.getBotaoNovaCategoria()){
+			System.out.println(e.getSource());
+			new JanelaCriarCategoria(janelaPai);
 		}
-		else if(arg0.getSource() == painelDespesas.getBotaoAdicionarDespesa()){
+		else if(e.getSource() == painelDespesas.getBotaoAdicionarDespesa()){
 			System.out.println("botao adicionar despesa");
 		}
 	}

@@ -6,7 +6,9 @@ import gui.painelInicio.PainelInicio;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Window;
 
+import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
 
@@ -18,11 +20,14 @@ public class AbasPrincipal extends JTabbedPane{
 	private final String NOME_ABA_2 = "<html>D<br>E<br>S<br>P<br>E<br>S<br>A<br>S"; 
 	private final String NOME_ABA_3 = "<html>G<br>R<br>A<br>F<br>I<br>C<br>O<br>S"; 
 	
-	PainelInicio painelInicio = new PainelInicio();
-	PainelDespesas painelDespesas = new PainelDespesas();
-	PainelGraficos painelGraficos = new PainelGraficos();
+	PainelInicio painelInicio;
+	PainelDespesas painelDespesas;
+	PainelGraficos painelGraficos;
 	
-	public AbasPrincipal(){
+	public AbasPrincipal(Window framePrincipal){
+		painelInicio = new PainelInicio(framePrincipal);
+		painelDespesas = new PainelDespesas(framePrincipal);
+		painelGraficos = new PainelGraficos(framePrincipal);
 		
 		add(NOME_ABA_1, painelInicio);
 		add(NOME_ABA_2, painelDespesas);

@@ -1,10 +1,13 @@
 package gui.painelGraficos;
 
+import java.awt.Window;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class PainelGraficos extends JPanel {
 
-	public PainelGraficos() {
+	public PainelGraficos(Window framePrincipal) {
 		
 	}
 	

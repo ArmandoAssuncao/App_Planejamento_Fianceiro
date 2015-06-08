@@ -6,10 +6,12 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Window;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -19,18 +21,20 @@ public class PainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
 	public final int TAM_PAINEL_Y = 600;
 	
-	AbaCategoria abaCategoria = new AbaCategoria();
-	JPanel painelBotoes = new JPanel();
-	JPanel painelTitulo = new JPanel();
+	AbaCategoria abaCategoria;
+	JPanel painelBotoes;
+	JPanel painelTitulo;
 	TEPainelDespesas trataEventosDespesas;
 	
 	JButton botaoAdicionarDespesa;
 	JButton botaoNovaCategoria;
+	ImageIcon iconeNovaCategoria;
 	
-	public PainelDespesas() {
-		trataEventosDespesas = new TEPainelDespesas(this);
-		
+	public PainelDespesas(Window framePrincipal) {
 		setLayout(new BorderLayout(0,5));
+		
+		trataEventosDespesas = new TEPainelDespesas(this, framePrincipal);
+		iniciaElementos();
 		
 		criaAbaCategoria("Esportes");
 		for(int i = 0; i < 14; i++) //APAGAR
@@ -69,9 +73,10 @@ public class PainelDespesas extends JPanel{
 		constraints.gridy = 0;
 		
 		//botao Nova Categoria
-		ImageIcon iconeNovaCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
+		iconeNovaCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
 		String labelBotaoNovaCategoria = "Nova Categoria";
-		botaoNovaCategoria = new JButton(labelBotaoNovaCategoria, iconeNovaCategoria);
+		botaoNovaCategoria.setText(labelBotaoNovaCategoria);
+		botaoNovaCategoria.setIcon(iconeNovaCategoria);
 		botaoNovaCategoria.setMargin(new Insets(0,-20,0,0));
 		botaoNovaCategoria.setHorizontalTextPosition(JButton.RIGHT);
 		botaoNovaCategoria.setBackground(Color.GREEN);
@@ -81,7 +86,8 @@ public class PainelDespesas extends JPanel{
 		//Botão Nova Despesa
 		ImageIcon iconeAdicionarDespesa = new ImageIcon("imagens/img_botaoNovaCategoria.png");
 		String labelBotaoAdicionarDespesa = "Adicionar Despesa";
-		botaoAdicionarDespesa = new JButton(labelBotaoAdicionarDespesa, iconeAdicionarDespesa);
+		botaoAdicionarDespesa.setText(labelBotaoAdicionarDespesa);
+		botaoAdicionarDespesa.setIcon(iconeAdicionarDespesa);
 		botaoAdicionarDespesa.setMargin(new Insets(0,0,0,0));
 		botaoAdicionarDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoAdicionarDespesa.setBackground(Color.GREEN);
@@ -109,6 +115,14 @@ public class PainelDespesas extends JPanel{
 		painelTitulo.setVisible(true);
 	}
 
+	private void iniciaElementos(){
+		abaCategoria = new AbaCategoria();
+		painelBotoes = new JPanel();
+		painelTitulo = new JPanel();
+		botaoNovaCategoria = new JButton();
+		botaoAdicionarDespesa = new JButton();
+	}
+	
 	public JButton getBotaoAdicionarDespesa() {
 		return botaoAdicionarDespesa;
 	}
