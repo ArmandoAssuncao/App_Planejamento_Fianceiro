@@ -188,11 +188,11 @@ public class JanelaCriarCategoria extends JDialog{
 		dispose();
 	}
 	
-	public void criaCategoria(){
+	public void criarCategoria(){
 		if(validaCampos()){
+			//Implementar a parte de adicionar no banco
 			
 			finalizaJanelaCategoria();
-			
 		}
 	}
 	
@@ -220,7 +220,7 @@ public class JanelaCriarCategoria extends JDialog{
 		}
 		
 		return true;
-	} 
+	}
 	
 	
 	public String getTITULO_JANELA() {

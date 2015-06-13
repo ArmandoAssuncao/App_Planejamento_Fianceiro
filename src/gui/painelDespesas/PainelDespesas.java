@@ -11,7 +11,6 @@ import java.awt.Window;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -21,14 +20,15 @@ public class PainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
 	public final int TAM_PAINEL_Y = 600;
 	
-	AbaCategoria abaCategoria;
+	AbasCategoria abaCategoria;
 	JPanel painelBotoes;
 	JPanel painelTitulo;
 	TEPainelDespesas trataEventosDespesas;
 	
-	JButton botaoAdicionarDespesa;
 	JButton botaoNovaCategoria;
-	ImageIcon iconeNovaCategoria;
+	JButton botaoExcluirCategoria;
+	JButton botaoEditarCategoria;
+	JButton botaoAdicionarDespesa;
 	
 	public PainelDespesas(Window framePrincipal) {
 		setLayout(new BorderLayout(0,5));
@@ -37,7 +37,7 @@ public class PainelDespesas extends JPanel{
 		iniciaElementos();
 		
 		criaAbaCategoria("Esportes");
-		for(int i = 0; i < 14; i++) //APAGAR
+		for(int i = 0; i < 10; i++) //APAGAR
 			criaAbaCategoria("Educação");
 		criaPainelBotoes();
 		criaPainelTitulo();
@@ -68,13 +68,13 @@ public class PainelDespesas extends JPanel{
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-		constraints.insets = new Insets(0, 0, 150, 0);
+		constraints.insets = new Insets(0, 0, 50, 0);
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		
 		//botao Nova Categoria
-		iconeNovaCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
 		String labelBotaoNovaCategoria = "Nova Categoria";
+		ImageIcon iconeNovaCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
 		botaoNovaCategoria.setText(labelBotaoNovaCategoria);
 		botaoNovaCategoria.setIcon(iconeNovaCategoria);
 		botaoNovaCategoria.setMargin(new Insets(0,-20,0,0));
@@ -83,9 +83,32 @@ public class PainelDespesas extends JPanel{
 		botaoNovaCategoria.setPreferredSize(new Dimension(150,50));
 		botaoNovaCategoria.addActionListener(trataEventosDespesas);
 		
+		//botao Excluir Categoria
+		String labelBotaoExcluirCategoria = "Excluir Categoria";
+		ImageIcon iconeExcluirCategoria = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
+		botaoExcluirCategoria.setText(labelBotaoExcluirCategoria);
+		botaoExcluirCategoria.setIcon(iconeExcluirCategoria);
+		botaoExcluirCategoria.setMargin(new Insets(0,-10,0,0));
+		botaoExcluirCategoria.setHorizontalTextPosition(JButton.RIGHT);
+		botaoExcluirCategoria.setBackground(Color.GREEN);
+		botaoExcluirCategoria.setPreferredSize(new Dimension(150,50));
+		botaoExcluirCategoria.addActionListener(trataEventosDespesas);
+		
+		//botao Editar Categoria
+		String labelBotaoEditarCategoria = "Editar Categoria";
+		ImageIcon iconeEditarCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
+		botaoEditarCategoria.setText(labelBotaoEditarCategoria);
+		botaoEditarCategoria.setIcon(iconeEditarCategoria);
+		botaoEditarCategoria.setMargin(new Insets(0,-20,0,0));
+		botaoEditarCategoria.setHorizontalTextPosition(JButton.RIGHT);
+		botaoEditarCategoria.setBackground(Color.GREEN);
+		botaoEditarCategoria.setPreferredSize(new Dimension(150,50));
+		botaoEditarCategoria.addActionListener(trataEventosDespesas);
+		
+		
 		//Botão Nova Despesa
-		ImageIcon iconeAdicionarDespesa = new ImageIcon("imagens/img_botaoNovaCategoria.png");
 		String labelBotaoAdicionarDespesa = "Adicionar Despesa";
+		ImageIcon iconeAdicionarDespesa = new ImageIcon("imagens/img_botaoNovaCategoria.png");
 		botaoAdicionarDespesa.setText(labelBotaoAdicionarDespesa);
 		botaoAdicionarDespesa.setIcon(iconeAdicionarDespesa);
 		botaoAdicionarDespesa.setMargin(new Insets(0,0,0,0));
@@ -96,6 +119,10 @@ public class PainelDespesas extends JPanel{
 		//adiciona os botões
 		painelBotoes.add(botaoNovaCategoria, constraints);
 		constraints.gridy = 1;
+		painelBotoes.add(botaoExcluirCategoria, constraints);
+		constraints.gridy = 2;
+		painelBotoes.add(botaoEditarCategoria, constraints);
+		constraints.gridy = 3;
 		painelBotoes.add(botaoAdicionarDespesa, constraints);
 		
 		painelBotoes.setPreferredSize(new Dimension(TAM_X, TAM_Y));
@@ -116,19 +143,29 @@ public class PainelDespesas extends JPanel{
 	}
 
 	private void iniciaElementos(){
-		abaCategoria = new AbaCategoria();
+		abaCategoria = new AbasCategoria();
 		painelBotoes = new JPanel();
 		painelTitulo = new JPanel();
 		botaoNovaCategoria = new JButton();
+		botaoExcluirCategoria = new JButton();
+		botaoEditarCategoria = new JButton();
 		botaoAdicionarDespesa = new JButton();
 	}
 	
-	public JButton getBotaoAdicionarDespesa() {
-		return botaoAdicionarDespesa;
-	}
-
 	public JButton getBotaoNovaCategoria() {
 		return botaoNovaCategoria;
+	}
+	
+	public JButton getBotaoExcluirCategoria() {
+		return botaoExcluirCategoria;
+	}
+
+	public JButton getBotaoEditarCategoria() {
+		return botaoEditarCategoria;
+	}
+
+	public JButton getBotaoAdicionarDespesa() {
+		return botaoAdicionarDespesa;
 	}
 	
 }

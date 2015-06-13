@@ -15,7 +15,7 @@ public class TEJanelaCriarCategoria  implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == janelaCriarCategoria.getBotaoCriar()){
-			janelaCriarCategoria.criaCategoria();
+			janelaCriarCategoria.criarCategoria();
 		}
 		else if(e.getSource() == janelaCriarCategoria.getBotaoCancelar()){
 			janelaCriarCategoria.finalizaJanelaCategoria();
