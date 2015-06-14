@@ -1,9 +1,9 @@
-package eventos;
+package eventos.categoria;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import gui.Categoria.JanelaCriarCategoria;
+import gui.categoria.JanelaCriarCategoria;
 
 public class TEJanelaCriarCategoria  implements ActionListener{
 	private JanelaCriarCategoria janelaCriarCategoria;

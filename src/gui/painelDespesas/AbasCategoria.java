@@ -71,6 +71,7 @@ public class AbasCategoria extends JTabbedPane{
 			}
 		}
 
+		//Muda o nome da categoria
 		setTitleAt(getSelectedIndex(), nomeCategoria);
 		
 		return true;

@@ -1,4 +1,4 @@
-package gui.Categoria;
+package gui.categoria;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import eventos.TEJanelaCriarCategoria;
+import eventos.categoria.TEJanelaCriarCategoria;
 import gui.JanelaAviso;
 import gui.painelDespesas.AbasCategoria;
 
@@ -228,7 +228,7 @@ public class JanelaCriarCategoria extends JDialog{
 		
 		String meta = textFieldMeta.getText();
 		if(!meta.matches("[0-9]*")){
-			labelErroCampo.setText("O campo \"Meta\" só aceita numeros");
+			labelErroCampo.setText("O campo \"Meta\" só aceita numeros e \".\"");
 			return false;
 		}
 		

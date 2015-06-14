@@ -1,7 +1,7 @@
-package eventos;
+package eventos.categoria;
 
 
-import gui.Categoria.JanelaEditarCategoria;
+import gui.categoria.JanelaEditarCategoria;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

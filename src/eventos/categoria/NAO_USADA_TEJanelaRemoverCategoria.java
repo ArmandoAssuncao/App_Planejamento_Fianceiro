@@ -1,6 +1,6 @@
-package eventos;
+package eventos.categoria;
 
-import gui.Categoria.NAO_USADA_JanelaRemoverCategoria;
+import gui.categoria.NAO_USADA_JanelaRemoverCategoria;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
-import eventos.TEPainelDespesas;
+import eventos.painelDespesa.TEPainelDespesas;
 
 public class PainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
@@ -117,6 +117,7 @@ public class PainelDespesas extends JPanel{
 		botaoAdicionarDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoAdicionarDespesa.setBackground(Color.GREEN);
 		botaoAdicionarDespesa.setPreferredSize(new Dimension(150,50));
+		botaoAdicionarDespesa.addActionListener(trataEventosDespesas);
 		
 		//Botão Excluir Despesa
 		String labelBotaoExcluirDespesa = "Excluir Despesa";
@@ -127,6 +128,7 @@ public class PainelDespesas extends JPanel{
 		botaoExcluirDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoExcluirDespesa.setBackground(Color.GREEN);
 		botaoExcluirDespesa.setPreferredSize(new Dimension(150,50));
+		botaoExcluirDespesa.addActionListener(trataEventosDespesas);
 		
 		//Botão Editar Despesa
 		String labelBotaoEditarDespesa = "Editar Despesa";
@@ -137,6 +139,7 @@ public class PainelDespesas extends JPanel{
 		botaoEditarDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoEditarDespesa.setBackground(Color.GREEN);
 		botaoEditarDespesa.setPreferredSize(new Dimension(150,50));
+		botaoEditarDespesa.addActionListener(trataEventosDespesas);
 		
 		//adiciona os botões
 		painelBotoes.add(botaoNovaCategoria, constraints);
