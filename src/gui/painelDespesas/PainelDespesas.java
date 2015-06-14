@@ -98,7 +98,7 @@ public class PainelDespesas extends JPanel{
 		
 		//botao Editar Categoria
 		String labelBotaoEditarCategoria = "Editar Categoria";
-		ImageIcon iconeEditarCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
+		ImageIcon iconeEditarCategoria = new ImageIcon("imagens/img_botaoEditarCategoria.png");
 		botaoEditarCategoria.setText(labelBotaoEditarCategoria);
 		botaoEditarCategoria.setIcon(iconeEditarCategoria);
 		botaoEditarCategoria.setMargin(new Insets(0,-20,0,0));
@@ -132,7 +132,7 @@ public class PainelDespesas extends JPanel{
 		
 		//Botão Editar Despesa
 		String labelBotaoEditarDespesa = "Editar Despesa";
-		ImageIcon iconeEditarDespesa = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
+		ImageIcon iconeEditarDespesa = new ImageIcon("imagens/img_botaoEditarCategoria.png");
 		botaoEditarDespesa.setText(labelBotaoEditarDespesa);
 		botaoEditarDespesa.setIcon(iconeEditarDespesa);
 		botaoEditarDespesa.setMargin(new Insets(0,0,0,0));
