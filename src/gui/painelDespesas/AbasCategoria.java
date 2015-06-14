@@ -20,7 +20,7 @@ public class AbasCategoria extends JTabbedPane{
 	public AbasCategoria() {
 		setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		setPreferredSize(new Dimension(TAM_ABA_X, TAM_ABA_Y));
-		setBackground(Color.GREEN);
+		//setBackground(Color.GRAY);
 		setVisible(true);
 	}
 	
@@ -37,7 +37,7 @@ public class AbasCategoria extends JTabbedPane{
 		tabela = new TabelaDaCategoria();
 		barraRolagem = new JScrollPane();
 		
-		for(int i = 0; i < 10; i++) //APAGAR/////////////////////////////////////////////////
+		for(int i = 0; i < 50; i++) //APAGAR/////////////////////////////////////////////////
 			tabela.adicionaLinha(nomeCategoria, "valor", "23/12");
 		
 		barraRolagem.setViewportView(tabela);

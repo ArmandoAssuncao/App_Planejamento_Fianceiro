@@ -50,7 +50,7 @@ public class PainelDespesas extends JPanel{
 		
 		
 		setPreferredSize(new Dimension(TAM_PAINEL_X, TAM_PAINEL_Y));
-		setBackground(Color.BLUE);
+		setBackground(Color.WHITE);
 		setVisible(true);
 	}
 
@@ -157,7 +157,7 @@ public class PainelDespesas extends JPanel{
 		painelBotoes.add(botaoEditarDespesa, constraints);
 		
 		painelBotoes.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-		painelBotoes.setBackground(Color.BLUE);
+		painelBotoes.setBackground(Color.WHITE);
 		painelBotoes.setVisible(true);
 	}
 	
