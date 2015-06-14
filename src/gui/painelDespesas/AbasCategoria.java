@@ -1,5 +1,8 @@
 package gui.painelDespesas;
 
+import gui.JanelaAviso;
+import gui.JanelaDeConfirmacao;
+
 import java.awt.Color;
 import java.awt.Dimension;
 
@@ -22,16 +25,56 @@ public class AbasCategoria extends JTabbedPane{
 	}
 	
 	//Cria nova Categoria
-	public void criarCategoria(String nomeCategoria){
+	public boolean criarCategoria(String nomeCategoria){
+		//verifica se o nome da aba ja existe
+		for(int indice = 0; indice < getTabCount(); indice++){
+			if(getTitleAt(indice).equalsIgnoreCase(nomeCategoria)){
+				System.out.println("Nome da categoria igual");
+				return false;
+			}
+		}
+		
 		tabela = new TabelaDaCategoria();
 		barraRolagem = new JScrollPane();
 		
-		for(int i = 0; i < 10; i++) //APAGAR
+		for(int i = 0; i < 10; i++) //APAGAR/////////////////////////////////////////////////
 			tabela.adicionaLinha(nomeCategoria, "valor", "23/12");
 		
 		barraRolagem.setViewportView(tabela);
 		
 		add(nomeCategoria, barraRolagem);
+		
+		return true;
 	}
+	
+	//Remover categoria
+	public boolean removerCategoria(){
+		String nomeDaCategoria = getTitleAt(getSelectedIndex());
+		
+		JanelaDeConfirmacao janelaDeConfirmacao = new JanelaDeConfirmacao("Remover Categoria", "Tem certeza que deseja remover a categoria \"" + nomeDaCategoria + "\"?");
+		if(janelaDeConfirmacao.isConfirmar()){
+			remove(getSelectedIndex());
+			//Implementar a parte de remover no banco, também remover as despesas associadas/////////////////////////////////////////
+			new JanelaAviso("Remover Categoria", "A categoria \"" + nomeDaCategoria + "\" foi removida com sucesso.");
+		}
+		
+		return false;
+	}
+	
+	//Editar Categoria
+	public boolean editarCategoria(String nomeCategoria){
+		//verifica se o nome da aba ja existe
+		for(int indice = 0; indice < getTabCount(); indice++){
+			if(getTitleAt(indice).equalsIgnoreCase(nomeCategoria)){
+				System.out.println("Nome da categoria igual. Editar");
+				return false;
+			}
+		}
+
+		setTitleAt(getSelectedIndex(), nomeCategoria);
+		
+		return true;
+	}
+	
 	
 }

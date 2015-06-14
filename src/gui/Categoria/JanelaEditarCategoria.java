@@ -14,35 +14,39 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import eventos.TEJanelaCriarCategoria;
+import eventos.TEJanelaEditarCategoria;
 import gui.JanelaAviso;
 import gui.painelDespesas.AbasCategoria;
 
-public class JanelaCriarCategoria extends JDialog{
-	private final String TITULO_JANELA= "Nova Categoria";
+public class JanelaEditarCategoria extends JDialog{
+	private final String TITULO_JANELA= "Editar Categoria";
 	private final int TAM_JANELA_X = 500;
 	private final int TAM_JANELA_Y = 500;
 	
-	private TEJanelaCriarCategoria trataEventosCategoria;
+	private TEJanelaEditarCategoria trataEventosCategoria;
 	private AbasCategoria abasCategoria;
 	private JPanel painelPrincipal;
 	private JPanel painelTitulo;
 	private JPanel painelCampos;
 	
-	private JButton botaoCriar;
+	private JButton botaoEditar;
 	private JButton botaoCancelar;
-	private JLabel labelDescricao;
-	private JLabel labelMeta;
+	private JLabel labelNovaDescricao;
+	private JLabel labelNovaMeta;
+	private JLabel labelAntigaDescricao;
+	private JLabel labelAntigaMeta;
+	private JLabel labelAntigaDescricaoValor;
+	private JLabel labelAntigaMetaValor;
 	private JLabel labelTitulo;
 	private JLabel labelSubTitulo;
 	private JLabel labelErroCampo;
-	private JTextField textFieldDescricao;
-	private JTextField textFieldMeta;
+	private JTextField textFieldNovaDescricao;
+	private JTextField textFieldNovaMeta;
 
-	public JanelaCriarCategoria(AbasCategoria abasCategoria) {
+	public JanelaEditarCategoria(AbasCategoria abasCategoria) {
 		setTitle(TITULO_JANELA);
 		
-		trataEventosCategoria = new TEJanelaCriarCategoria(this);
+		trataEventosCategoria = new TEJanelaEditarCategoria(this);
 		this.abasCategoria = abasCategoria;
 		
 		iniciaElementos();
@@ -77,7 +81,7 @@ public class JanelaCriarCategoria extends JDialog{
 		
 		painelTitulo.setLayout(new BorderLayout(0,0));
 		
-		labelTitulo.setText("Nova Categoria");
+		labelTitulo.setText("Editar Categoria");
 		labelTitulo.setFont(new Font("serif", Font.PLAIN, 25));
 		
 		labelSubTitulo.setText("Campos com * são obrigatórios.");
@@ -102,18 +106,21 @@ public class JanelaCriarCategoria extends JDialog{
 		GridBagConstraints constraints = new GridBagConstraints();
 		
 		labelErroCampo.setText(" ");
-		labelDescricao.setText("* Nome da Categoria:");
-		labelMeta.setText("Meta da Categoria:");
-		textFieldDescricao.setPreferredSize(new Dimension(120,25));
-		textFieldMeta.setPreferredSize(new Dimension(120,25));
+		labelNovaDescricao.setText("* Novo Nome da Categoria:");
+		labelNovaMeta.setText("Nova Meta da Categoria:");
+		labelAntigaDescricao.setText("Antigo Nome da Categoria:");
+		labelAntigaDescricaoValor.setText( abasCategoria.getTitleAt(abasCategoria.getSelectedIndex()) );
+		labelAntigaMeta.setText("Antiga Meta:");
+		labelAntigaMetaValor.setText("????"); //PEGAR O VALOR DO BANCO TALVEZ /////////////////////////////////////////////////////////
+		textFieldNovaDescricao.setPreferredSize(new Dimension(120,25));
+		textFieldNovaMeta.setPreferredSize(new Dimension(120,25));
 		
-		botaoCriar.setText("Criar");
-		botaoCriar.addActionListener(trataEventosCategoria);
+		botaoEditar.setText("Editar");
+		botaoEditar.addActionListener(trataEventosCategoria);
 		
 		botaoCancelar.setText("Cancelar");
 		botaoCancelar.addActionListener(trataEventosCategoria);
 		
-		//constraints.fill = GridBagConstraints.BOTH;
 		constraints.insets = new Insets(-5, -100, 30, 0);
 		constraints.anchor = GridBagConstraints.FIRST_LINE_START;
 		constraints.gridx = 0;
@@ -128,25 +135,48 @@ public class JanelaCriarCategoria extends JDialog{
 		constraints.gridwidth = 1;
 		constraints.ipadx = 0;
 		constraints.weightx = 0;
-		constraints.insets = new Insets(0, 100, 30, -90);
+		constraints.insets = new Insets(0, 100, 10, -90);
 		constraints.anchor = GridBagConstraints.LINE_END;
-		painelCampos.add(labelDescricao, constraints);
+		painelCampos.add(labelAntigaDescricao, constraints);
 		
 		constraints.gridx = 2;
-		painelCampos.add(textFieldDescricao, constraints);
+		constraints.anchor = GridBagConstraints.LINE_START;
+		painelCampos.add(labelAntigaDescricaoValor, constraints);
 		
 		constraints.gridx = 1;
 		constraints.gridy = 2;
-		painelCampos.add(labelMeta, constraints);
+		constraints.anchor = GridBagConstraints.LINE_END;
+		painelCampos.add(labelAntigaMeta, constraints);
 		
 		constraints.gridx = 2;
-		painelCampos.add(textFieldMeta, constraints);
+		constraints.anchor = GridBagConstraints.LINE_START;
+		painelCampos.add(labelAntigaMetaValor, constraints);
 		
 		constraints.gridx = 1;
 		constraints.gridy = 3;
-		constraints.insets = new Insets(200, 100, 0, -90);
+		constraints.anchor = GridBagConstraints.LINE_END;
+		/*constraints.gridwidth = 1;
+		constraints.ipadx = 0;
+		constraints.weightx = 0;
+		constraints.insets = new Insets(0, 100, 30, -90);
+		constraints.anchor = GridBagConstraints.LINE_END;*/
+		painelCampos.add(labelNovaDescricao, constraints);
+		
+		constraints.gridx = 2;
+		painelCampos.add(textFieldNovaDescricao, constraints);
+		
+		constraints.gridx = 1;
+		constraints.gridy = 4;
+		painelCampos.add(labelNovaMeta, constraints);
+		
+		constraints.gridx = 2;
+		painelCampos.add(textFieldNovaMeta, constraints);
+		
+		constraints.gridx = 1;
+		constraints.gridy = 5;
+		constraints.insets = new Insets(180, 100, 0, -90);
 		constraints.anchor = GridBagConstraints.CENTER;
-		painelCampos.add(botaoCriar, constraints);
+		painelCampos.add(botaoEditar, constraints);
 		constraints.gridx = 2;
 		painelCampos.add(botaoCancelar, constraints);
 		
@@ -160,30 +190,38 @@ public class JanelaCriarCategoria extends JDialog{
 		painelPrincipal = new JPanel();
 		painelCampos = new JPanel();
 		painelTitulo = new JPanel();
-		botaoCriar = new JButton();
+		botaoEditar = new JButton();
 		botaoCancelar = new JButton();
-		labelDescricao = new JLabel();
-		labelMeta = new JLabel();
+		labelAntigaDescricao = new JLabel();
+		labelAntigaMeta = new JLabel();
 		labelTitulo = new JLabel();
 		labelSubTitulo = new JLabel();
 		labelErroCampo = new JLabel();
-		textFieldDescricao = new JTextField();
-		textFieldMeta = new JTextField();
+		textFieldNovaDescricao = new JTextField();
+		textFieldNovaMeta = new JTextField();
+		labelNovaDescricao = new JLabel();
+		labelNovaMeta = new JLabel();
+		labelAntigaDescricaoValor = new JLabel();
+		labelAntigaMetaValor = new JLabel();
 	}
 	
 	private void liberaElementos(){
 		painelPrincipal = null;
 		painelCampos = null;
 		painelTitulo = null;
-		botaoCriar = null;
+		botaoEditar = null;
 		botaoCancelar = null;
-		labelDescricao = null;
-		labelMeta = null;
+		labelAntigaDescricao = null;
+		labelAntigaMeta = null;
 		labelTitulo = null;
 		labelSubTitulo = null;
 		labelErroCampo = null;
-		textFieldDescricao = null;
-		textFieldMeta = null;
+		textFieldNovaDescricao = null;
+		textFieldNovaMeta = null;
+		labelNovaDescricao = null;
+		labelNovaMeta = null;
+		labelAntigaDescricaoValor = null;
+		labelAntigaMetaValor = null;
 	}
 	
 	public void finalizaJanelaCategoria(){
@@ -191,16 +229,16 @@ public class JanelaCriarCategoria extends JDialog{
 		dispose();
 	}
 	
-	public void criarCategoria(){
+	public void editarCategoria(){
 		if(validaCampos()){
 			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
 			
 			//Se a condição for true, cria a aba e exibe uma janela confirmando a criação.
-			if( abasCategoria.criarCategoria(getTextFieldDescricao().getText()) ){
-				finalizaJanelaCategoria();				
+			if( abasCategoria.editarCategoria(getTextFieldNovaDescricao().getText()) ){
+				finalizaJanelaCategoria();
 			}
 			else{
-				new JanelaAviso("Criar categoria", "Já existe uma categoria com esse nome.");
+				new JanelaAviso("Editar categoria", "Já existe uma categoria com esse nome.");
 			}
 		}
 	}
@@ -208,7 +246,7 @@ public class JanelaCriarCategoria extends JDialog{
 	private boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		
-		String descricao = textFieldDescricao.getText(); 
+		String descricao = textFieldNovaDescricao.getText(); 
 		if(descricao.equals("")){
 			labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
 			return false;
@@ -226,7 +264,7 @@ public class JanelaCriarCategoria extends JDialog{
 			return false;
 		}
 		
-		String meta = textFieldMeta.getText();
+		String meta = textFieldNovaMeta.getText();
 		if(!meta.matches("[0-9]*")){
 			labelErroCampo.setText("O campo \"Meta\" só aceita numeros");
 			return false;
@@ -236,20 +274,20 @@ public class JanelaCriarCategoria extends JDialog{
 	}
 	
 	
-	public JButton getBotaoCriar() {
-		return botaoCriar;
+	public JButton getBotaoEditar() {
+		return botaoEditar;
 	}
 
 	public JButton getBotaoCancelar() {
 		return botaoCancelar;
 	}
 
-	public JTextField getTextFieldDescricao() {
-		return textFieldDescricao;
+	public JTextField getTextFieldNovaDescricao() {
+		return textFieldNovaDescricao;
 	}
 
-	public JTextField getTextFieldMeta() {
-		return textFieldMeta;
+	public JTextField getTextFieldNovaMeta() {
+		return textFieldNovaMeta;
 	}
 	
 }

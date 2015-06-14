@@ -20,7 +20,7 @@ public class PainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
 	public final int TAM_PAINEL_Y = 600;
 	
-	AbasCategoria abaCategoria;
+	AbasCategoria abasCategoria;
 	JPanel painelBotoes;
 	JPanel painelTitulo;
 	TEPainelDespesas trataEventosDespesas;
@@ -29,6 +29,8 @@ public class PainelDespesas extends JPanel{
 	JButton botaoExcluirCategoria;
 	JButton botaoEditarCategoria;
 	JButton botaoAdicionarDespesa;
+	JButton botaoExcluirDespesa;
+	JButton botaoEditarDespesa;
 	
 	public PainelDespesas(Window framePrincipal) {
 		setLayout(new BorderLayout(0,5));
@@ -37,13 +39,13 @@ public class PainelDespesas extends JPanel{
 		iniciaElementos();
 		
 		criaAbaCategoria("Esportes");
-		for(int i = 0; i < 10; i++) //APAGAR
-			criaAbaCategoria("Educação");
+		for(int i = 0; i < 15; i++) //APAGAR
+			criaAbaCategoria("Educação"+i);
 		criaPainelBotoes();
 		criaPainelTitulo();
 		
 		add(painelTitulo, BorderLayout.NORTH);
-		add(abaCategoria, BorderLayout.WEST);
+		add(abasCategoria, BorderLayout.WEST);
 		add(painelBotoes, BorderLayout.EAST);
 		
 		
@@ -54,7 +56,7 @@ public class PainelDespesas extends JPanel{
 
 	//cria uma nova aba
 	private void criaAbaCategoria(String nomeCategoria){
-		abaCategoria.criarCategoria(nomeCategoria);
+		abasCategoria.criarCategoria(nomeCategoria);
 	}
 	
 	private void criaPainelBotoes(){
@@ -68,7 +70,7 @@ public class PainelDespesas extends JPanel{
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-		constraints.insets = new Insets(0, 0, 50, 0);
+		constraints.insets = new Insets(0, 0, 25, 0);
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		
@@ -116,14 +118,40 @@ public class PainelDespesas extends JPanel{
 		botaoAdicionarDespesa.setBackground(Color.GREEN);
 		botaoAdicionarDespesa.setPreferredSize(new Dimension(150,50));
 		
+		//Botão Excluir Despesa
+		String labelBotaoExcluirDespesa = "Excluir Despesa";
+		ImageIcon iconeExcluirDespesa = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
+		botaoExcluirDespesa.setText(labelBotaoExcluirDespesa);
+		botaoExcluirDespesa.setIcon(iconeExcluirDespesa);
+		botaoExcluirDespesa.setMargin(new Insets(0,0,0,0));
+		botaoExcluirDespesa.setHorizontalTextPosition(JButton.RIGHT);
+		botaoExcluirDespesa.setBackground(Color.GREEN);
+		botaoExcluirDespesa.setPreferredSize(new Dimension(150,50));
+		
+		//Botão Editar Despesa
+		String labelBotaoEditarDespesa = "Editar Despesa";
+		ImageIcon iconeEditarDespesa = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
+		botaoEditarDespesa.setText(labelBotaoEditarDespesa);
+		botaoEditarDespesa.setIcon(iconeEditarDespesa);
+		botaoEditarDespesa.setMargin(new Insets(0,0,0,0));
+		botaoEditarDespesa.setHorizontalTextPosition(JButton.RIGHT);
+		botaoEditarDespesa.setBackground(Color.GREEN);
+		botaoEditarDespesa.setPreferredSize(new Dimension(150,50));
+		
 		//adiciona os botões
 		painelBotoes.add(botaoNovaCategoria, constraints);
 		constraints.gridy = 1;
 		painelBotoes.add(botaoExcluirCategoria, constraints);
 		constraints.gridy = 2;
+		constraints.insets = new Insets(0, 0, 50, 0);
 		painelBotoes.add(botaoEditarCategoria, constraints);
 		constraints.gridy = 3;
+		constraints.insets = new Insets(0, 0, 25, 0);
 		painelBotoes.add(botaoAdicionarDespesa, constraints);
+		constraints.gridy = 4;
+		painelBotoes.add(botaoExcluirDespesa, constraints);
+		constraints.gridy = 5;
+		painelBotoes.add(botaoEditarDespesa, constraints);
 		
 		painelBotoes.setPreferredSize(new Dimension(TAM_X, TAM_Y));
 		painelBotoes.setBackground(Color.BLUE);
@@ -143,13 +171,16 @@ public class PainelDespesas extends JPanel{
 	}
 
 	private void iniciaElementos(){
-		abaCategoria = new AbasCategoria();
+		abasCategoria = new AbasCategoria();
 		painelBotoes = new JPanel();
 		painelTitulo = new JPanel();
 		botaoNovaCategoria = new JButton();
 		botaoExcluirCategoria = new JButton();
 		botaoEditarCategoria = new JButton();
 		botaoAdicionarDespesa = new JButton();
+		botaoExcluirDespesa = new JButton();
+		botaoEditarDespesa = new JButton();
+		
 	}
 	
 	public JButton getBotaoNovaCategoria() {
@@ -166,6 +197,18 @@ public class PainelDespesas extends JPanel{
 
 	public JButton getBotaoAdicionarDespesa() {
 		return botaoAdicionarDespesa;
+	}
+
+	public JButton getBotaoExcluirDespesa() {
+		return botaoExcluirDespesa;
+	}
+
+	public JButton getBotaoEditarDespesa() {
+		return botaoEditarDespesa;
+	}
+
+	public AbasCategoria getAbasCategoria() {
+		return abasCategoria;
 	}
 	
 }

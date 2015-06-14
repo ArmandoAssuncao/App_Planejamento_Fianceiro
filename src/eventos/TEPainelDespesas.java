@@ -1,6 +1,8 @@
 package eventos;
 
 import gui.Categoria.JanelaCriarCategoria;
+import gui.Categoria.JanelaEditarCategoria;
+import gui.Categoria.NAO_USADA_JanelaRemoverCategoria;
 import gui.painelDespesas.PainelDespesas;
 
 import java.awt.Window;
@@ -19,11 +21,14 @@ public class TEPainelDespesas implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == painelDespesas.getBotaoNovaCategoria()){
-			System.out.println(e.getSource());
-			new JanelaCriarCategoria(janelaPai);
+			new JanelaCriarCategoria(painelDespesas.getAbasCategoria());
 		}
-		else if(e.getSource() == painelDespesas.getBotaoAdicionarDespesa()){
-			System.out.println("botao adicionar despesa");
+		else if(e.getSource() == painelDespesas.getBotaoExcluirCategoria()){
+			painelDespesas.getAbasCategoria().removerCategoria();
+		}
+		else if(e.getSource() == painelDespesas.getBotaoEditarCategoria()){
+			new JanelaEditarCategoria(painelDespesas.getAbasCategoria());
+			System.out.println("botao a despesa");
 		}
 	}
 	
