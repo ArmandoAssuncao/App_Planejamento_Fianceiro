@@ -48,17 +48,16 @@ public class AbasCategoria extends JTabbedPane{
 	}
 	
 	//Remover categoria
-	public boolean removerCategoria(){
-		String nomeDaCategoria = getTitleAt(getSelectedIndex());
-		
-		JanelaDeConfirmacao janelaDeConfirmacao = new JanelaDeConfirmacao("Remover Categoria", "Tem certeza que deseja remover a categoria \"" + nomeDaCategoria + "\"?");
-		if(janelaDeConfirmacao.isConfirmar()){
-			remove(getSelectedIndex());
-			//Implementar a parte de remover no banco, também remover as despesas associadas/////////////////////////////////////////
-			new JanelaAviso("Remover Categoria", "A categoria \"" + nomeDaCategoria + "\" foi removida com sucesso.");
+	public boolean removerCategoria(String nomeCategoria){
+		JanelaDeConfirmacao janelaDeConfirmacao = new JanelaDeConfirmacao("Remover Categoria", "Tem certeza que deseja remover a categoria \"" + nomeCategoria + "\"?");
+		if(!janelaDeConfirmacao.isConfirmar()){
+			return false;
 		}
 		
-		return false;
+		remove(getSelectedIndex());
+		new JanelaAviso("Remover Categoria", "A categoria \"" + nomeCategoria + "\" foi removida com sucesso.");
+		
+		return true;
 	}
 	
 	//Editar Categoria
@@ -77,5 +76,8 @@ public class AbasCategoria extends JTabbedPane{
 		return true;
 	}
 	
+	public int numeroDeAbas(){
+		return getTabCount();
+	}
 	
 }

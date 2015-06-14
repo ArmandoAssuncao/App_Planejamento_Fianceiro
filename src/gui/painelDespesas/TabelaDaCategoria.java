@@ -9,13 +9,13 @@ public class TabelaDaCategoria extends JTable{
 	private final int TAM_TABELA_X = 500;
 	private final int TAM_TABELA_Y = 500;
 	
-	private final static String[] nomeColunas = {"Despesa", "Valor", "Data"};
+	private final static String[] nomeColunas = {"Descrição", "Valor", "Data da Despesa", "Data do Pagamento", "Tipo Pagamento", "Número do Cheque", "Parcelas"};
 	DefaultTableModel modelo;
 
 	public TabelaDaCategoria() {
 		
 		modelo = new DefaultTableModel(nomeColunas, 0);
-		modelo.addRow(new String[]{"","",""});
+		modelo.addRow(new String[]{"","","","","","",""});
 		modelo.removeRow(0);
 		setModel(modelo);
 		

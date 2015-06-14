@@ -12,19 +12,17 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-import eventos.categoria.NAO_USADA_TEJanelaRemoverCategoria;
+import eventos.categoria.TEJanelaRemoverCategoria;
 import gui.JanelaAviso;
-import gui.JanelaDeConfirmacao;
 import gui.painelDespesas.AbasCategoria;
 
-public class NAO_USADA_JanelaRemoverCategoria extends JDialog {
+public class JanelaRemoverCategoria extends JDialog {
 	private final String TITULO_JANELA= "Remover Categoria";
 	private final int TAM_JANELA_X = 500;
 	private final int TAM_JANELA_Y = 500;
 	
-	private NAO_USADA_TEJanelaRemoverCategoria trataEventosCategoria;
+	private TEJanelaRemoverCategoria trataEventosCategoria;
 	private AbasCategoria abasCategoria;
 	private JPanel painelPrincipal;
 	private JPanel painelTitulo;
@@ -32,16 +30,18 @@ public class NAO_USADA_JanelaRemoverCategoria extends JDialog {
 	
 	private JButton botaoRemover;
 	private JButton botaoCancelar;
-	private JLabel labelDescricao;
 	private JLabel labelTitulo;
 	private JLabel labelSubTitulo;
 	private JLabel labelErroCampo;
-	private JTextField textFieldDescricao;
+	private JLabel labelDescricao;
+	private JLabel labelDescricaoValor;
+	private JLabel labelMeta;
+	private JLabel labelMetaValor;
 	
-	public NAO_USADA_JanelaRemoverCategoria(AbasCategoria abasCategoria) {
+	public JanelaRemoverCategoria(AbasCategoria abasCategoria) {
 		setTitle(TITULO_JANELA);
 		
-		trataEventosCategoria = new NAO_USADA_TEJanelaRemoverCategoria(this);
+		trataEventosCategoria = new TEJanelaRemoverCategoria(this);
 		this.abasCategoria = abasCategoria;
 		
 		iniciaElementos();
@@ -103,7 +103,9 @@ public class NAO_USADA_JanelaRemoverCategoria extends JDialog {
 		
 		labelErroCampo.setText(" ");
 		labelDescricao.setText("* Nome da Categoria:");
-		textFieldDescricao.setPreferredSize(new Dimension(120,25));
+		labelDescricaoValor.setText( abasCategoria.getTitleAt(abasCategoria.getSelectedIndex()) );
+		labelMeta.setText("Meta da Categoria:");
+		labelMetaValor.setText("????"); //PEGAR O VALOR DO BANCO TALVEZ ////////////////////
 		
 		botaoRemover.setText("Remover");
 		botaoRemover.addActionListener(trataEventosCategoria);
@@ -126,16 +128,24 @@ public class NAO_USADA_JanelaRemoverCategoria extends JDialog {
 		constraints.gridwidth = 1;
 		constraints.ipadx = 0;
 		constraints.weightx = 0;
-		constraints.insets = new Insets(0, 100, 30, -90);
+		constraints.insets = new Insets(0, 150, 10, -140);
 		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelDescricao, constraints);
-		
 		constraints.gridx = 2;
-		painelCampos.add(textFieldDescricao, constraints);
+		constraints.anchor = GridBagConstraints.LINE_START;
+		painelCampos.add(labelDescricaoValor, constraints);
+		
+		constraints.gridx = 1;
+		constraints.gridy = 2;
+		constraints.anchor = GridBagConstraints.LINE_END;
+		painelCampos.add(labelMeta, constraints);
+		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_START;
+		painelCampos.add(labelMetaValor, constraints);
 		
 		constraints.gridx = 1;
 		constraints.gridy = 3;
-		constraints.insets = new Insets(200, 100, 0, -90);
+		constraints.insets = new Insets(250, 150, 0, -140);
 		constraints.anchor = GridBagConstraints.CENTER;
 		painelCampos.add(botaoRemover, constraints);
 		constraints.gridx = 2;
@@ -153,11 +163,13 @@ public class NAO_USADA_JanelaRemoverCategoria extends JDialog {
 		painelTitulo = new JPanel();
 		botaoRemover = new JButton();
 		botaoCancelar = new JButton();
-		labelDescricao = new JLabel();
 		labelTitulo = new JLabel();
 		labelSubTitulo = new JLabel();
 		labelErroCampo = new JLabel();
-		textFieldDescricao = new JTextField();
+		labelDescricao = new JLabel();
+		labelDescricaoValor = new JLabel();
+		labelMeta = new JLabel();
+		labelMetaValor = new JLabel();
 	}
 	
 	private void liberaElementos(){
@@ -166,11 +178,13 @@ public class NAO_USADA_JanelaRemoverCategoria extends JDialog {
 		painelTitulo = null;
 		botaoRemover = null;
 		botaoCancelar = null;
-		labelDescricao = null;
 		labelTitulo = null;
 		labelSubTitulo = null;
 		labelErroCampo = null;
-		textFieldDescricao = null;
+		labelDescricao = null;
+		labelDescricaoValor = null;
+		labelMeta = null;
+		labelMetaValor = null;
 	}
 	
 	public void finalizaJanelaCategoria(){
@@ -178,42 +192,17 @@ public class NAO_USADA_JanelaRemoverCategoria extends JDialog {
 		dispose();
 	}
 	
-	/*public void removerCategoria(){
-		if(validaCampos()){
+	public void removerCategoria(){
+		//Se a condição for true, exibe uma janela de confirmação final
+		if( abasCategoria.removerCategoria(getlabelDescricaoValor().getText()) ){
 			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
 			
-			//Se a condição for true, exibe uma janela de confirmação final
-			if( abasCategoria.removerCategoria(getTextFieldDescricao().getText()) ){
-				finalizaJanelaCategoria();
-			}
-			else{
-				new JanelaAviso("Remover categoria", "Não existe uma categoria com esse nome.");
-			}
+			finalizaJanelaCategoria();
 		}
-	}*/
-	
-	private boolean validaCampos(){
-		labelErroCampo.setForeground(Color.RED);
-		
-		String descricao = textFieldDescricao.getText(); 
-		if(descricao.equals("")){
-			labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
-			return false;
+		else{
+			new JanelaAviso("Remover categoria", "Não existe uma categoria com esse nome.");
+			finalizaJanelaCategoria();
 		}
-		else if(descricao.length() >= 25){
-			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
-			return false;
-		}
-		else if(!descricao.matches("[a-zA-Z]{1}.*")){
-			labelErroCampo.setText("O campo \"Nome\" tem que iniciar com uma letra");
-			return false;
-		}
-		else if(!descricao.matches("([a-zA-z]|[0-9]|_|-){1,30}")){
-			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
-			return false;
-		}
-		
-		return true;
 	}
 
 	public JButton getBotaoRemover() {
@@ -224,8 +213,12 @@ public class NAO_USADA_JanelaRemoverCategoria extends JDialog {
 		return botaoCancelar;
 	}
 
-	public JTextField getTextFieldDescricao() {
-		return textFieldDescricao;
+	public JLabel getlabelDescricaoValor() {
+		return labelDescricaoValor;
+	}
+
+	public JLabel getLabelMetaValor() {
+		return labelMetaValor;
 	}
 	
 }

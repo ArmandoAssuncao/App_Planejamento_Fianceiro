@@ -2,7 +2,7 @@ package eventos.painelDespesa;
 
 import gui.categoria.JanelaCriarCategoria;
 import gui.categoria.JanelaEditarCategoria;
-import gui.categoria.NAO_USADA_JanelaRemoverCategoria;
+import gui.categoria.JanelaRemoverCategoria;
 import gui.despesa.JanelaCriarDespesa;
 import gui.painelDespesas.PainelDespesas;
 
@@ -25,13 +25,17 @@ public class TEPainelDespesas implements ActionListener{
 			new JanelaCriarCategoria(painelDespesas.getAbasCategoria());
 		}
 		else if(e.getSource() == painelDespesas.getBotaoExcluirCategoria()){
-			painelDespesas.getAbasCategoria().removerCategoria();
+			if(painelDespesas.getAbasCategoria().numeroDeAbas() != 0)
+				new JanelaRemoverCategoria(painelDespesas.getAbasCategoria());
+				//painelDespesas.getAbasCategoria().removerCategoria();
 		}
 		else if(e.getSource() == painelDespesas.getBotaoEditarCategoria()){
-			new JanelaEditarCategoria(painelDespesas.getAbasCategoria());
+			if(painelDespesas.getAbasCategoria().numeroDeAbas() != 0)
+				new JanelaEditarCategoria(painelDespesas.getAbasCategoria());
 		}
 		else if(e.getSource() == painelDespesas.getBotaoAdicionarDespesa()){
-			new JanelaCriarDespesa(painelDespesas.getAbasCategoria());
+			if(painelDespesas.getAbasCategoria().numeroDeAbas() != 0)
+				new JanelaCriarDespesa(painelDespesas.getAbasCategoria());
 		}
 	}
 	
