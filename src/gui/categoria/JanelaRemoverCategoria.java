@@ -128,7 +128,7 @@ public class JanelaRemoverCategoria extends JDialog {
 		constraints.gridwidth = 1;
 		constraints.ipadx = 0;
 		constraints.weightx = 0;
-		constraints.insets = new Insets(0, 150, 10, -140);
+		constraints.insets = new Insets(0, 130, 10, -120);
 		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelDescricao, constraints);
 		constraints.gridx = 2;
@@ -145,10 +145,11 @@ public class JanelaRemoverCategoria extends JDialog {
 		
 		constraints.gridx = 1;
 		constraints.gridy = 3;
-		constraints.insets = new Insets(250, 150, 0, -140);
-		constraints.anchor = GridBagConstraints.CENTER;
+		constraints.insets = new Insets(250, 130, 0, -120);
+		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(botaoRemover, constraints);
 		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(botaoCancelar, constraints);
 		
 		painelCampos.setPreferredSize(new Dimension(TAM_X, TAM_Y));

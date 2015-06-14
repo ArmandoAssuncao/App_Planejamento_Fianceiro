@@ -7,8 +7,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -19,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import validacoes.ValidarDados;
+import enumeracoes.TipoPagamento;
 import eventos.despesa.TEJanelaCriarDespesa;
 import gui.JanelaAviso;
 import gui.painelDespesas.AbasCategoria;
@@ -122,25 +122,40 @@ public class JanelaCriarDespesa extends JDialog{
 		labelDataDoPagamento.setText("* Data do Pagamento:");
 		labelTipoDoPagamento.setText("* Tipo do Pagamento:");
 		labelTipoDoPagamentoInfo.setText(" ");
+		labelTipoDoPagamentoInfo.setVisible(false);
 		labelCategoria.setText("Categoria:");
 		textFieldDescricao.setPreferredSize(new Dimension(100,25));
 		textFieldValorDespesa.setPreferredSize(new Dimension(100,25));
 		textFieldDataDaDespesa.setPreferredSize(new Dimension(100,25));
 		textFieldDataDoPagamento.setPreferredSize(new Dimension(100,25));
 		textFieldTipoDoPagamentoInfo.setPreferredSize(new Dimension(100,25));
+		textFieldTipoDoPagamentoInfo.setVisible(false);
 		
-		for(int indice = 0; indice < 4; indice++){
-			jComboBoxTipoDoPagamento.addItem( "Pagamento " + indice ); //USAR O ENUM DOS TIPOS DE PAGAMENTO ///////////////////////////
+		for(TipoPagamento tipoPagamento : TipoPagamento.values()){
+			jComboBoxTipoDoPagamento.addItem(tipoPagamento.getTipoPagamento()); //USAR O ENUM DOS TIPOS DE PAGAMENTO ///////////////////////////
 		}
 		jComboBoxTipoDoPagamento.setMaximumRowCount(5);
 		jComboBoxTipoDoPagamento.setSelectedIndex(0);
 		jComboBoxTipoDoPagamento.setPreferredSize(new Dimension(100,25));
 		jComboBoxTipoDoPagamento.addItemListener(new ItemListener() {
-			
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange() == ItemEvent.SELECTED)
-					System.out.println(e.getItem()); //COMPARAR COM O ENUM ///////////////////////////////////
+				if(e.getStateChange() == ItemEvent.SELECTED){
+					if( e.getItem().equals(TipoPagamento.PRAZO.getTipoPagamento()) ){
+						labelTipoDoPagamentoInfo.setText("* Número de Parcelas:");
+						labelTipoDoPagamentoInfo.setVisible(true);
+						textFieldTipoDoPagamentoInfo.setVisible(true);
+					}
+					else if( e.getItem().equals(TipoPagamento.CHEQUE.getTipoPagamento()) ){
+						labelTipoDoPagamentoInfo.setText("* Número do Cheque:");
+						labelTipoDoPagamentoInfo.setVisible(true);
+						textFieldTipoDoPagamentoInfo.setVisible(true);
+					}
+					else{
+						labelTipoDoPagamentoInfo.setVisible(false);
+						textFieldTipoDoPagamentoInfo.setVisible(false);
+					}
+				}
 			}
 		});
 		
@@ -175,44 +190,58 @@ public class JanelaCriarDespesa extends JDialog{
 		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelCategoria, constraints);
 		constraints.gridx = 1;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(jComboBoxCategoria, constraints);
 		
 		constraints.gridx = 0;
 		constraints.gridy = 2;
+		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelDescricao, constraints);
 		constraints.gridx = 1;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(textFieldDescricao, constraints);
 		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelValorDespesa, constraints);
 		constraints.gridx = 3;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(textFieldValorDespesa, constraints);
 		
 		constraints.gridx = 0;
 		constraints.gridy = 3;
+		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelDataDaDespesa, constraints);
 		constraints.gridx = 1;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(textFieldDataDaDespesa, constraints);
 		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelDataDoPagamento, constraints);
 		constraints.gridx = 3;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(textFieldDataDoPagamento, constraints);
 		
 		constraints.gridx = 0;
 		constraints.gridy = 4;
+		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelTipoDoPagamento, constraints);
 		constraints.gridx = 1;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(jComboBoxTipoDoPagamento, constraints);
 		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelTipoDoPagamentoInfo, constraints);
 		constraints.gridx = 3;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(textFieldTipoDoPagamentoInfo, constraints);
 		
 		constraints.gridx = 1;
 		constraints.gridy = 5;
 		constraints.insets = new Insets(120, 0, 0, 0);
-		constraints.anchor = GridBagConstraints.CENTER;
+		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(botaoCriar, constraints);
 		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.CENTER;
 		painelCampos.add(botaoCancelar, constraints);
 		
 		painelCampos.setPreferredSize(new Dimension(TAM_X, TAM_Y));
@@ -242,7 +271,7 @@ public class JanelaCriarDespesa extends JDialog{
 		textFieldDataDaDespesa = new JTextField();
 		textFieldDataDoPagamento = new JTextField();
 		textFieldTipoDoPagamentoInfo = new JTextField();
-		jComboBoxTipoDoPagamento = new JComboBox<String>(); //USAR ENUM ////////////////////////
+		jComboBoxTipoDoPagamento = new JComboBox<String>();
 		jComboBoxCategoria = new JComboBox<String>();
 	}
 	
@@ -279,6 +308,23 @@ public class JanelaCriarDespesa extends JDialog{
 	public void criarDespesa(){
 		if(validaCampos()){
 			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
+			String categoria = jComboBoxCategoria.getItemAt(jComboBoxCategoria.getSelectedIndex());
+			String descricao = textFieldDescricao.getText();
+			String valor = textFieldValorDespesa.getText();
+			String dataDaDespesa = textFieldDataDaDespesa.getText();
+			String dataDoPagamento = textFieldDataDoPagamento.getText();
+			String tipoDoPagamento = jComboBoxTipoDoPagamento.getItemAt(jComboBoxTipoDoPagamento.getSelectedIndex());
+			String parcelas = "";
+			String numeroDoCheque = "";
+			if( tipoDoPagamento.equals(TipoPagamento.PRAZO.getTipoPagamento()) )
+				parcelas = textFieldTipoDoPagamentoInfo.getText();
+			else if( tipoDoPagamento.equals(TipoPagamento.CHEQUE.getTipoPagamento()) )
+				numeroDoCheque = textFieldTipoDoPagamentoInfo.getText();
+			
+			
+			if(abasCategoria.criarDespesa(categoria, descricao, valor, dataDaDespesa, dataDoPagamento, tipoDoPagamento, parcelas, numeroDoCheque));
+			
+			finalizaJanelaDespesa();
 			
 			//Se a condição for true, cria a aba e exibe uma janela confirmando a criação.
 			/*if( abasCategoria.criarCategoria(getTextFieldDescricao().getText()) ){
@@ -293,27 +339,44 @@ public class JanelaCriarDespesa extends JDialog{
 	private boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		
-		String descricao = textFieldDescricao.getText(); 
-		if(descricao.equals("")){
+		//valida o campo descricao
+		String descricao = textFieldDescricao.getText();
+		if(!ValidarDados.validarVazio(descricao)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
 			return false;
 		}
-		else if(descricao.length() >= 25){
+		else if(!ValidarDados.validarTamanho(descricao, 25)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
 			return false;
 		}
-		else if(!descricao.matches("[a-zA-Z]{1}.*")){
+		else if(!ValidarDados.validarInicioString(descricao, "[a-zA-Z]")){
 			labelErroCampo.setText("O campo \"Nome\" tem que iniciar com uma letra");
 			return false;
 		}
-		else if(!descricao.matches("([a-zA-z]|[0-9]|_|-){1,30}")){
+		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-]")){
 			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
 			return false;
 		}
-		
-		String meta = textFieldValorDespesa.getText();
-		if(!meta.matches("[0-9]*")){
-			labelErroCampo.setText("O campo \"Meta\" só aceita numeros e \".\"");
+
+		//valida o campo valor
+		String valor = textFieldValorDespesa.getText();
+		if(!ValidarDados.validarVazio(valor)){
+			return true;
+		}
+		else if(!ValidarDados.validarTamanho(valor, 10)){
+			labelErroCampo.setText("O campo \"Valor\" não pode ter mais que 10 caracteres.");
+			return false;
+		}
+		else if(!ValidarDados.validarInicioString(valor, "[0-9]")){
+			labelErroCampo.setText("O campo \"Valor\" deve iniciar com um número.");
+			return false;
+		}
+		else if(!ValidarDados.validarFimString(valor, "[0-9]")){
+			labelErroCampo.setText("O campo \"Valor\" deve terminar com um número.");
+			return false;
+		}
+		if(!ValidarDados.validarNumeroDouble(valor)){
+			labelErroCampo.setText("O campo \"Valor\" só aceita numeros e um \".\"");
 			return false;
 		}
 		

@@ -8,6 +8,7 @@ import java.awt.Dimension;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JViewport;
 
 public class AbasCategoria extends JTabbedPane{
 	private final int TAM_ABA_X = 900;
@@ -37,8 +38,8 @@ public class AbasCategoria extends JTabbedPane{
 		tabela = new TabelaDaCategoria();
 		barraRolagem = new JScrollPane();
 		
-		for(int i = 0; i < 50; i++) //APAGAR/////////////////////////////////////////////////
-			tabela.adicionaLinha(nomeCategoria, "valor", "23/12");
+		for(int i = 0; i < 20; i++) //APAGAR/////////////////////////////////////////////////
+			tabela.adicionaLinha(nomeCategoria, "valor", "23/12", "1", "1", "1", "1");
 		
 		barraRolagem.setViewportView(tabela);
 		
@@ -72,6 +73,26 @@ public class AbasCategoria extends JTabbedPane{
 
 		//Muda o nome da categoria
 		setTitleAt(getSelectedIndex(), nomeCategoria);
+		
+		return true;
+	}
+	
+	public boolean criarDespesa(String categoria, String descricao, String valor, String dataDaDespesa, String dataDoPagamento, String tipoDoPagamento, String parcelas, String numeroDoCheque){
+		JScrollPane conteudo = null;
+		
+		for(int indice = 0; indice < getTabCount(); indice++){
+			if(categoria.equals(getTitleAt(indice))){
+				conteudo = (JScrollPane)getComponentAt(indice);
+				break;
+			}
+		}
+		
+		if(conteudo == null) return false;
+		
+		JViewport viewport = conteudo.getViewport(); 
+		TabelaDaCategoria table = (TabelaDaCategoria)viewport.getView(); 
+
+		table.adicionaLinha(descricao, valor, dataDaDespesa, dataDoPagamento, tipoDoPagamento, parcelas, numeroDoCheque);
 		
 		return true;
 	}

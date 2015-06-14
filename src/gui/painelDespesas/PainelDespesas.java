@@ -39,7 +39,7 @@ public class PainelDespesas extends JPanel{
 		iniciaElementos();
 		
 		criaAbaCategoria("Esportes");
-		for(int i = 0; i < 14; i++) //APAGAR //////////////////////////////////////////////
+		for(int i = 0; i < 15; i++) //APAGAR //////////////////////////////////////////////
 			criaAbaCategoria("Educação"+i);
 		criaPainelBotoes();
 		criaPainelTitulo();

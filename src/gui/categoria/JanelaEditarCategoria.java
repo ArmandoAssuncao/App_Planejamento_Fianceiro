@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import validacoes.ValidarDados;
 import eventos.categoria.TEJanelaEditarCategoria;
 import gui.JanelaAviso;
 import gui.painelDespesas.AbasCategoria;
@@ -158,21 +159,25 @@ public class JanelaEditarCategoria extends JDialog{
 		painelCampos.add(labelNovaDescricao, constraints);
 		
 		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(textFieldNovaDescricao, constraints);
 		
 		constraints.gridx = 1;
 		constraints.gridy = 4;
+		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelNovaMeta, constraints);
 		
 		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(textFieldNovaMeta, constraints);
 		
 		constraints.gridx = 1;
 		constraints.gridy = 5;
 		constraints.insets = new Insets(180, 100, 0, -90);
-		constraints.anchor = GridBagConstraints.CENTER;
+		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(botaoEditar, constraints);
 		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(botaoCancelar, constraints);
 		
 		painelCampos.setPreferredSize(new Dimension(TAM_X, TAM_Y));
@@ -241,27 +246,44 @@ public class JanelaEditarCategoria extends JDialog{
 	private boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		
-		String descricao = textFieldNovaDescricao.getText(); 
-		if(descricao.equals("")){
+		///valida o campo descricao
+		String descricao = textFieldNovaDescricao.getText();
+		if(!ValidarDados.validarVazio(descricao)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
 			return false;
 		}
-		else if(descricao.length() >= 25){
+		else if(!ValidarDados.validarTamanho(descricao, 25)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
 			return false;
 		}
-		else if(!descricao.matches("[a-zA-Z]{1}.*")){
+		else if(!ValidarDados.validarInicioString(descricao, "[a-zA-Z]")){
 			labelErroCampo.setText("O campo \"Nome\" tem que iniciar com uma letra");
 			return false;
 		}
-		else if(!descricao.matches("([a-zA-z]|[0-9]|_|-){1,30}")){
+		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-]")){
 			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
 			return false;
 		}
-		
+
+		//valida o campo meta
 		String meta = textFieldNovaMeta.getText();
-		if(!meta.matches("[0-9]*")){
-			labelErroCampo.setText("O campo \"Meta\" só aceita numeros e \".\"");
+		if(!ValidarDados.validarVazio(meta)){
+			return true;
+		}
+		else if(!ValidarDados.validarTamanho(meta, 10)){
+			labelErroCampo.setText("O campo \"Meta\" não pode ter mais que 10 caracteres.");
+			return false;
+		}
+		else if(!ValidarDados.validarInicioString(meta, "[0-9]")){
+			labelErroCampo.setText("O campo \"Meta\" deve iniciar com um número.");
+			return false;
+		}
+		else if(!ValidarDados.validarFimString(meta, "[0-9]")){
+			labelErroCampo.setText("O campo \"Meta\" deve terminar com um número.");
+			return false;
+		}
+		if(!ValidarDados.validarNumeroDouble(meta)){
+			labelErroCampo.setText("O campo \"Meta\" só aceita numeros e um \".\"");
 			return false;
 		}
 		
