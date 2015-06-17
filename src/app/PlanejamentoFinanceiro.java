@@ -9,5 +9,4 @@ public class PlanejamentoFinanceiro {
 		Tema.mudaTema();
 		new GuiPrincipal();
 	}
-
 }
