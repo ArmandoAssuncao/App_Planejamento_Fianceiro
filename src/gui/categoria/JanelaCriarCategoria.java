@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -14,10 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import classes.MetaMensal;
 import validacoes.ValidarDados;
 import eventos.categoria.TEJanelaCriarCategoria;
 import gui.JanelaAviso;
 import gui.painelDespesas.AbasCategoria;
+import gui.painelDespesas.IgPainelDespesas;
 
 public class JanelaCriarCategoria extends JDialog{
 	private final String TITULO_JANELA= "Nova Categoria";
@@ -25,7 +28,7 @@ public class JanelaCriarCategoria extends JDialog{
 	private final int TAM_JANELA_Y = 500;
 	
 	private TEJanelaCriarCategoria trataEventosCategoria;
-	private AbasCategoria abasCategoria;
+	private IgPainelDespesas igPainelDespesas;
 	private JPanel painelPrincipal;
 	private JPanel painelTitulo;
 	private JPanel painelCampos;
@@ -40,11 +43,11 @@ public class JanelaCriarCategoria extends JDialog{
 	private JTextField textFieldDescricao;
 	private JTextField textFieldMeta;
 
-	public JanelaCriarCategoria(AbasCategoria abasCategoria) {
+	public JanelaCriarCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
 		
 		trataEventosCategoria = new TEJanelaCriarCategoria(this);
-		this.abasCategoria = abasCategoria;
+		this.igPainelDespesas = igPainelDespesas;
 		
 		iniciaElementos();
 		
@@ -198,12 +201,20 @@ public class JanelaCriarCategoria extends JDialog{
 	
 	public void criarCategoria(){
 		if(validaCampos()){
-			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
 			
-			//Se a condição for true, cria a aba e exibe uma janela confirmando a criação.
-			if( abasCategoria.criarCategoria(getTextFieldDescricao().getText()) ){
-				abasCategoria.setSelectedIndex(abasCategoria.getNumeroDeAbas()-1);
-				finalizaJanelaCategoria();				
+			MetaMensal metaMensal = new MetaMensal();
+			metaMensal.setDescricao(textFieldDescricao.getText());
+			Calendar c = Calendar.getInstance();
+			metaMensal.setMesAnoMeta(c);// O mes da metal mensal vai ser o atual? ///////////////////////
+			try{
+				metaMensal.setValor( Double.parseDouble(textFieldMeta.getText()) );
+			}
+			catch(NumberFormatException e){
+				e.printStackTrace();
+			}
+			
+			if( igPainelDespesas.criarCategoria(metaMensal) ){
+				finalizaJanelaCategoria();
 			}
 			else{
 				new JanelaAviso("Criar categoria", "Já existe uma categoria com esse nome.");

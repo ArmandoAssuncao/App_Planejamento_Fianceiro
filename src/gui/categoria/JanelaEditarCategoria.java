@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -14,10 +15,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import classes.MetaMensal;
 import validacoes.ValidarDados;
 import eventos.categoria.TEJanelaEditarCategoria;
 import gui.JanelaAviso;
-import gui.painelDespesas.AbasCategoria;
+import gui.painelDespesas.IgPainelDespesas;
 
 public class JanelaEditarCategoria extends JDialog{
 	private final String TITULO_JANELA= "Editar Categoria";
@@ -25,7 +27,7 @@ public class JanelaEditarCategoria extends JDialog{
 	private final int TAM_JANELA_Y = 500;
 	
 	private TEJanelaEditarCategoria trataEventosCategoria;
-	private AbasCategoria abasCategoria;
+	IgPainelDespesas igPainelDespesas;
 	private JPanel painelPrincipal;
 	private JPanel painelTitulo;
 	private JPanel painelCampos;
@@ -44,11 +46,11 @@ public class JanelaEditarCategoria extends JDialog{
 	private JTextField textFieldNovaDescricao;
 	private JTextField textFieldNovaMeta;
 
-	public JanelaEditarCategoria(AbasCategoria abasCategoria) {
+	public JanelaEditarCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
 		
 		trataEventosCategoria = new TEJanelaEditarCategoria(this);
-		this.abasCategoria = abasCategoria;
+		this.igPainelDespesas = igPainelDespesas;
 		
 		iniciaElementos();
 		
@@ -110,9 +112,9 @@ public class JanelaEditarCategoria extends JDialog{
 		labelNovaDescricao.setText("* Novo Nome da Categoria:");
 		labelNovaMeta.setText("Nova Meta da Categoria:");
 		labelAntigaDescricao.setText("Antigo Nome da Categoria:");
-		labelAntigaDescricaoValor.setText( abasCategoria.getTitleAt(abasCategoria.getSelectedIndex()) );
+		labelAntigaDescricaoValor.setText( igPainelDespesas.getDescricaoCategoria() );
 		labelAntigaMeta.setText("Antiga Meta:");
-		labelAntigaMetaValor.setText("????"); //PEGAR O VALOR DO BANCO TALVEZ /////////////////////////////////////////////////////////
+		labelAntigaMetaValor.setText( String.valueOf(igPainelDespesas.getMetaCategoriaValor()) );
 		textFieldNovaDescricao.setPreferredSize(new Dimension(120,25));
 		textFieldNovaMeta.setPreferredSize(new Dimension(120,25));
 		
@@ -231,10 +233,18 @@ public class JanelaEditarCategoria extends JDialog{
 	
 	public void editarCategoria(){
 		if(validaCampos()){
-			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
+			MetaMensal metaMensal = new MetaMensal();
+			metaMensal.setDescricao(textFieldNovaDescricao.getText());
+			Calendar c = Calendar.getInstance();
+			metaMensal.setMesAnoMeta(c);// O mes da metal mensal vai ser o atual? ///////////////////////
+			try{
+				metaMensal.setValor( Double.parseDouble(textFieldNovaMeta.getText()) );
+			}
+			catch(NumberFormatException e){
+				e.printStackTrace();
+			}
 			
-			//Se a condi��o for true, cria a aba e exibe uma janela confirmando a cria��o.
-			if( abasCategoria.editarCategoria(getTextFieldNovaDescricao().getText()) ){
+			if( igPainelDespesas.editarCategoria(metaMensal) ){
 				finalizaJanelaCategoria();
 			}
 			else{

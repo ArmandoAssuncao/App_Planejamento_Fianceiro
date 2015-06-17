@@ -1,6 +1,6 @@
 package gui.framePrincipal;
 
-import gui.painelDespesas.PainelDespesas;
+import gui.painelDespesas.IgPainelDespesas;
 import gui.painelGraficos.PainelGraficos;
 import gui.painelInicio.PainelInicio;
 
@@ -21,12 +21,12 @@ public class AbasPrincipal extends JTabbedPane{
 	private final String NOME_ABA_3 = "<html>G<br>R<br>A<br>F<br>I<br>C<br>O<br>S"; 
 	
 	PainelInicio painelInicio;
-	PainelDespesas painelDespesas;
+	IgPainelDespesas painelDespesas;
 	PainelGraficos painelGraficos;
 	
 	public AbasPrincipal(Window framePrincipal){
 		painelInicio = new PainelInicio(framePrincipal);
-		painelDespesas = new PainelDespesas(framePrincipal);
+		painelDespesas = new IgPainelDespesas(framePrincipal);
 		painelGraficos = new PainelGraficos(framePrincipal);
 		
 		add(NOME_ABA_1, painelInicio);

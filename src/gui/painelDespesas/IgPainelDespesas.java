@@ -8,6 +8,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -17,13 +19,16 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.plaf.metal.MetalMenuBarUI;
 
+import classes.MetaMensal;
 import eventos.painelDespesa.TEPainelDespesas;
 
-public class PainelDespesas extends JPanel{
+public class IgPainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
 	public final int TAM_PAINEL_Y = 600;
 	
+	ArrayList<MetaMensal> arrayMetaMensal = new ArrayList<MetaMensal>();
 	AbasCategoria abasCategoria;
 	JPanel painelBotoes;
 	JPanel painelTitulo;
@@ -43,15 +48,19 @@ public class PainelDespesas extends JPanel{
 	JLabel labelValorTotalDespesasValor;
 	JLabel labelValorTotalDespesasPorcentagemValor;
 	
-	public PainelDespesas(Window framePrincipal) {
+	public IgPainelDespesas(Window framePrincipal) {
 		setLayout(new BorderLayout(0,5));
 		
 		trataEventosDespesas = new TEPainelDespesas(this, framePrincipal);
 		iniciaElementos();
 		
 		//criaAbaCategoria("Esportes");
-		for(int i = 0; i < 0; i++) //APAGAR //////////////////////////////////////////////
-			criaAbaCategoria("Educação"+i);
+		MetaMensal metaMensalTeste = new MetaMensal();
+		for(int i = 0; i < 0; i++){ //APAGAR //////////////////////////////////////////////
+			metaMensalTeste.setDescricao("Educacao"+i);
+			metaMensalTeste.setValor(22);
+			criarCategoria(metaMensalTeste);
+		}
 		criaPainelBotoes();
 		criaPainelTitulo();
 		
@@ -65,10 +74,6 @@ public class PainelDespesas extends JPanel{
 		setVisible(true);
 	}
 
-	//cria uma nova aba
-	private void criaAbaCategoria(String nomeCategoria){
-		abasCategoria.criarCategoria(nomeCategoria);
-	}
 	
 	private void criaPainelBotoes(){
 		final int TAM_X = 200;
@@ -172,6 +177,7 @@ public class PainelDespesas extends JPanel{
 		painelBotoes.setVisible(true);
 	}
 	
+	
 	private void criaPainelTitulo(){
 		final int TAM_X = 500;
 		final int TAM_Y = 130;
@@ -208,7 +214,8 @@ public class PainelDespesas extends JPanel{
 		abasCategoria.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				atualizaPainelTitulo();
+				if(abasCategoria.getNumeroDeAbas() != 0 && arrayMetaMensal.size() != 0)
+					atualizaPainelTitulo();
 			}
 		});
 		
@@ -271,6 +278,7 @@ public class PainelDespesas extends JPanel{
 		painelTitulo.setBorder(borda);
 		painelTitulo.setVisible(true);
 	}//painelTitulo()
+	
 
 	private void iniciaElementos(){
 		abasCategoria = new AbasCategoria();
@@ -289,12 +297,53 @@ public class PainelDespesas extends JPanel{
 		labelValorTotalDespesasPorcentagemValor = new JLabel();
 	}
 	
-	public void atualizaPainelTitulo(){
-		labelNomeCategoriaValor.setText( abasCategoria.getTitleAt(abasCategoria.getSelectedIndex()) );
-		labelMetaCategoriaValor.setText("$Meta");
+	private void atualizaPainelTitulo(){
+		String descricao = arrayMetaMensal.get(abasCategoria.getSelectedIndex()).getDescricao();
+		double valorMeta = arrayMetaMensal.get(abasCategoria.getSelectedIndex()).getValor();
+		double totalDespesasPorcentagem = (abasCategoria.getValorTotalDespesas() * 100)/valorMeta;
+		
+		labelNomeCategoriaValor.setText(descricao);
+		labelMetaCategoriaValor.setText("$" + valorMeta);
 		labelNumeroDeDespesasValor.setText("" + abasCategoria.getNumeroDeDespesasDaCategoria());
 		labelValorTotalDespesasValor.setText("$" + abasCategoria.getValorTotalDespesas());
-		labelValorTotalDespesasPorcentagemValor.setText("Total");
+		labelValorTotalDespesasPorcentagemValor.setText( totalDespesasPorcentagem + "%");
+		
+		if(totalDespesasPorcentagem >= 100){
+			labelValorTotalDespesasPorcentagemValor.setForeground(Color.RED);
+		}
+		else if(totalDespesasPorcentagem >= 70){
+			labelValorTotalDespesasPorcentagemValor.setForeground(Color.YELLOW);
+		}
+		else{
+			labelValorTotalDespesasPorcentagemValor.setForeground(Color.BLACK);
+		}
+	}
+	
+	//cria uma nova categoria
+	public boolean criarCategoria(MetaMensal metaMensal){
+		if( abasCategoria.criarCategoria(metaMensal.getDescricao())){
+			arrayMetaMensal.add(metaMensal);
+			abasCategoria.setSelectedIndex(abasCategoria.getNumeroDeAbas()-1);
+			//Adicionar a parte do banco /////////////////////////////////////////
+			
+			atualizaPainelTitulo();
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean editarCategoria(MetaMensal metaMensal){
+		if( abasCategoria.editarCategoria(metaMensal.getDescricao())){
+			arrayMetaMensal.set(abasCategoria.getSelectedIndex(), metaMensal);
+			
+			//Adicionar a parte do banco /////////////////////////////////////////
+			
+			atualizaPainelTitulo();
+			return true;
+		}
+		else
+			return false;
 	}
 	
 	public JButton getBotaoNovaCategoria() {
@@ -325,4 +374,11 @@ public class PainelDespesas extends JPanel{
 		return abasCategoria;
 	}
 	
+	public String getDescricaoCategoria(){
+		return arrayMetaMensal.get(abasCategoria.getSelectedIndex()).getDescricao();
+	}
+	
+	public double getMetaCategoriaValor(){
+		return arrayMetaMensal.get(abasCategoria.getSelectedIndex()).getValor();
+	}
 }

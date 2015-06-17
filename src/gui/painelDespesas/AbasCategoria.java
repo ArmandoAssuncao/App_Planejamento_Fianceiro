@@ -38,7 +38,7 @@ public class AbasCategoria extends JTabbedPane{
 		barraRolagem = new JScrollPane();
 		
 		for(int i = 0; i < 20; i++) //APAGAR/////////////////////////////////////////////////
-			tabela.adicionaLinha(nomeCategoria + " " + i, "2.0", "23/12", "1", "1", "1", "1");
+			tabela.adicionaLinha(nomeCategoria + " " + i, "1.0", "20/11/2015", "1", "1", "1", "1");
 		
 		barraRolagem.setViewportView(tabela);
 		

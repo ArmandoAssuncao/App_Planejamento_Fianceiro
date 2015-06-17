@@ -1,6 +1,5 @@
 package eventos.categoria;
 
-
 import gui.categoria.JanelaEditarCategoria;
 
 import java.awt.event.ActionEvent;
