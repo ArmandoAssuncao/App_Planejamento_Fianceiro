@@ -9,7 +9,7 @@ public class TabelaDaCategoria extends JTable{
 	private final int TAM_TABELA_X = 500;
 	private final int TAM_TABELA_Y = 500;
 	
-	private final static String[] nomeColunas = {"Descrição", "Valor", "Data da Despesa", "Data do Pagamento", "Tipo Pagamento", "Parcelas", "Número do Cheque"};
+	private final static String[] nomeColunas = {"DescriÃ§Ã£o", "Valor", "Data da Despesa", "Data do Pagamento", "Tipo Pagamento", "Parcelas", "NÃºmero do cheque"};
 	DefaultTableModel modelo;
 
 	public TabelaDaCategoria() {
@@ -24,7 +24,7 @@ public class TabelaDaCategoria extends JTable{
 		setVisible(true);
 	}
 	
-	//adiciona linha à tabela
+	//adiciona linha tabela
 	public void adicionaLinha(String descricao, String valor, String dataDaDespesa, String dataDoPagamento, String tipoDoPagamento, String parcelas, String numeroDoCheque){
 		modelo.addRow(new String[]{descricao, valor, dataDaDespesa, dataDoPagamento, tipoDoPagamento, parcelas, numeroDoCheque});
 	}

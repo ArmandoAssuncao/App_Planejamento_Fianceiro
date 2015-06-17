@@ -1,12 +1,12 @@
 package enumeracoes;
 
 /**
- * Est· classe contÈm os tipos de pagamento.
- * @author Samuel e Wagner 
+ * Esta classe cont√©m os tipos de pagamento.
+ * @author Armando e Richardson
  */
 public enum TipoPagamento {
 	AVISTA("A Vista"),
-	CARTAO("Cart„o de Credito"),
+	CARTAO("Cart√£o de Credito"),
 	CHEQUE("Cheque"),
 	PRAZO("Prazo");
 	private String tipoPagamento;

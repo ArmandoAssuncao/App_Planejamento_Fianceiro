@@ -1,6 +1,8 @@
 package validacoes;
 
 public class ValidarDados {
+	public enum VALIDAR{letra, numero};
+	
 	
 	public static boolean validarVazio(String str){
 		if(str.equals("")){

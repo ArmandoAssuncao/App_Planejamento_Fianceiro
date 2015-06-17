@@ -81,7 +81,7 @@ public class JanelaCriarCategoria extends JDialog{
 		labelTitulo.setText("Nova Categoria");
 		labelTitulo.setFont(new Font("serif", Font.PLAIN, 25));
 		
-		labelSubTitulo.setText("Campos com * são obrigatórios.");
+		labelSubTitulo.setText("Campos com * sÃ£o obrigatÃ³rios");
 		
 		painelTitulo.add(labelTitulo, BorderLayout.WEST);
 		painelTitulo.add(labelSubTitulo, BorderLayout.SOUTH);
@@ -200,12 +200,13 @@ public class JanelaCriarCategoria extends JDialog{
 		if(validaCampos()){
 			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
 			
-			//Se a condição for true, cria a aba e exibe uma janela confirmando a criação.
+			//Se a condiÃ§Ã£o for true, cria a aba e exibe uma janela confirmando a criaÃ§Ã£o.
 			if( abasCategoria.criarCategoria(getTextFieldDescricao().getText()) ){
+				abasCategoria.setSelectedIndex(abasCategoria.getNumeroDeAbas()-1);
 				finalizaJanelaCategoria();				
 			}
 			else{
-				new JanelaAviso("Criar categoria", "Já existe uma categoria com esse nome.");
+				new JanelaAviso("Criar categoria", "JÃ¡ existe uma categoria com esse nome.");
 			}
 		}
 	}
@@ -216,11 +217,11 @@ public class JanelaCriarCategoria extends JDialog{
 		//valida o campo descricao
 		String descricao = textFieldDescricao.getText();
 		if(!ValidarDados.validarVazio(descricao)){
-			labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
+			labelErroCampo.setText("O campo \"Nome\" nÃ£o pode ficar vazio.");
 			return false;
 		}
 		else if(!ValidarDados.validarTamanho(descricao, 25)){
-			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
+			labelErroCampo.setText("O campo \"Nome\" nÃ£o pode ter mais que 25 caracteres.");
 			return false;
 		}
 		else if(!ValidarDados.validarInicioString(descricao, "[a-zA-Z]")){
@@ -228,7 +229,7 @@ public class JanelaCriarCategoria extends JDialog{
 			return false;
 		}
 		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-]")){
-			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
+			labelErroCampo.setText("O campo \"Nome\" sÃ³ aceita letras, numeros, \"_\" e \"-\"");
 			return false;
 		}
 
@@ -238,19 +239,19 @@ public class JanelaCriarCategoria extends JDialog{
 			return true;
 		}
 		else if(!ValidarDados.validarTamanho(meta, 10)){
-			labelErroCampo.setText("O campo \"Meta\" não pode ter mais que 10 caracteres.");
+			labelErroCampo.setText("O campo \"Meta\" nÃ£o pode ter mais que 10 caracteres.");
 			return false;
 		}
 		else if(!ValidarDados.validarInicioString(meta, "[0-9]")){
-			labelErroCampo.setText("O campo \"Meta\" deve iniciar com um número.");
+			labelErroCampo.setText("O campo \"Meta\" deve iniciar com um nÃºmero.");
 			return false;
 		}
 		else if(!ValidarDados.validarFimString(meta, "[0-9]")){
-			labelErroCampo.setText("O campo \"Meta\" deve terminar com um número.");
+			labelErroCampo.setText("O campo \"Meta\" deve terminar com um nï¿½mero.");
 			return false;
 		}
 		if(!ValidarDados.validarNumeroDouble(meta)){
-			labelErroCampo.setText("O campo \"Meta\" só aceita numeros e um \".\"");
+			labelErroCampo.setText("O campo \"Meta\" sÃ³ aceita nÃºmeros e um \".\"");
 			return false;
 		}
 		

@@ -51,7 +51,7 @@ public class JanelaCriarDespesa extends JDialog{
 	private JTextField textFieldDataDaDespesa;
 	private JTextField textFieldDataDoPagamento;
 	private JTextField textFieldTipoDoPagamentoInfo;
-	private JComboBox<String> jComboBoxTipoDoPagamento; //USAR ENUM /////////////////////////
+	private JComboBox<String> jComboBoxTipoDoPagamento;
 	private JComboBox<String> jComboBoxCategoria;
 
 	public JanelaCriarDespesa(AbasCategoria abasCategoria) {
@@ -94,7 +94,7 @@ public class JanelaCriarDespesa extends JDialog{
 		labelTitulo.setText("Criar Despesa");
 		labelTitulo.setFont(new Font("serif", Font.PLAIN, 25));
 		
-		labelSubTitulo.setText("Campos com * são obrigatórios.");
+		labelSubTitulo.setText("Campos com * sÃ£o obrigÃ¡torios.");
 		
 		painelTitulo.add(labelTitulo, BorderLayout.WEST);
 		painelTitulo.add(labelSubTitulo, BorderLayout.SOUTH);
@@ -142,12 +142,12 @@ public class JanelaCriarDespesa extends JDialog{
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED){
 					if( e.getItem().equals(TipoPagamento.PRAZO.getTipoPagamento()) ){
-						labelTipoDoPagamentoInfo.setText("* Número de Parcelas:");
+						labelTipoDoPagamentoInfo.setText("* NÃºmero de parcelas:");
 						labelTipoDoPagamentoInfo.setVisible(true);
 						textFieldTipoDoPagamentoInfo.setVisible(true);
 					}
 					else if( e.getItem().equals(TipoPagamento.CHEQUE.getTipoPagamento()) ){
-						labelTipoDoPagamentoInfo.setText("* Número do Cheque:");
+						labelTipoDoPagamentoInfo.setText("* NÃºmero do cheque:");
 						labelTipoDoPagamentoInfo.setVisible(true);
 						textFieldTipoDoPagamentoInfo.setVisible(true);
 					}
@@ -321,17 +321,18 @@ public class JanelaCriarDespesa extends JDialog{
 			else if( tipoDoPagamento.equals(TipoPagamento.CHEQUE.getTipoPagamento()) )
 				numeroDoCheque = textFieldTipoDoPagamentoInfo.getText();
 			
-			
 			if(abasCategoria.criarDespesa(categoria, descricao, valor, dataDaDespesa, dataDoPagamento, tipoDoPagamento, parcelas, numeroDoCheque));
+			
+			abasCategoria.setSelectedIndex(jComboBoxCategoria.getSelectedIndex());
 			
 			finalizaJanelaDespesa();
 			
-			//Se a condição for true, cria a aba e exibe uma janela confirmando a criação.
+			//Se a condiÃ§Ã£o for true, cria a aba e exibe uma janela confirmando a criaÃ§Ã£o.
 			/*if( abasCategoria.criarCategoria(getTextFieldDescricao().getText()) ){
 				finalizaJanelaDespesa();				
 			}
 			else{
-				new JanelaAviso("Criar categoria", "Já existe uma categoria com esse nome.");
+				new JanelaAviso("Criar categoria", "Jï¿½ existe uma categoria com esse nome.");
 			}*/
 		}
 	}
@@ -342,11 +343,11 @@ public class JanelaCriarDespesa extends JDialog{
 		//valida o campo descricao
 		String descricao = textFieldDescricao.getText();
 		if(!ValidarDados.validarVazio(descricao)){
-			labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
+			labelErroCampo.setText("O campo \"Nome\" nÃ£o pode ficar vazio.");
 			return false;
 		}
 		else if(!ValidarDados.validarTamanho(descricao, 25)){
-			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
+			labelErroCampo.setText("O campo \"Nome\" nÃ£o pode ter mais que 25 caracteres.");
 			return false;
 		}
 		else if(!ValidarDados.validarInicioString(descricao, "[a-zA-Z]")){
@@ -354,7 +355,7 @@ public class JanelaCriarDespesa extends JDialog{
 			return false;
 		}
 		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-]")){
-			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
+			labelErroCampo.setText("O campo \"Nome\" sÃ³ aceita letras, numeros, \"_\" e \"-\"");
 			return false;
 		}
 
@@ -364,19 +365,19 @@ public class JanelaCriarDespesa extends JDialog{
 			return true;
 		}
 		else if(!ValidarDados.validarTamanho(valor, 10)){
-			labelErroCampo.setText("O campo \"Valor\" não pode ter mais que 10 caracteres.");
+			labelErroCampo.setText("O campo \"Valor\" nÃ£o pode ter mais que 10 caracteres.");
 			return false;
 		}
 		else if(!ValidarDados.validarInicioString(valor, "[0-9]")){
-			labelErroCampo.setText("O campo \"Valor\" deve iniciar com um número.");
+			labelErroCampo.setText("O campo \"Valor\" deve iniciar com um nÃºmero.");
 			return false;
 		}
 		else if(!ValidarDados.validarFimString(valor, "[0-9]")){
-			labelErroCampo.setText("O campo \"Valor\" deve terminar com um número.");
+			labelErroCampo.setText("O campo \"Valor\" deve terminar com um nÃºmero.");
 			return false;
 		}
 		if(!ValidarDados.validarNumeroDouble(valor)){
-			labelErroCampo.setText("O campo \"Valor\" só aceita numeros e um \".\"");
+			labelErroCampo.setText("O campo \"Valor\" sÃ³ aceita nÃºmero e um \".\"");
 			return false;
 		}
 		

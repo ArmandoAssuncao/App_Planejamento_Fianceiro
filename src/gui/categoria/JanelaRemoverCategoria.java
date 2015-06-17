@@ -80,7 +80,7 @@ public class JanelaRemoverCategoria extends JDialog {
 		labelTitulo.setText("Remover Categoria");
 		labelTitulo.setFont(new Font("serif", Font.PLAIN, 25));
 		
-		labelSubTitulo.setText("Campos com * são obrigatórios.");
+		labelSubTitulo.setText("Campos com * sÃ£o obrigatÃ³rios.");
 		
 		painelTitulo.add(labelTitulo, BorderLayout.WEST);
 		painelTitulo.add(labelSubTitulo, BorderLayout.SOUTH);
@@ -194,14 +194,14 @@ public class JanelaRemoverCategoria extends JDialog {
 	}
 	
 	public void removerCategoria(){
-		//Se a condição for true, exibe uma janela de confirmação final
+		//Se a condiï¿½ï¿½o for true, exibe uma janela de confirmaï¿½ï¿½o final
 		if( abasCategoria.removerCategoria(getlabelDescricaoValor().getText()) ){
 			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
 			
 			finalizaJanelaCategoria();
 		}
 		else{
-			new JanelaAviso("Remover categoria", "Não existe uma categoria com esse nome.");
+			new JanelaAviso("Remover categoria", "NÃ£o existe uma categoria com esse nome.");
 			finalizaJanelaCategoria();
 		}
 	}

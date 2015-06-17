@@ -3,7 +3,6 @@ package gui.painelDespesas;
 import gui.JanelaAviso;
 import gui.JanelaDeConfirmacao;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JScrollPane;
@@ -39,7 +38,7 @@ public class AbasCategoria extends JTabbedPane{
 		barraRolagem = new JScrollPane();
 		
 		for(int i = 0; i < 20; i++) //APAGAR/////////////////////////////////////////////////
-			tabela.adicionaLinha(nomeCategoria, "valor", "23/12", "1", "1", "1", "1");
+			tabela.adicionaLinha(nomeCategoria + " " + i, "2.0", "23/12", "1", "1", "1", "1");
 		
 		barraRolagem.setViewportView(tabela);
 		
@@ -80,6 +79,7 @@ public class AbasCategoria extends JTabbedPane{
 	public boolean criarDespesa(String categoria, String descricao, String valor, String dataDaDespesa, String dataDoPagamento, String tipoDoPagamento, String parcelas, String numeroDoCheque){
 		JScrollPane conteudo = null;
 		
+		//Verifica se exite uma categoria com o nome passado no argumento.
 		for(int indice = 0; indice < getTabCount(); indice++){
 			if(categoria.equals(getTitleAt(indice))){
 				conteudo = (JScrollPane)getComponentAt(indice);
@@ -90,15 +90,48 @@ public class AbasCategoria extends JTabbedPane{
 		if(conteudo == null) return false;
 		
 		JViewport viewport = conteudo.getViewport(); 
-		TabelaDaCategoria table = (TabelaDaCategoria)viewport.getView(); 
+		TabelaDaCategoria tabela = (TabelaDaCategoria)viewport.getView(); 
 
-		table.adicionaLinha(descricao, valor, dataDaDespesa, dataDoPagamento, tipoDoPagamento, parcelas, numeroDoCheque);
+		tabela.adicionaLinha(descricao, valor, dataDaDespesa, dataDoPagamento, tipoDoPagamento, parcelas, numeroDoCheque);
 		
 		return true;
 	}
 	
-	public int numeroDeAbas(){
+	public int getNumeroDeAbas(){
 		return getTabCount();
+	}
+	
+	public int getNumeroDeDespesasDaCategoria(){
+		TabelaDaCategoria tabela = getTabelaDaCategoriaSelecionada();
+		
+		return tabela.getRowCount();
+	}
+	
+	public double getValorTotalDespesas(){
+		TabelaDaCategoria tabela = getTabelaDaCategoriaSelecionada();
+		double valor = 0;
+		
+		try{
+			for(int i = 0; i < tabela.getRowCount(); i++){
+				valor += Double.parseDouble((String)tabela.getValueAt(i, 1));
+			}
+		}
+		catch(NumberFormatException e){
+			System.err.println("Conversão de String para double falhou.\ngetValorTotalDespesas().");
+		}
+		
+		return valor;
+	}
+	
+	private TabelaDaCategoria getTabelaDaCategoriaSelecionada(){
+		JScrollPane conteudo = null;
+		
+		conteudo = (JScrollPane)getSelectedComponent();
+		
+		JViewport viewport = conteudo.getViewport();
+		TabelaDaCategoria tabela = (TabelaDaCategoria)viewport.getView();
+		
+		return tabela;
 	}
 	
 }

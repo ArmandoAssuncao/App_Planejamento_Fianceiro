@@ -25,17 +25,20 @@ public class TEPainelDespesas implements ActionListener{
 			new JanelaCriarCategoria(painelDespesas.getAbasCategoria());
 		}
 		else if(e.getSource() == painelDespesas.getBotaoExcluirCategoria()){
-			if(painelDespesas.getAbasCategoria().numeroDeAbas() != 0)
+			if(painelDespesas.getAbasCategoria().getNumeroDeAbas() != 0)
 				new JanelaRemoverCategoria(painelDespesas.getAbasCategoria());
 				//painelDespesas.getAbasCategoria().removerCategoria();
 		}
 		else if(e.getSource() == painelDespesas.getBotaoEditarCategoria()){
-			if(painelDespesas.getAbasCategoria().numeroDeAbas() != 0)
+			if(painelDespesas.getAbasCategoria().getNumeroDeAbas() != 0)
 				new JanelaEditarCategoria(painelDespesas.getAbasCategoria());
 		}
 		else if(e.getSource() == painelDespesas.getBotaoAdicionarDespesa()){
-			if(painelDespesas.getAbasCategoria().numeroDeAbas() != 0)
+			if(painelDespesas.getAbasCategoria().getNumeroDeAbas() != 0){
 				new JanelaCriarDespesa(painelDespesas.getAbasCategoria());
+				painelDespesas.atualizaPainelTitulo();
+			}
+				
 		}
 	}
 	
