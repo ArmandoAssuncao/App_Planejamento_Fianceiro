@@ -9,7 +9,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -19,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.plaf.metal.MetalMenuBarUI;
 
 import classes.MetaMensal;
 import eventos.painelDespesa.TEPainelDespesas;
@@ -54,13 +52,14 @@ public class IgPainelDespesas extends JPanel{
 		trataEventosDespesas = new TEPainelDespesas(this, framePrincipal);
 		iniciaElementos();
 		
-		//criaAbaCategoria("Esportes");
-		MetaMensal metaMensalTeste = new MetaMensal();
-		for(int i = 0; i < 0; i++){ //APAGAR //////////////////////////////////////////////
+		MetaMensal metaMensalTeste;
+		for(int i = 0; i < 15; i++){ //APAGAR //////////////////////////////////////////////
+			metaMensalTeste = new MetaMensal();
 			metaMensalTeste.setDescricao("Educacao"+i);
-			metaMensalTeste.setValor(22);
+			metaMensalTeste.setValor(i);
 			criarCategoria(metaMensalTeste);
 		}
+		
 		criaPainelBotoes();
 		criaPainelTitulo();
 		
@@ -207,8 +206,7 @@ public class IgPainelDespesas extends JPanel{
 		labelValorTotalDespesas.setText("Total das despesas:");
 		labelValorTotalDespesasPorcentagem.setText("Total das despesas %:");
 		
-		if(abasCategoria.getNumeroDeAbas() != 0)
-			atualizaPainelTitulo();
+		atualizaPainelTitulo();
 		
 		//Atualiza os labels do painel Titulo sempre quando muda de categoria(aba).
 		abasCategoria.addChangeListener(new ChangeListener() {
@@ -239,11 +237,11 @@ public class IgPainelDespesas extends JPanel{
 		constraints.insets.set(10, 5, 0, 0);
 		painelTitulo.add(labelNomeCategoria, constraints);
 		constraints.gridx = 1;
-		constraints.gridwidth = 2;
+		constraints.gridwidth = 3;
 		painelTitulo.add(labelNomeCategoriaValor, constraints);
 		constraints.gridx = 2;
 		constraints.gridwidth = 1;
-		constraints.insets.set(10, 200, 0, 0);
+		constraints.insets.set(10, 250, 0, 0);
 		painelTitulo.add(labelMetaCategoria, constraints);
 		constraints.gridx = 3;
 		constraints.insets.set(10, 5, 0, 0);
@@ -255,9 +253,11 @@ public class IgPainelDespesas extends JPanel{
 		constraints.insets.set(10, 5, 0, 0);
 		painelTitulo.add(labelNumeroDeDespesas, constraints);
 		constraints.gridx = 1;
+		constraints.gridwidth = 3;
 		painelTitulo.add(labelNumeroDeDespesasValor, constraints);
 		constraints.gridx = 2;
-		constraints.insets.set(10, 200, 0, 0);
+		constraints.gridwidth = 1;
+		constraints.insets.set(10, 250, 0, 0);
 		painelTitulo.add(labelValorTotalDespesas, constraints);
 		constraints.gridx = 3;
 		constraints.insets.set(10, 5, 0, 0);
@@ -266,7 +266,7 @@ public class IgPainelDespesas extends JPanel{
 		//linha 2
 		constraints.gridx = 2;
 		constraints.gridy = 2;
-		constraints.insets.set(10, 200, 0, 0);
+		constraints.insets.set(10, 250, 0, 0);
 		painelTitulo.add(labelValorTotalDespesasPorcentagem, constraints);
 		constraints.gridx = 3;
 		constraints.insets.set(10, 5, 0, 0);
@@ -298,15 +298,22 @@ public class IgPainelDespesas extends JPanel{
 	}
 	
 	private void atualizaPainelTitulo(){
+		if(abasCategoria.getNumeroDeAbas() == 0){
+			labelNomeCategoriaValor.setText("");
+			labelMetaCategoriaValor.setText("");
+			labelNumeroDeDespesasValor.setText("");
+			labelValorTotalDespesasValor.setText("");
+			labelValorTotalDespesasPorcentagemValor.setText("");
+			return;
+		}
+		
 		String descricao = arrayMetaMensal.get(abasCategoria.getSelectedIndex()).getDescricao();
 		double valorMeta = arrayMetaMensal.get(abasCategoria.getSelectedIndex()).getValor();
 		double totalDespesasPorcentagem = (abasCategoria.getValorTotalDespesas() * 100)/valorMeta;
 		
-		labelNomeCategoriaValor.setText(descricao);
-		labelMetaCategoriaValor.setText("$" + valorMeta);
-		labelNumeroDeDespesasValor.setText("" + abasCategoria.getNumeroDeDespesasDaCategoria());
-		labelValorTotalDespesasValor.setText("$" + abasCategoria.getValorTotalDespesas());
-		labelValorTotalDespesasPorcentagemValor.setText( totalDespesasPorcentagem + "%");
+		if(valorMeta == 0){
+			totalDespesasPorcentagem = 0;
+		}
 		
 		if(totalDespesasPorcentagem >= 100){
 			labelValorTotalDespesasPorcentagemValor.setForeground(Color.RED);
@@ -317,6 +324,12 @@ public class IgPainelDespesas extends JPanel{
 		else{
 			labelValorTotalDespesasPorcentagemValor.setForeground(Color.BLACK);
 		}
+		
+		labelNomeCategoriaValor.setText(descricao);
+		labelMetaCategoriaValor.setText("$" + valorMeta);
+		labelNumeroDeDespesasValor.setText("" + abasCategoria.getNumeroDeDespesasDaCategoria());
+		labelValorTotalDespesasValor.setText("$" + abasCategoria.getValorTotalDespesas());
+		labelValorTotalDespesasPorcentagemValor.setText( totalDespesasPorcentagem + "%");
 	}
 	
 	//cria uma nova categoria
@@ -336,6 +349,20 @@ public class IgPainelDespesas extends JPanel{
 	public boolean editarCategoria(MetaMensal metaMensal){
 		if( abasCategoria.editarCategoria(metaMensal.getDescricao())){
 			arrayMetaMensal.set(abasCategoria.getSelectedIndex(), metaMensal);
+			
+			//Adicionar a parte do banco /////////////////////////////////////////
+			
+			atualizaPainelTitulo();
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public boolean removerCategoria(){
+		int abaSelecionada = abasCategoria.getSelectedIndex();
+		if( abasCategoria.removerCategoria(getDescricaoCategoria())){
+			arrayMetaMensal.remove(abaSelecionada);
 			
 			//Adicionar a parte do banco /////////////////////////////////////////
 			

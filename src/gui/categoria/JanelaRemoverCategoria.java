@@ -7,15 +7,18 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import classes.MetaMensal;
 import eventos.categoria.TEJanelaRemoverCategoria;
 import gui.JanelaAviso;
 import gui.painelDespesas.AbasCategoria;
+import gui.painelDespesas.IgPainelDespesas;
 
 public class JanelaRemoverCategoria extends JDialog {
 	private final String TITULO_JANELA= "Remover Categoria";
@@ -23,7 +26,7 @@ public class JanelaRemoverCategoria extends JDialog {
 	private final int TAM_JANELA_Y = 500;
 	
 	private TEJanelaRemoverCategoria trataEventosCategoria;
-	private AbasCategoria abasCategoria;
+	IgPainelDespesas igPainelDespesas;
 	private JPanel painelPrincipal;
 	private JPanel painelTitulo;
 	private JPanel painelCampos;
@@ -38,11 +41,11 @@ public class JanelaRemoverCategoria extends JDialog {
 	private JLabel labelMeta;
 	private JLabel labelMetaValor;
 	
-	public JanelaRemoverCategoria(AbasCategoria abasCategoria) {
+	public JanelaRemoverCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
 		
 		trataEventosCategoria = new TEJanelaRemoverCategoria(this);
-		this.abasCategoria = abasCategoria;
+		this.igPainelDespesas = igPainelDespesas;
 		
 		iniciaElementos();
 		
@@ -103,9 +106,9 @@ public class JanelaRemoverCategoria extends JDialog {
 		
 		labelErroCampo.setText(" ");
 		labelDescricao.setText("* Nome da Categoria:");
-		labelDescricaoValor.setText( abasCategoria.getTitleAt(abasCategoria.getSelectedIndex()) );
+		labelDescricaoValor.setText( igPainelDespesas.getDescricaoCategoria() );
 		labelMeta.setText("Meta da Categoria:");
-		labelMetaValor.setText("????"); //PEGAR O VALOR DO BANCO TALVEZ ////////////////////
+		labelMetaValor.setText( String.valueOf(igPainelDespesas.getMetaCategoriaValor()) );
 		
 		botaoRemover.setText("Remover");
 		botaoRemover.addActionListener(trataEventosCategoria);
@@ -194,15 +197,11 @@ public class JanelaRemoverCategoria extends JDialog {
 	}
 	
 	public void removerCategoria(){
-		//Se a condi��o for true, exibe uma janela de confirma��o final
-		if( abasCategoria.removerCategoria(getlabelDescricaoValor().getText()) ){
-			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
-			
+		if( igPainelDespesas.removerCategoria() ){
 			finalizaJanelaCategoria();
 		}
 		else{
 			new JanelaAviso("Remover categoria", "Não existe uma categoria com esse nome.");
-			finalizaJanelaCategoria();
 		}
 	}
 

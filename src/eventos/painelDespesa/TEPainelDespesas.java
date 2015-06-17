@@ -26,7 +26,7 @@ public class TEPainelDespesas implements ActionListener{
 		}
 		else if(e.getSource() == painelDespesas.getBotaoExcluirCategoria()){
 			if(painelDespesas.getAbasCategoria().getNumeroDeAbas() != 0)
-				new JanelaRemoverCategoria(painelDespesas.getAbasCategoria());
+				new JanelaRemoverCategoria(painelDespesas);
 		}
 		else if(e.getSource() == painelDespesas.getBotaoEditarCategoria()){
 			if(painelDespesas.getAbasCategoria().getNumeroDeAbas() != 0)

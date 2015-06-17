@@ -38,11 +38,30 @@ public class AbasCategoria extends JTabbedPane{
 		barraRolagem = new JScrollPane();
 		
 		for(int i = 0; i < 20; i++) //APAGAR/////////////////////////////////////////////////
-			tabela.adicionaLinha(nomeCategoria + " " + i, "1.0", "20/11/2015", "1", "1", "1", "1");
+			tabela.adicionaLinha(nomeCategoria + " " + i, "10000.0", "20/11/2015", "1", "1", "1", "1");
 		
 		barraRolagem.setViewportView(tabela);
 		
 		add(nomeCategoria, barraRolagem);
+		
+		return true;
+	}
+	
+	//Editar Categoria
+	public boolean editarCategoria(String nomeCategoria){
+		//Se o nome da categoria for igual ao argumento, não faz a verificação
+		if(!getTitleAt(getSelectedIndex()).equals(nomeCategoria)){
+			//verifica se o nome da aba ja existe
+			for(int indice = 0; indice < getTabCount(); indice++){
+				if(getTitleAt(indice).equalsIgnoreCase(nomeCategoria)){
+					System.out.println("Nome da categoria igual. Editar");
+					return false;
+				}
+			}
+		}
+
+		//Muda o nome da categoria
+		setTitleAt(getSelectedIndex(), nomeCategoria);
 		
 		return true;
 	}
@@ -56,22 +75,6 @@ public class AbasCategoria extends JTabbedPane{
 		
 		remove(getSelectedIndex());
 		new JanelaAviso("Remover Categoria", "A categoria \"" + nomeCategoria + "\" foi removida com sucesso.");
-		
-		return true;
-	}
-	
-	//Editar Categoria
-	public boolean editarCategoria(String nomeCategoria){
-		//verifica se o nome da aba ja existe
-		for(int indice = 0; indice < getTabCount(); indice++){
-			if(getTitleAt(indice).equalsIgnoreCase(nomeCategoria)){
-				System.out.println("Nome da categoria igual. Editar");
-				return false;
-			}
-		}
-
-		//Muda o nome da categoria
-		setTitleAt(getSelectedIndex(), nomeCategoria);
 		
 		return true;
 	}

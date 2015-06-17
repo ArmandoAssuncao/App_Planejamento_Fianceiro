@@ -201,7 +201,6 @@ public class JanelaCriarCategoria extends JDialog{
 	
 	public void criarCategoria(){
 		if(validaCampos()){
-			
 			MetaMensal metaMensal = new MetaMensal();
 			metaMensal.setDescricao(textFieldDescricao.getText());
 			Calendar c = Calendar.getInstance();
@@ -249,8 +248,8 @@ public class JanelaCriarCategoria extends JDialog{
 		if(!ValidarDados.validarVazio(meta)){
 			return true;
 		}
-		else if(!ValidarDados.validarTamanho(meta, 10)){
-			labelErroCampo.setText("O campo \"Meta\" não pode ter mais que 10 caracteres.");
+		else if(!ValidarDados.validarTamanho(meta, 5)){
+			labelErroCampo.setText("O campo \"Meta\" não pode ter mais que 5 caracteres.");
 			return false;
 		}
 		else if(!ValidarDados.validarInicioString(meta, "[0-9]")){
