@@ -36,6 +36,7 @@ public class JanelaAviso extends JDialog {
 		JButton botaoFechar = new JButton("Fechar");
 		botaoFechar.setBounds(129, 88, 89, 23);
 		botaoFechar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JanelaAviso.this.dispose();
 			}

@@ -37,6 +37,7 @@ public class JanelaDeConfirmacao extends JDialog {
 		JButton botaoFechar = new JButton("Fechar");
 		botaoFechar.setBounds(187, 88, 89, 23);
 		botaoFechar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				JanelaDeConfirmacao.this.dispose();
 			}
@@ -46,6 +47,7 @@ public class JanelaDeConfirmacao extends JDialog {
 		botaoConfirmar.setBounds(74, 88, 89, 23);
 		botaoConfirmar.setMargin(new Insets(0, 0, 0, 0));
 		botaoConfirmar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				confirmar = true;
 				JanelaDeConfirmacao.this.dispose();
