@@ -39,14 +39,22 @@ public class Categoria extends Identificacao {
 		return "Categoria [ " + super.toString() + " ]";
 	}
 
-	public static boolean categoriaExists(int codigoCategoria) {
-		//TODO 
-		boolean existe = false;
-		return existe;
+	/**
+	 * Verifica se existe uma <code>Categoria</code> com o id fornecido no banco de dados.
+	 * @param codigoCategoria <code>int</code> com o codigo da categoria a ser pesquisada.
+	 * @return <code>true</code> se a categoria existe, <code>false</code> em caso contrário.
+	 */
+	public static boolean exists(int codigoCategoria){
+		//TODO
+		return true;
 	}
-
-	public static int getId(int codigoCategoria) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	/**
+	 * Retorna o id da categoria no banco de dados
+	 * @return <code>int</code> com o id da categoria no banco de dados, caso não encontre retorna <code>0</code>
+	 */
+	public static int getId(){
+		//TODO
+		return 1;
 	}
 }//class Categoria

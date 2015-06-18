@@ -1,6 +1,8 @@
 package persistencia;
 
 
+import gui.JanelaMensagem;
+
 import java.util.Calendar;
 
 import classes.Categoria;
@@ -38,13 +40,13 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 		String comandoInsercao = "INSERT INTO candidato VALUES";
 		
 		//Verifica se a categoria onde a despesa será cadastrada existe
-		if(Categoria.categoriaExists(codigoCategoria)){ //TODO metodo categoriaexists nao implementado
-			int idCategoria = -1;
-			//Obtem o id da despesa
-			idCategoria = Categoria.getId(codigoCategoria);
+		if(Categoria.exists(codigoCategoria)){
+//			int idCategoria = -1;
+//			//Obtem o id da despesa
+//			idCategoria = Categoria.getId();
 			//TODO 
-		}else{//Codigo da categoria nao existe.
-			
+		}else{//Codigo da categoria nao existe, nao se pode cadastrar uma despesa.
+			JanelaMensagem.mostraMensagemErro(null, "Ocorreu um erro, a categoria onde seria cadastrada a despesa não existe.");//TODO mudar esta mensagem?
 		}
 		return 1;
 	}//inserir
