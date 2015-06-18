@@ -7,7 +7,6 @@ import javax.swing.JOptionPane;
 /** Classe com metodos estaticos para exibição de mensagens para o usuário
  * @author Arthur Assunção
  * 
- * 
  * @see JOptionPane
  *
  */

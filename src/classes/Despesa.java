@@ -2,8 +2,8 @@ package classes;
 
 import java.util.Calendar;
 /**
- * Contém atributos e métodos para armazenar as informações das despesas realizadas.
- * Os atributos <code>int</code>codigo e <code>String</code> são herdados da superclasse abstrata Identificação.
+ * Contï¿½m atributos e mï¿½todos para armazenar as informaï¿½ï¿½es das despesas realizadas.
+ * Os atributos <code>int</code>codigo e <code>String</code> sï¿½o herdados da superclasse abstrata Identificaï¿½ï¿½o.
  * 
  * @author Armando e Richardson
  *
@@ -18,7 +18,7 @@ public class Despesa extends Identificacao {
 	private int numeroParcelas;
 	
 	/**
-	 * Construtor padrão. Inicia as variáveis de instância
+	 * Construtor padrÃ£o. Inicia as variÃ¡veis de instÃ¢ncia
 	 * 
 	 * dataDespesa <code>Calendar</code> e dataPagamento <code>Calendar</code>  com a data atual do sistema.
 	 */
@@ -29,12 +29,12 @@ public class Despesa extends Identificacao {
 	}//Despesa()
 	
 	/**
-	 * Construtor sobrecarregado da classe Despesa. Recebe como argumento os seguintes parâmetros.
+	 * Construtor sobrecarregado da classe Despesa. Recebe como argumento os seguintes parï¿½metros.
 	 * 
 	 * @param codigoDespesa <code>int</code> com o codigo da despesa
-	 * @param descricao <code>String</code> com a descrição da despesa a ser cadastrada.
-	 * @param codigoCategoria <code>int</code> com o código da categoria da despesa.
-	 * @param codigoPagamento <code>int</code> com o código do pagamento informando a forma de pagamento utilizada.
+	 * @param descricao <code>String</code> com a descriï¿½ï¿½o da despesa a ser cadastrada.
+	 * @param codigoCategoria <code>int</code> com o cï¿½digo da categoria da despesa.
+	 * @param codigoPagamento <code>int</code> com o cï¿½digo do pagamento informando a forma de pagamento utilizada.
 	 * @param dataDespesa <code>Calendar</code> com a data da despesa. 
 	 * @param dataPagamento <code>Calendar</code> com a data em que o pagamento foi realizado.
 	 * @param numeroCheque <code>String</code> caso este tenha sido utilizado.
@@ -55,32 +55,32 @@ public class Despesa extends Identificacao {
 	}//Despesa()
 
 	/**
-	 * Retorna o código da categoria.
-	 * @return um <code>int</code> com o código da categoria da despesa.
+	 * Retorna o cÃ³digo da categoria.
+	 * @return um <code>int</code> com o cï¿½digo da categoria da despesa.
 	 */
 	public int getCodigoCategoria() {
 		return codigoCategoria;
 	}//getCodigoCategoria()
 
 	/**
-	 * Atribui o codigo da categora recebido por parâmetro.
-	 * @param codigoCategoria <code>int</code> com o código da categoria da despesa.
+	 * Atribui o codigo da categora recebido por parï¿½metro.
+	 * @param codigoCategoria <code>int</code> com o cï¿½digo da categoria da despesa.
 	 */
 	public void setCodigoCategoria(int codigoCategoria) {
 		this.codigoCategoria = codigoCategoria;
 	}//setCodigoCategoria()
 
 	/**
-	 * Retorna o código do pagamento.
-	 * @return um <code>int</code> com o código do pagamento.
+	 * Retorna o cï¿½digo do pagamento.
+	 * @return um <code>int</code> com o cï¿½digo do pagamento.
 	 */
 	public int getCodigoPagamento() {
 		return codigoPagamento;
 	}//getCoditoPagamento()
 	
 	/**
-	 * Atribui o codigo do pagamento recebido por parâmetro.
-	 * @param codigoPagamento <code>int</code> com o código do tipo de pagamento realizado.
+	 * Atribui o codigo do pagamento recebido por parï¿½metro.
+	 * @param codigoPagamento <code>int</code> com o cï¿½digo do tipo de pagamento realizado.
 	 */
 	public void setCodigoPagamento(int codigoPagamento) {
 		this.codigoPagamento = codigoPagamento;
@@ -95,7 +95,7 @@ public class Despesa extends Identificacao {
 	}//getDataDespesa()
 
 	/**
-	 * Atribui a data da despesa recebida por parâmetro.
+	 * Atribui a data da despesa recebida por parï¿½metro.
 	 * @param dataDespesa <code>Calendar</code> com a data em que a despesa foi realizada.
 	 */
 	public void setDataDespesa(Calendar dataDespesa) {
@@ -111,7 +111,7 @@ public class Despesa extends Identificacao {
 	}//getDataPagamento
 	
 	/**
-	 * Atribui a data de pagamento recebida por parâmetro.
+	 * Atribui a data de pagamento recebida por parï¿½metro.
 	 * @param dataPagamento <code>Calendar</code> com a data em que o pagamento foi realizado.
 	 */
 	public void setDataPagamento(Calendar dataPagamento) {
@@ -119,16 +119,16 @@ public class Despesa extends Identificacao {
 	}//setDataPagamento()
 
 	/**
-	 * Retorna o número do cheque.
-	 * @return um <code>String</code> com o número do cheque.
+	 * Retorna o nï¿½mero do cheque.
+	 * @return um <code>String</code> com o nï¿½mero do cheque.
 	 */
 	public String getNumeroCheque() {
 		return numeroCheque;
 	}//getNumeroCheque()
 
 	/**
-	 * Atribui o número do cheque (caso está seja a forma de pagamento) recebida por parâmetro.
-	 * @param numeroCheque <code>String</code> com o número do cheque.
+	 * Atribui o nï¿½mero do cheque (caso estï¿½ seja a forma de pagamento) recebida por parï¿½metro.
+	 * @param numeroCheque <code>String</code> com o nï¿½mero do cheque.
 	 */
 	public void setNumeroCheque(String numeroCheque) {
 		this.numeroCheque = numeroCheque;
@@ -143,7 +143,7 @@ public class Despesa extends Identificacao {
 	}//getValorDespesa()
 	
 	/**
-	 * Atribui o valor da despesa recebido por parâmetro.
+	 * Atribui o valor da despesa recebido por parï¿½metro.
 	 * @param valorDespesa <code>double</code> com o valor da despesa.
 	 */
 	public void setValorDespesa(double valorDespesa) {
@@ -152,28 +152,28 @@ public class Despesa extends Identificacao {
 	
 	/**
 	 * Retorna a quantidade de parcelas.
-	 * @return um <code>int</code> quantidade de parcelas em que a despesa será quitada.
+	 * @return um <code>int</code> quantidade de parcelas em que a despesa serï¿½ quitada.
 	 */
 	public int getNumeroParcelas() {
 		return numeroParcelas;
 	}//getNumeroParcelas()
 	
 	/**
-	 * Atribui a quantidade de parcelas recebida como parâmetro.
-	 * @param numeroParcelas <code>int</code> número de parcelas em que a despesa será quitada.
+	 * Atribui a quantidade de parcelas recebida como parï¿½metro.
+	 * @param numeroParcelas <code>int</code> nï¿½mero de parcelas em que a despesa serï¿½ quitada.
 	 */
 	public void setNumeroParcelas(int numeroParcelas) {
 		this.numeroParcelas = numeroParcelas;
 	}//setNumeroParcelas()
 	
 	/**
-	 * Retorna uma referência em String contendo as informações da despesa.
-	 * @return um <code>String</code> com as informações da despesa.
+	 * Retorna uma referï¿½ncia em String contendo as informaï¿½ï¿½es da despesa.
+	 * @return um <code>String</code> com as informaï¿½ï¿½es da despesa.
 	 */
 	@Override
 	public String toString() {
-		return super.toString() + "Código da categoria: " + codigoCategoria
-				+ ", Código do pagamento: " + codigoPagamento + String.format(", Data da despesa: %02d/%02d/%04d", 
+		return super.toString() + "Cï¿½digo da categoria: " + codigoCategoria
+				+ ", Cï¿½digo do pagamento: " + codigoPagamento + String.format(", Data da despesa: %02d/%02d/%04d", 
 																			dataDespesa.get(Calendar.DAY_OF_MONTH),
 																			dataDespesa.get(Calendar.MONTH) + 1, 
 																			dataDespesa.get(Calendar.YEAR)) + 
@@ -181,7 +181,7 @@ public class Despesa extends Identificacao {
 															    		    dataPagamento.get(Calendar.DAY_OF_MONTH),
 															    		    dataPagamento.get(Calendar.MONTH) + 1,
 															    		    dataPagamento.get(Calendar.YEAR)) + 
-				 ", Número do Cheque: " + numeroCheque + String.format(", Valor da despesa: R$%1.2f", valorDespesa) + 
-				 ", Número de Parcelas: " + numeroParcelas;
+				 ", Nï¿½mero do Cheque: " + numeroCheque + String.format(", Valor da despesa: R$%1.2f", valorDespesa) + 
+				 ", Nï¿½mero de Parcelas: " + numeroParcelas;
 	}//toString()
 }//class Despesa

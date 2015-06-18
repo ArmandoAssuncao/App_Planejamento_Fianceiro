@@ -38,4 +38,15 @@ public class Categoria extends Identificacao {
 	public String toString() {
 		return "Categoria [ " + super.toString() + " ]";
 	}
+
+	public static boolean categoriaExists(int codigoCategoria) {
+		//TODO 
+		boolean existe = false;
+		return existe;
+	}
+
+	public static int getId(int codigoCategoria) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }//class Categoria

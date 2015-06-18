@@ -15,12 +15,13 @@ import classes.Arquivo;
 
 
 /** Classe para manipular o banco de dados do sistema
- * @author Richardson William
+ * 
  * @author Armando Assunção
+ * @author Richardson William
  * 
  * @see BancoDeDados
  */
-public class BDPlanejamentoFinanceiro extends BancoDeDados{
+public class BDPlanejamentoFinanceiro extends BancoDeDados implements Runnable{
 
 	private static final String DIRETORIO_BANCO_DE_DADOS = "banco/";
 	/** Caminho do banco de dados*/
@@ -47,6 +48,20 @@ public class BDPlanejamentoFinanceiro extends BancoDeDados{
 	 */
 	public static BDPlanejamentoFinanceiro getInstance(){
 		return BANCO_DE_DADOS_PF;
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run(){
+		try {
+			this.iniciaBanco();
+		}
+		catch (SQLException e) {
+			JanelaMensagem.mostraMensagemErroBD(null, "Falha ao iniciar o banco de dados: \n" + e.getMessage() + "\n\nPrograma sera finalizado");
+			System.exit(0);
+		}
 	}
 	
 	/** Inicia o banco de dados
@@ -163,30 +178,6 @@ public class BDPlanejamentoFinanceiro extends BancoDeDados{
 		}
 	}
 
-	/** Remove as tabelas do banco de dados do sistema
-	 * @throws IOException possivel erro ao abrir o arquivo sql
-	 * @throws SQLException possível erro gerado por má configuração do banco de dados
-	 */
-	private void removeTabelas() throws IOException, SQLException{
-		//remove todas as tabelas e sequencias do banco de dados
-		String arquivoTemporario = "tempRemoveEstrutura.sql";
-		Arquivo.copiaArquivo(Recursos.getResourceAsStream(ENDERECO_ARQUIVO_REMOVE_ESTRUTURA_SQL), new File(arquivoTemporario));
-		abreArquivoSQL(arquivoTemporario);
-		Arquivo.removeArquivo(arquivoTemporario);
-	}
-	
-	/** Exclui os registros das tabelas do banco de dados do sistema
-	 * @throws IOException possivel erro ao abrir o arquivo sql
-	 * @throws SQLException possível erro gerado por má configuração do banco de dados
-	 */
-	public void excluiRegistros() throws IOException, SQLException{
-		//remove todas as tabelas e sequencias do banco de dados
-		String arquivoTemporario = "tempExcluiDados.sql";
-		Arquivo.copiaArquivo(Recursos.getResourceAsStream(ENDERECO_ARQUIVO_EXCLUI_DADOS_SQL), new File(arquivoTemporario));
-		abreArquivoSQL(arquivoTemporario);
-		Arquivo.removeArquivo(arquivoTemporario);
-	}
-	
 	/** Cria as tabelas do banco de dados do sistema
 	 * @throws IOException possivel erro ao abrir o arquivo sql
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
@@ -199,6 +190,18 @@ public class BDPlanejamentoFinanceiro extends BancoDeDados{
 		Arquivo.removeArquivo(arquivoTemporario);
 	}
 	
+	/** Remove as tabelas do banco de dados do sistema
+	 * @throws IOException possivel erro ao abrir o arquivo sql
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	private void removeTabelas() throws IOException, SQLException{
+		//remove todas as tabelas e sequencias do banco de dados
+		String arquivoTemporario = "tempRemoveEstrutura.sql";
+		Arquivo.copiaArquivo(Recursos.getResourceAsStream(ENDERECO_ARQUIVO_REMOVE_ESTRUTURA_SQL), new File(arquivoTemporario));
+		abreArquivoSQL(arquivoTemporario);
+		Arquivo.removeArquivo(arquivoTemporario);
+	}
+
 	/** Insere dados predefinidos nas tabelas do banco de dados do sistema
 	 * @throws IOException possivel erro ao abrir o arquivo sql
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
@@ -207,6 +210,18 @@ public class BDPlanejamentoFinanceiro extends BancoDeDados{
 		//Insere os dados no banco de dados
 		String arquivoTemporario = "tempInsereDados.sql";
 		Arquivo.copiaArquivo(Recursos.getResourceAsStream(ENDERECO_ARQUIVO_DADOS_SQL), new File(arquivoTemporario));
+		abreArquivoSQL(arquivoTemporario);
+		Arquivo.removeArquivo(arquivoTemporario);
+	}
+	
+	/** Exclui os registros das tabelas do banco de dados do sistema
+	 * @throws IOException possivel erro ao abrir o arquivo sql
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public void excluiRegistros() throws IOException, SQLException{
+		//remove todas as tabelas e sequencias do banco de dados
+		String arquivoTemporario = "tempExcluiDados.sql";
+		Arquivo.copiaArquivo(Recursos.getResourceAsStream(ENDERECO_ARQUIVO_EXCLUI_DADOS_SQL), new File(arquivoTemporario));
 		abreArquivoSQL(arquivoTemporario);
 		Arquivo.removeArquivo(arquivoTemporario);
 	}
