@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -14,17 +15,18 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import classes.RendaMensal;
 import eventos.painelRenda.TEPainelRenda;
-import gui.painelDespesas.TabelaDaCategoria;
 
-public class PainelRenda extends JPanel {
+public class IgPainelRenda extends JPanel {
 	public final int TAM_PAINEL_X = 800;
 	public final int TAM_PAINEL_Y = 600;
 	
 
+	ArrayList<RendaMensal> arrayListRendaMensal;
 	private TEPainelRenda trataEventosRenda;
-	
-	private TabelaDaCategoria tabelasTeste;
+	private AbasRenda abasRenda;
+	private TabelaRendaMensal tabelaRendaMensal;
 	
 	private JPanel painelBotoes;
 	private JPanel painelTitulo;
@@ -33,7 +35,7 @@ public class PainelRenda extends JPanel {
 	private JButton botaoExcluirRenda;
 	private JButton botaoEditarRenda;
 	
-	public PainelRenda(Window framePrincipal) {
+	public IgPainelRenda(Window framePrincipal) {
 		setLayout(new BorderLayout(0,5));
 
 		trataEventosRenda = new TEPainelRenda(this, framePrincipal);
@@ -41,8 +43,11 @@ public class PainelRenda extends JPanel {
 		criaPainelTitulo();
 		criaPainelBotoes();
 			
+		for(int i = 0;i<15;i++)//TODO apagar 
+		tabelaRendaMensal.adicionaLinha("Data", "valor");
+		
 		add(painelTitulo, BorderLayout.NORTH);
-		add(tabelasTeste, BorderLayout.WEST);
+		add(abasRenda, BorderLayout.WEST);
 		add(painelBotoes,BorderLayout.EAST);
 		
 		
@@ -50,7 +55,14 @@ public class PainelRenda extends JPanel {
 	}
 
 	private void iniciaElementos() {
-		tabelasTeste = new TabelaDaCategoria();
+		tabelaRendaMensal = new TabelaRendaMensal();
+		arrayListRendaMensal = new ArrayList<RendaMensal>();
+		
+		abasRenda = new AbasRenda();
+		
+		for(int i = 0;i<15;i++)
+			abasRenda.criarAbaRenda("Renda "+i);
+		
 		painelBotoes = new JPanel();
 		painelTitulo = new JPanel();
 		
@@ -58,9 +70,9 @@ public class PainelRenda extends JPanel {
 		botaoExcluirRenda = new JButton();
 		botaoEditarRenda = new JButton();
 		
-		tabelasTeste = new TabelaDaCategoria();
-		tabelasTeste.setPreferredSize(new Dimension(900, 500));
-		tabelasTeste.adicionaLinha("descricao", "valor", "dataDaDespesa", "dataDoPagamento", "tipoDoPagamento", "parcelas", "numeroDoCheque");
+		tabelaRendaMensal = new TabelaRendaMensal();
+		tabelaRendaMensal.setPreferredSize(new Dimension(900, 500));
+		tabelaRendaMensal.adicionaLinha("data", "valor");
 	}//iniciaElementos()
 
 	private void criaPainelTitulo(){
@@ -135,6 +147,17 @@ public class PainelRenda extends JPanel {
 //		painelBotoes.setVisible(true);  //TODO isso � realmente necess�rio?
 	}//criaPainelBotoes
 
+	
+	public boolean criarAbaRenda(RendaMensal rendaMensal){
+		if(abasRenda.criarAbaRenda(rendaMensal.getDescricao())){
+			arrayListRendaMensal.add(rendaMensal);
+			abasRenda.setSelectedIndex(abasRenda.getNumeroDeAbas()-1);
+		
+			return true;
+		}
+		return true;
+	}
+	
 	public JButton getBotaoAddRenda() {
 		return botaoAddRenda;
 	}

@@ -3,7 +3,7 @@ package gui.framePrincipal;
 import gui.painelDespesas.IgPainelDespesas;
 import gui.painelGraficos.PainelGraficos;
 import gui.painelInicio.PainelInicio;
-import gui.painelRenda.PainelRenda;
+import gui.painelRenda.IgPainelRenda;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,16 +23,16 @@ public class AbasPrincipal extends JTabbedPane{
 	PainelInicio painelInicio;
 	IgPainelDespesas painelDespesas;
 	PainelGraficos painelGraficos;
-    PainelRenda painelRenda;
+    IgPainelRenda igPainelRenda;
 	
 	public AbasPrincipal(Window framePrincipal){
 		painelInicio = new PainelInicio(framePrincipal);
 		painelDespesas = new IgPainelDespesas(framePrincipal);
 		painelGraficos = new PainelGraficos(framePrincipal);
-        painelRenda = new PainelRenda(framePrincipal);
+        igPainelRenda = new IgPainelRenda(framePrincipal);
 		
 		add(NOME_ABA_1, painelInicio);
-		add(NOME_ABA_2, painelRenda);
+		add(NOME_ABA_2, igPainelRenda);
 		add(NOME_ABA_3, painelDespesas);
 		add(NOME_ABA_4, painelGraficos);
 		

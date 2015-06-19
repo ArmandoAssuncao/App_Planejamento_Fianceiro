@@ -1,16 +1,16 @@
 package eventos.painelRenda;
 
-import gui.painelRenda.PainelRenda;
+import gui.painelRenda.IgPainelRenda;
 
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TEPainelRenda implements ActionListener {
-	private PainelRenda painelRenda;
+	private IgPainelRenda painelRenda;
 	Window janelaPai;
 	
-	public TEPainelRenda(PainelRenda painelRenda, Window janelaPai) {
+	public TEPainelRenda(IgPainelRenda painelRenda, Window janelaPai) {
 		this.painelRenda = painelRenda;
 		this.janelaPai = janelaPai;
 	}
