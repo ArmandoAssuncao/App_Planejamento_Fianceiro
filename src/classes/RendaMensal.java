@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 /**
  * /**
- *  Armazena informações sobre a renda mensal. Herda os atributos da classe Renda.
+ *  Armazena informaÃ§Ãµes sobre a renda mensal. Herda os atributos da classe Renda.
  *  Adiciona os seguintes atributos: valor do tipo <code>double</code> e data do tipo <code>Calendar</code>.
  * @author Armando e Richardson
  */
@@ -13,21 +13,21 @@ public class RendaMensal extends Renda {
 	private Calendar data;
 	
 	/**
-	 * Construtor padrão.
+	 * Construtor padrÃ£o.
 	 */
 	public RendaMensal() {
 		super();
 	}
 
 	/**
-	 * Construtor sobrecarregado, recebe os seguintes parâmetros:
-	 * @param codigo <code>int</code> de identificação da renda mensal.
+	 * Construtor sobrecarregado, recebe os seguintes parÃ¢metros:
 	 * @param data <code>Calendar</code> com a data da receita.
 	 * @param valor <code>double</code> da renda mensal.
 	 */
-	public RendaMensal(int codigo,Calendar data, double valor) {
-		setCodigo(codigo);
+	public RendaMensal(String descricao, Calendar data, double valor) {
+		setDescricao(descricao);
 		setValor(valor);
+		setData(data);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class RendaMensal extends Renda {
 	}
 	
 	/**
-	 * Atribui o valor recebido por parâmetro como valor do item.
+	 * Atribui o valor recebido por parÃ¢metro como valor do item.
 	 * @param valor <code>double</code>
 	 */
 	public void setValor(double valor) {
@@ -63,12 +63,12 @@ public class RendaMensal extends Renda {
 	}
 
 	/**
-	 * Retorna uma referência em String do código, descrição e do valor da renda mensal.
+	 * Retorna uma referÃªncia em String da descriÃ§Ã£o, data e do valor da renda mensal.
 	 * @return <code>String</code> referente aos dados cadastrados.
 	 */
 	@Override
 	public String toString() {
-		return "Renda Mensal [ Código: " + getCodigo() + 
+		return "Renda Mensal [ descriÃ§Ã£o: " + getDescricao() + 
 				String.format("Data da Renda: %02d/%02d/%04d", 
 						data.get(Calendar.DAY_OF_MONTH),
 						data.get(Calendar.MONTH) + 1,

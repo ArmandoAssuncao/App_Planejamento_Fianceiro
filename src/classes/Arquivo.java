@@ -17,7 +17,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /** Classe para manipular arquivos
- * @author Arthur Assun��o
+ * @author Arthur Assunção
  * 
  * 
  * @see File
@@ -67,7 +67,7 @@ public class Arquivo {
 	 * @param destino <code>File</code> com o arquivo de destino
 	 * @return <code>boolean</code> com <code>true</code> se o arquivo foi copiado com sucesso e <code>false</code> senao
 	 * @throws IOException pode ocorre algum erro ao ler ou escrever o arquivo
-	 * @throws ClassCastException caso o <code>InputStream</code> n�o seja um <code>FileOutputStream</code>
+	 * @throws ClassCastException caso o <code>InputStream</code> nãoseja um <code>FileOutputStream</code>
 	 * @see File
 	 * @see InputStream
 	 * @see FileOutputStream

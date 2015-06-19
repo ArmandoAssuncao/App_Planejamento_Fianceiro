@@ -1,43 +1,46 @@
 package classes;
 
 /**
- * Armazena informações sobre a renda.
- * Possui os parâmetros <code>int</code>codigo e <code>String</code> descrição herdados
- * da superclasse abstrata <code>Identificacao</code>.
+ * Armazena informaÃ§Ãµes sobre a renda.
  * @author Armando e Richardson
  */
-public class Renda extends Identificacao {
+public class Renda {
+	private String descricao;
 	
 	/**
-	 * Contrutor padrão.
+	 * Contrutor padrÃ£o.
 	 */
-	public Renda() {
-		super();
-	}
+	public Renda() {}
+	
 	
 	/**
-	 *  Construtor sobrecarregado da classe Renda. Recebe o seguinte parâmetro:
-	 *  @param codigo <code>int</code> de indentificação da renda.
-	 */
-	public Renda(int codigo){
-		super(codigo);
-	}
-	
-	/**
-	 * Contrutor sobrecarregado da classe Renda. Recebe os seguintes parâmetros:
-	 * @param codigo <code>int</code> de indentificação da renda.
+	 * Contrutor sobrecarregado da classe Renda. Recebe o seguinte parÃ¢metro:
 	 * @param descricao <code>String</code> da renda.
 	 */
-	public Renda(int codigo, String descricao) {
-		super(codigo, descricao);
+	public Renda(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	/** Retornar uma <code>String</code> com a descriÃ§Ã£o da renda
+	 * @return <code>String</code> com a descriÃ§Ã£o da renda
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
+	
+	/** Define a descriÃ§Ã£o da renda
+	 * @param descricao <code>String</code> com a nova descriÃ§Ã£o da renda
+	 */
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	
 	/**
-	 * Retorna uma referência em String do código e da descrição
+	 * Retorna uma referÃªncia em String da descriÃ§Ã£o
 	 * @return <code>String</code> referente aos dados cadastrados.
 	 */
 	@Override
 	public String toString() {
-		return "Renda [ " + super.toString() + " ]";
+		return "Renda [ " + descricao + " ]";
 	}
 }//class Renda

@@ -30,7 +30,6 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	 * @see BancoDeDados#RESULTADO_ERRO_DESCONHECIDO
 	 */
 	protected int inserir(Categoria categoria){
-		int codigo = categoria.getCodigo();
 		String nome =  categoria.getDescricao();
 		
 		String comandoInsercao = "INSERT INTO categoria VALUES";
@@ -140,7 +139,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 				codigo = Integer.parseInt(resultadoQuery.getString("codigo"));
 				descricao = resultadoQuery.getString("descricao");
 				
-				categorias.add(new Categoria(codigo, descricao));
+				categorias.add(new Categoria(descricao));
 			}//while
 		} catch (NumberFormatException  | SQLException e) {
 			e.printStackTrace();

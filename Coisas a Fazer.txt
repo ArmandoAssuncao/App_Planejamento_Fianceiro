@@ -1,0 +1,3 @@
+-Arquivar o banco a cada mês que passar, para que caso seja necessário, o usuário veja as depesas anteriores.
+ou
+-Exibir um relatorio com as despesas do mês que o usuário escolher, caso o usuário queira ver suas despesas anteriores.

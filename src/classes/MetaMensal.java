@@ -2,8 +2,8 @@ package classes;
 
 import java.util.Calendar;
 /**
- * Armazena as informações sobre as metas e gastos referentes a um Mes/Ano determinado.
- * Os atributos são um <code>Calendar</code> mesAnoMeta e um <code>double</code> valor.
+ * Armazena as informaÃ§Ãµes sobre as metas e gastos referentes a um Mes/Ano determinado.
+ * Os atributos sÃ£o um <code>Calendar</code> mesAnoMeta e um <code>double</code> valor.
  * @author Armando e Richardson
  */
 public class MetaMensal extends Categoria {
@@ -11,26 +11,26 @@ public class MetaMensal extends Categoria {
 	private double valor;
 	
 	/**
-	 * Construtor padrão.
+	 * Construtor padrÃ£o.
 	 */
 	public MetaMensal() {
 		super();
 	}//MetaMensal()
 	
 	/**
-	 * Construtor sobrecarregado da classe MetaMensal. Recebe os seguintes parâmetros:
-	 * @param codigo <code>int</code> da meta mensal.
-	 * @param mesAnoMeta <code>Calendar</code> com o mês e o ano da meta mensal.
+	 * Construtor sobrecarregado da classe MetaMensal. Recebe os seguintes parÃ¢metros:
+	 * @param descricao <code>String</code> da meta mensal
+	 * @param mesAnoMeta <code>Calendar</code> com o mÃªs e o ano da meta mensal.
 	 * @param valor <code>double</code> da meta para os gastos.
 	 */
-	public MetaMensal(int codigo, Calendar mesAnoMeta, double valor) {
-		super(codigo);
+	public MetaMensal(String descricao, Calendar mesAnoMeta, double valor) {
+		super(descricao);
 		this.mesAnoMeta = mesAnoMeta;
 		this.valor = valor;
 	}//MetaMensal()
 
 	/**
-	 * Retorna o mês/ano da meta.
+	 * Retorna o mÃªs/ano da meta.
 	 * @return<code>Calendar</code> 
 	 */
 	public Calendar getMesAnoMeta() {
@@ -38,7 +38,7 @@ public class MetaMensal extends Categoria {
 	}//getMesAnoMeta()
 	
 	/**
-	 * Atribui o mês/ano da meta mensal.
+	 * Atribui o mÃªs/ano da meta mensal.
 	 * @param mesAnoMeta <code>Calendar</code>
 	 */
 	public void setMesAnoMeta(Calendar mesAnoMeta) {
@@ -62,11 +62,11 @@ public class MetaMensal extends Categoria {
 	}//setValor()
 	
 	/**
-	 * Retornar uma referência de uma String contendo as informações da meta.
+	 * Retornar uma referÃªncia de uma String contendo as informaÃ§Ãµes da meta.
 	 * @return <code>String</code>
 	 */
 	@Override
 	public String toString() {
-		return "Meta Mensal [ Código: " + getCodigo() + ", Mes/Ano da Meta:" + mesAnoMeta + String.format(", Valor R$ %1.2f", valor) + " ]";
+		return "Meta Mensal [ DescriÃ§Ã£o: "+ getDescricao() + ", Mes/Ano da Meta:" + mesAnoMeta + String.format(", Valor R$ %1.2f", valor) + " ]";
 	}//toString()
 }//class MetaMensal
