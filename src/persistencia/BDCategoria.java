@@ -35,7 +35,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 		String comandoInsercao = "INSERT INTO categoria VALUES";
 		try{
 			if(!exists(descricao)){//Verifica se existe uma categoria com o mesmo nome;
-				String comandoSql = comandoInsercao + String.format("(%s, \'%s\');", "NEXT VALUE FOR seq_categoria", categoria); 
+				String comandoSql = comandoInsercao + String.format("(%s, \'%s\');", "NEXT VALUE FOR seq_categoria", descricao); 
 				try {
 					this.executaUpdate(comandoSql);
 				} catch (SQLException e) {
@@ -45,7 +45,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 				}
 			}
 			else
-				return BancoDeDados.RESULTADO_ERRO_REGISTRO_DUPLICADO;// Categoria existente.
+				return BancoDeDados.RESULTADO_ERRO_REGISTRO_DUPLICADO;// Categoria com descrição duplicada.
 		}
 		catch(SQLException e){
 			e.printStackTrace();
@@ -86,7 +86,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	
 	/**
 	 * Exclui uma categoria no banco de dados.
-	 * @param descrição <code>String</code> com a descrição da <code>Categoria</code> a ser excluida. 
+	 * @param descricao <code>String</code> com a descrição da <code>Categoria</code> a ser excluida. 
 	 * @return <code>true</code> se os dados foram removidos, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
@@ -105,7 +105,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	
 	/**
 	 * Verifica se existe uma categoria com a descrição indicada no banco de dados.
-	 * @param descrição <code>String</code> com a descrição da categoria.
+	 * @param descricao <code>String</code> com a descrição da categoria a ser removida.
 	 * @return <code>true</code> se a categoria existe, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
@@ -131,7 +131,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	/**
 	 * Pesquisa categoria pela descricao
 	 * @param descricao <code>String</code> com a descrição da <code>Categoria</code> a ser pesquisada. 
-	 * @return {@code List<Categoria>} com as categorias que tem a descrição especificada
+	 * @return {@code List<Categoria>} com as categorias que tem na descrição a descrição especificado
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
 	protected static List<Categoria> pesquisar(String descricao) throws SQLException{
@@ -161,7 +161,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 
 	/**
 	 *   Retorna o id da categoria no banco de dados
-	 * @param descrição <code>String</code> com a descrição da categoria
+	 * @param descricao descrição <code>String</code> com a descrição da categoria
 	 * @return <code>int</code> com o id da categoria no banco de dados, caso não encontre retorna <code>0</code>
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */

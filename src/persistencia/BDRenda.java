@@ -30,22 +30,30 @@ public abstract class BDRenda extends BDPlanejamentoFinanceiro {
 	 * @see BancoDeDados#RESULTADO_ERRO_DESCONHECIDO
 	 */
 	protected int inserir(Renda renda){
-		String nome =  renda.getDescricao();
+		String descricao =  renda.getDescricao();
 		
 		String comandoInsercao = "INSERT INTO renda VALUES";
-		
-		if(true){ //TODO pesquisar se  a renda existe, se existe, nao e possivel cadastrar.
-			String comandoSql = comandoInsercao + "()";  //TODO comando sql
-			try {
-				this.executaUpdate(comandoSql);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
-				return BancoDeDados.RESULTADO_ERRO_BANCO_DADOS;
+		try{
+			if(!exists(descricao)){//Verifica se existe uma renda com a mesma descrição; //TODO
+				String comandoSql = comandoInsercao + String.format("(%s, \'%s\');", "NEXT VALUE FOR seq_renda", descricao);
+				try {
+					this.executaUpdate(comandoSql);
+				} catch (SQLException e) {
+					e.printStackTrace();
+					JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
+					return BancoDeDados.RESULTADO_ERRO_BANCO_DADOS;
+				}
 			}
+			else
+				return BancoDeDados.RESULTADO_ERRO_REGISTRO_DUPLICADO;// Renda com descrição duplicada.
 		}
-		//else // Renda existente. 
-			return BancoDeDados.RESULTADO_ERRO_REGISTRO_DUPLICADO;
+		catch(SQLException e){
+			e.printStackTrace();
+			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
+			return BancoDeDados.RESULTADO_ERRO_BANCO_DADOS;
+		}
+		
+		return BancoDeDados.RESULTADO_SUCESSO;
 	}//inserir
 	
 	/**
@@ -60,11 +68,12 @@ public abstract class BDRenda extends BDPlanejamentoFinanceiro {
 			return false;
 		}
 		
-		String comandoUpdate = "UPDATE renda SET ";		
+		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(renda.getDescricao());
+		String comandoUpdate = "UPDATE renda SET ";
 		String clausulaWhere = " WHERE idRenda=" + id;
-		String novoNome = renda.getDescricao();
 		
-		String comandoSql = comandoUpdate + ""; //TODO comando sql
+		String comandoSql = comandoUpdate + String.format("descricao=\'%s\'%s", novaDescricao, clausulaWhere);
+		
 		try {
 			this.executaUpdate(comandoSql);
 		} catch (SQLException e) {
@@ -77,16 +86,17 @@ public abstract class BDRenda extends BDPlanejamentoFinanceiro {
 	
 	/**
 	 * Exclui uma renda no banco de dados.
-	 * @param nome <code>String</code> com o nome da <code>Renda</code> a ser excluida. 
+	 * @param descricao <code>String</code> com a descrição da <code>Renda</code> a ser excluida. 
 	 * @return <code>true</code> se os dados foram removidos, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected boolean excluir(String nome) throws SQLException{
+	protected boolean excluir(String descricao) throws SQLException{
 		this.abreConexao();
 		
-		BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(nome);
+		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(descricao);
+		String comandoSql = "DELETE FROM renda WHERE descricao=";
 		
-		this.executaUpdate("DELETE FROM renda WHERE nome=\'" + nome + " \'"); //TODO comando sql
+		this.executaUpdate(comandoSql + String.format("\'%s\'", novaDescricao));
 		
 		this.fechaConexao();
 		
@@ -94,22 +104,23 @@ public abstract class BDRenda extends BDPlanejamentoFinanceiro {
 	}
 	
 	/**
-	 * Verifica se existe uma renda com o nome indicado no banco de dados.
-	 * @param nome <code>String</code> com o nome da renda a ser removida.
+	 * Verifica se existe uma renda com a descrição indicada no banco de dados.
+	 * @param descricao <code>String</code> com a descrição da renda a ser removida.
 	 * @return <code>true</code> se a renda existe, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected boolean exists(String nome) throws SQLException{
+	protected boolean exists(String descricao) throws SQLException{
 		int contagem = 0;
 		this.abreConexao();
 		
-		nome = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(nome);
-		ResultSet resultadoQuery = this.executaQuery("" +
-				"SELECT COUNT(*) AS contagem FROM renda WHERE nome=\'" + nome + "\'"); //TODO comando sql
+		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(descricao);
+		String comandoSql = "" + "SELECT COUNT(*) AS contagem FROM renda WHERE descricao=";
+		ResultSet resultadoQuery = this.executaQuery(comandoSql + String.format("\'%s\'", novaDescricao));
+		
 		resultadoQuery.next();
-		String contagemCategorias = resultadoQuery.getString("contagem");
-		if (contagemCategorias != null){
-			contagem = Integer.parseInt(contagemCategorias);
+		String contagemRendas = resultadoQuery.getString("contagem");
+		if (contagemRendas != null){
+			contagem = Integer.parseInt(contagemRendas);
 		}
 		
 		this.fechaConexao();
@@ -118,49 +129,48 @@ public abstract class BDRenda extends BDPlanejamentoFinanceiro {
 	}
 	
 	/**
-	 * Pesquisa renda pelo nome
-	 * @param nome <code>String</code> com o nome da <code>Renda</code> a ser pesquisada. 
-	 * @return {@code List<Renda>} com as categorias que tem no nome o nome especificado
+	 * Pesquisa renda pela descrição
+	 * @param descricao <code>String</code> com a descrição da <code>Renda</code> a ser pesquisada. 
+	 * @return {@code List<Renda>} com as rendas que tem na descrição a descrição especificada
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected static List<Renda> pesquisar(String nome) throws SQLException{
-		String descricao;
-		int codigo;
-		
-		List<Renda> categorias = new ArrayList<Renda>();
+	protected static List<Renda> pesquisar(String descricao) throws SQLException{
+		List<Renda> rendas = new ArrayList<Renda>();
 		
 		BANCO_DE_DADOS_PF.abreConexao();
-		nome = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(nome);
-		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery("SELECT * FROM renda WHERE nome LIKE \'%" + nome + "%\'");//TODO comando sql
+		
+		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(descricao);
+		String comandoSql = "SELECT * FROM renda WHERE descricao LIKE \'%" + novaDescricao + "%\'";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
 		
 		try {
 			//resultSet posiciona o cursor antes da primeira linha, entao o next() abaixo ja o coloca na primeira linha, caso haja
 			while(resultadoQuery.next()){
-				codigo = Integer.parseInt(resultadoQuery.getString("codigo"));
-				descricao = resultadoQuery.getString("descricao");
+				novaDescricao = resultadoQuery.getString("descricao");
 				
-				categorias.add(new Renda(descricao));
+				rendas.add(new Renda(novaDescricao));
 			}//while
-		} catch (NumberFormatException  | SQLException e) {
+		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
 			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
 		}
 		
 		BANCO_DE_DADOS_PF.fechaConexao();
-		return categorias;
+		return rendas;
 	}//pesquisar
 
 	/**
 	 *   Retorna o id da renda no banco de dados
-	 * @param nome <code>String</code> com o nome da renda
+	 * @param descricao <code>String</code> com a descrição da renda
 	 * @return <code>int</code> com o id da renda no banco de dados, caso não encontre retorna <code>0</code>
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected int getId(String nome) throws SQLException{
+	protected int getId(String descricao) throws SQLException{
 		int id = 0;
 		
 		this.abreConexao();
-		ResultSet resultadoQuery = this.executaQuery("SELECT idCategoria FROM renda WHERE nome=\'" + nome + "\'");//TODO comando sql
+		String comandoSql = "SELECT idRenda FROM renda WHERE descricao=\'" + descricao + "\'";
+		ResultSet resultadoQuery = this.executaQuery(comandoSql);
 		
 		resultadoQuery.next();
 		id = resultadoQuery.getInt(1); //valor da coluna um, unica coluna
