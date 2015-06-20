@@ -1,17 +1,2 @@
 /*C3*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C5*/SET SCHEMA PUBLIC
-CREATE TABLE IF NOT EXISTS renda(\u000a\u0009idRenda INTEGER NOT NULL,\u000a\u0009descricao VARCHAR_IGNORECASE(100) NOT NULL CHECK(LENGTH(descricao) > 0),\u000a\u0009CONSTRAINT pk_renda PRIMARY KEY (idRenda)\u000a)
-CREATE TABLE IF NOT EXISTS renda_mensal(\u000a    dataRenda VARCHAR_IGNORECASE(10),\u000a\u0009valor DOUBLE,\u000a    idRenda INTEGER NOT NULL,\u000a    CONSTRAINT fk_renda_mensal FOREIGN KEY (idRenda) REFERENCES renda(idRenda) ON DELETE CASCADE,\u000a\u0009CONSTRAINT pk_renda_mesal PRIMARY KEY (idRenda, dataRenda)\u000a)
-CREATE TABLE IF NOT EXISTS forma_pagamento(\u000a\u0009idFormaPagamento INTEGER NOT NULL,\u000a\u0009descricao VARCHAR_IGNORECASE(100) NOT NULL UNIQUE CHECK(LENGTH(descricao) > 0),\u000a\u0009CONSTRAINT pk_forma_pagamento PRIMARY KEY (idFormaPagamento)\u000a)
-CREATE TABLE IF NOT EXISTS categoria(\u000a\u0009idCategoria INTEGER NOT NULL,\u000a\u0009descricao VARCHAR_IGNORECASE(100) NOT NULL UNIQUE CHECK(LENGTH(descricao) > 0),\u000a\u0009CONSTRAINT pk_categoria PRIMARY KEY (idCategoria)\u000a)
-CREATE TABLE IF NOT EXISTS despesa(\u000a\u0009idDespesa INTEGER NOT NULL,\u000a\u0009descricao VARCHAR_IGNORECASE(100) NOT NULL CHECK(LENGTH(descricao) > 0),\u000a    idCategoria INTEGER NOT NULL,\u000a    dataDespesa VARCHAR_IGNORECASE(10),\u000a    dataPagamento VARCHAR_IGNORECASE(10),\u000a    idFormaPagamento INTEGER NOT NULL,\u000a    numeroCheque INTEGER,\u000a    valor DOUBLE,\u000a    numeroDeParcelas INTEGER,\u000a\u0009CONSTRAINT fk_despesa_categoria FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria) ON DELETE CASCADE,\u000a    CONSTRAINT fk_despesa_pagamento FOREIGN KEY (idFormaPagamento) REFERENCES forma_pagamento(idFormaPagamento),\u000a    CONSTRAINT pk_despesa PRIMARY KEY (idDespesa)\u000a)
-CREATE TABLE IF NOT EXISTS planejamento_mensal(\u000a\u0009mesAnoPlanejamento VARCHAR_IGNORECASE(10),\u000a    idDespesa INTEGER NOT NULL,\u000a    CONSTRAINT fk_planejamento_despesa FOREIGN KEY (idDespesa) REFERENCES despesa(idDespesa) ON DELETE CASCADE,\u000a\u0009CONSTRAINT pk_planejamento_mensal PRIMARY KEY (mesAnoPlanejamento, idDespesa)\u000a)
-CREATE TABLE IF NOT EXISTS meta_mensal(\u000a\u0009mesAnoMeta VARCHAR_IGNORECASE(10),\u000a    idCategoria INTEGER NOT NULL,\u000a    valor DOUBLE,\u000a    CONSTRAINT fk_meta_mensal_despesa FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria) ON DELETE CASCADE,\u000a\u0009CONSTRAINT pk_meta_mensal PRIMARY KEY (mesAnoMeta, idCategoria)\u000a)
-CREATE TABLE IF NOT EXISTS configuracoes(\u000a\u0009idConfiguracao INTEGER NOT NULL,\u000a\u0009nome VARCHAR(50),\u000a\u0009valor VARCHAR(50),\u000a\u0009CONSTRAINT pk_configuracoes PRIMARY KEY (nome)\u000a)
-CREATE SEQUENCE seq_renda START WITH 1
-CREATE SEQUENCE seq_forma_pagamento START WITH 1
-CREATE SEQUENCE seq_categoria START WITH 1
-CREATE SEQUENCE seq_despesa START WITH 1
-CREATE SEQUENCE seq_configuracoes START WITH 1
-DISCONNECT

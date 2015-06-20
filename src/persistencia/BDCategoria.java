@@ -105,7 +105,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	
 	/**
 	 * Verifica se existe uma categoria com a descrição indicada no banco de dados.
-	 * @param descrição <code>String</code> com a descrição da categoria a ser removida.
+	 * @param descrição <code>String</code> com a descrição da categoria.
 	 * @return <code>true</code> se a categoria existe, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
@@ -130,8 +130,8 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	
 	/**
 	 * Pesquisa categoria pela descricao
-	 * @param descrição <code>String</code> com a descrição da <code>Categoria</code> a ser pesquisada. 
-	 * @return {@code List<Categoria>} com as categorias que tem na descrição a descrição especificado
+	 * @param descricao <code>String</code> com a descrição da <code>Categoria</code> a ser pesquisada. 
+	 * @return {@code List<Categoria>} com as categorias que tem a descrição especificada
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
 	protected static List<Categoria> pesquisar(String descricao) throws SQLException{
@@ -146,9 +146,9 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 		try {
 			//resultSet posiciona o cursor antes da primeira linha, entao o next() abaixo ja o coloca na primeira linha, caso haja
 			while(resultadoQuery.next()){
-				descricao = resultadoQuery.getString("descricao");
+				novaDescricao = resultadoQuery.getString("descricao");
 				
-				categorias.add(new Categoria(descricao));
+				categorias.add(new Categoria(novaDescricao));
 			}//while
 		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
