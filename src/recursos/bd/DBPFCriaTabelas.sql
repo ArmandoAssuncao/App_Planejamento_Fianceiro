@@ -2,7 +2,7 @@
 /* Renda */
 CREATE TABLE IF NOT EXISTS renda(
 	idRenda INTEGER NOT NULL,
-	descricao VARCHAR_IGNORECASE(100),
+	descricao VARCHAR_IGNORECASE(100) NOT NULL CHECK(LENGTH(descricao) > 0),
 	CONSTRAINT pk_renda PRIMARY KEY (idRenda)
 );
 /* Renda Mensal */
@@ -16,19 +16,19 @@ CREATE TABLE IF NOT EXISTS renda_mensal(
 /* Forma Pagamento */
 CREATE TABLE IF NOT EXISTS forma_pagamento(
 	idFormaPagamento INTEGER NOT NULL,
-	descricao VARCHAR_IGNORECASE(100),
+	descricao VARCHAR_IGNORECASE(100) NOT NULL UNIQUE CHECK(LENGTH(descricao) > 0),
 	CONSTRAINT pk_forma_pagamento PRIMARY KEY (idFormaPagamento)
 );
 /* Categoria */
 CREATE TABLE IF NOT EXISTS categoria(
 	idCategoria INTEGER NOT NULL,
-	descricao VARCHAR_IGNORECASE(100),
+	descricao VARCHAR_IGNORECASE(100) NOT NULL UNIQUE CHECK(LENGTH(descricao) > 0),
 	CONSTRAINT pk_categoria PRIMARY KEY (idCategoria)
 );
 /* Despesa */
 CREATE TABLE IF NOT EXISTS despesa(
 	idDespesa INTEGER NOT NULL,
-	descricao VARCHAR_IGNORECASE(100),
+	descricao VARCHAR_IGNORECASE(100) NOT NULL CHECK(LENGTH(descricao) > 0),
     idCategoria INTEGER NOT NULL,
     dataDespesa VARCHAR_IGNORECASE(10),
     dataPagamento VARCHAR_IGNORECASE(10),

@@ -20,7 +20,7 @@ import classes.Categoria;
 public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 
 	/** Insere um objeto <code>Categoria</code> no banco de dados
-	 * @param categoria <code>Categoria</code> que será inserido no banco de dados
+	 * @param categoria <code>Categoria</code> que será inserida no banco de dados
 	 * @return <code>int</code> com o resultado da inserção. Este valor é uma constante definida na classe <code>BancoDeDados</code>
 	 * 
 	 * @see Categoria
@@ -30,22 +30,30 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	 * @see BancoDeDados#RESULTADO_ERRO_DESCONHECIDO
 	 */
 	protected int inserir(Categoria categoria){
-		String nome =  categoria.getDescricao();
+		String descricao =  categoria.getDescricao();
 		
 		String comandoInsercao = "INSERT INTO categoria VALUES";
-		
-		if(true){ //TODO pesquisar se  a categoria existe, se existe, nao e possivel cadastrar.
-			String comandoSql = comandoInsercao + "()";  //TODO comando sql
-			try {
-				this.executaUpdate(comandoSql);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
-				return BancoDeDados.RESULTADO_ERRO_BANCO_DADOS;
+		try{
+			if(!exists(descricao)){//Verifica se existe uma categoria com o mesmo nome;
+				String comandoSql = comandoInsercao + String.format("(%s, \'%s\');", "NEXT VALUE FOR seq_categoria", categoria); 
+				try {
+					this.executaUpdate(comandoSql);
+				} catch (SQLException e) {
+					e.printStackTrace();
+					JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
+					return BancoDeDados.RESULTADO_ERRO_BANCO_DADOS;
+				}
 			}
+			else
+				return BancoDeDados.RESULTADO_ERRO_REGISTRO_DUPLICADO;// Categoria existente.
 		}
-		//else // Categoria existente. 
-			return BancoDeDados.RESULTADO_ERRO_REGISTRO_DUPLICADO;
+		catch(SQLException e){
+			e.printStackTrace();
+			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
+			return BancoDeDados.RESULTADO_ERRO_BANCO_DADOS;
+		}
+		
+		return BancoDeDados.RESULTADO_SUCESSO;
 	}//inserir
 	
 	/**
@@ -60,11 +68,12 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 			return false;
 		}
 		
-		String comandoUpdate = "UPDATE categoria SET ";		
+		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(categoria.getDescricao());
+		String comandoUpdate = "UPDATE categoria SET ";
 		String clausulaWhere = " WHERE idCategoria=" + id;
-		String novoNome = categoria.getDescricao();
 		
-		String comandoSql = comandoUpdate + ""; //TODO comando sql
+		String comandoSql = comandoUpdate + String.format("descricao=\'%s\'%s", novaDescricao, clausulaWhere);
+		
 		try {
 			this.executaUpdate(comandoSql);
 		} catch (SQLException e) {
@@ -77,16 +86,17 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	
 	/**
 	 * Exclui uma categoria no banco de dados.
-	 * @param nome <code>String</code> com o nome da <code>Categoria</code> a ser excluida. 
+	 * @param descrição <code>String</code> com a descrição da <code>Categoria</code> a ser excluida. 
 	 * @return <code>true</code> se os dados foram removidos, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected boolean excluir(String nome) throws SQLException{
+	protected boolean excluir(String descricao) throws SQLException{
 		this.abreConexao();
 		
-		BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(nome);
+		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(descricao);
+		String comandoSql = "DELETE FROM categoria WHERE descricao=";
 		
-		this.executaUpdate("DELETE FROM categoria WHERE nome=\'" + nome + " \'"); //TODO comando sql
+		this.executaUpdate(comandoSql + String.format("\'%s\'", novaDescricao));
 		
 		this.fechaConexao();
 		
@@ -94,18 +104,19 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	}
 	
 	/**
-	 * Verifica se existe uma categoria com o nome indicado no banco de dados.
-	 * @param nome <code>String</code> com o nome da categoria a ser removida.
+	 * Verifica se existe uma categoria com a descrição indicada no banco de dados.
+	 * @param descrição <code>String</code> com a descrição da categoria a ser removida.
 	 * @return <code>true</code> se a categoria existe, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected boolean exists(String nome) throws SQLException{
+	protected boolean exists(String descricao) throws SQLException{
 		int contagem = 0;
 		this.abreConexao();
 		
-		nome = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(nome);
-		ResultSet resultadoQuery = this.executaQuery("" +
-				"SELECT COUNT(*) AS contagem FROM categoria WHERE nome=\'" + nome + "\'"); //TODO comando sql
+		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(descricao);
+		String comandoSql = "" + "SELECT COUNT(*) AS contagem FROM categoria WHERE descricao=";
+		ResultSet resultadoQuery = this.executaQuery(comandoSql + String.format("\'%s\'", novaDescricao));
+		
 		resultadoQuery.next();
 		String contagemCategorias = resultadoQuery.getString("contagem");
 		if (contagemCategorias != null){
@@ -118,30 +129,28 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	}
 	
 	/**
-	 * Pesquisa categoria pelo nome
-	 * @param nome <code>String</code> com o nome da <code>Categoria</code> a ser pesquisada. 
-	 * @return {@code List<Categoria>} com as categorias que tem no nome o nome especificado
+	 * Pesquisa categoria pela descricao
+	 * @param descrição <code>String</code> com a descrição da <code>Categoria</code> a ser pesquisada. 
+	 * @return {@code List<Categoria>} com as categorias que tem na descrição a descrição especificado
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected static List<Categoria> pesquisar(String nome) throws SQLException{
-		String descricao;
-		int codigo;
-		
+	protected static List<Categoria> pesquisar(String descricao) throws SQLException{
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		
 		BANCO_DE_DADOS_PF.abreConexao();
-		nome = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(nome);
-		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery("SELECT * FROM categoria WHERE nome LIKE \'%" + nome + "%\'");//TODO comando sql
+		
+		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(descricao);
+		String comandoSql = "SELECT * FROM categoria WHERE descricao LIKE \'%" + novaDescricao + "%\'";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
 		
 		try {
 			//resultSet posiciona o cursor antes da primeira linha, entao o next() abaixo ja o coloca na primeira linha, caso haja
 			while(resultadoQuery.next()){
-				codigo = Integer.parseInt(resultadoQuery.getString("codigo"));
 				descricao = resultadoQuery.getString("descricao");
 				
 				categorias.add(new Categoria(descricao));
 			}//while
-		} catch (NumberFormatException  | SQLException e) {
+		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
 			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
 		}
@@ -152,15 +161,16 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 
 	/**
 	 *   Retorna o id da categoria no banco de dados
-	 * @param nome <code>String</code> com o nome da categoria
+	 * @param descrição <code>String</code> com a descrição da categoria
 	 * @return <code>int</code> com o id da categoria no banco de dados, caso não encontre retorna <code>0</code>
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected int getId(String nome) throws SQLException{
+	protected int getId(String descricao) throws SQLException{
 		int id = 0;
 		
 		this.abreConexao();
-		ResultSet resultadoQuery = this.executaQuery("SELECT idCategoria FROM categoria WHERE nome=\'" + nome + "\'");//TODO comando sql
+		String comandoSql = "SELECT idCategoria FROM categoria WHERE descricao=\'" + descricao + "\'";
+		ResultSet resultadoQuery = this.executaQuery(comandoSql);
 		
 		resultadoQuery.next();
 		id = resultadoQuery.getInt(1); //valor da coluna um, unica coluna
