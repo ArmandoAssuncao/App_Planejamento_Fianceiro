@@ -2,7 +2,7 @@
 /* Renda */
 CREATE TABLE IF NOT EXISTS renda(
 	idRenda INTEGER NOT NULL,
-	descricao VARCHAR_IGNORECASE(100) NOT NULL CHECK(LENGTH(descricao) > 0),
+	descricao VARCHAR_IGNORECASE(100) NOT NULL UNIQUE CHECK(LENGTH(descricao) > 0),
 	CONSTRAINT pk_renda PRIMARY KEY (idRenda)
 );
 /* Renda Mensal */
