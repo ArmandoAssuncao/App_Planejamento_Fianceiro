@@ -105,7 +105,7 @@ public abstract class BDRenda extends BDPlanejamentoFinanceiro {
 	
 	/**
 	 * Verifica se existe uma renda com a descrição indicada no banco de dados.
-	 * @param descricao <code>String</code> com a descrição da renda a ser removida.
+	 * @param descricao <code>String</code> com a descrição da renda.
 	 * @return <code>true</code> se a renda existe, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */

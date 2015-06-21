@@ -5,6 +5,8 @@ import gui.JanelaMensagem;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -47,21 +49,52 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 		
 		String comandoInsercao = "INSERT INTO despesa VALUES ";
 		
-		String comandoSql = comandoInsercao  + String.format("%s, \'%s\', %d, \'%s\', \'%s\', %d, %d, %f, %d",
+		String comandoSql = comandoInsercao  + String.format("%s, \'%s\', %d, \'%s\', \'%s\', %d, %d, "+valorDespesa +", %d",
 				" NEXT VALUE FOR seq_despesa ", descricao,codigoCategoria, dataDaDespesa,dataDoPagamento,
-				codigoPagamento,numeroCheque,valorDespesa,numeroParcelas) ;
+				codigoPagamento,numeroCheque,numeroParcelas) ;
 		
-		
-			try {
-				this.executaUpdate(comandoSql);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
-				return BancoDeDados.RESULTADO_ERRO_BANCO_DADOS;
-			}
-		
+		try{
+			if(!exists(despesa.getDataDespesa())){
+					try {
+						this.executaUpdate(comandoSql);
+					} catch (SQLException e) {
+						e.printStackTrace();
+						JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
+						return BancoDeDados.RESULTADO_ERRO_BANCO_DADOS;
+					}
+				}
+				else
+					return BancoDeDados.RESULTADO_ERRO_REGISTRO_DUPLICADO;
+		}catch(SQLException e){
+			e.printStackTrace();
+			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
+			return BancoDeDados.RESULTADO_ERRO_BANCO_DADOS;
+		}
 		return BancoDeDados.RESULTADO_SUCESSO;
 	}//inserir
+
+	/**
+	 * Verifica se existe uma despesa com a data indicada no banco de dados.
+	 * @param dataDespesa <code>Calendar</code> com a data a ser pesquisada.
+	 * @return <code>true</code> se a despesa existe, <code>false</code> em caso constrário.
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	protected boolean exists(Calendar dataDespesa) throws SQLException {
+		int contagem = 0;
+		this.abreConexao();
+		
+		String comandoSql = "" + "SELECT COUNT(*) AS contagem FROM despesa WHERE dataDespesa=";
+		ResultSet resultadoQuery = this.executaQuery(comandoSql + String.format("\'%s\'", calendarToString(dataDespesa)));
+		
+		resultadoQuery.next();
+		String contagemDespesas = resultadoQuery.getString("contagem");
+		if (contagemDespesas != null){
+		 contagem = Integer.parseInt(contagemDespesas);
+		}
+		
+		this.fechaConexao();
+		return contagem > 0 ? true : false;
+	}
 
 	/**
 	 * Atualiza os dados da despesa no banco de dados.
@@ -89,9 +122,9 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 		String clausulaWhere = "WHERE idDespesa=" + id;
 		
 		String comandoSql = comandoUpdate  + String.format("descricao=\'%s\', idCategoria=%d, dataDespesa=\'%s\',"
-				+ " dataPagamento=\'%s\', idFormaPagamento=%d, numeroCheque=%d, valor=%f, numeroParcelas=%d %s",""
+				+ " dataPagamento=\'%s\', idFormaPagamento=%d, numeroCheque=%d, valor="+valorDespesa+", numeroParcelas=%d %s",""
 				+ descricao,codigoCategoria, dataDaDespesa,
-				dataDoPagamento,codigoPagamento,numeroCheque,valorDespesa,numeroParcelas,clausulaWhere) ;
+				dataDoPagamento,codigoPagamento,numeroCheque,numeroParcelas,clausulaWhere) ;
 		
 		try {
 			this.executaUpdate(comandoSql);
@@ -158,18 +191,35 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 		return despesas;
 	}//pesquisar
 
+	/**
+	 * Retorna o id de uma Despesa no banco de dados
+	 * @param data <code>Calendar</code> com a data a ser pesquisada.
+	 * @return <code>int</code> com o id da renda no banco de dados, caso não encontre retorna <code>0</code>
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	protected int getId(Calendar data) throws SQLException{
+		int id = 0;
+		
+		this.abreConexao();
+		String comandoSql = "SELECT idDespesa FROM despesa WHERE dataDespesa=\'" + data + "\'";
+		ResultSet resultadoQuery = this.executaQuery(comandoSql);
+		
+		resultadoQuery.next();
+		id = resultadoQuery.getInt(1); //valor da coluna um, unica coluna
+		
+		this.fechaConexao();
+		
+		return id;
+	} 
 	
-//	protected int getId(){
-//		
-//	} 
 	/**
 	 * Retorna uma representação em <code>String</code> da data.
 	 * @param dataPagamento objeto <code>Calendar</code> com uma data.
 	 * @return <code>String</code> no formato DD/MM/AAAA representando a data.
 	 */
 	private String calendarToString(Calendar dataPagamento) {
-		//TODO corrigir este método
-		return  dataPagamento.DAY_OF_MONTH + "/" + dataPagamento.MONTH + "/" + dataPagamento.YEAR ;
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return  sdf.format(dataPagamento);
 	}
 	
 	/**
@@ -178,12 +228,21 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 	 * @return <code>Calendar</code> obtida do parâmetro data.
 	 */
 	private Calendar stringToCalendar(String string) {
-		//TODO
-		Calendar c = null;
-		int ano = 0;
-		int mes = 0;
-		int dia = 0;
-		c.set(ano, mes, dia);
+//		Calendar c = Calendar.getInstance();
+//		int ano = Integer.parseInt(string.substring(0, 2));
+//		int mes = Integer.parseInt(string.substring(3,5));
+//		int dia = Integer.parseInt(string.substring(6, 10));
+//		c.set(ano, mes, dia);
+//		return c;
+		
+		Calendar c = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
+		try {
+			c.setTime(sdf.parse(string));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return c;
 	}
 	
