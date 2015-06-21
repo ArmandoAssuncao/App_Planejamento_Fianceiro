@@ -36,12 +36,12 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 	 * @see BancoDeDados#RESULTADO_ERRO_BANCO_DADOS
 	 * @see BancoDeDados#RESULTADO_ERRO_DESCONHECIDO
 	 */
-	protected int inserir(Despesa despesa){
+	protected int inserir(Despesa despesa,String descricaoCategoria,String descricaoPagamento){
 		String descricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(despesa.getDescricao());
-		int codigoCategoria = 0;
+		int codigoCategoria = 0;//TODO new Categoria().getId(descricaoCategoria);
+		int codigoPagamento = 0;//TODO new Pagamento().getId(descricaoPagamento);
 		String dataDaDespesa = calendarToString(despesa.getDataDespesa());
 		String dataDoPagamento = calendarToString(despesa.getDataPagamento());
-		int codigoPagamento = 0;
 		String numeroCheque = despesa.getNumeroCheque();
 		double valorDespesa = despesa.getValorDespesa();
 		int numeroParcelas = despesa.getNumeroParcelas();
@@ -171,11 +171,11 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 		try {
 			while(resultadoQuery.next()){
 				novaDescricao = resultadoQuery.getString("descricao");
-				int idDespesa = resultadoQuery.getInt("idDespesa");
-				int idCategoria = resultadoQuery.getInt("idCategoria");
+			//	int idDespesa = resultadoQuery.getInt("idDespesa");
+			//	int idCategoria = resultadoQuery.getInt("idCategoria");
 				Calendar dataDespesa = stringToCalendar(resultadoQuery.getString("dataDespesa"));
 				Calendar dataPagamento = stringToCalendar(resultadoQuery.getString("dataPagamento"));
-				int idFormaPagamento = resultadoQuery.getInt("idFormaPagamento");
+			//	int idFormaPagamento = resultadoQuery.getInt("idFormaPagamento");
 				String numeroCheque = resultadoQuery.getString("numeroCheque");
 				double valor = resultadoQuery.getDouble("valor");
 				int numeroDeParcelas = resultadoQuery.getInt("numeroDeParcelas");
