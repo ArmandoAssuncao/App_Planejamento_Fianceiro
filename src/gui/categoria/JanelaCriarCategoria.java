@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,11 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import classes.Categoria;
 import classes.MetaMensal;
 import validacoes.ValidarDados;
 import eventos.categoria.TEJanelaCriarCategoria;
-import gui.JanelaAviso;
-import gui.painelDespesas.AbasCategoria;
+import funcoes.Converte;
 import gui.painelDespesas.IgPainelDespesas;
 
 public class JanelaCriarCategoria extends JDialog{
@@ -46,8 +45,8 @@ public class JanelaCriarCategoria extends JDialog{
 	public JanelaCriarCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
 		
-		trataEventosCategoria = new TEJanelaCriarCategoria(this);
-		this.igPainelDespesas = igPainelDespesas;
+		trataEventosCategoria = new TEJanelaCriarCategoria(this, igPainelDespesas);
+		//this.igPainelDespesas = igPainelDespesas;
 		
 		iniciaElementos();
 		
@@ -199,7 +198,7 @@ public class JanelaCriarCategoria extends JDialog{
 		dispose();
 	}
 	
-	public void criarCategoria(){
+	/*public void criarCategoria(){
 		if(validaCampos()){
 			MetaMensal metaMensal = new MetaMensal();
 			metaMensal.setDescricao(textFieldDescricao.getText());
@@ -219,9 +218,9 @@ public class JanelaCriarCategoria extends JDialog{
 				new JanelaAviso("Criar categoria", "Já existe uma categoria com esse nome.");
 			}
 		}
-	}
+	}*/
 	
-	private boolean validaCampos(){
+	public boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		
 		//valida o campo descricao
@@ -283,6 +282,26 @@ public class JanelaCriarCategoria extends JDialog{
 
 	public JTextField getTextFieldMeta() {
 		return textFieldMeta;
+	}
+	
+	public Categoria retornaCategoria(){
+		MetaMensal metaMensal = new MetaMensal();
+		
+		metaMensal.setMesAnoMeta( Converte.stringToCalendar("10/10/2010") );//TODO
+		
+		try{
+			if(!textFieldMeta.getText().equals(""))
+				metaMensal.setValor( Double.parseDouble(textFieldMeta.getText()) );
+		}
+		catch(NumberFormatException e){
+			e.printStackTrace();
+		}
+		
+		Categoria categoria = new Categoria();
+		categoria.setDescricao( getTextFieldDescricao().getText() );
+		categoria.setMetaMensal(metaMensal);
+		
+		return categoria;
 	}
 	
 }

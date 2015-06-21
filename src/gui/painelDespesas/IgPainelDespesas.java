@@ -19,14 +19,15 @@ import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import classes.MetaMensal;
+import classes.Categoria;
 import eventos.painelDespesa.TEPainelDespesas;
+import funcoes.Converte;
 
 public class IgPainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
 	public final int TAM_PAINEL_Y = 600;
 	
-	ArrayList<MetaMensal> arrayMetaMensal = new ArrayList<MetaMensal>();
+	ArrayList<Categoria> arrayCategoria = new ArrayList<Categoria>();
 	AbasCategoria abasCategoria;
 	JPanel painelBotoes;
 	JPanel painelTitulo;
@@ -52,12 +53,13 @@ public class IgPainelDespesas extends JPanel{
 		trataEventosDespesas = new TEPainelDespesas(this, framePrincipal);
 		iniciaElementos();
 		
-		MetaMensal metaMensalTeste;
+		Categoria categoriaTeste;
 		for(int i = 0; i < 15; i++){ //APAGAR //////////////////////////////////////////////
-			metaMensalTeste = new MetaMensal();
-			metaMensalTeste.setDescricao("Educacao"+i);
-			metaMensalTeste.setValor(i);
-			criarCategoria(metaMensalTeste);
+			categoriaTeste = new Categoria();
+			categoriaTeste.setDescricao("Educacao"+i);
+			categoriaTeste.setValorMeta(1000);
+			categoriaTeste.setMesAnoMeta(Converte.stringToCalendar("11/12/2013"));
+			criarCategoria(categoriaTeste);
 		}
 		
 		criaPainelBotoes();
@@ -212,7 +214,7 @@ public class IgPainelDespesas extends JPanel{
 		abasCategoria.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				if(abasCategoria.getNumeroDeAbas() != 0 && arrayMetaMensal.size() != 0)
+				if(abasCategoria.getNumeroDeAbas() != 0 && arrayCategoria.size() != 0)
 					atualizaPainelTitulo();
 			}
 		});
@@ -307,8 +309,8 @@ public class IgPainelDespesas extends JPanel{
 			return;
 		}
 		
-		String descricao = arrayMetaMensal.get(abasCategoria.getSelectedIndex()).getDescricao();
-		double valorMeta = arrayMetaMensal.get(abasCategoria.getSelectedIndex()).getValor();
+		String descricao = arrayCategoria.get(abasCategoria.getSelectedIndex()).getDescricao();
+		double valorMeta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorMeta();
 		double totalDespesasPorcentagem = (abasCategoria.getValorTotalDespesas() * 100)/valorMeta;
 		
 		if(valorMeta == 0){
@@ -333,11 +335,10 @@ public class IgPainelDespesas extends JPanel{
 	}
 	
 	//cria uma nova categoria
-	public boolean criarCategoria(MetaMensal metaMensal){
-		if( abasCategoria.criarCategoria(metaMensal.getDescricao())){
-			arrayMetaMensal.add(metaMensal);
+	public boolean criarCategoria(Categoria categoria){
+		if( abasCategoria.criarCategoria(categoria.getDescricao())){
+			arrayCategoria.add(categoria);
 			abasCategoria.setSelectedIndex(abasCategoria.getNumeroDeAbas()-1);
-			//Adicionar a parte do banco /////////////////////////////////////////
 			
 			atualizaPainelTitulo();
 			return true;
@@ -346,11 +347,9 @@ public class IgPainelDespesas extends JPanel{
 			return false;
 	}
 	
-	public boolean editarCategoria(MetaMensal metaMensal){
-		if( abasCategoria.editarCategoria(metaMensal.getDescricao())){
-			arrayMetaMensal.set(abasCategoria.getSelectedIndex(), metaMensal);
-			
-			//Adicionar a parte do banco /////////////////////////////////////////
+	public boolean editarCategoria(Categoria categoria){
+		if( abasCategoria.editarCategoria(categoria.getDescricao())){
+			arrayCategoria.set(abasCategoria.getSelectedIndex(), categoria);
 			
 			atualizaPainelTitulo();
 			return true;
@@ -360,7 +359,7 @@ public class IgPainelDespesas extends JPanel{
 	}
 	
 	public boolean removerCategoria(){
-		int abaSelecionada = abasCategoria.getSelectedIndex();
+		/*int abaSelecionada = abasCategoria.getSelectedIndex();
 		if( abasCategoria.removerCategoria(getDescricaoCategoria())){
 			arrayMetaMensal.remove(abaSelecionada);
 			
@@ -368,9 +367,9 @@ public class IgPainelDespesas extends JPanel{
 			
 			atualizaPainelTitulo();
 			return true;
-		}
-		else
-			return false;
+		}*/
+		
+		return false;
 	}
 	
 	public JButton getBotaoNovaCategoria() {
@@ -402,10 +401,10 @@ public class IgPainelDespesas extends JPanel{
 	}
 	
 	public String getDescricaoCategoria(){
-		return arrayMetaMensal.get(abasCategoria.getSelectedIndex()).getDescricao();
+		return arrayCategoria.get(abasCategoria.getSelectedIndex()).getDescricao();
 	}
 	
 	public double getMetaCategoriaValor(){
-		return arrayMetaMensal.get(abasCategoria.getSelectedIndex()).getValor();
+		return arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorMeta();
 	}
 }

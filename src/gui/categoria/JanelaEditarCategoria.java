@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -15,10 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import classes.Categoria;
 import classes.MetaMensal;
 import validacoes.ValidarDados;
 import eventos.categoria.TEJanelaEditarCategoria;
-import gui.JanelaAviso;
+import funcoes.Converte;
 import gui.painelDespesas.IgPainelDespesas;
 
 public class JanelaEditarCategoria extends JDialog{
@@ -49,7 +49,7 @@ public class JanelaEditarCategoria extends JDialog{
 	public JanelaEditarCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
 		
-		trataEventosCategoria = new TEJanelaEditarCategoria(this);
+		trataEventosCategoria = new TEJanelaEditarCategoria(this, igPainelDespesas);
 		this.igPainelDespesas = igPainelDespesas;
 		
 		iniciaElementos();
@@ -231,7 +231,7 @@ public class JanelaEditarCategoria extends JDialog{
 		dispose();
 	}
 	
-	public void editarCategoria(){
+	/*public void editarCategoria(){//TODO APAGAR
 		if(validaCampos()){
 			MetaMensal metaMensal = new MetaMensal();
 			metaMensal.setDescricao(textFieldNovaDescricao.getText());
@@ -251,9 +251,9 @@ public class JanelaEditarCategoria extends JDialog{
 				new JanelaAviso("Editar categoria", "Já existe uma categoria com esse nome.");
 			}
 		}
-	}
+	}*/
 	
-	private boolean validaCampos(){
+	public boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		
 		///valida o campo descricao
@@ -315,6 +315,41 @@ public class JanelaEditarCategoria extends JDialog{
 
 	public JTextField getTextFieldNovaMeta() {
 		return textFieldNovaMeta;
+	}
+	
+	public Categoria retornaNovaCategoria(){
+		MetaMensal metaMensal = new MetaMensal();
+		metaMensal.setMesAnoMeta( Converte.stringToCalendar("10/10/2010") );//TODO
+		try{
+			if(!textFieldNovaMeta.getText().equals(""))
+				metaMensal.setValor( Double.parseDouble(textFieldNovaMeta.getText()) );
+		}
+		catch(NumberFormatException e){
+			e.printStackTrace();
+		}
+		
+		Categoria categoria = new Categoria();
+		categoria.setDescricao( getTextFieldNovaDescricao().getText() );
+		categoria.setMetaMensal(metaMensal);
+		
+		return categoria;
+	}
+	
+	public Categoria retornaAntigaCategoria(){
+		MetaMensal metaMensal = new MetaMensal();
+		metaMensal.setMesAnoMeta( Converte.stringToCalendar("10/10/2010") );//TODO
+		try{
+			metaMensal.setValor( Double.parseDouble(labelAntigaMetaValor.getText()) );
+		}
+		catch(NumberFormatException e){
+			e.printStackTrace();
+		}
+		
+		Categoria categoria = new Categoria();
+		categoria.setDescricao( labelAntigaDescricaoValor.getText() );
+		categoria.setMetaMensal(metaMensal);
+		
+		return categoria;
 	}
 	
 }

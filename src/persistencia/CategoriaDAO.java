@@ -17,7 +17,7 @@ import classes.Categoria;
  * 
  * @see BDPlanejamentoFinanceiro
  */
-public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
+public class CategoriaDAO extends BDPlanejamentoFinanceiro {
 
 	/** Insere um objeto <code>Categoria</code> no banco de dados
 	 * @param categoria <code>Categoria</code> que será inserida no banco de dados
@@ -29,7 +29,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	 * @see BancoDeDados#RESULTADO_ERRO_BANCO_DADOS
 	 * @see BancoDeDados#RESULTADO_ERRO_DESCONHECIDO
 	 */
-	protected int inserir(Categoria categoria){
+	public int inserir(Categoria categoria){
 		String descricao =  categoria.getDescricao();
 		
 		String comandoInsercao = "INSERT INTO categoria VALUES";
@@ -59,10 +59,17 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	/**
 	 * Atualiza os dados da categoria no banco de dados.
 	 * @param categoria <code>Categoria</code> que será sobrescrita no banco de dados.
-	 * @param id <code>int</code> com o id da categoria no banco de dados.
+	 * @param descricao <code>String</code> com a descrição da categoria no banco de dados.
 	 * @return <code>true</code> se os dados foram atualizados, <code>false</code> em caso constrário.
 	 */
-	public boolean atualizarDados(Categoria categoria, int id){
+	public boolean atualizarDados(Categoria categoria, String descricao){
+		int id = 0;
+		try {
+			id = getId(descricao);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
 		if (id <= 0){
 			JanelaMensagem.mostraMensagemErro(null, "ID da Categoria Invalida");
 			return false;
@@ -90,7 +97,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	 * @return <code>true</code> se os dados foram removidos, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected boolean excluir(String descricao) throws SQLException{
+	public boolean excluir(String descricao) throws SQLException{
 		this.abreConexao();
 		
 		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(descricao);
@@ -109,7 +116,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	 * @return <code>true</code> se a categoria existe, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected boolean exists(String descricao) throws SQLException{
+	public boolean exists(String descricao) throws SQLException{
 		int contagem = 0;
 		this.abreConexao();
 		
@@ -134,7 +141,7 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	 * @return {@code List<Categoria>} com as categorias que tem na descrição a descrição especificado
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected static List<Categoria> pesquisar(String descricao) throws SQLException{
+	public static List<Categoria> pesquisar(String descricao) throws SQLException{
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		
 		BANCO_DE_DADOS_PF.abreConexao();
@@ -165,15 +172,15 @@ public abstract class BDCategoria extends BDPlanejamentoFinanceiro {
 	 * @return <code>int</code> com o id da categoria no banco de dados, caso não encontre retorna <code>0</code>
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected int getId(String descricao) throws SQLException{
+	public int getId(String descricao) throws SQLException{
 		int id = 0;
 		
 		this.abreConexao();
 		String comandoSql = "SELECT idCategoria FROM categoria WHERE descricao=\'" + descricao + "\'";
 		ResultSet resultadoQuery = this.executaQuery(comandoSql);
 		
-		resultadoQuery.next();
-		id = resultadoQuery.getInt(1); //valor da coluna um, unica coluna
+		if(resultadoQuery.next())
+			id = resultadoQuery.getInt(1); //valor da coluna um, unica coluna
 		
 		this.fechaConexao();
 		

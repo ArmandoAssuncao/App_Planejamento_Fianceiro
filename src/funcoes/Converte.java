@@ -12,7 +12,7 @@ public final class Converte {
 	 */
 	public static String calendarToString(Calendar data) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		return  sdf.format(data);
+		return sdf.format(data.getTime());
 	}
 	
 	/**

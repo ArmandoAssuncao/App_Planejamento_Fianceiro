@@ -6,7 +6,7 @@ import java.util.Calendar;
  * Os atributos são um <code>Calendar</code> mesAnoMeta e um <code>double</code> valor.
  * @author Armando e Richardson
  */
-public class MetaMensal extends Categoria {
+public class MetaMensal {
 	private Calendar mesAnoMeta;
 	private double valor;
 	
@@ -23,8 +23,7 @@ public class MetaMensal extends Categoria {
 	 * @param mesAnoMeta <code>Calendar</code> com o mês e o ano da meta mensal.
 	 * @param valor <code>double</code> da meta para os gastos.
 	 */
-	public MetaMensal(String descricao, Calendar mesAnoMeta, double valor) {
-		super(descricao);
+	public MetaMensal(Calendar mesAnoMeta, double valor) {
 		this.mesAnoMeta = mesAnoMeta;
 		this.valor = valor;
 	}//MetaMensal()
@@ -67,6 +66,6 @@ public class MetaMensal extends Categoria {
 	 */
 	@Override
 	public String toString() {
-		return "Meta Mensal [ Descrição: "+ getDescricao() + ", Mes/Ano da Meta:" + mesAnoMeta + String.format(", Valor R$ %1.2f", valor) + " ]";
+		return "Meta Mensal [ Mes/Ano da Meta:" + mesAnoMeta + String.format(", Valor R$ %1.2f", valor) + " ]";
 	}//toString()
 }//class MetaMensal
