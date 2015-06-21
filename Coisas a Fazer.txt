@@ -1,3 +1,7 @@
 -Arquivar o banco a cada mês que passar, para que caso seja necessário, o usuário veja as depesas anteriores.
 ou
 -Exibir um relatorio com as despesas do mês que o usuário escolher, caso o usuário queira ver suas despesas anteriores.
+
+classe RendaMensal compor classe Categoria
+
+Exibir um icone na aba da categoria se a meta utrapassar o limite definido. icone amarelo meta>=70% , icone vermelho meta>=100%
