@@ -1,12 +1,11 @@
 package persistencia;
 
 
+import funcoes.Converte;
 import gui.JanelaMensagem;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -40,8 +39,8 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 		String descricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(despesa.getDescricao());
 		int codigoCategoria = 0;//TODO new Categoria().getId(descricaoCategoria);
 		int codigoPagamento = 0;//TODO new Pagamento().getId(descricaoPagamento);
-		String dataDaDespesa = calendarToString(despesa.getDataDespesa());
-		String dataDoPagamento = calendarToString(despesa.getDataPagamento());
+		String dataDaDespesa = Converte.calendarToString(despesa.getDataDespesa());
+		String dataDoPagamento = Converte.calendarToString(despesa.getDataPagamento());
 		String numeroCheque = despesa.getNumeroCheque();
 		double valorDespesa = despesa.getValorDespesa();
 		int numeroParcelas = despesa.getNumeroParcelas();
@@ -84,7 +83,7 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 		this.abreConexao();
 		
 		String comandoSql = "" + "SELECT COUNT(*) AS contagem FROM despesa WHERE dataDespesa=";
-		ResultSet resultadoQuery = this.executaQuery(comandoSql + String.format("\'%s\'", calendarToString(dataDespesa)));
+		ResultSet resultadoQuery = this.executaQuery(comandoSql + String.format("\'%s\'", Converte.calendarToString(dataDespesa)));
 		
 		resultadoQuery.next();
 		String contagemDespesas = resultadoQuery.getString("contagem");
@@ -110,8 +109,8 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 		
 		String descricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(despesa.getDescricao());
 		int codigoCategoria = 0;
-		String dataDaDespesa = calendarToString(despesa.getDataDespesa());
-		String dataDoPagamento = calendarToString(despesa.getDataPagamento());
+		String dataDaDespesa = Converte.calendarToString(despesa.getDataDespesa());
+		String dataDoPagamento = Converte.calendarToString(despesa.getDataPagamento());
 		int codigoPagamento = 0;
 		String numeroCheque = despesa.getNumeroCheque();
 		double valorDespesa = despesa.getValorDespesa();
@@ -173,8 +172,8 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 				novaDescricao = resultadoQuery.getString("descricao");
 			//	int idDespesa = resultadoQuery.getInt("idDespesa");
 			//	int idCategoria = resultadoQuery.getInt("idCategoria");
-				Calendar dataDespesa = stringToCalendar(resultadoQuery.getString("dataDespesa"));
-				Calendar dataPagamento = stringToCalendar(resultadoQuery.getString("dataPagamento"));
+				Calendar dataDespesa = Converte.stringToCalendar(resultadoQuery.getString("dataDespesa"));
+				Calendar dataPagamento = Converte.stringToCalendar(resultadoQuery.getString("dataPagamento"));
 			//	int idFormaPagamento = resultadoQuery.getInt("idFormaPagamento");
 				String numeroCheque = resultadoQuery.getString("numeroCheque");
 				double valor = resultadoQuery.getDouble("valor");
@@ -217,17 +216,17 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 	 * @param dataPagamento objeto <code>Calendar</code> com uma data.
 	 * @return <code>String</code> no formato DD/MM/AAAA representando a data.
 	 */
-	private String calendarToString(Calendar dataPagamento) {
+	/*private String calendarToString(Calendar dataPagamento) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		return  sdf.format(dataPagamento);
-	}
+	}*/
 	
 	/**
 	 * Retorna uma representação em <code>Calendar</code> da data em <code>String</code>.
 	 * @param string objeto <code>String</code> com uma data.
 	 * @return <code>Calendar</code> obtida do parâmetro data.
 	 */
-	private Calendar stringToCalendar(String string) {
+	/*private Calendar stringToCalendar(String string) {
 //		Calendar c = Calendar.getInstance();
 //		int ano = Integer.parseInt(string.substring(0, 2));
 //		int mes = Integer.parseInt(string.substring(3,5));
@@ -244,7 +243,7 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 			e.printStackTrace();
 		}
 		return c;
-	}
+	}*/
 	
 	
 	/**
@@ -265,8 +264,8 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 				String descricao = resultadoQuery.getString("descricao");
 			//	int idDespesa = resultadoQuery.getInt("idDespesa");
 			//	int idCategoria = resultadoQuery.getInt("idCategoria");
-				Calendar dataDespesa = stringToCalendar(resultadoQuery.getString("dataDespesa"));
-				Calendar dataPagamento = stringToCalendar(resultadoQuery.getString("dataPagamento"));
+				Calendar dataDespesa = Converte.stringToCalendar(resultadoQuery.getString("dataDespesa"));
+				Calendar dataPagamento = Converte.stringToCalendar(resultadoQuery.getString("dataPagamento"));
 			//	int idFormaPagamento = resultadoQuery.getInt("idFormaPagamento");
 				String numeroCheque = resultadoQuery.getString("numeroCheque");
 				double valor = resultadoQuery.getDouble("valor");
