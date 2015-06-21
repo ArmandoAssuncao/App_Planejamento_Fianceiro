@@ -154,7 +154,7 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 	}
 
 	/**
-	 * Pesquisa categoria pela descricao
+	 * Pesquisa despesa pela descricao
 	 * @param descricao <code>String</code> com a descrição da <code>Despesa</code> a ser pesquisada. 
 	 * @return {@code List<Despesa>} com as despesas que tem descrição especificada
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
@@ -246,4 +246,40 @@ public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
 		return c;
 	}
 	
+	
+	/**
+	 * Retorna todas as entradas da tabela despesa.
+	 * @return {@code List<Despesa>} com todas as despesas da tabela
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public List<Despesa> todasAsDespesas() throws SQLException{
+		List<Despesa> despesas = new ArrayList<Despesa>();
+		BANCO_DE_DADOS_PF.abreConexao();
+		
+		String comandoSql = "SELECT * FROM despesa";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
+		
+		
+		try {
+			while(resultadoQuery.next()){
+				String descricao = resultadoQuery.getString("descricao");
+			//	int idDespesa = resultadoQuery.getInt("idDespesa");
+			//	int idCategoria = resultadoQuery.getInt("idCategoria");
+				Calendar dataDespesa = stringToCalendar(resultadoQuery.getString("dataDespesa"));
+				Calendar dataPagamento = stringToCalendar(resultadoQuery.getString("dataPagamento"));
+			//	int idFormaPagamento = resultadoQuery.getInt("idFormaPagamento");
+				String numeroCheque = resultadoQuery.getString("numeroCheque");
+				double valor = resultadoQuery.getDouble("valor");
+				int numeroDeParcelas = resultadoQuery.getInt("numeroDeParcelas");
+				
+				despesas.add(new Despesa(descricao, dataDespesa, dataPagamento, numeroCheque, valor, numeroDeParcelas));
+			}//while
+		} catch (NumberFormatException | SQLException e) {
+			e.printStackTrace();
+			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
+		}
+		
+		BANCO_DE_DADOS_PF.fechaConexao();
+		return despesas;
+	}
 }//class BDDespesa
