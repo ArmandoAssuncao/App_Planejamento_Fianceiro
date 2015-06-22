@@ -5,7 +5,7 @@ import gui.framePrincipal.GuiMenu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import persistencia.BDPlanejamentoFinanceiro;
+import persistencia.PlanejamentoFinanceiroDAO;
 
 public class TEGuiMenu implements ActionListener{
 	private GuiMenu guiMenu;
@@ -18,7 +18,7 @@ public class TEGuiMenu implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(e.getSource());
 		if(e.getSource() == guiMenu.getMenuItemAbrirBD()){
-			BDPlanejamentoFinanceiro.mostraJanelaBancoDeDados();
+			PlanejamentoFinanceiroDAO.mostraJanelaBancoDeDados();
 			System.out.println("asd");
 		}
 	}

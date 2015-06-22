@@ -18,10 +18,10 @@ import classes.Despesa;
  * @author Armando Assunção
  * @author Richardson William
  * 
- * @see BDPlanejamentoFinanceiro
+ * @see PlanejamentoFinanceiroDAO
  *
  */
-public abstract class BDDespesa extends BDPlanejamentoFinanceiro {
+public abstract class DespesaDAO extends PlanejamentoFinanceiroDAO {
 
 	/**
 	 * Insere um objeto Despesa no banco de dados.

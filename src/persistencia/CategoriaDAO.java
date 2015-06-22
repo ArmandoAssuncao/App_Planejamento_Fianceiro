@@ -15,9 +15,9 @@ import classes.Categoria;
  * @author Armando Assunção
  * @author Richardson William
  * 
- * @see BDPlanejamentoFinanceiro
+ * @see PlanejamentoFinanceiroDAO
  */
-public class CategoriaDAO extends BDPlanejamentoFinanceiro {
+public class CategoriaDAO extends PlanejamentoFinanceiroDAO {
 
 	/** Insere um objeto <code>Categoria</code> no banco de dados
 	 * @param categoria <code>Categoria</code> que será inserida no banco de dados

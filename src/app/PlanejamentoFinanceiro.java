@@ -1,6 +1,6 @@
 package app;
 
-import persistencia.BDPlanejamentoFinanceiro;
+import persistencia.PlanejamentoFinanceiroDAO;
 import gui.framePrincipal.GuiPrincipal;
 import gui.temas.Tema;
 
@@ -19,7 +19,7 @@ public class PlanejamentoFinanceiro {
 	 */
 	public static void main(String[] args) {
 		//inicia as threads
-		BDPlanejamentoFinanceiro BancoDados = BDPlanejamentoFinanceiro.getInstance();
+		PlanejamentoFinanceiroDAO BancoDados = PlanejamentoFinanceiroDAO.getInstance();
 		Thread threadBancoDeDados = new Thread(BancoDados);
 		threadBancoDeDados.start();
 

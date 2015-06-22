@@ -17,9 +17,9 @@ import classes.MetaMensal;
  * @author Armando Assunção
  * @author Richardson William
  * 
- * @see BDPlanejamentoFinanceiro
+ * @see PlanejamentoFinanceiroDAO
  */
-public class MetaMensalDAO extends BDPlanejamentoFinanceiro {
+public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 
 	/** Insere um objeto <code>MetaMensal</code> no banco de dados
 	 * @param metaMensal <code>MetaMensal</code> que será inserida no banco de dados

@@ -19,9 +19,9 @@ import classes.RendaMensal;
  * @author Armando Assunção
  * @author Richardson William
  * 
- * @see BDPlanejamentoFinanceiro
+ * @see PlanejamentoFinanceiroDAO
  */
-public class BDRendaMensal extends BDPlanejamentoFinanceiro {
+public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 	
 	/** Insere um objeto <code>RendaMensal</code> no banco de dados
 	 * @param rendaMensal <code>RendaMensal</code> que será inserida no banco de dados.

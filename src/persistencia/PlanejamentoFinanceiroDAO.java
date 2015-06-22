@@ -21,7 +21,7 @@ import classes.Arquivo;
  * 
  * @see BancoDeDados
  */
-public class BDPlanejamentoFinanceiro extends BancoDeDados implements Runnable{
+public class PlanejamentoFinanceiroDAO extends BancoDeDados implements Runnable{
 
 	private static final String DIRETORIO_BANCO_DE_DADOS = "banco/";
 	/** Caminho do banco de dados*/
@@ -36,17 +36,17 @@ public class BDPlanejamentoFinanceiro extends BancoDeDados implements Runnable{
 														"--noexit"};
 	
 	/** <code>BDPlanejamentoFinanceiro</code> com a instâcia do banco de dados */
-	protected static BDPlanejamentoFinanceiro BANCO_DE_DADOS_PF = new BDPlanejamentoFinanceiro();
+	protected static PlanejamentoFinanceiroDAO BANCO_DE_DADOS_PF = new PlanejamentoFinanceiroDAO();
 	
 	/** Cria uma instancia do banco de dados do sistema. */
-	public BDPlanejamentoFinanceiro(){
+	public PlanejamentoFinanceiroDAO(){
 		super(ENDERECO_BANCO_DE_DADOS);
 	}
 	
 	/** Retorna a instancia do banco de dados do sistema
 	 * @return <code>BDPlanejamentoFinanceiro</code> com a instancia da classe
 	 */
-	public static BDPlanejamentoFinanceiro getInstance(){
+	public static PlanejamentoFinanceiroDAO getInstance(){
 		return BANCO_DE_DADOS_PF;
 	}
 	

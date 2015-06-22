@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -287,7 +288,12 @@ public class JanelaCriarCategoria extends JDialog{
 	public Categoria retornaCategoria(){
 		MetaMensal metaMensal = new MetaMensal();
 		
-		metaMensal.setMesAnoMeta( Converte.stringToCalendar("10/10/2010") );//TODO
+		//Atribui o dia 01 do mes e ano atual
+		int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
+		int mesAtual = Calendar.getInstance().get(Calendar.MONTH)+1;
+		String data = String.format("%02d/%02d/%04d", 1, mesAtual, anoAtual);
+		
+		metaMensal.setMesAnoMeta( Converte.stringToCalendar(data) );//TODO
 		
 		try{
 			if(!textFieldMeta.getText().equals(""))

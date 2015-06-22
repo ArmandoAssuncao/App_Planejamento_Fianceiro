@@ -15,9 +15,9 @@ import classes.Renda;
  * @author Armando Assunção
  * @author Richardson William
  * 
- * @see BDPlanejamentoFinanceiro
+ * @see PlanejamentoFinanceiroDAO
  */
-public abstract class BDRenda extends BDPlanejamentoFinanceiro {
+public abstract class RendaDAO extends PlanejamentoFinanceiroDAO {
 
 	/** Insere um objeto <code>Renda</code> no banco de dados
 	 * @param renda <code>Renda</code> que será inserido no banco de dados
