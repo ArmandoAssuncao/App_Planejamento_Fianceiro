@@ -94,9 +94,10 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 		double novoValor = novaMetaMensal.getValor();
 		
 		String comandoUpdate = "UPDATE meta_mensal SET ";
-		String clausulaWhere = " WHERE idCategoria=" + id + " AND mesAnoMeta=\'" + mesAnoMeta + "\'";
+		String clausulaWhere = " WHERE idCategoria=" + id + " AND mesAnoMeta=\'" + novoMesAnoMeta + "\'";
 		
-		String comandoSql = comandoUpdate + "descricao=\'" + novoMesAnoMeta + "\', valor=" + novoValor + clausulaWhere;
+		String comandoSql = comandoUpdate + "valor=" + novoValor + clausulaWhere;
+		//String comandoSql = comandoUpdate + "mesAnoMeta=\'" + novoMesAnoMeta + "\', valor=" + novoValor + clausulaWhere;
 		
 		try {
 			this.executaUpdate(comandoSql);
@@ -115,7 +116,7 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 	 * @return <code>true</code> se os dados foram removidos, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	public boolean excluir(Calendar mesAnoMeta, String descricaoCategoria) throws SQLException{
+	/*public boolean excluir(Calendar mesAnoMeta, String descricaoCategoria) throws SQLException{
 		//verifica se existe a MetaMensal
 		if(!exists(mesAnoMeta, descricaoCategoria))
 			return false;
@@ -143,7 +144,7 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 		this.fechaConexao();
 		
 		return true;
-	}
+	}*/
 	
 	/**
 	 * Verifica se existe uma MetaMensal com a data e descricao indicada no banco de dados.

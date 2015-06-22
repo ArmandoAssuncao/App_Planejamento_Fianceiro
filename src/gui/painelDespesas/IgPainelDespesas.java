@@ -359,15 +359,13 @@ public class IgPainelDespesas extends JPanel{
 	}
 	
 	public boolean removerCategoria(){
-		/*int abaSelecionada = abasCategoria.getSelectedIndex();
+		int abaSelecionada = abasCategoria.getSelectedIndex();
 		if( abasCategoria.removerCategoria(getDescricaoCategoria())){
-			arrayMetaMensal.remove(abaSelecionada);
-			
-			//Adicionar a parte do banco /////////////////////////////////////////
+			arrayCategoria.remove(abaSelecionada);
 			
 			atualizaPainelTitulo();
 			return true;
-		}*/
+		}
 		
 		return false;
 	}

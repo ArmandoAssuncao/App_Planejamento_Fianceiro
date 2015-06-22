@@ -88,7 +88,7 @@ public class JanelaEditarCategoria extends JDialog{
 		labelTitulo.setText("Editar Categoria");
 		labelTitulo.setFont(new Font("serif", Font.PLAIN, 25));
 		
-		labelSubTitulo.setText("Campos com * são obrigatórios.");
+		labelSubTitulo.setText("Caso não queria alterar o campo, deixe-o em branco.");
 		
 		painelTitulo.add(labelTitulo, BorderLayout.WEST);
 		painelTitulo.add(labelSubTitulo, BorderLayout.SOUTH);
@@ -110,7 +110,7 @@ public class JanelaEditarCategoria extends JDialog{
 		GridBagConstraints constraints = new GridBagConstraints();
 		
 		labelErroCampo.setText(" ");
-		labelNovaDescricao.setText("* Novo Nome da Categoria:");
+		labelNovaDescricao.setText("Novo Nome da Categoria:");
 		labelNovaMeta.setText("Nova Meta da Categoria:");
 		labelAntigaDescricao.setText("Antigo Nome da Categoria:");
 		labelAntigaDescricaoValor.setText( igPainelDespesas.getDescricaoCategoria() );
@@ -260,8 +260,8 @@ public class JanelaEditarCategoria extends JDialog{
 		///valida o campo descricao
 		String descricao = textFieldNovaDescricao.getText();
 		if(!ValidarDados.validarVazio(descricao)){
-			labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
-			return false;
+			/*labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
+			return false;*/
 		}
 		else if(!ValidarDados.validarTamanho(descricao, 25)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
@@ -327,18 +327,27 @@ public class JanelaEditarCategoria extends JDialog{
 		String data = String.format("%02d/%02d/%04d", 1, mesAtual, anoAtual);
 		
 		metaMensal.setMesAnoMeta( Converte.stringToCalendar(data) );//TODO
-				
+		
+		//Se o campo for vazio, atribui o antigo valor da meta
 		try{
 			if(!textFieldNovaMeta.getText().equals(""))
 				metaMensal.setValor( Double.parseDouble(textFieldNovaMeta.getText()) );
+			
+			else{
+				metaMensal.setValor( Double.parseDouble(labelAntigaMetaValor.getText()) );
+			}
 		}
 		catch(NumberFormatException e){
 			e.printStackTrace();
 		}
 		
 		Categoria categoria = new Categoria();
-		categoria.setDescricao( getTextFieldNovaDescricao().getText() );
 		categoria.setMetaMensal(metaMensal);
+		//Se o campo for vazio, atribui a antiga descrição
+		if(!textFieldNovaDescricao.getText().equals(""))
+			categoria.setDescricao( getTextFieldNovaDescricao().getText() );
+		else
+			categoria.setDescricao( labelAntigaDescricaoValor.getText() );
 		
 		return categoria;
 	}

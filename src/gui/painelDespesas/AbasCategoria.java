@@ -68,14 +68,7 @@ public class AbasCategoria extends JTabbedPane{
 	
 	//Remover categoria
 	public boolean removerCategoria(String nomeCategoria){
-		JanelaDeConfirmacao janelaDeConfirmacao = new JanelaDeConfirmacao("Remover Categoria", "Tem certeza que deseja remover a categoria \"" + nomeCategoria + "\"?");
-		if(!janelaDeConfirmacao.isConfirmar()){
-			return false;
-		}
-		
 		remove(getSelectedIndex());
-		new JanelaAviso("Remover Categoria", "A categoria \"" + nomeCategoria + "\" foi removida com sucesso.");
-		
 		return true;
 	}
 	

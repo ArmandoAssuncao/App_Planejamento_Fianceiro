@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import persistencia.BancoDeDados;
 import persistencia.CategoriaDAO;
+import persistencia.MetaMensalDAO;
 import classes.Categoria;
 import classes.MetaMensal;
 
@@ -28,23 +28,32 @@ public class TEJanelaEditarCategoria  implements ActionListener{
 		if(event.getSource() == janelaEditarCategoria.getBotaoEditar()){
 			if(janelaEditarCategoria.validaCampos()){
 				Categoria novaCategoria = janelaEditarCategoria.retornaNovaCategoria();
+				System.out.println(novaCategoria.getDescricao());
 				MetaMensal novaMetaMensal = novaCategoria.getMetaMensal();
 				
 				Categoria antigaCategoria = janelaEditarCategoria.retornaAntigaCategoria();
-				MetaMensal antigaMetaMensal = antigaCategoria.getMetaMensal();
 				
 				CategoriaDAO categoriaDAO = new CategoriaDAO();
-				//MetaMensalDAO metaMensalDAO = new MetaMensalDAO();
+				MetaMensalDAO metaMensalDAO = new MetaMensalDAO();
+				
+				//verifica se a nova e antiga descricao são iguais
+				boolean descricoesIguais = novaCategoria.getDescricao().equals(antigaCategoria.getDescricao());
 				
 				try{
-					if(!categoriaDAO.exists(novaCategoria.getDescricao())){ //TODO && metaMensalDAO.exists()
-						if(categoriaDAO.atualizarDados(novaCategoria, antigaCategoria.getDescricao())){
-							System.out.println("Atualizou o banco");
+					if(descricoesIguais || (!categoriaDAO.exists(novaCategoria.getDescricao()) &&
+						!metaMensalDAO.exists(novaMetaMensal.getMesAnoMeta(), novaCategoria.getDescricao()))){
+						
+						if(categoriaDAO.atualizarDados(novaCategoria, antigaCategoria.getDescricao()) &&
+							metaMensalDAO.atualizarDados(novaMetaMensal, novaMetaMensal.getMesAnoMeta(), novaCategoria.getDescricao())){
+							System.out.println("Atualizou o banco");//TODO
 							
 							igPainelDespesas.editarCategoria(novaCategoria);
 							
 							janelaEditarCategoria.finalizaJanelaCategoria();
 						}
+					}
+					else{
+						JanelaMensagem.mostraMensagem(null, "Editar Categoria", "Já existe uma categoria com esse nome.");
 					}
 				}
 				catch(SQLException e){
@@ -53,10 +62,10 @@ public class TEJanelaEditarCategoria  implements ActionListener{
 				}
 			}
 		}//if()
+		
 		else if(event.getSource() == janelaEditarCategoria.getBotaoCancelar()){
 			janelaEditarCategoria.finalizaJanelaCategoria();
 		}
 		
-	}
-	
-}
+	}//actionperformed()
+}//class

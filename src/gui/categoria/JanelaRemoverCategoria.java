@@ -7,17 +7,14 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import classes.MetaMensal;
+import classes.Categoria;
 import eventos.categoria.TEJanelaRemoverCategoria;
-import gui.JanelaAviso;
-import gui.painelDespesas.AbasCategoria;
 import gui.painelDespesas.IgPainelDespesas;
 
 public class JanelaRemoverCategoria extends JDialog {
@@ -44,7 +41,7 @@ public class JanelaRemoverCategoria extends JDialog {
 	public JanelaRemoverCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
 		
-		trataEventosCategoria = new TEJanelaRemoverCategoria(this);
+		trataEventosCategoria = new TEJanelaRemoverCategoria(this, igPainelDespesas);
 		this.igPainelDespesas = igPainelDespesas;
 		
 		iniciaElementos();
@@ -196,14 +193,14 @@ public class JanelaRemoverCategoria extends JDialog {
 		dispose();
 	}
 	
-	public void removerCategoria(){
+	/*public void removerCategoria(){
 		if( igPainelDespesas.removerCategoria() ){
 			finalizaJanelaCategoria();
 		}
 		else{
 			new JanelaAviso("Remover categoria", "Não existe uma categoria com esse nome.");
 		}
-	}
+	}*/
 
 	public JButton getBotaoRemover() {
 		return botaoRemover;
@@ -221,4 +218,10 @@ public class JanelaRemoverCategoria extends JDialog {
 		return labelMetaValor;
 	}
 	
+	public Categoria retornaCategoria(){
+		Categoria categoria = new Categoria();
+		categoria.setDescricao( labelDescricaoValor.getText() );
+		
+		return categoria;
+	}
 }
