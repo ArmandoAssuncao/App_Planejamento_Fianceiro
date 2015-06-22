@@ -232,28 +232,6 @@ public class JanelaEditarCategoria extends JDialog{
 		dispose();
 	}
 	
-	/*public void editarCategoria(){//TODO APAGAR
-		if(validaCampos()){
-			MetaMensal metaMensal = new MetaMensal();
-			metaMensal.setDescricao(textFieldNovaDescricao.getText());
-			Calendar c = Calendar.getInstance();
-			metaMensal.setMesAnoMeta(c);// O mes da metal mensal vai ser o atual? ///////////////////////
-			try{
-				metaMensal.setValor( Double.parseDouble(textFieldNovaMeta.getText()) );
-			}
-			catch(NumberFormatException e){
-				e.printStackTrace();
-			}
-			
-			if( igPainelDespesas.editarCategoria(metaMensal) ){
-				finalizaJanelaCategoria();
-			}
-			else{
-				new JanelaAviso("Editar categoria", "Já existe uma categoria com esse nome.");
-			}
-		}
-	}*/
-	
 	public boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		

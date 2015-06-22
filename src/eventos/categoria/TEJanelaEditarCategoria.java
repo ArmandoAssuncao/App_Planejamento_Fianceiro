@@ -28,7 +28,6 @@ public class TEJanelaEditarCategoria  implements ActionListener{
 		if(event.getSource() == janelaEditarCategoria.getBotaoEditar()){
 			if(janelaEditarCategoria.validaCampos()){
 				Categoria novaCategoria = janelaEditarCategoria.retornaNovaCategoria();
-				System.out.println(novaCategoria.getDescricao());
 				MetaMensal novaMetaMensal = novaCategoria.getMetaMensal();
 				
 				Categoria antigaCategoria = janelaEditarCategoria.retornaAntigaCategoria();

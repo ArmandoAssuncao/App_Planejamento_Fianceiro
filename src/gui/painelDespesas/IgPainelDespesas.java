@@ -54,7 +54,7 @@ public class IgPainelDespesas extends JPanel{
 		iniciaElementos();
 		
 		Categoria categoriaTeste;
-		for(int i = 0; i < 15; i++){ //APAGAR //////////////////////////////////////////////
+		for(int i = 0; i < 15; i++){ //TODO APAGAR //////////////////////////////////////////////
 			categoriaTeste = new Categoria();
 			categoriaTeste.setDescricao("Educacao"+i);
 			categoriaTeste.setValorMeta(1000);

@@ -192,15 +192,6 @@ public class JanelaRemoverCategoria extends JDialog {
 		liberaElementos();
 		dispose();
 	}
-	
-	/*public void removerCategoria(){
-		if( igPainelDespesas.removerCategoria() ){
-			finalizaJanelaCategoria();
-		}
-		else{
-			new JanelaAviso("Remover categoria", "Não existe uma categoria com esse nome.");
-		}
-	}*/
 
 	public JButton getBotaoRemover() {
 		return botaoRemover;

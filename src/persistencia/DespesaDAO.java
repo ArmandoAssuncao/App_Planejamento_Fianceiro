@@ -209,42 +209,7 @@ public abstract class DespesaDAO extends PlanejamentoFinanceiroDAO {
 		this.fechaConexao();
 		
 		return id;
-	} 
-	
-	/**
-	 * Retorna uma representação em <code>String</code> da data.
-	 * @param dataPagamento objeto <code>Calendar</code> com uma data.
-	 * @return <code>String</code> no formato DD/MM/AAAA representando a data.
-	 */
-	/*private String calendarToString(Calendar dataPagamento) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		return  sdf.format(dataPagamento);
-	}*/
-	
-	/**
-	 * Retorna uma representação em <code>Calendar</code> da data em <code>String</code>.
-	 * @param string objeto <code>String</code> com uma data.
-	 * @return <code>Calendar</code> obtida do parâmetro data.
-	 */
-	/*private Calendar stringToCalendar(String string) {
-//		Calendar c = Calendar.getInstance();
-//		int ano = Integer.parseInt(string.substring(0, 2));
-//		int mes = Integer.parseInt(string.substring(3,5));
-//		int dia = Integer.parseInt(string.substring(6, 10));
-//		c.set(ano, mes, dia);
-//		return c;
-		
-		Calendar c = Calendar.getInstance();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
-		try {
-			c.setTime(sdf.parse(string));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return c;
-	}*/
-	
+	}
 	
 	/**
 	 * Retorna todas as entradas da tabela despesa.

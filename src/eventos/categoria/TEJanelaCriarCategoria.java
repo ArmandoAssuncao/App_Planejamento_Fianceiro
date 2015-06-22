@@ -37,7 +37,7 @@ public class TEJanelaCriarCategoria  implements ActionListener{
 					if(!categoriaDAO.exists(categoria.getDescricao()) && !metaMensalDAO.exists(metaMensal.getMesAnoMeta(), categoria.getDescricao())){
 						if(categoriaDAO.inserir(categoria) == BancoDeDados.RESULTADO_SUCESSO &&
 							metaMensalDAO.inserir(metaMensal, categoria.getDescricao()) == BancoDeDados.RESULTADO_SUCESSO){
-							System.out.println("salvou no banco");
+							System.out.println("salvou no banco");//TODO
 							
 							igPainelDespesas.criarCategoria(categoria);
 							

@@ -28,7 +28,6 @@ public class JanelaCriarCategoria extends JDialog{
 	private final int TAM_JANELA_Y = 500;
 	
 	private TEJanelaCriarCategoria trataEventosCategoria;
-	private IgPainelDespesas igPainelDespesas;
 	private JPanel painelPrincipal;
 	private JPanel painelTitulo;
 	private JPanel painelCampos;
@@ -47,7 +46,6 @@ public class JanelaCriarCategoria extends JDialog{
 		setTitle(TITULO_JANELA);
 		
 		trataEventosCategoria = new TEJanelaCriarCategoria(this, igPainelDespesas);
-		//this.igPainelDespesas = igPainelDespesas;
 		
 		iniciaElementos();
 		
@@ -198,28 +196,6 @@ public class JanelaCriarCategoria extends JDialog{
 		liberaElementos();
 		dispose();
 	}
-	
-	/*public void criarCategoria(){
-		if(validaCampos()){
-			MetaMensal metaMensal = new MetaMensal();
-			metaMensal.setDescricao(textFieldDescricao.getText());
-			Calendar c = Calendar.getInstance();
-			metaMensal.setMesAnoMeta(c);// O mes da metal mensal vai ser o atual? ///////////////////////
-			try{
-				metaMensal.setValor( Double.parseDouble(textFieldMeta.getText()) );
-			}
-			catch(NumberFormatException e){
-				e.printStackTrace();
-			}
-			
-			if( igPainelDespesas.criarCategoria(metaMensal) ){
-				finalizaJanelaCategoria();
-			}
-			else{
-				new JanelaAviso("Criar categoria", "Já existe uma categoria com esse nome.");
-			}
-		}
-	}*/
 	
 	public boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);

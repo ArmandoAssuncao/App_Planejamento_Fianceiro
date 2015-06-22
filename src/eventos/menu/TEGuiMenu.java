@@ -16,10 +16,8 @@ public class TEGuiMenu implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(e.getSource());
 		if(e.getSource() == guiMenu.getMenuItemAbrirBD()){
 			PlanejamentoFinanceiroDAO.mostraJanelaBancoDeDados();
-			System.out.println("asd");
 		}
 	}
 	
