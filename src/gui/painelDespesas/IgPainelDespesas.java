@@ -8,7 +8,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -19,7 +21,10 @@ import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import persistencia.CategoriaDAO;
+import persistencia.MetaMensalDAO;
 import classes.Categoria;
+import classes.MetaMensal;
 import eventos.painelDespesa.TEPainelDespesas;
 import funcoes.Converte;
 
@@ -27,7 +32,7 @@ public class IgPainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
 	public final int TAM_PAINEL_Y = 600;
 	
-	ArrayList<Categoria> arrayCategoria = new ArrayList<Categoria>();
+	List<Categoria> arrayCategoria = new ArrayList<Categoria>();
 	AbasCategoria abasCategoria;
 	JPanel painelBotoes;
 	JPanel painelTitulo;
@@ -53,14 +58,7 @@ public class IgPainelDespesas extends JPanel{
 		trataEventosDespesas = new TEPainelDespesas(this, framePrincipal);
 		iniciaElementos();
 		
-		Categoria categoriaTeste;
-		for(int i = 0; i < 15; i++){ //TODO APAGAR //////////////////////////////////////////////
-			categoriaTeste = new Categoria();
-			categoriaTeste.setDescricao("Educacao"+i);
-			categoriaTeste.setValorMeta(1000);
-			categoriaTeste.setMesAnoMeta(Converte.stringToCalendar("11/12/2013"));
-			criarCategoria(categoriaTeste);
-		}
+		iniciaCategorias();
 		
 		criaPainelBotoes();
 		criaPainelTitulo();
@@ -331,7 +329,27 @@ public class IgPainelDespesas extends JPanel{
 		labelMetaCategoriaValor.setText("$" + valorMeta);
 		labelNumeroDeDespesasValor.setText("" + abasCategoria.getNumeroDeDespesasDaCategoria());
 		labelValorTotalDespesasValor.setText("$" + abasCategoria.getValorTotalDespesas());
-		labelValorTotalDespesasPorcentagemValor.setText( totalDespesasPorcentagem + "%");
+		labelValorTotalDespesasPorcentagemValor.setText( String.format("%.1f%%", totalDespesasPorcentagem));
+	}
+	
+	private void iniciaCategorias(){
+		List<MetaMensal> arrayMetaMensalTemp = new ArrayList<MetaMensal>();
+		List<Categoria> arrayCategoriaTemp = new ArrayList<Categoria>();
+		try {
+			arrayCategoriaTemp = CategoriaDAO.todasAsCategorias();
+			arrayMetaMensalTemp = MetaMensalDAO.todasAsMetasMensais();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		for(int indice = 0; indice < arrayMetaMensalTemp.size(); indice++){
+			arrayCategoriaTemp.get(indice).setMetaMensal(arrayMetaMensalTemp.get(indice));
+			criarCategoria(arrayCategoriaTemp.get(indice));
+		}
+		
+		if(abasCategoria.getNumeroDeAbas() > 0)
+			abasCategoria.setSelectedIndex(0);
 	}
 	
 	//cria uma nova categoria

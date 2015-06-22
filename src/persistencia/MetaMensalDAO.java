@@ -220,7 +220,7 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 	 * @return {@code List<MetaMensal>} com todas as metas mensais da tabela
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	public List<MetaMensal> todasAsMetasMensais() throws SQLException{
+	public static List<MetaMensal> todasAsMetasMensais() throws SQLException{
 		List<MetaMensal> metasMensais = new ArrayList<MetaMensal>();
 		
 		BANCO_DE_DADOS_PF.abreConexao();

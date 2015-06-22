@@ -171,7 +171,7 @@ public class CategoriaDAO extends PlanejamentoFinanceiroDAO {
 	 * @return {@code List<Categoria>} com todas as categorias da tabela
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	public List<Categoria> todasAsCategorias() throws SQLException{
+	public static List<Categoria> todasAsCategorias() throws SQLException{
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		
 		BANCO_DE_DADOS_PF.abreConexao();
