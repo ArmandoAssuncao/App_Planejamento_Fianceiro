@@ -141,7 +141,7 @@ public class CategoriaDAO extends PlanejamentoFinanceiroDAO {
 	 * @return {@code List<Categoria>} com as categorias que tem na descrição a descrição especificado
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	public static List<Categoria> pesquisar(String descricao) throws SQLException{
+	/*public static List<Categoria> pesquisar(String descricao) throws SQLException{
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		
 		BANCO_DE_DADOS_PF.abreConexao();
@@ -164,7 +164,31 @@ public class CategoriaDAO extends PlanejamentoFinanceiroDAO {
 		
 		BANCO_DE_DADOS_PF.fechaConexao();
 		return categorias;
-	}//pesquisar
+	}//pesquisar*/
+	
+	/**
+	 * Retorna todas as entradas da tabela categoria.
+	 * @return {@code List<Categoria>} com todas as categorias da tabela
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public List<Categoria> todasAsCategorias() throws SQLException{
+		List<Categoria> categorias = new ArrayList<Categoria>();
+		
+		BANCO_DE_DADOS_PF.abreConexao();
+		
+		String comandoSql = "SELECT * FROM categoria";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
+		
+		while(resultadoQuery.next()){
+			//int idCategoria = resultadoQuery.getInt("idCategoria");
+			String descricao = resultadoQuery.getString("descricao");
+			
+			categorias.add(new Categoria(descricao));
+		}//while
+		
+		BANCO_DE_DADOS_PF.fechaConexao();
+		return categorias;
+	}
 
 	/**
 	 *   Retorna o id da categoria no banco de dados

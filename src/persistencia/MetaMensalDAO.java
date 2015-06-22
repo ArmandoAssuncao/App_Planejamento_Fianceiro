@@ -214,6 +214,31 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 		BANCO_DE_DADOS_PF.fechaConexao();
 		return categorias;
 	}//pesquisar*/
+	
+	/**
+	 * Retorna todas as entradas da tabela meta_mensal.
+	 * @return {@code List<MetaMensal>} com todas as metas mensais da tabela
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public List<MetaMensal> todasAsMetasMensais() throws SQLException{
+		List<MetaMensal> metasMensais = new ArrayList<MetaMensal>();
+		
+		BANCO_DE_DADOS_PF.abreConexao();
+		
+		String comandoSql = "SELECT * FROM meta_mensal";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
+		
+		while(resultadoQuery.next()){
+			//int idCategoria = resultadoQuery.getInt("idCategoria");
+			Calendar mesAnoMeta = Converte.stringToCalendar( resultadoQuery.getString("mesAnoMeta") );
+			double valor = resultadoQuery.getDouble("valor");
+			
+			metasMensais.add(new MetaMensal(mesAnoMeta, valor));
+		}//while
+		
+		BANCO_DE_DADOS_PF.fechaConexao();
+		return metasMensais;
+	}
 
 	/**
 	 *   Retorna o id da categoria associada a MetaMensal no banco de dados
