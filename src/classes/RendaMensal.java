@@ -29,7 +29,7 @@ public class RendaMensal {
 	 */
 	public RendaMensal(Calendar data, double valor) {
 		setValor(valor);
-		setData(data);
+		setDataRenda(data);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class RendaMensal {
 	 * Retorna a data da renda.
 	 * @return <code>Calendar</code> data.
 	 */
-	public Calendar getData() {
+	public Calendar getDataRenda() {
 		return dataRenda;
 	}
 
@@ -60,7 +60,7 @@ public class RendaMensal {
 	 * Atribui a data da renda.
 	 * @param data <code>Calendar</code>
 	 */
-	public void setData(Calendar data) {
+	public void setDataRenda(Calendar data) {
 		this.dataRenda = data;
 	}
 
