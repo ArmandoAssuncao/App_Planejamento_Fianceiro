@@ -2,7 +2,10 @@ package enumeracoes;
 
 /**
  * Esta classe contém os tipos de pagamento.
- * @author Armando e Richardson
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
  */
 public enum TipoPagamento {
 	AVISTA("A Vista"),

@@ -7,7 +7,10 @@ import persistencia.CategoriaDAO;
 /**
  * Armazena informações sobre a categoria dos gastos.
  * Possui os parâmetro <code>String</code> descrição.
- * @author Armando e Richardson
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
  */
 public class Categoria extends CategoriaDAO{
 	private String descricao;

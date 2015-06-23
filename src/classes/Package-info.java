@@ -1,5 +1,8 @@
 /**
  * Contém as classes base para o gerenciamento financeiro.
- * @author Armando e Richardson
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
  */
 package classes;

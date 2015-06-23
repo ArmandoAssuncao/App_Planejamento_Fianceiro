@@ -6,7 +6,10 @@ import java.util.Calendar;
  * /**
  *  Armazena informações sobre a renda mensal. Herda os atributos da classe Renda.
  *  Adiciona os seguintes atributos: valor do tipo <code>double</code> e data do tipo <code>Calendar</code>.
- * @author Armando e Richardson
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
  */
 public class RendaMensal extends Renda {
 	private double valor;

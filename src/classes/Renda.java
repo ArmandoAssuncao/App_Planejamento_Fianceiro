@@ -2,7 +2,10 @@ package classes;
 
 /**
  * Armazena informações sobre a renda.
- * @author Armando e Richardson
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
  */
 public class Renda {
 	private String descricao;

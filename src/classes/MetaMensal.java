@@ -4,7 +4,10 @@ import java.util.Calendar;
 /**
  * Armazena as informações sobre as metas e gastos referentes a um Mes/Ano determinado.
  * Os atributos são um <code>Calendar</code> mesAnoMeta e um <code>double</code> valor.
- * @author Armando e Richardson
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
  */
 public class MetaMensal {
 	private Calendar mesAnoMeta;

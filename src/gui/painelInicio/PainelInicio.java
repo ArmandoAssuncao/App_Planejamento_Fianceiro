@@ -1,12 +1,11 @@
 package gui.painelInicio;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.Window;
+
+import javax.swing.JPanel;
 
 public class PainelInicio extends JPanel{
 	public final int TAM_PAINEL_X = 800;

@@ -17,9 +17,10 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 /** Classe para manipular arquivos
- * @author Arthur Assunção
  * 
- * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
  * @see File
  * @see InputStream
  * @see BufferedInputStream

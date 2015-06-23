@@ -20,8 +20,9 @@ import org.hsqldb.util.DatabaseManagerSwing;
 
 
 /** Classe para manipular o banco de dados
- * @author Arthur Assunção
  * 
+ * @author Armando Assunção
+ * @author Richardson William
  * 
  * @see Connection
  * @see Statement

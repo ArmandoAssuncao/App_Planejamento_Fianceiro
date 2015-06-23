@@ -26,7 +26,6 @@ import persistencia.MetaMensalDAO;
 import classes.Categoria;
 import classes.MetaMensal;
 import eventos.painelDespesa.TEPainelDespesas;
-import funcoes.Converte;
 
 public class IgPainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;

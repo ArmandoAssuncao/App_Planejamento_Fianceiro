@@ -5,7 +5,9 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 
 /** Classe com metodos estaticos para exibição de mensagens para o usuário
- * @author Arthur Assunção
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
  * 
  * @see JOptionPane
  *

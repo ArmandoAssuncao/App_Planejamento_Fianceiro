@@ -20,7 +20,6 @@ import javax.swing.JTextField;
 import validacoes.ValidarDados;
 import enumeracoes.TipoPagamento;
 import eventos.despesa.TEJanelaCriarDespesa;
-import gui.JanelaAviso;
 import gui.painelDespesas.AbasCategoria;
 
 public class JanelaCriarDespesa extends JDialog{

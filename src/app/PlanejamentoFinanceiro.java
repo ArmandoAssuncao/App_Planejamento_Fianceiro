@@ -7,7 +7,7 @@ import gui.temas.Tema;
 /**
  * Esta classe inicia o aplicativo de gerenciamento financeiro.
  * 
- * @author Armando Assuncao
+ * @author Armando Assunção
  * @author Richardson William
  *
  */

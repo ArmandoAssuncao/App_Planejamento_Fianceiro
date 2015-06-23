@@ -4,7 +4,8 @@ import java.util.Calendar;
 /**
  * Contém atributos e métodos para armazenar as informações das despesas realizadas.
  * 
- * @author Armando e Richardson
+ * @author Armando Assunção
+ * @author Richardson William
  *
  */
 public class Despesa {
