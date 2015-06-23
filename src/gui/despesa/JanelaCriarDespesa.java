@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import validacoes.ValidarDados;
-import enumeracoes.TipoPagamento;
+import enumeracoes.FormaPagamento;
 import eventos.despesa.TEJanelaCriarDespesa;
 import gui.painelDespesas.AbasCategoria;
 
@@ -130,8 +130,8 @@ public class JanelaCriarDespesa extends JDialog{
 		textFieldTipoDoPagamentoInfo.setPreferredSize(new Dimension(100,25));
 		textFieldTipoDoPagamentoInfo.setVisible(false);
 		
-		for(TipoPagamento tipoPagamento : TipoPagamento.values()){
-			jComboBoxTipoDoPagamento.addItem(tipoPagamento.getTipoPagamento()); //USAR O ENUM DOS TIPOS DE PAGAMENTO ///////////////////////////
+		for(FormaPagamento tipoPagamento : FormaPagamento.values()){
+			jComboBoxTipoDoPagamento.addItem(tipoPagamento.getFormaPagamento()); //USAR O ENUM DOS TIPOS DE PAGAMENTO ///////////////////////////
 		}
 		jComboBoxTipoDoPagamento.setMaximumRowCount(5);
 		jComboBoxTipoDoPagamento.setSelectedIndex(0);
@@ -140,12 +140,12 @@ public class JanelaCriarDespesa extends JDialog{
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED){
-					if( e.getItem().equals(TipoPagamento.PRAZO.getTipoPagamento()) ){
+					if( e.getItem().equals(FormaPagamento.PRAZO.getFormaPagamento()) ){
 						labelTipoDoPagamentoInfo.setText("* Número de parcelas:");
 						labelTipoDoPagamentoInfo.setVisible(true);
 						textFieldTipoDoPagamentoInfo.setVisible(true);
 					}
-					else if( e.getItem().equals(TipoPagamento.CHEQUE.getTipoPagamento()) ){
+					else if( e.getItem().equals(FormaPagamento.CHEQUE.getFormaPagamento()) ){
 						labelTipoDoPagamentoInfo.setText("* Número do cheque:");
 						labelTipoDoPagamentoInfo.setVisible(true);
 						textFieldTipoDoPagamentoInfo.setVisible(true);
@@ -315,9 +315,9 @@ public class JanelaCriarDespesa extends JDialog{
 			String tipoDoPagamento = jComboBoxTipoDoPagamento.getItemAt(jComboBoxTipoDoPagamento.getSelectedIndex());
 			String parcelas = "";
 			String numeroDoCheque = "";
-			if( tipoDoPagamento.equals(TipoPagamento.PRAZO.getTipoPagamento()) )
+			if( tipoDoPagamento.equals(FormaPagamento.PRAZO.getFormaPagamento()) )
 				parcelas = textFieldTipoDoPagamentoInfo.getText();
-			else if( tipoDoPagamento.equals(TipoPagamento.CHEQUE.getTipoPagamento()) )
+			else if( tipoDoPagamento.equals(FormaPagamento.CHEQUE.getFormaPagamento()) )
 				numeroDoCheque = textFieldTipoDoPagamentoInfo.getText();
 			
 			if(abasCategoria.criarDespesa(categoria, descricao, valor, dataDaDespesa, dataDoPagamento, tipoDoPagamento, parcelas, numeroDoCheque));
