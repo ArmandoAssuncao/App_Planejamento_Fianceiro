@@ -35,7 +35,7 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 	 * @see BancoDeDados#RESULTADO_ERRO_BANCO_DADOS
 	 * @see BancoDeDados#RESULTADO_ERRO_DESCONHECIDO
 	 */
-	protected int inserir(Despesa despesa,String descricaoCategoria,String descricaoPagamento){
+	public int inserir(Despesa despesa,String descricaoCategoria,String descricaoPagamento){
 		String descricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(despesa.getDescricao());
 		int codigoCategoria = 0;//TODO new Categoria().getId(descricaoCategoria);
 		int codigoPagamento = 0;//TODO new Pagamento().getId(descricaoPagamento);
@@ -78,7 +78,7 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 	 * @return <code>true</code> se a despesa existe, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected boolean exists(Calendar dataDespesa) throws SQLException {
+	public boolean exists(Calendar dataDespesa) throws SQLException {
 		int contagem = 0;
 		this.abreConexao();
 		
@@ -158,7 +158,7 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 	 * @return {@code List<Despesa>} com as despesas que tem descrição especificada
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected List<Despesa> pesquisar(String descricao) throws SQLException{
+	public List<Despesa> pesquisar(String descricao) throws SQLException{
 		List<Despesa> despesas = new ArrayList<Despesa>();
 		BANCO_DE_DADOS_PF.abreConexao();
 		
@@ -196,7 +196,7 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 	 * @return <code>int</code> com o id da renda no banco de dados, caso não encontre retorna <code>0</code>
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected int getId(Calendar data) throws SQLException{
+	public int getId(Calendar data) throws SQLException{
 		int id = 0;
 		
 		this.abreConexao();

@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS renda(
 );
 /* Renda Mensal */
 CREATE TABLE IF NOT EXISTS renda_mensal(
+    idRenda INTEGER NOT NULL,
     dataRenda VARCHAR_IGNORECASE(10),
 	valor DOUBLE,
-    idRenda INTEGER NOT NULL,
     CONSTRAINT fk_renda_mensal FOREIGN KEY (idRenda) REFERENCES renda(idRenda) ON DELETE CASCADE,
 	CONSTRAINT pk_renda_mesal PRIMARY KEY (idRenda, dataRenda)
 );

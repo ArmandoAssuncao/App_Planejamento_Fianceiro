@@ -11,9 +11,9 @@ import java.util.Calendar;
  * @author Richardson William
  *
  */
-public class RendaMensal extends Renda {
+public class RendaMensal {
 	private double valor;
-	private Calendar data;
+	private Calendar dataRenda;
 	
 	/**
 	 * Construtor padrão.
@@ -27,8 +27,7 @@ public class RendaMensal extends Renda {
 	 * @param data <code>Calendar</code> com a data da receita.
 	 * @param valor <code>double</code> da renda mensal.
 	 */
-	public RendaMensal(String descricao, Calendar data, double valor) {
-		setDescricao(descricao);
+	public RendaMensal(Calendar data, double valor) {
 		setValor(valor);
 		setData(data);
 	}
@@ -54,7 +53,7 @@ public class RendaMensal extends Renda {
 	 * @return <code>Calendar</code> data.
 	 */
 	public Calendar getData() {
-		return data;
+		return dataRenda;
 	}
 
 	/**
@@ -62,7 +61,7 @@ public class RendaMensal extends Renda {
 	 * @param data <code>Calendar</code>
 	 */
 	public void setData(Calendar data) {
-		this.data = data;
+		this.dataRenda = data;
 	}
 
 	/**
@@ -71,11 +70,11 @@ public class RendaMensal extends Renda {
 	 */
 	@Override
 	public String toString() {
-		return "Renda Mensal [ descrição: " + getDescricao() + 
+		return "Renda Mensal [ " + 
 				String.format("Data da Renda: %02d/%02d/%04d", 
-						data.get(Calendar.DAY_OF_MONTH),
-						data.get(Calendar.MONTH) + 1,
-						data.get(Calendar.YEAR) + 
+						dataRenda.get(Calendar.DAY_OF_MONTH),
+						dataRenda.get(Calendar.MONTH) + 1,
+						dataRenda.get(Calendar.YEAR) + 
 						String.format(" , Valor: %.2f", valor)) + " ]";
 	}
 }
