@@ -14,6 +14,11 @@ import java.awt.Color;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.SoftBevelBorder;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
+
 public class PainelGraficos extends JPanel {
 	private JPanel painelTitulo;
 	private JPanel painelDeGraficos;
