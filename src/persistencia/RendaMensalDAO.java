@@ -33,12 +33,12 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 	 * @see BancoDeDados#RESULTADO_ERRO_DESCONHECIDO
 	 */
 	public int inserir(RendaMensal rendaMensal, String descricaoRenda){
-		String dataRenda = Converte.calendarToString(rendaMensal.getData());
+		String dataRenda = Converte.calendarToString(rendaMensal.getDataRenda());
 		double valor = rendaMensal.getValor();
 		
 		String comandoInsercao = "INSERT INTO meta_mensal VALUES";
 		try{
-			if(!exists(rendaMensal.getData(), descricaoRenda)){//Verifica se existe uma meta mensal com a mesma data e descrição de renda;
+			if(!exists(rendaMensal.getDataRenda(), descricaoRenda)){//Verifica se existe uma meta mensal com a mesma data e descrição de renda;
 				int idRenda = getId(descricaoRenda);
 				
 				String comandoSql = comandoInsercao + "(" + idRenda + ",\'" + dataRenda + "\'," + valor + ")";
@@ -90,7 +90,7 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 			return false;
 		}
 		
-		String novaDataRenda = Converte.calendarToString(novaRendaMensal.getData());
+		String novaDataRenda = Converte.calendarToString(novaRendaMensal.getDataRenda());
 		double novoValor = novaRendaMensal.getValor();
 		
 		String comandoUpdate = "UPDATE meta_mensal SET ";

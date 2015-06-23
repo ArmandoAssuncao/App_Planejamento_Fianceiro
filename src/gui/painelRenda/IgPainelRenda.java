@@ -149,12 +149,12 @@ public class IgPainelRenda extends JPanel {
 
 	
 	public boolean criarAbaRenda(RendaMensal rendaMensal){
-		if(abasRenda.criarAbaRenda(rendaMensal.getDescricao())){
+		/*if(abasRenda.criarAbaRenda(rendaMensal.getDescricao())){
 			arrayListRendaMensal.add(rendaMensal);
 			abasRenda.setSelectedIndex(abasRenda.getNumeroDeAbas()-1);
 		
 			return true;
-		}
+		}*/
 		return true;
 	}
 	
