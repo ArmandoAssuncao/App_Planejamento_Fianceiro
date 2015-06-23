@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
 public class AbasPrincipal extends JTabbedPane{
-	private final int TAM_PAINEL_X = 1150;
+	private final int TAM_PAINEL_X = 990;
 	private final int TAM_PAINEL_Y = 645;
 	
 	private final String NOME_ABA_1 = "<html>&nbsp;I<br>N<br>&nbsp;Í<br>C<br>&nbsp;I<br>O";

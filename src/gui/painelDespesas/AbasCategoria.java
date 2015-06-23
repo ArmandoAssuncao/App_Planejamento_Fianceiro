@@ -1,13 +1,15 @@
 package gui.painelDespesas;
 
 import java.awt.Dimension;
+import java.awt.Font;
 
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JViewport;
 
 public class AbasCategoria extends JTabbedPane{
-	private final int TAM_ABA_X = 900;
+	private final int TAM_ABA_X = 750;
 	private final int TAM_ABA_Y = 500;
 	
 	private TabelaDaCategoria tabela;
@@ -15,6 +17,10 @@ public class AbasCategoria extends JTabbedPane{
 	
 	
 	public AbasCategoria() {
+		
+		String fonteDefault = new JLabel().getFont().getFontName(); //Pega a fonte default do sistema
+		Font fonte = new Font(fonteDefault, Font.PLAIN, 12);
+		setFont(fonte);
 		setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		setPreferredSize(new Dimension(TAM_ABA_X, TAM_ABA_Y));
 		//setBackground(Color.GRAY);

@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 public class GuiPrincipal extends JFrame{
 	private final static String TITULO_PRINCIPAL = "Planejamento Financeiro";
-	public final int TAM_JANELA_PRINCIPAL_X = 1200;
+	public final int TAM_JANELA_PRINCIPAL_X = 1000;
 	public final int TAM_JANELA_PRINCIPAL_Y = 700;
 
 	PainelPrincipal painelPrincipal = new PainelPrincipal(this);

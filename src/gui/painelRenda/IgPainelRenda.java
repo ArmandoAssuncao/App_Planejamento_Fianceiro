@@ -77,7 +77,7 @@ public class IgPainelRenda extends JPanel {
 
 	private void criaPainelTitulo(){
 		final int TAM_X = 300;
-		final int TAM_Y = 100;
+		final int TAM_Y = 130;
 		
 		Border borda = BorderFactory.createLineBorder(Color.BLACK, 2);
 		

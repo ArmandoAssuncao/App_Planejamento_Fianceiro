@@ -10,7 +10,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JViewport;
 
 public class AbasRenda extends JTabbedPane{
-	private final int TAM_ABA_X = 900;
+	private final int TAM_ABA_X = 750;
 	private final int TAM_ABA_Y = 500;
 	
 	private TabelaRendaMensal tabelaRendaMensal;
