@@ -22,7 +22,6 @@ public class MetaMensal {
 	
 	/**
 	 * Construtor sobrecarregado da classe MetaMensal. Recebe os seguintes parâmetros:
-	 * @param descricao <code>String</code> da meta mensal
 	 * @param mesAnoMeta <code>Calendar</code> com o mês e o ano da meta mensal.
 	 * @param valor <code>double</code> da meta para os gastos.
 	 */
@@ -33,7 +32,7 @@ public class MetaMensal {
 
 	/**
 	 * Retorna o mês/ano da meta.
-	 * @return<code>Calendar</code> 
+	 * @return <code>Calendar</code> 
 	 */
 	public Calendar getMesAnoMeta() {
 		return mesAnoMeta;
