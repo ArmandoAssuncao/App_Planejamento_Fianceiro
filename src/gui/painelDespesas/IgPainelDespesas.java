@@ -57,7 +57,7 @@ public class IgPainelDespesas extends JPanel{
 		trataEventosDespesas = new TEPainelDespesas(this, framePrincipal);
 		iniciaElementos();
 		
-		iniciaCategorias();
+		iniciaValoresCategoria();
 		
 		criaPainelBotoes();
 		criaPainelTitulo();
@@ -331,7 +331,7 @@ public class IgPainelDespesas extends JPanel{
 		labelValorTotalDespesasPorcentagemValor.setText( String.format("%.1f%%", totalDespesasPorcentagem));
 	}
 	
-	private void iniciaCategorias(){
+	private void iniciaValoresCategoria(){
 		List<MetaMensal> arrayMetaMensalTemp = new ArrayList<MetaMensal>();
 		List<Categoria> arrayCategoriaTemp = new ArrayList<Categoria>();
 		try {
