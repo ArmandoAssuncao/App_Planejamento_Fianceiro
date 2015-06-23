@@ -17,10 +17,10 @@ import classes.Renda;
  * 
  * @see PlanejamentoFinanceiroDAO
  */
-public abstract class RendaDAO extends PlanejamentoFinanceiroDAO {
+public class RendaDAO extends PlanejamentoFinanceiroDAO {
 
 	/** Insere um objeto <code>Renda</code> no banco de dados
-	 * @param renda <code>Renda</code> que será inserido no banco de dados
+	 * @param renda <code>Renda</code> que será inserida no banco de dados
 	 * @return <code>int</code> com o resultado da inserção. Este valor é uma constante definida na classe <code>BancoDeDados</code>
 	 * 
 	 * @see Renda
@@ -29,13 +29,13 @@ public abstract class RendaDAO extends PlanejamentoFinanceiroDAO {
 	 * @see BancoDeDados#RESULTADO_ERRO_BANCO_DADOS
 	 * @see BancoDeDados#RESULTADO_ERRO_DESCONHECIDO
 	 */
-	protected int inserir(Renda renda){
+	public int inserir(Renda renda){
 		String descricao =  renda.getDescricao();
 		
 		String comandoInsercao = "INSERT INTO renda VALUES";
 		try{
-			if(!exists(descricao)){//Verifica se existe uma renda com a mesma descrição; //TODO
-				String comandoSql = comandoInsercao + String.format("(%s, \'%s\');", "NEXT VALUE FOR seq_renda", descricao);
+			if(!exists(descricao)){//Verifica se existe uma renda com o mesmo nome;
+				String comandoSql = comandoInsercao + String.format("(%s, \'%s\');", "NEXT VALUE FOR seq_renda", descricao); 
 				try {
 					this.executaUpdate(comandoSql);
 				} catch (SQLException e) {
@@ -59,10 +59,17 @@ public abstract class RendaDAO extends PlanejamentoFinanceiroDAO {
 	/**
 	 * Atualiza os dados da renda no banco de dados.
 	 * @param renda <code>Renda</code> que será sobrescrita no banco de dados.
-	 * @param id <code>int</code> com o id da renda no banco de dados.
+	 * @param descricao <code>String</code> com a descrição da renda no banco de dados.
 	 * @return <code>true</code> se os dados foram atualizados, <code>false</code> em caso constrário.
 	 */
-	public boolean atualizarDados(Renda renda, int id){
+	public boolean atualizarDados(Renda renda, String descricao){
+		int id = 0;
+		try {
+			id = getId(descricao);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
 		if (id <= 0){
 			JanelaMensagem.mostraMensagemErro(null, "ID da Renda Invalida");
 			return false;
@@ -90,7 +97,7 @@ public abstract class RendaDAO extends PlanejamentoFinanceiroDAO {
 	 * @return <code>true</code> se os dados foram removidos, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected boolean excluir(String descricao) throws SQLException{
+	public boolean excluir(String descricao) throws SQLException{
 		this.abreConexao();
 		
 		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(descricao);
@@ -105,11 +112,11 @@ public abstract class RendaDAO extends PlanejamentoFinanceiroDAO {
 	
 	/**
 	 * Verifica se existe uma renda com a descrição indicada no banco de dados.
-	 * @param descricao <code>String</code> com a descrição da renda.
+	 * @param descricao <code>String</code> com a descrição da renda a ser removida.
 	 * @return <code>true</code> se a renda existe, <code>false</code> em caso constrário.
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected boolean exists(String descricao) throws SQLException{
+	public boolean exists(String descricao) throws SQLException{
 		int contagem = 0;
 		this.abreConexao();
 		
@@ -129,12 +136,12 @@ public abstract class RendaDAO extends PlanejamentoFinanceiroDAO {
 	}
 	
 	/**
-	 * Pesquisa renda pela descrição
+	 * Pesquisa renda pela descricao
 	 * @param descricao <code>String</code> com a descrição da <code>Renda</code> a ser pesquisada. 
-	 * @return {@code List<Renda>} com as rendas que tem na descrição a descrição especificada
+	 * @return {@code List<Renda>} com as rendas que tem na descrição a descrição especificado
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected static List<Renda> pesquisar(String descricao) throws SQLException{
+	/*public static List<Renda> pesquisar(String descricao) throws SQLException{
 		List<Renda> rendas = new ArrayList<Renda>();
 		
 		BANCO_DE_DADOS_PF.abreConexao();
@@ -157,27 +164,50 @@ public abstract class RendaDAO extends PlanejamentoFinanceiroDAO {
 		
 		BANCO_DE_DADOS_PF.fechaConexao();
 		return rendas;
-	}//pesquisar
+	}//pesquisar*/
+	
+	/**
+	 * Retorna todas as entradas da tabela renda.
+	 * @return {@code List<Renda>} com todas as rendas da tabela
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public static List<Renda> todasAsRendas() throws SQLException{
+		List<Renda> rendas = new ArrayList<Renda>();
+		
+		BANCO_DE_DADOS_PF.abreConexao();
+		
+		String comandoSql = "SELECT * FROM renda";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
+		
+		while(resultadoQuery.next()){
+			//int idRenda = resultadoQuery.getInt("idRenda");
+			String descricao = resultadoQuery.getString("descricao");
+			
+			rendas.add(new Renda(descricao));
+		}//while
+		
+		BANCO_DE_DADOS_PF.fechaConexao();
+		return rendas;
+	}
 
 	/**
 	 *   Retorna o id da renda no banco de dados
-	 * @param descricao <code>String</code> com a descrição da renda
+	 * @param descricao descrição <code>String</code> com a descrição da renda
 	 * @return <code>int</code> com o id da renda no banco de dados, caso não encontre retorna <code>0</code>
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	protected int getId(String descricao) throws SQLException{
+	public int getId(String descricao) throws SQLException{
 		int id = 0;
 		
 		this.abreConexao();
 		String comandoSql = "SELECT idRenda FROM renda WHERE descricao=\'" + descricao + "\'";
 		ResultSet resultadoQuery = this.executaQuery(comandoSql);
 		
-		resultadoQuery.next();
-		id = resultadoQuery.getInt(1); //valor da coluna um, unica coluna
+		if(resultadoQuery.next())
+			id = resultadoQuery.getInt(1); //valor da coluna um, unica coluna
 		
 		this.fechaConexao();
 		
 		return id;
 	}
-
 }//class BDRenda

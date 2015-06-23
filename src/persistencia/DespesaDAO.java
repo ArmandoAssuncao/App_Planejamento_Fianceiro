@@ -21,7 +21,7 @@ import classes.Despesa;
  * @see PlanejamentoFinanceiroDAO
  *
  */
-public abstract class DespesaDAO extends PlanejamentoFinanceiroDAO {
+public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 
 	/**
 	 * Insere um objeto Despesa no banco de dados.
