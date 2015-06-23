@@ -6,17 +6,17 @@ import java.awt.Window;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+
 import javax.swing.border.BevelBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
+
 import java.awt.Color;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.SoftBevelBorder;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 public class PainelGraficos extends JPanel {
@@ -60,6 +60,22 @@ public class PainelGraficos extends JPanel {
 	private void criaPainelDeGraficos(){
 		final int TAM_X = 500;
 		final int TAM_Y = 130;
+		
+		// cria o conjunto de dados
+		DefaultCategoryDataset ds = new DefaultCategoryDataset();
+		ds.addValue(40.5, "maximo", "dia 1");
+		ds.addValue(38.2, "maximo", "dia 2");
+		ds.addValue(37.3, "maximo", "dia 3");
+		ds.addValue(31.5, "maximo", "dia 4");
+		ds.addValue(35.7, "maximo", "dia 5");
+		ds.addValue(42.5, "maximo", "dia 6");
+
+		// cria o gráfico
+		JFreeChart grafico = ChartFactory.createLineChart("Meu Grafico", "Dia", 
+		    "Valor", ds, PlotOrientation.VERTICAL, true, true, false);
+		
+		grafico.setBackgroundPaint(new Color(240,240,240));
+		painelDeGraficos.add(new ChartPanel(grafico));
 		
 		painelDeGraficos.setPreferredSize(new Dimension(TAM_X, TAM_Y));
 	}
