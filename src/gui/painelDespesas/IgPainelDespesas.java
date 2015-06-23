@@ -52,7 +52,7 @@ public class IgPainelDespesas extends JPanel{
 	JLabel labelValorTotalDespesasPorcentagemValor;
 	
 	public IgPainelDespesas(Window framePrincipal) {
-		setLayout(new BorderLayout(0,5));
+		setLayout(new BorderLayout(0,3));
 		
 		trataEventosDespesas = new TEPainelDespesas(this, framePrincipal);
 		iniciaElementos();
