@@ -10,6 +10,8 @@ import java.util.Calendar;
  */
 public class Despesa {
 	private int idDespesa;
+	private int idCategoria;
+	private int idFormaPagamento;
 	private String descricao;
 	private Calendar dataDespesa;
 	private Calendar dataPagamento;
@@ -37,9 +39,11 @@ public class Despesa {
 	 * @param numeroCheque <code>String</code> caso este tenha sido utilizado.
 	 * @param valorDespesa <code>double</code> com o valor gasto com a despesa.
 	 * @param numeroParcelas <code>int</code> caso o pagamento tenha sido parcelado.
+	 * @param idCategoria <code>int</code> com o id da Categoria.
+	 * @param idFormaPagamento <code>int</code> com o id da forma de pagamento.
 	 */
 	public Despesa(int idDespesa, String descricao, Calendar dataDespesa, Calendar dataPagamento, String numeroCheque,
-				   double valorDespesa, int numeroParcelas) {
+				   double valorDespesa, int numeroParcelas,int idCategoria,int idFormaPagamento) {
 		this.idDespesa = idDespesa;
 		this.descricao = descricao;
 		this.dataDespesa = dataDespesa;
@@ -47,6 +51,8 @@ public class Despesa {
 		this.numeroCheque = numeroCheque;
 		this.valorDespesa = valorDespesa;
 		this.numeroParcelas = numeroParcelas;
+		this.idCategoria = idCategoria;
+		this.idFormaPagamento = idFormaPagamento;
 	}//Despesa()
 	
 
@@ -179,4 +185,36 @@ public class Despesa {
 				 ", Número do Cheque " + numeroCheque + String.format(", Valor da despesa: R$%1.2f", valorDespesa) + 
 				 ", Número de Parcelas: " + numeroParcelas;
 	}//toString()
+
+	/**
+	 * Retorna o id da Categoria.
+	 * @return um <code>int</code> com o id da Categoria.
+	 */
+	public int getIdCategoria() {
+		return idCategoria;
+	}
+
+	/**
+	 * Atribui o id da categoria no objeto Despesa com o inteiro recebido como parâmetro.
+	 * @param idCategoria <code>int</code> com o identificador da categoria.
+	 */
+	public void setIdCategoria(int idCategoria) {
+		this.idCategoria = idCategoria;
+	}
+
+	/**
+	 * Retorna o id da Forma de Pagamento.
+	 * @return um <code>int</code> com o id da Forma de Pagamento.
+	 */
+	public int getIdFormaPagamento() {
+		return idFormaPagamento;
+	}
+
+	/**
+	 * Atribui a forma de pagamento como parâmetro.
+	 * @param idFormaPagamento <code>int</code> identificador da forma de pagamento.
+	 */
+	public void setIdFormaPagamento(int idFormaPagamento) {
+		this.idFormaPagamento = idFormaPagamento;
+	}
 }//class Despesa
