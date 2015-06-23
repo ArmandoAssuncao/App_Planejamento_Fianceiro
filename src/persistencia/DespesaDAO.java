@@ -170,7 +170,7 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 		try {
 			while(resultadoQuery.next()){
 				novaDescricao = resultadoQuery.getString("descricao");
-			//	int idDespesa = resultadoQuery.getInt("idDespesa");
+				int idDespesa = resultadoQuery.getInt("idDespesa");
 			//	int idCategoria = resultadoQuery.getInt("idCategoria");
 				Calendar dataDespesa = Converte.stringToCalendar(resultadoQuery.getString("dataDespesa"));
 				Calendar dataPagamento = Converte.stringToCalendar(resultadoQuery.getString("dataPagamento"));
@@ -179,7 +179,7 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 				double valor = resultadoQuery.getDouble("valor");
 				int numeroDeParcelas = resultadoQuery.getInt("numeroDeParcelas");
 				
-				despesas.add(new Despesa(novaDescricao, dataDespesa, dataPagamento, numeroCheque, valor, numeroDeParcelas));
+				despesas.add(new Despesa(idDespesa, novaDescricao, dataDespesa, dataPagamento, numeroCheque, valor, numeroDeParcelas));
 			}//while
 		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
@@ -227,7 +227,7 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 		try {
 			while(resultadoQuery.next()){
 				String descricao = resultadoQuery.getString("descricao");
-			//	int idDespesa = resultadoQuery.getInt("idDespesa");
+				int idDespesa = resultadoQuery.getInt("idDespesa");
 			//	int idCategoria = resultadoQuery.getInt("idCategoria");
 				Calendar dataDespesa = Converte.stringToCalendar(resultadoQuery.getString("dataDespesa"));
 				Calendar dataPagamento = Converte.stringToCalendar(resultadoQuery.getString("dataPagamento"));
@@ -236,7 +236,7 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 				double valor = resultadoQuery.getDouble("valor");
 				int numeroDeParcelas = resultadoQuery.getInt("numeroDeParcelas");
 				
-				despesas.add(new Despesa(descricao, dataDespesa, dataPagamento, numeroCheque, valor, numeroDeParcelas));
+				despesas.add(new Despesa(idDespesa, descricao, dataDespesa, dataPagamento, numeroCheque, valor, numeroDeParcelas));
 			}//while
 		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();

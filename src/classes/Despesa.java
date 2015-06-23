@@ -9,6 +9,7 @@ import java.util.Calendar;
  *
  */
 public class Despesa {
+	private int idDespesa;
 	private String descricao;
 	private Calendar dataDespesa;
 	private Calendar dataPagamento;
@@ -29,15 +30,17 @@ public class Despesa {
 	/**
 	 * Construtor sobrecarregado da classe Despesa. Recebe como argumento os seguintes parâmetros.
 	 * 
-	 * @param descricao <code>String</code> com a nova descrição da categoria
+	 * @param idDespesa <code>int</code> com o id da despesa
+	 * @param descricao <code>String</code> com a descrição da despesa
 	 * @param dataDespesa <code>Calendar</code> com a data da despesa. 
 	 * @param dataPagamento <code>Calendar</code> com a data em que o pagamento foi realizado.
 	 * @param numeroCheque <code>String</code> caso este tenha sido utilizado.
 	 * @param valorDespesa <code>double</code> com o valor gasto com a despesa.
 	 * @param numeroParcelas <code>int</code> caso o pagamento tenha sido parcelado.
 	 */
-	public Despesa(String descricao, Calendar dataDespesa, Calendar dataPagamento, String numeroCheque,
+	public Despesa(int idDespesa, String descricao, Calendar dataDespesa, Calendar dataPagamento, String numeroCheque,
 				   double valorDespesa, int numeroParcelas) {
+		this.idDespesa = idDespesa;
 		this.descricao = descricao;
 		this.dataDespesa = dataDespesa;
 		this.dataPagamento = dataPagamento;
@@ -46,7 +49,23 @@ public class Despesa {
 		this.numeroParcelas = numeroParcelas;
 	}//Despesa()
 	
+
+	/**
+	 * Retorna o id da despesa
+	 * @return um <code>int</code> com o id da despesa
+	 */
+	public int getIdDespesa() {
+		return idDespesa;
+	}
+
 	
+	/** Define o id da despesa
+	 * @param idDespesa <code>int</code> com o id da despesa
+	 */
+	public void setIdDespesa(int idDespesa) {
+		this.idDespesa = idDespesa;
+	}
+
 	/**
 	 * Retorna a descrição da despesa
 	 * @return uma <code>String</code> com a descrição da despesa
@@ -148,7 +167,8 @@ public class Despesa {
 	 */
 	@Override
 	public String toString() {
-		return "Descrição: "+ descricao							 + String.format(", Data da despesa: %02d/%02d/%04d", 
+		return "ID: " + idDespesa + ", descricao:" + descricao +			
+																String.format(", Data da despesa: %02d/%02d/%04d", 
 																			dataDespesa.get(Calendar.DAY_OF_MONTH),
 																			dataDespesa.get(Calendar.MONTH) + 1, 
 																			dataDespesa.get(Calendar.YEAR)) + 
