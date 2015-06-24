@@ -49,6 +49,10 @@ public class JanelaCriarCategoria extends JDialog{
 	private JTextField textFieldDescricao;
 	private JTextField textFieldMeta;
 
+	/**
+	 * Cria uma instância do <code>JDialog</code> 
+	 * @param igPainelDespesas <code>JPanel</code> com parte do conteúdo da janela. //TODO revisar comentario
+	 */
 	public JanelaCriarCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
 		
@@ -67,6 +71,10 @@ public class JanelaCriarCategoria extends JDialog{
 		setVisible(true);
 	}//construtor
 	
+	/**
+	 * Cria o painel principal do <code>JDialog</code>.
+	 * @return retorna o painel criado.
+	 */
 	private JPanel criaPainelPrincipal(){
 		painelPrincipal.setLayout(new BorderLayout(0, 0));
 		
@@ -79,6 +87,10 @@ public class JanelaCriarCategoria extends JDialog{
 		return painelPrincipal;
 	}
 	
+	/**
+	 * Criao o painel de título do <code>JDialog</code>
+	 * @return retorna o painel criado.
+	 */
 	private JPanel criaPainelTitulo(){
 		final int TAM_X = this.getWidth();
 		final int TAM_Y = 70;
@@ -100,6 +112,10 @@ public class JanelaCriarCategoria extends JDialog{
 		return painelTitulo;
 	}
 	
+	/**
+	 * Cria o painel para armazenar os campos do <code>JDialog</code>
+	 * @return retorna o painel criado.
+	 */
 	private JPanel criaPainelCampos(){
 		final int TAM_X = this.getWidth();
 		final int TAM_Y = 400;
@@ -167,6 +183,9 @@ public class JanelaCriarCategoria extends JDialog{
 		return painelCampos;
 	}
 	
+	/**
+	 * Inicia as variáveis de instância do <code>JDialog</code>
+	 */
 	private void iniciaElementos(){
 		painelPrincipal = new JPanel();
 		painelCampos = new JPanel();
@@ -182,6 +201,9 @@ public class JanelaCriarCategoria extends JDialog{
 		textFieldMeta = new JTextField();
 	}
 	
+	/**
+	 * Libera os recursos alocados para as variáveis de instância da classe
+	 */
 	private void liberaElementos(){
 		painelPrincipal = null;
 		painelCampos = null;
@@ -197,11 +219,18 @@ public class JanelaCriarCategoria extends JDialog{
 		textFieldMeta = null;
 	}
 	
+	/**
+	 * Libera os recursos alocados para a janela.
+	 */
 	public void finalizaJanelaCategoria(){
 		liberaElementos();
 		dispose();
 	}
 	
+	/**
+	 * Valida os campos digitados pelo usuário.
+	 * @return <code>true</code> se os dados estão corretos, <code>fase</code> caso contrário
+	 */
 	public boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		
