@@ -22,10 +22,13 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import persistencia.CategoriaDAO;
+import persistencia.DespesaDAO;
 import persistencia.MetaMensalDAO;
 import classes.Categoria;
+import classes.Despesa;
 import classes.MetaMensal;
 import eventos.painelDespesa.TEPainelDespesas;
+import funcoes.Converte;
 
 public class IgPainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
@@ -72,7 +75,6 @@ public class IgPainelDespesas extends JPanel{
 		setVisible(true);
 	}
 
-	
 	private void criaPainelBotoes(){
 		final int TAM_X = 200;
 		final int TAM_Y = 400;
@@ -174,7 +176,6 @@ public class IgPainelDespesas extends JPanel{
 		painelBotoes.setBackground(Color.WHITE);
 		painelBotoes.setVisible(true);
 	}
-	
 	
 	private void criaPainelTitulo(){
 		final int TAM_X = 500;
@@ -334,6 +335,7 @@ public class IgPainelDespesas extends JPanel{
 	private void iniciaValoresCategoria(){
 		List<MetaMensal> arrayMetaMensalTemp = new ArrayList<MetaMensal>();
 		List<Categoria> arrayCategoriaTemp = new ArrayList<Categoria>();
+		
 		try {
 			arrayCategoriaTemp = CategoriaDAO.todasAsCategorias();
 			arrayMetaMensalTemp = MetaMensalDAO.todasAsMetasMensais();
@@ -349,13 +351,17 @@ public class IgPainelDespesas extends JPanel{
 		
 		if(abasCategoria.getNumeroDeAbas() > 0)
 			abasCategoria.setSelectedIndex(0);
-	}
+	
+	}//iniciaValoresCategoria()
 	
 	//cria uma nova categoria
 	public boolean criarCategoria(Categoria categoria){
 		if( abasCategoria.criarCategoria(categoria.getDescricao())){
 			arrayCategoria.add(categoria);
 			abasCategoria.setSelectedIndex(abasCategoria.getNumeroDeAbas()-1);
+			
+			//Adiciona as linhas da tabela.
+			adicionarLinhasTabela(categoria.getDescricao());
 			
 			atualizaPainelTitulo();
 			return true;
@@ -364,6 +370,23 @@ public class IgPainelDespesas extends JPanel{
 			return false;
 	}
 	
+	//TODO nao funciona?
+	private void adicionarLinhasTabela(String descricaoCategoria) {
+		try {
+			List<Despesa> arrayDespesasTemp = new ArrayList<Despesa>();
+			int idCategoria = new Categoria().getId(descricaoCategoria);
+			
+			for(Despesa d : arrayDespesasTemp){
+				if(d.getIdCategoria() == idCategoria)
+					abasCategoria.getTabela().
+					adicionaLinha(d.getDescricao(), String.format("%f", d.getValorDespesa()), Converte.calendarToString(d.getDataDespesa()), Converte.calendarToString(d.getDataPagamento()), Integer.toString(d.getIdFormaPagamento()),Integer.toString(d.getNumeroParcelas()), d.getNumeroCheque());
+			}//for
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}//adicionarLinhasTabela
+
 	public boolean editarCategoria(Categoria categoria){
 		if( abasCategoria.editarCategoria(categoria.getDescricao())){
 			arrayCategoria.set(abasCategoria.getSelectedIndex(), categoria);
@@ -387,6 +410,7 @@ public class IgPainelDespesas extends JPanel{
 		return false;
 	}
 	
+	// Getters e setters
 	public JButton getBotaoNovaCategoria() {
 		return botaoNovaCategoria;
 	}

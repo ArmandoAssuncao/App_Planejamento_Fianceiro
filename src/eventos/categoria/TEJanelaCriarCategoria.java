@@ -13,15 +13,33 @@ import gui.JanelaMensagem;
 import gui.categoria.JanelaCriarCategoria;
 import gui.painelDespesas.IgPainelDespesas;
 
+/**
+ * Classe para tratar os eventos da janela Criar Categoria.
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ *@see ActionListener
+ */
 public class TEJanelaCriarCategoria  implements ActionListener{
 	private JanelaCriarCategoria janelaCriarCategoria;
 	private IgPainelDespesas igPainelDespesas;
 	
+	/**
+	 * Cria uma instância do tratador de eventos da janela.
+	 * 
+	 * @param janelaCriarCategoria janela de onde vem os eventos.
+	 * @param igPainelDespesas painel interno da janela //TODO está certo?
+	 */
 	public TEJanelaCriarCategoria(JanelaCriarCategoria janelaCriarCategoria, IgPainelDespesas igPainelDespesas) {
 		this.janelaCriarCategoria = janelaCriarCategoria;
 		this.igPainelDespesas = igPainelDespesas;
 	}
-
+	
+	/**
+	 * Trata os eventos de clique da janela.
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		//botão Criar
@@ -37,7 +55,8 @@ public class TEJanelaCriarCategoria  implements ActionListener{
 					if(!categoriaDAO.exists(categoria.getDescricao()) && !metaMensalDAO.exists(metaMensal.getMesAnoMeta(), categoria.getDescricao())){
 						if(categoriaDAO.inserir(categoria) == BancoDeDados.RESULTADO_SUCESSO &&
 							metaMensalDAO.inserir(metaMensal, categoria.getDescricao()) == BancoDeDados.RESULTADO_SUCESSO){
-							System.out.println("salvou no banco");//TODO
+							
+							System.out.println("salvou no banco");//TODO apagar
 							
 							igPainelDespesas.criarCategoria(categoria);
 							
@@ -59,6 +78,5 @@ public class TEJanelaCriarCategoria  implements ActionListener{
 		else if(event.getSource() == janelaCriarCategoria.getBotaoCancelar()){
 			janelaCriarCategoria.finalizaJanelaCategoria();
 		}
-		
 	}//actionPerformed()
 }

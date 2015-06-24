@@ -55,7 +55,26 @@ public class Despesa {
 		this.idFormaPagamento = idFormaPagamento;
 	}//Despesa()
 	
-
+	/**
+	 * Retorna uma referência em String contendo as informações da despesa.
+	 * @return um <code>String</code> com as informações da despesa.
+	 */
+	@Override
+	public String toString() {
+		return "ID: " + idDespesa + ", descricao:" + descricao +			
+																String.format(", Data da despesa: %02d/%02d/%04d", 
+																			dataDespesa.get(Calendar.DAY_OF_MONTH),
+																			dataDespesa.get(Calendar.MONTH) + 1, 
+																			dataDespesa.get(Calendar.YEAR)) + 
+															    String.format(", Data de pagamento: %02d/%02d/%04d" , 
+															    		    dataPagamento.get(Calendar.DAY_OF_MONTH),
+															    		    dataPagamento.get(Calendar.MONTH) + 1,
+															    		    dataPagamento.get(Calendar.YEAR)) + 
+				 ", Número do Cheque " + numeroCheque + String.format(", Valor da despesa: R$%1.2f", valorDespesa) + 
+				 ", Número de Parcelas: " + numeroParcelas;
+	}//toString()
+	
+	//Getters e setters
 	/**
 	 * Retorna o id da despesa
 	 * @return um <code>int</code> com o id da despesa
@@ -64,7 +83,6 @@ public class Despesa {
 		return idDespesa;
 	}
 
-	
 	/** Define o id da despesa
 	 * @param idDespesa <code>int</code> com o id da despesa
 	 */
@@ -166,25 +184,6 @@ public class Despesa {
 	public void setNumeroParcelas(int numeroParcelas) {
 		this.numeroParcelas = numeroParcelas;
 	}//setNumeroParcelas()
-	
-	/**
-	 * Retorna uma referência em String contendo as informações da despesa.
-	 * @return um <code>String</code> com as informações da despesa.
-	 */
-	@Override
-	public String toString() {
-		return "ID: " + idDespesa + ", descricao:" + descricao +			
-																String.format(", Data da despesa: %02d/%02d/%04d", 
-																			dataDespesa.get(Calendar.DAY_OF_MONTH),
-																			dataDespesa.get(Calendar.MONTH) + 1, 
-																			dataDespesa.get(Calendar.YEAR)) + 
-															    String.format(", Data de pagamento: %02d/%02d/%04d" , 
-															    		    dataPagamento.get(Calendar.DAY_OF_MONTH),
-															    		    dataPagamento.get(Calendar.MONTH) + 1,
-															    		    dataPagamento.get(Calendar.YEAR)) + 
-				 ", Número do Cheque " + numeroCheque + String.format(", Valor da despesa: R$%1.2f", valorDespesa) + 
-				 ", Número de Parcelas: " + numeroParcelas;
-	}//toString()
 
 	/**
 	 * Retorna o id da Categoria.

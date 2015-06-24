@@ -22,6 +22,13 @@ import eventos.categoria.TEJanelaCriarCategoria;
 import funcoes.Converte;
 import gui.painelDespesas.IgPainelDespesas;
 
+/**
+ * Cria uma GUI para a obtenção dos atributos de uma <code>Categoria</code>. 
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ */
 public class JanelaCriarCategoria extends JDialog{
 	private final String TITULO_JANELA= "Nova Categoria";
 	private final int TAM_JANELA_X = 500;
@@ -53,12 +60,12 @@ public class JanelaCriarCategoria extends JDialog{
 		
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setSize(TAM_JANELA_X, TAM_JANELA_Y);
-		setBackground(Color.PINK);
-		setLocationRelativeTo(null);
+		setBackground(Color.PINK);   //TODO apagar
+		setLocationRelativeTo(igPainelDespesas);
 		setResizable(false);
 		setModal(true);
 		setVisible(true);
-	}
+	}//construtor
 	
 	private JPanel criaPainelPrincipal(){
 		painelPrincipal.setLayout(new BorderLayout(0, 0));
@@ -71,7 +78,6 @@ public class JanelaCriarCategoria extends JDialog{
 		
 		return painelPrincipal;
 	}
-	
 	
 	private JPanel criaPainelTitulo(){
 		final int TAM_X = this.getWidth();
@@ -93,7 +99,6 @@ public class JanelaCriarCategoria extends JDialog{
 		
 		return painelTitulo;
 	}
-	
 	
 	private JPanel criaPainelCampos(){
 		final int TAM_X = this.getWidth();
@@ -214,7 +219,7 @@ public class JanelaCriarCategoria extends JDialog{
 			labelErroCampo.setText("O campo \"Nome\" tem que iniciar com uma letra");
 			return false;
 		}
-		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-]")){
+		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-s]")){
 			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
 			return false;
 		}
@@ -228,37 +233,20 @@ public class JanelaCriarCategoria extends JDialog{
 			labelErroCampo.setText("O campo \"Meta\" não pode ter mais que 5 caracteres.");
 			return false;
 		}
-		else if(!ValidarDados.validarInicioString(meta, "[0-9]")){
-			labelErroCampo.setText("O campo \"Meta\" deve iniciar com um número.");
-			return false;
-		}
-		else if(!ValidarDados.validarFimString(meta, "[0-9]")){
-			labelErroCampo.setText("O campo \"Meta\" deve terminar com um n�mero.");
-			return false;
-		}
+//		else if(!ValidarDados.validarInicioString(meta, "[0-9]")){
+//			labelErroCampo.setText("O campo \"Meta\" deve iniciar com um número.");
+//			return false;
+//		}
+//		else if(!ValidarDados.validarFimString(meta, "[0-9]")){
+//			labelErroCampo.setText("O campo \"Meta\" deve terminar com um n�mero.");
+//			return false;
+//		}
 		if(!ValidarDados.validarNumeroDouble(meta)){
-			labelErroCampo.setText("O campo \"Meta\" só aceita números e um \".\"");
+			labelErroCampo.setText("O campo \"Meta\" só aceita números. Se precisar, use um ponto(\".\") como separador.");
 			return false;
 		}
 		
 		return true;
-	}
-	
-	
-	public JButton getBotaoCriar() {
-		return botaoCriar;
-	}
-
-	public JButton getBotaoCancelar() {
-		return botaoCancelar;
-	}
-
-	public JTextField getTextFieldDescricao() {
-		return textFieldDescricao;
-	}
-
-	public JTextField getTextFieldMeta() {
-		return textFieldMeta;
 	}
 	
 	public Categoria retornaCategoria(){
@@ -285,5 +273,21 @@ public class JanelaCriarCategoria extends JDialog{
 		
 		return categoria;
 	}
-	
+
+	// Getters e setters
+	public JButton getBotaoCriar() {
+		return botaoCriar;
+	}
+
+	public JButton getBotaoCancelar() {
+		return botaoCancelar;
+	}
+
+	public JTextField getTextFieldDescricao() {
+		return textFieldDescricao;
+	}
+
+	public JTextField getTextFieldMeta() {
+		return textFieldMeta;
+	}	
 }

@@ -40,8 +40,8 @@ public class AbasCategoria extends JTabbedPane{
 		tabela = new TabelaDaCategoria();
 		barraRolagem = new JScrollPane();
 		
-		for(int i = 0; i < 20; i++) //TODO APAGAR/////////////////////////////////////////////////
-			tabela.adicionaLinha(nomeCategoria + " " + i, "10000.0", "20/11/2015", "1", "1", "1", "1");
+	//	for(int i = 0; i < 20; i++) //TODO APAGAR/////////////////////////////////////////////////
+	//		tabela.adicionaLinha(nomeCategoria + " " + i, "10000.0", "20/11/2015", "1", "1", "1", "1");
 		
 		barraRolagem.setViewportView(tabela);
 		
@@ -130,6 +130,14 @@ public class AbasCategoria extends JTabbedPane{
 		JViewport viewport = conteudo.getViewport();
 		TabelaDaCategoria tabela = (TabelaDaCategoria)viewport.getView();
 		
+		return tabela;
+	}
+
+	/**
+	 * Retorna uma referência da tabela da aba da categoria.
+	 * @return referência da tabela da aba da categoria.
+	 */
+	public TabelaDaCategoria getTabela() {
 		return tabela;
 	}
 	

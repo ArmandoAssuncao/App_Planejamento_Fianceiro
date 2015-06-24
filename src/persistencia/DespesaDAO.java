@@ -191,7 +191,7 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 	 * @return {@code List<Despesa>} com todas as despesas da tabela
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	public List<Despesa> todasAsDespesas() throws SQLException{
+	public static List<Despesa> todasAsDespesas() throws SQLException{
 		List<Despesa> despesas = new ArrayList<Despesa>();
 		BANCO_DE_DADOS_PF.abreConexao();
 		
