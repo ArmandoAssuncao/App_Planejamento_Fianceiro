@@ -219,7 +219,7 @@ public class JanelaCriarCategoria extends JDialog{
 			labelErroCampo.setText("O campo \"Nome\" tem que iniciar com uma letra");
 			return false;
 		}
-		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-s]")){
+		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-]")){
 			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
 			return false;
 		}
