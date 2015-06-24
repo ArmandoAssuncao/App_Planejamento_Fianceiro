@@ -14,7 +14,7 @@ import classes.RendaMensal;
  * @author Richardson William
  *
  */
-public class Renda extends RendaDAO{
+public class Renda{
 	private String descricao;
 	
 	private RendaMensal rendaMensal;

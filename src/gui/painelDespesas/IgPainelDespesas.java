@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.awt.Window;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -23,6 +24,7 @@ import javax.swing.event.ChangeListener;
 
 import persistencia.CategoriaDAO;
 import persistencia.DespesaDAO;
+import persistencia.FormaPagamentoDAO;
 import persistencia.MetaMensalDAO;
 import classes.Categoria;
 import classes.Despesa;
@@ -344,15 +346,60 @@ public class IgPainelDespesas extends JPanel{
 			e.printStackTrace();
 		}
 		
+		//Inicializa as abas das categoria
 		for(int indice = 0; indice < arrayMetaMensalTemp.size(); indice++){
 			arrayCategoriaTemp.get(indice).setMetaMensal(arrayMetaMensalTemp.get(indice));
 			criarCategoria(arrayCategoriaTemp.get(indice));
 		}
 		
+		String descricaoCategoria;
+		for(int indice = 0; indice < arrayMetaMensalTemp.size(); indice++){
+			descricaoCategoria = arrayCategoriaTemp.get(indice).getDescricao();
+			iniciaValoresDespesa(descricaoCategoria);
+		}
+
 		if(abasCategoria.getNumeroDeAbas() > 0)
 			abasCategoria.setSelectedIndex(0);
 	
 	}//iniciaValoresCategoria()
+	
+	private void iniciaValoresDespesa(String descricaoCategoria){
+		List<Despesa> arrayDespesasTemp = new ArrayList<Despesa>();
+		int idCategoria;
+		String descricao;
+		String dataDespesa;
+		String dataPagamento;
+		String numeroCheque;
+		String valorDespesa;
+		String numeroParcelas;
+		String formaPagamento;
+		
+		try {
+			arrayDespesasTemp = DespesaDAO.todasAsDespesas();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//Inicializa as despesas da categoria
+		try {
+			for(Despesa d : arrayDespesasTemp){
+				idCategoria = new CategoriaDAO().getId(descricaoCategoria);
+				descricao = d.getDescricao();
+				dataDespesa = Converte.calendarToString(d.getDataDespesa());
+				dataPagamento = Converte.calendarToString(d.getDataPagamento());
+				numeroCheque = d.getNumeroCheque();
+				valorDespesa = Double.toString(d.getValorDespesa());
+				numeroParcelas = Integer.toString(d.getNumeroParcelas());
+				formaPagamento = new FormaPagamentoDAO().getDescricao(d.getIdFormaPagamento());
+				
+				if(d.getIdCategoria() == idCategoria)
+					abasCategoria.criarDespesa(descricaoCategoria, descricao, valorDespesa, dataDespesa, dataPagamento, formaPagamento, numeroParcelas, numeroCheque);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	//cria uma nova categoria
 	public boolean criarCategoria(Categoria categoria){
@@ -360,32 +407,12 @@ public class IgPainelDespesas extends JPanel{
 			arrayCategoria.add(categoria);
 			abasCategoria.setSelectedIndex(abasCategoria.getNumeroDeAbas()-1);
 			
-			//Adiciona as linhas da tabela.
-			adicionarLinhasTabela(categoria.getDescricao());
-			
 			atualizaPainelTitulo();
 			return true;
 		}
 		else
 			return false;
 	}
-	
-	//TODO nao funciona?
-	private void adicionarLinhasTabela(String descricaoCategoria) {
-		try {
-			List<Despesa> arrayDespesasTemp = new ArrayList<Despesa>();
-			int idCategoria = new Categoria().getId(descricaoCategoria);
-			
-			for(Despesa d : arrayDespesasTemp){
-				if(d.getIdCategoria() == idCategoria)
-					abasCategoria.getTabela().
-					adicionaLinha(d.getDescricao(), String.format("%f", d.getValorDespesa()), Converte.calendarToString(d.getDataDespesa()), Converte.calendarToString(d.getDataPagamento()), Integer.toString(d.getIdFormaPagamento()),Integer.toString(d.getNumeroParcelas()), d.getNumeroCheque());
-			}//for
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}//adicionarLinhasTabela
 
 	public boolean editarCategoria(Categoria categoria){
 		if( abasCategoria.editarCategoria(categoria.getDescricao())){

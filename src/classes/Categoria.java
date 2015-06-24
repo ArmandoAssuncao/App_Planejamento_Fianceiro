@@ -12,7 +12,7 @@ import persistencia.CategoriaDAO;
  * @author Richardson William
  *
  */
-public class Categoria extends CategoriaDAO{
+public class Categoria{
 	private String descricao;
 	
 	private MetaMensal metaMensal;
