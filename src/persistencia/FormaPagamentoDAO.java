@@ -190,7 +190,7 @@ public class FormaPagamentoDAO extends PlanejamentoFinanceiroDAO {
 
 	/**
 	 *   Retorna o id da forma_pagamento no banco de dados
-	 * @param descricao descrição <code>String</code> com a descrição da forma_pagamento
+	 * @param descricao <code>String</code> com a descrição da forma_pagamento
 	 * @return <code>int</code> com o id da forma_pagamento no banco de dados, caso não encontre retorna <code>0</code>
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
@@ -207,5 +207,26 @@ public class FormaPagamentoDAO extends PlanejamentoFinanceiroDAO {
 		this.fechaConexao();
 		
 		return id;
+	}
+	
+	/**
+	 *   Retorna a descrição da forma_pagamento no banco de dados
+	 * @param id <code>int</code> com o id da forma_pagamento
+	 * @return <code>String</code> com a descrição da forma_pagamento no banco de dados, caso não encontre retorna <code>null</code>
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public String getDescricao(int id) throws SQLException{
+		String descricao = null;
+		
+		this.abreConexao();
+		String comandoSql = "SELECT descricao FROM forma_pagamento WHERE idFormaPagamento=" + id;
+		ResultSet resultadoQuery = this.executaQuery(comandoSql);
+		
+		if(resultadoQuery.next())
+			descricao = resultadoQuery.getString("descricao");
+		
+		this.fechaConexao();
+		
+		return descricao;
 	}
 }//class BDFormaPagamento

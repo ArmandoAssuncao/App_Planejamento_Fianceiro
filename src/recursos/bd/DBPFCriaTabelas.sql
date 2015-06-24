@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS despesa(
     dataDespesa VARCHAR_IGNORECASE(10),
     dataPagamento VARCHAR_IGNORECASE(10),
     idFormaPagamento INTEGER NOT NULL,
-    numeroCheque INTEGER,
+    numeroCheque VARCHAR_IGNORECASE(100),
     valor DOUBLE,
     numeroDeParcelas INTEGER,
 	CONSTRAINT fk_despesa_categoria FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria) ON DELETE CASCADE,
