@@ -84,8 +84,6 @@ public class PainelGraficos extends JPanel {
 	private void criaPainelDeGraficos(){
 		final int TAM_X = 500;
 		final int TAM_Y = 130;
-
-		painelDeGraficos.add(GraficosJFreeChart.painelGraficoPizza("Grafico Pizza", new String[]{"campo1", "campo2"}, new int[]{1,2}));
 		
 		painelDeGraficos.setPreferredSize(new Dimension(TAM_X, TAM_Y));
 	}
@@ -184,6 +182,18 @@ public class PainelGraficos extends JPanel {
 		painelBotoes.setPreferredSize(new Dimension(TAM_X, TAM_Y));
 		painelBotoes.setBackground(Color.WHITE);
 		painelBotoes.setVisible(true);
+	}
+	
+	public void adicionarGrafico(String tituloGrafico, String[] campos, int[] valores, int tipoGrafico){
+		painelDeGraficos.removeAll();
+		if(tipoGrafico == 1)
+			painelDeGraficos.add(GraficosJFreeChart.painelGraficoPizza(tituloGrafico, campos, valores));
+		else if(tipoGrafico == 2)
+			painelDeGraficos.add(GraficosJFreeChart.painelGraficoBarra(tituloGrafico, campos, valores));
+		else if(tipoGrafico == 3)
+			painelDeGraficos.add(GraficosJFreeChart.painelGraficoBarra(tituloGrafico, campos, valores));
+		
+		painelDeGraficos.revalidate();
 	}
 
 	public JButton getBotaoBalancoTotal() {

@@ -22,12 +22,16 @@ public class TEPainelGraficos implements ActionListener{
 		else if(e.getSource() == painelGraficos.getBotaoBalancoDespesa()){
 		}
 		else if(e.getSource() == painelGraficos.getBotaoGraficoPizzaTotal()){
+			painelGraficos.adicionarGrafico("titulo Pizza", new String[]{"campo1", "campo2"}, new int[]{1,2}, 1);
 		}
 		else if(e.getSource() == painelGraficos.getBotaoGraficoBarraCategoria()){
+			painelGraficos.adicionarGrafico("titulo Barra", new String[]{"campo1", "campo2"}, new int[]{1,2}, 2);
 		}
 		else if(e.getSource() == painelGraficos.getBotaoGraficoLinhaMetaMensal()){
+			painelGraficos.adicionarGrafico("titulo Linha", new String[]{"campo1", "campo2"}, new int[]{1,2}, 3);
 		}
 		else if(e.getSource() == painelGraficos.getBotaoGraficoPizzaFormaPagamento()){
+			painelGraficos.adicionarGrafico("titulo Pizza forma pagamento", new String[]{"campo1", "campo2"}, new int[]{1,2}, 1);
 		}
 	}
 	
