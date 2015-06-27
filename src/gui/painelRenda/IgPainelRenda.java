@@ -109,7 +109,6 @@ public class IgPainelRenda extends JPanel {
 		botaoAddRenda.setIcon(iconeNovaCategoria);
 		botaoAddRenda.setMargin(new Insets(0,-20,0,0));
 		botaoAddRenda.setHorizontalTextPosition(JButton.RIGHT);
-		botaoAddRenda.setBackground(Color.GREEN);
 		botaoAddRenda.setPreferredSize(new Dimension(150,50));
 		botaoAddRenda.addActionListener(trataEventosRenda);
 		
@@ -120,7 +119,6 @@ public class IgPainelRenda extends JPanel {
 		botaoExcluirRenda.setIcon(iconeExcluirRenda);
 		botaoExcluirRenda.setMargin(new Insets(0,-10,0,0));
 		botaoExcluirRenda.setHorizontalTextPosition(JButton.RIGHT);
-		botaoExcluirRenda.setBackground(Color.GREEN);
 		botaoExcluirRenda.setPreferredSize(new Dimension(150,50));
 		botaoExcluirRenda.addActionListener(trataEventosRenda);
 		
@@ -131,7 +129,6 @@ public class IgPainelRenda extends JPanel {
 		botaoEditarRenda.setIcon(iconeEditarRenda);
 		botaoEditarRenda.setMargin(new Insets(0,-20,0,0));
 		botaoEditarRenda.setHorizontalTextPosition(JButton.RIGHT);
-		botaoEditarRenda.setBackground(Color.GREEN);
 		botaoEditarRenda.setPreferredSize(new Dimension(150,50));
 		botaoEditarRenda.addActionListener(trataEventosRenda);
 		
