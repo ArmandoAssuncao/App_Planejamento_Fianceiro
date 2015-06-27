@@ -21,6 +21,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 import eventos.painelGraficos.TEPainelGraficos;
 
@@ -83,22 +84,8 @@ public class PainelGraficos extends JPanel {
 	private void criaPainelDeGraficos(){
 		final int TAM_X = 500;
 		final int TAM_Y = 130;
-		
-		// cria o conjunto de dados
-		DefaultCategoryDataset ds = new DefaultCategoryDataset();
-		ds.addValue(40.5, "maximo", "dia 1");
-		ds.addValue(38.2, "maximo", "dia 2");
-		ds.addValue(37.3, "maximo", "dia 3");
-		ds.addValue(31.5, "maximo", "dia 4");
-		ds.addValue(35.7, "maximo", "dia 5");
-		ds.addValue(42.5, "maximo", "dia 6");
 
-		// cria o gráfico
-		JFreeChart grafico = ChartFactory.createLineChart("Meu Grafico", "Dia", 
-		    "Valor", ds, PlotOrientation.VERTICAL, true, true, false);
-		
-		grafico.setBackgroundPaint(new Color(240,240,240));
-		painelDeGraficos.add(new ChartPanel(grafico));
+		painelDeGraficos.add(GraficosJFreeChart.painelGraficoPizza("Grafico Pizza", new String[]{"campo1", "campo2"}, new int[]{1,2}));
 		
 		painelDeGraficos.setPreferredSize(new Dimension(TAM_X, TAM_Y));
 	}
@@ -118,7 +105,7 @@ public class PainelGraficos extends JPanel {
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		
-		//botao Nova Categoria
+		//botao Banlanço mensal
 		String labelBalancoTotal = "Balanço Mensal";
 		botaoBalancoTotal.setText(labelBalancoTotal);
 		//ImageIcon iconeBalancoTotal = new ImageIcon("imagens/img_botaoNovaCategoria.png");
@@ -128,7 +115,7 @@ public class PainelGraficos extends JPanel {
 		botaoBalancoTotal.setPreferredSize(new Dimension(150,50));
 		botaoBalancoTotal.addActionListener(trataEventosGraficos);
 		
-		//botao Excluir Categoria
+		//botao Balanço mensal das despesas pela forma de pagamento
 		String labelBalancoDespesa = "<html>Balanço Mensal <br>Forma de Pagamento</html>";
 		botaoBalancoDespesa.setText(labelBalancoDespesa);
 		//ImageIcon iconeBalancoDespesa = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
@@ -138,7 +125,7 @@ public class PainelGraficos extends JPanel {
 		botaoBalancoDespesa.setPreferredSize(new Dimension(150,50));
 		botaoBalancoDespesa.addActionListener(trataEventosGraficos);
 		
-		//botao Editar Categoria
+		//botao Grafico valores da receita
 		String labelGraficoPizzaTotal = "<html>Grafico<br>Valores da Receita</html>";
 		botaoGraficoPizzaTotal.setText(labelGraficoPizzaTotal);
 		//ImageIcon iconeGraficoPizzaTotal = new ImageIcon("imagens/img_botaoEditarCategoria.png");
@@ -149,7 +136,7 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoPizzaTotal.addActionListener(trataEventosGraficos);
 		
 		
-		//Botao Nova Despesa
+		//Botao Grafico categorias
 		String labelGraficoBarraCategoria = "<html>Grafico<br>Categorias";
 		botaoGraficoBarraCategoria.setText(labelGraficoBarraCategoria);
 //		ImageIcon iconeGraficoBarraCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
@@ -159,7 +146,7 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoBarraCategoria.setPreferredSize(new Dimension(150,50));
 		botaoGraficoBarraCategoria.addActionListener(trataEventosGraficos);
 		
-		//Botao Excluir Despesa
+		//Botao Grafico Metas mensal
 		String labelGraficoLinhaMetaMensal = "<html>Grafico<br>Metas Mensal";
 		botaoGraficoLinhaMetaMensal.setText(labelGraficoLinhaMetaMensal);
 //		ImageIcon iconeGraficoLinhaMetaMensal = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
@@ -169,7 +156,7 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoLinhaMetaMensal.setPreferredSize(new Dimension(150,50));
 		botaoGraficoLinhaMetaMensal.addActionListener(trataEventosGraficos);
 		
-		//Botao Editar Despesa
+		//Botao Grafico Forma de Pagamento
 		String labelGraficoPizzaFormaPagamento = "<html>Grafico<br>Formas de Pagamento";
 		botaoGraficoPizzaFormaPagamento.setText(labelGraficoPizzaFormaPagamento);
 //		ImageIcon iconeGraficoPizzaFormaPagamento = new ImageIcon("imagens/img_botaoEditarCategoria.png");
