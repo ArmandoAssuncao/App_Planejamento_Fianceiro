@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS meta_mensal(
     idCategoria INTEGER NOT NULL,
 	mesAnoMeta VARCHAR_IGNORECASE(10),
     valor DOUBLE,
+    alerta DOUBLE,
     CONSTRAINT fk_meta_mensal_despesa FOREIGN KEY (idCategoria) REFERENCES categoria(idCategoria) ON DELETE CASCADE,
 	CONSTRAINT pk_meta_mensal PRIMARY KEY (mesAnoMeta, idCategoria)
 );

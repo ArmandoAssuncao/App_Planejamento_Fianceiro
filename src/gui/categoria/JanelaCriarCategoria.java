@@ -270,23 +270,23 @@ public class JanelaCriarCategoria extends JDialog{
 
 		//valida o campo meta
 		String meta = textFieldMeta.getText();
-		if(!ValidarDados.validarVazio(meta)){
-			return true;
-		}
-		else if(!ValidarDados.validarTamanho(meta, 5)){
+		if(!ValidarDados.validarTamanho(meta, 5)){
 			labelErroCampo.setText("O campo \"Meta\" não pode ter mais que 5 caracteres.");
 			return false;
 		}
-//		else if(!ValidarDados.validarInicioString(meta, "[0-9]")){
-//			labelErroCampo.setText("O campo \"Meta\" deve iniciar com um número.");
-//			return false;
-//		}
-//		else if(!ValidarDados.validarFimString(meta, "[0-9]")){
-//			labelErroCampo.setText("O campo \"Meta\" deve terminar com um n�mero.");
-//			return false;
-//		}
-		if(!ValidarDados.validarNumeroDouble(meta)){
+		else if(!ValidarDados.validarNumeroDouble(meta)){
 			labelErroCampo.setText("O campo \"Meta\" só aceita números. Se precisar, use um ponto(\".\") como separador.");
+			return false;
+		}
+		
+		//valida o campo meta porcentagem
+		String metaPorcentagem = textFieldMetaPorcentagem.getText();
+		if(!ValidarDados.validarTamanho(metaPorcentagem, 5)){
+			labelErroCampo.setText("O campo \"Alerta\" não pode ter mais que 5 caracteres.");
+			return false;
+		}
+		else if(!ValidarDados.validarNumeroDouble(metaPorcentagem)){
+			labelErroCampo.setText("O campo \"Alerta\" só aceita números. Se precisar, use um ponto(\".\") como separador.");
 			return false;
 		}
 		
@@ -306,6 +306,9 @@ public class JanelaCriarCategoria extends JDialog{
 		try{
 			if(!textFieldMeta.getText().equals(""))
 				metaMensal.setValor( Double.parseDouble(textFieldMeta.getText()) );
+			if(textFieldMetaPorcentagem.getText().equals(""))
+				textFieldMetaPorcentagem.setText("70");
+			metaMensal.setAlerta(Double.parseDouble(textFieldMetaPorcentagem.getText()));
 		}
 		catch(NumberFormatException e){
 			e.printStackTrace();

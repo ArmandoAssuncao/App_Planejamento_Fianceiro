@@ -35,13 +35,14 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 	public int inserir(MetaMensal metaMensal, String descricaoCategoria){
 		String mesAnoMeta = Converte.calendarToString(metaMensal.getMesAnoMeta());
 		double valor = metaMensal.getValor();
+		double alerta = metaMensal.getAlerta();
 		
 		String comandoInsercao = "INSERT INTO meta_mensal VALUES";
 		try{
 			if(!exists(metaMensal.getMesAnoMeta(), descricaoCategoria)){//Verifica se existe uma meta mensal com a mesma data e descrição de categoria;
 				int idCategoria = getId(descricaoCategoria);
 				
-				String comandoSql = comandoInsercao + "(" + idCategoria + ",\'" + mesAnoMeta + "\'," + valor + ")";
+				String comandoSql = comandoInsercao + "(" + idCategoria + ",\'" + mesAnoMeta + "\'," + valor + "," + alerta + ")";
 				try {
 					this.executaUpdate(comandoSql);
 				} catch (SQLException e) {
@@ -92,12 +93,12 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 		
 		String novoMesAnoMeta = Converte.calendarToString(novaMetaMensal.getMesAnoMeta());
 		double novoValor = novaMetaMensal.getValor();
+		double novoAlerta = novaMetaMensal.getAlerta();
 		
 		String comandoUpdate = "UPDATE meta_mensal SET ";
 		String clausulaWhere = " WHERE idCategoria=" + id + " AND mesAnoMeta=\'" + novoMesAnoMeta + "\'";
 		
-		String comandoSql = comandoUpdate + "valor=" + novoValor + clausulaWhere;
-		//String comandoSql = comandoUpdate + "mesAnoMeta=\'" + novoMesAnoMeta + "\', valor=" + novoValor + clausulaWhere;
+		String comandoSql = comandoUpdate + "valor=" + novoValor + "AND alerta=" + novoAlerta + clausulaWhere;
 		
 		try {
 			this.executaUpdate(comandoSql);
@@ -232,8 +233,9 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 			//int idCategoria = resultadoQuery.getInt("idCategoria");
 			Calendar mesAnoMeta = Converte.stringToCalendar( resultadoQuery.getString("mesAnoMeta") );
 			double valor = resultadoQuery.getDouble("valor");
+			double alerta = resultadoQuery.getDouble("alerta");
 			
-			metasMensais.add(new MetaMensal(mesAnoMeta, valor));
+			metasMensais.add(new MetaMensal(mesAnoMeta, valor, alerta));
 		}//while
 		
 		BANCO_DE_DADOS_PF.fechaConexao();

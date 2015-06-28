@@ -30,10 +30,14 @@ import classes.Despesa;
 import classes.MetaMensal;
 import eventos.painelDespesa.TEPainelDespesas;
 import funcoes.Converte;
+import gui.JanelaMensagem;
 
 public class IgPainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
 	public final int TAM_PAINEL_Y = 600;
+	
+	boolean avisoMetaTotal = false;
+	boolean avisoMetaDefinido = false;
 	
 	List<Categoria> arrayCategoria = new ArrayList<Categoria>();
 	AbasCategoria abasCategoria;
@@ -304,17 +308,23 @@ public class IgPainelDespesas extends JPanel{
 		
 		String descricao = arrayCategoria.get(abasCategoria.getSelectedIndex()).getDescricao();
 		double valorMeta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorMeta();
+		double valorAlerta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorAlerta();
 		double totalDespesasPorcentagem = (abasCategoria.getValorTotalDespesas() * 100)/valorMeta;
 		
 		if(valorMeta == 0){
 			totalDespesasPorcentagem = 0;
 		}
 		
+		avisoMetaDefinido = false;
+		avisoMetaTotal = false;
 		if(totalDespesasPorcentagem >= 100){
 			labelValorTotalDespesasPorcentagemValor.setForeground(Color.RED);
+			avisoMetaDefinido = true;
+			avisoMetaTotal = true;
 		}
-		else if(totalDespesasPorcentagem >= 70){
+		else if(totalDespesasPorcentagem >= valorAlerta){
 			labelValorTotalDespesasPorcentagemValor.setForeground(Color.YELLOW);
+			avisoMetaDefinido = true;
 		}
 		else{
 			labelValorTotalDespesasPorcentagemValor.setForeground(Color.BLACK);
@@ -442,12 +452,30 @@ public class IgPainelDespesas extends JPanel{
 		
 		if( abasCategoria.criarDespesa(nomeCategoria, descricao, valorDespesa,
 				dataDespesa, dataPagamento, formaPagamento, numeroParcelas, numeroCheque)){
+
+			exibeMsgAvisoMeta();
 			
 			atualizaPainelTitulo();
 			return true;
 		}
 		else
 			return false;
+	}
+	
+	private void exibeMsgAvisoMeta(){
+		double valorMeta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorMeta();
+		double valorAlerta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorAlerta();
+		double totalDespesasPorcentagem = (abasCategoria.getValorTotalDespesas() * 100)/valorMeta;
+		
+		if(totalDespesasPorcentagem >= 100 && !avisoMetaTotal){
+			JanelaMensagem.mostraMensagemWarning(null, "Sua(s) despesa(s) utrapassaram os 100% da meta da categoria.");
+			avisoMetaTotal = true;
+			avisoMetaDefinido = true;
+		}
+		else if(totalDespesasPorcentagem >= valorAlerta && !avisoMetaDefinido){
+			JanelaMensagem.mostraMensagemWarning(null, "Sua(s) despesa(s) utrapassaram os " + valorAlerta + "% defindos da meta da categoria.");
+			avisoMetaDefinido = true;
+		}
 	}
 	
 	// Getters e setters

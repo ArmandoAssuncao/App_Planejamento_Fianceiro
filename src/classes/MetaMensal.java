@@ -12,6 +12,7 @@ import java.util.Calendar;
 public class MetaMensal {
 	private Calendar mesAnoMeta;
 	private double valor;
+	private double alerta;
 	
 	/**
 	 * Construtor padrão.
@@ -24,10 +25,12 @@ public class MetaMensal {
 	 * Construtor sobrecarregado da classe MetaMensal. Recebe os seguintes parâmetros:
 	 * @param mesAnoMeta <code>Calendar</code> com o mês e o ano da meta mensal.
 	 * @param valor <code>double</code> da meta para os gastos.
+	 * @param alerta <code>double</code> exibe uma mensagem quando o valor em porcento da categoria chegar ao do alerta.
 	 */
-	public MetaMensal(Calendar mesAnoMeta, double valor) {
+	public MetaMensal(Calendar mesAnoMeta, double valor, double alerta) {
 		this.mesAnoMeta = mesAnoMeta;
 		this.valor = valor;
+		this.alerta = alerta;
 	}//MetaMensal()
 
 	/**
@@ -62,12 +65,29 @@ public class MetaMensal {
 		this.valor = valor;
 	}//setValor()
 	
+	
+	/**
+	 * Retornar o alerta estipulado da meta mensal
+	 * @return alerta <code>double</code>
+	 */
+	public double getAlerta() {
+		return alerta;
+	}
+
+	/**
+	 * Atribui o alerta da meta mensal.
+	 * @param alerta <code>double</code>
+	 */
+	public void setAlerta(double alerta) {
+		this.alerta = alerta;
+	}
+
 	/**
 	 * Retornar uma referência de uma String contendo as informações da meta.
 	 * @return <code>String</code>
 	 */
 	@Override
 	public String toString() {
-		return "Meta Mensal [ Mes/Ano da Meta:" + mesAnoMeta + String.format(", Valor R$ %1.2f", valor) + " ]";
+		return "Meta Mensal [ Mes/Ano da Meta:" + mesAnoMeta + String.format(", Valor R$ %1.2f", valor) + String.format(", Alerta %1.2f%%", alerta) + " ]";
 	}//toString()
 }//class MetaMensal

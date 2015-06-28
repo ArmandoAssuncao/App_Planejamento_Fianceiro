@@ -37,11 +37,13 @@ public class Categoria{
 	 * @param descricao <code>String</code> da categoria.
 	 * @param mesAnoMeta <code>Calendar</code> da categoria.
 	 * @param valor <code>double</code> da categoria.
+	 * @param alerta <code>double</code> exibe uma mensagem quando o valor em porcento da categoria chegar ao do alerta.
 	 */
-	public Categoria(String descricao, Calendar mesAnoMeta, double valor){
+	public Categoria(String descricao, Calendar mesAnoMeta, double valor, double alerta){
 		this.descricao = descricao;
 		metaMensal.setMesAnoMeta(mesAnoMeta);
 		metaMensal.setValor(valor);
+		metaMensal.setAlerta(alerta);
 	}//Categoria()
 	
 	
@@ -100,6 +102,20 @@ public class Categoria{
 	 */
 	public void setValorMeta(double valorMeta) {
 		this.metaMensal.setValor(valorMeta);
+	}
+	
+	/** Retornar um <code>double</code> com o alerta da meta mensal da categoria
+	 * @return <code>double</code> com valor do alerta da meta mensal da categoria
+	 */
+	public double getValorAlerta() {
+		return metaMensal.getAlerta();
+	}
+
+	/** Define o valor da meta mensal da categoria
+	 * @param valorMeta <code>double</code> com o novo valor da meta mensal da categoria
+	 */
+	public void setValorAlerta(double valorAlerta) {
+		this.metaMensal.setValor(valorAlerta);
 	}
 
 	/**
