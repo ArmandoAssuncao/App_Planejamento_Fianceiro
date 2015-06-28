@@ -19,6 +19,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.toedter.calendar.JDateChooser;
+
 import persistencia.CategoriaDAO;
 import persistencia.FormaPagamentoDAO;
 import classes.Categoria;
@@ -52,13 +54,15 @@ public class JanelaCriarDespesa extends JDialog{
 	private JLabel labelDataDaDespesa;
 	private JLabel labelDataDoPagamento;
 	private JLabel labelTipoDoPagamento;
-	private JLabel labelTipoDoPagamentoInfo;
+	private JLabel labelNumeroDeParcelas;
+	private JLabel labelNumeroDoCheque;
 	private JLabel labelCategoria;
 	private JTextField textFieldDescricao;
 	private JTextField textFieldValorDespesa;
-	private JTextField textFieldDataDaDespesa;
-	private JTextField textFieldDataDoPagamento;
-	private JTextField textFieldTipoDoPagamentoInfo;
+	private JDateChooser jDateChooserDataDaDespesa;
+	private JDateChooser jDateChooserDataDoPagamento;
+	private JTextField textFieldNumeroDeParcelas;
+	private JTextField textFieldNumeroDoCheque;
 	private JComboBox<String> jComboBoxTipoDoPagamento;
 	private JComboBox<String> jComboBoxCategoria;
 
@@ -129,18 +133,22 @@ public class JanelaCriarDespesa extends JDialog{
 		labelDataDaDespesa.setText("* Data da Despesa:");
 		labelDataDoPagamento.setText("* Data do Pagamento:");
 		labelTipoDoPagamento.setText("* Tipo do Pagamento:");
-		labelTipoDoPagamentoInfo.setText(" ");
-		labelTipoDoPagamentoInfo.setVisible(false);
+		labelNumeroDeParcelas.setText("* Número de parcelas:");
+		labelNumeroDoCheque.setText("* Número do Cheque:");
 		labelCategoria.setText("Categoria:");
 		textFieldDescricao.setPreferredSize(new Dimension(100,25));
 		textFieldValorDespesa.setPreferredSize(new Dimension(100,25));
-		textFieldDataDaDespesa.setPreferredSize(new Dimension(100,25));
-		textFieldDataDoPagamento.setPreferredSize(new Dimension(100,25));
-		textFieldTipoDoPagamentoInfo.setPreferredSize(new Dimension(100,25));
-		textFieldTipoDoPagamentoInfo.setVisible(false);
+		jDateChooserDataDaDespesa.setPreferredSize(new Dimension(100,25));
+		jDateChooserDataDoPagamento.setPreferredSize(new Dimension(100,25));
+		textFieldNumeroDeParcelas.setPreferredSize(new Dimension(100,25));
+		textFieldNumeroDoCheque.setPreferredSize(new Dimension(100,25));
+		labelNumeroDeParcelas.setEnabled(false);
+		labelNumeroDoCheque.setEnabled(false);
+		textFieldNumeroDeParcelas.setEnabled(false);
+		textFieldNumeroDoCheque.setEnabled(false);
 		
 		for(FormaPagamento tipoPagamento : FormaPagamento.values()){
-			jComboBoxTipoDoPagamento.addItem(tipoPagamento.getFormaPagamento()); //USAR O ENUM DOS TIPOS DE PAGAMENTO ///////////////////////////
+			jComboBoxTipoDoPagamento.addItem(tipoPagamento.getFormaPagamento());
 		}
 		jComboBoxTipoDoPagamento.setMaximumRowCount(5);
 		jComboBoxTipoDoPagamento.setSelectedIndex(0);
@@ -150,18 +158,22 @@ public class JanelaCriarDespesa extends JDialog{
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED){
 					if( e.getItem().equals(FormaPagamento.PRAZO.getFormaPagamento()) ){
-						labelTipoDoPagamentoInfo.setText("* Número de parcelas:");
-						labelTipoDoPagamentoInfo.setVisible(true);
-						textFieldTipoDoPagamentoInfo.setVisible(true);
+						labelNumeroDeParcelas.setEnabled(true);
+						textFieldNumeroDeParcelas.setEnabled(true);
+						labelNumeroDoCheque.setEnabled(false);
+						textFieldNumeroDoCheque.setEnabled(false);
 					}
 					else if( e.getItem().equals(FormaPagamento.CHEQUE.getFormaPagamento()) ){
-						labelTipoDoPagamentoInfo.setText("* Número do cheque:");
-						labelTipoDoPagamentoInfo.setVisible(true);
-						textFieldTipoDoPagamentoInfo.setVisible(true);
+						labelNumeroDeParcelas.setEnabled(true);
+						textFieldNumeroDeParcelas.setEnabled(true);
+						labelNumeroDoCheque.setEnabled(true);
+						textFieldNumeroDoCheque.setEnabled(true);
 					}
 					else{
-						labelTipoDoPagamentoInfo.setVisible(false);
-						textFieldTipoDoPagamentoInfo.setVisible(false);
+						labelNumeroDeParcelas.setEnabled(false);
+						labelNumeroDoCheque.setEnabled(false);
+						textFieldNumeroDeParcelas.setEnabled(false);
+						textFieldNumeroDoCheque.setEnabled(false);
 					}
 				}
 			}
@@ -221,13 +233,13 @@ public class JanelaCriarDespesa extends JDialog{
 		painelCampos.add(labelDataDaDespesa, constraints);
 		constraints.gridx = 1;
 		constraints.anchor = GridBagConstraints.LINE_START;
-		painelCampos.add(textFieldDataDaDespesa, constraints);
+		painelCampos.add(jDateChooserDataDaDespesa, constraints);
 		constraints.gridx = 2;
 		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelDataDoPagamento, constraints);
 		constraints.gridx = 3;
 		constraints.anchor = GridBagConstraints.LINE_START;
-		painelCampos.add(textFieldDataDoPagamento, constraints);
+		painelCampos.add(jDateChooserDataDoPagamento, constraints);
 		
 		constraints.gridx = 0;
 		constraints.gridy = 4;
@@ -238,14 +250,22 @@ public class JanelaCriarDespesa extends JDialog{
 		painelCampos.add(jComboBoxTipoDoPagamento, constraints);
 		constraints.gridx = 2;
 		constraints.anchor = GridBagConstraints.LINE_END;
-		painelCampos.add(labelTipoDoPagamentoInfo, constraints);
+		painelCampos.add(labelNumeroDeParcelas, constraints);
 		constraints.gridx = 3;
 		constraints.anchor = GridBagConstraints.LINE_START;
-		painelCampos.add(textFieldTipoDoPagamentoInfo, constraints);
+		painelCampos.add(textFieldNumeroDeParcelas, constraints);
+		
+		constraints.gridx = 2;
+		constraints.gridy = 5;
+		constraints.anchor = GridBagConstraints.LINE_END;
+		painelCampos.add(labelNumeroDoCheque, constraints);
+		constraints.gridx = 3;
+		constraints.anchor = GridBagConstraints.LINE_START;
+		painelCampos.add(textFieldNumeroDoCheque, constraints);
 		
 		constraints.gridx = 1;
-		constraints.gridy = 5;
-		constraints.insets = new Insets(120, 0, 0, 0);
+		constraints.gridy = 6;
+		constraints.insets = new Insets(60, 0, 0, 0);
 		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(botaoCriar, constraints);
 		constraints.gridx = 2;
@@ -272,13 +292,15 @@ public class JanelaCriarDespesa extends JDialog{
 		labelDataDaDespesa = new JLabel();
 		labelDataDoPagamento = new JLabel();
 		labelTipoDoPagamento = new JLabel();
-		labelTipoDoPagamentoInfo = new JLabel();
+		labelNumeroDeParcelas = new JLabel();
+		labelNumeroDoCheque = new JLabel();
 		labelCategoria = new JLabel();
 		textFieldDescricao = new JTextField();
 		textFieldValorDespesa = new JTextField();
-		textFieldDataDaDespesa = new JTextField();
-		textFieldDataDoPagamento = new JTextField();
-		textFieldTipoDoPagamentoInfo = new JTextField();
+		jDateChooserDataDaDespesa = new JDateChooser();
+		jDateChooserDataDoPagamento = new JDateChooser();
+		textFieldNumeroDeParcelas = new JTextField();
+		textFieldNumeroDoCheque = new JTextField();
 		jComboBoxTipoDoPagamento = new JComboBox<String>();
 		jComboBoxCategoria = new JComboBox<String>();
 	}
@@ -297,13 +319,15 @@ public class JanelaCriarDespesa extends JDialog{
 		labelDataDaDespesa = null;
 		labelDataDoPagamento = null;
 		labelTipoDoPagamento = null;
-		labelTipoDoPagamentoInfo = null;
+		labelNumeroDeParcelas = null;
+		labelNumeroDoCheque = null;
 		labelCategoria = null;
 		textFieldDescricao = null;
 		textFieldValorDespesa = null;
-		textFieldDataDaDespesa = null;
-		textFieldDataDoPagamento = null;
-		textFieldTipoDoPagamentoInfo = null;
+		jDateChooserDataDaDespesa = null;
+		jDateChooserDataDoPagamento = null;
+		textFieldNumeroDeParcelas = null;
+		textFieldNumeroDoCheque = null;
 		jComboBoxTipoDoPagamento = null;
 		jComboBoxCategoria = null;
 	}
@@ -313,39 +337,7 @@ public class JanelaCriarDespesa extends JDialog{
 		dispose();
 	}
 	
-//	public void criarDespesa(){
-//		if(validaCampos()){
-//			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
-//			String categoria = jComboBoxCategoria.getItemAt(jComboBoxCategoria.getSelectedIndex());
-//			String descricao = textFieldDescricao.getText();
-//			String valor = textFieldValorDespesa.getText();
-//			String dataDaDespesa = textFieldDataDaDespesa.getText();
-//			String dataDoPagamento = textFieldDataDoPagamento.getText();
-//			String tipoDoPagamento = jComboBoxTipoDoPagamento.getItemAt(jComboBoxTipoDoPagamento.getSelectedIndex());
-//			String parcelas = "";
-//			String numeroDoCheque = "";
-//			if( tipoDoPagamento.equals(FormaPagamento.PRAZO.getFormaPagamento()) )
-//				parcelas = textFieldTipoDoPagamentoInfo.getText();
-//			else if( tipoDoPagamento.equals(FormaPagamento.CHEQUE.getFormaPagamento()) )
-//				numeroDoCheque = textFieldTipoDoPagamentoInfo.getText();
-//			
-//			if(abasCategoria.criarDespesa(categoria, descricao, valor, dataDaDespesa, dataDoPagamento, tipoDoPagamento, parcelas, numeroDoCheque));
-//			
-//			abasCategoria.setSelectedIndex(jComboBoxCategoria.getSelectedIndex());
-//			
-//			finalizaJanelaDespesa();
-//			
-//			//Se a condição for true, cria a aba e exibe uma janela confirmando a criação.
-//			/*if( abasCategoria.criarCategoria(getTextFieldDescricao().getText()) ){
-//				finalizaJanelaDespesa();				
-//			}
-//			else{
-//				new JanelaAviso("Criar categoria", "J� existe uma categoria com esse nome.");
-//			}*/
-//		}
-//	}
-	
-	private boolean validaCampos(){
+	public boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		
 		//valida o campo descricao
@@ -358,35 +350,57 @@ public class JanelaCriarDespesa extends JDialog{
 			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
 			return false;
 		}
-		else if(!ValidarDados.validarInicioString(descricao, "[a-zA-Z]")){
-			labelErroCampo.setText("O campo \"Nome\" tem que iniciar com uma letra");
-			return false;
-		}
-		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-]")){
-			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
-			return false;
-		}
 
 		//valida o campo valor
 		String valor = textFieldValorDespesa.getText();
-		if(!ValidarDados.validarVazio(valor)){
-			return true;
-		}
-		else if(!ValidarDados.validarTamanho(valor, 10)){
+		if(!ValidarDados.validarTamanho(valor, 10)){
 			labelErroCampo.setText("O campo \"Valor\" não pode ter mais que 10 caracteres.");
 			return false;
 		}
-		else if(!ValidarDados.validarInicioString(valor, "[0-9]")){
-			labelErroCampo.setText("O campo \"Valor\" deve iniciar com um número.");
-			return false;
-		}
-		else if(!ValidarDados.validarFimString(valor, "[0-9]")){
-			labelErroCampo.setText("O campo \"Valor\" deve terminar com um número.");
-			return false;
-		}
-		if(!ValidarDados.validarNumeroDouble(valor)){
+		else if(!ValidarDados.validarNumeroDouble(valor)){
 			labelErroCampo.setText("O campo \"Valor\" só aceita número e um \".\"");
 			return false;
+		}
+		
+		//valida o campo data da Despesa
+		String dataDespesa = Converte.calendarToString(jDateChooserDataDaDespesa.getCalendar());
+		if(!ValidarDados.validarVazio(dataDespesa)){
+			labelErroCampo.setText("O campo \"Data da Despesa\" não pode ficar vazio.");
+			return false;
+		}
+		
+		//valida o campo Parcelas
+		if(textFieldNumeroDeParcelas.isEnabled()){
+			String parcelas = textFieldNumeroDeParcelas.getText();
+			if(!ValidarDados.validarVazio(parcelas)){
+				labelErroCampo.setText("O campo \"Numero de parcelas\" não pode ficar vazio.");
+				return false;
+			}
+			else if(!ValidarDados.validarTamanho(parcelas, 5)){
+				labelErroCampo.setText("O campo \"Numero do cheque\" não pode ter mais que 5 caracteres.");
+				return false;
+			}
+			else if(!parcelas.matches("[0-9]{1,5}")){
+				labelErroCampo.setText("O campo \"Numero de Parcelas\" só aceita números.");
+				return false;
+			}
+		}
+		
+		//valida o campo Numero do cheque
+		if(textFieldNumeroDoCheque.isEnabled()){
+			String cheque = textFieldNumeroDoCheque.getText();
+			if(!ValidarDados.validarVazio(cheque)){
+				labelErroCampo.setText("O campo \"Numero do cheque\" não pode ficar vazio.");
+				return false;
+			}
+			else if(!ValidarDados.validarTamanho(cheque, 30)){
+				labelErroCampo.setText("O campo \"Numero do cheque\" não pode ter mais que 30 caracteres.");
+				return false;
+			}
+			if(!cheque.matches("[0-9]{1,30}")){
+				labelErroCampo.setText("O campo \"Numero do cheque\" só aceita números");
+				return false;
+			}
 		}
 		
 		return true;
@@ -396,21 +410,24 @@ public class JanelaCriarDespesa extends JDialog{
 		String categoria = jComboBoxCategoria.getItemAt(jComboBoxCategoria.getSelectedIndex());
 		String descricao = textFieldDescricao.getText();
 		String valor = textFieldValorDespesa.getText();
-		String dataDaDespesa = textFieldDataDaDespesa.getText();
-		String dataDoPagamento = textFieldDataDoPagamento.getText();
+		Calendar dataDaDespesa = jDateChooserDataDaDespesa.getCalendar();
+		Calendar dataDoPagamento = jDateChooserDataDoPagamento.getCalendar();
 		String tipoDoPagamento = jComboBoxTipoDoPagamento.getItemAt(jComboBoxTipoDoPagamento.getSelectedIndex());
-		String parcelas = textFieldTipoDoPagamentoInfo.getText();
-		String numeroDoCheque = textFieldTipoDoPagamentoInfo.getText();
+		String parcelas = textFieldNumeroDeParcelas.getText();
+		String numeroDoCheque = textFieldNumeroDoCheque.getText();
 		if(parcelas.equals("")) parcelas = "1";
+		
+		System.out.println(Converte.calendarToString(dataDoPagamento));
 		
 		Despesa despesa = new Despesa();
 		despesa.setDescricao(descricao);
-		despesa.setDataDespesa(Converte.stringToCalendar(dataDaDespesa));
-		despesa.setDataPagamento(Converte.stringToCalendar(dataDoPagamento));
+		despesa.setDataDespesa(dataDaDespesa);
+		despesa.setDataPagamento(dataDoPagamento);
 		despesa.setNumeroCheque(numeroDoCheque);
 		
 		try{
-			despesa.setValorDespesa(Double.parseDouble(valor));
+			if(!valor.equals(""))
+				despesa.setValorDespesa(Double.parseDouble(valor));
 			despesa.setNumeroParcelas(Integer.parseInt(parcelas));
 		}
 		catch(NumberFormatException e){

@@ -38,24 +38,26 @@ public class TEJanelaCriarDespesa implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == janelaCriarDespesa.getBotaoCriar()){
-			Despesa despesa = janelaCriarDespesa.retornaDespesa();
-			
-			String descricaoCategoria;
-			String descricaoPagamento;
-			try {
-				descricaoCategoria = new CategoriaDAO().getDescricao(despesa.getIdCategoria());
-				descricaoPagamento = new FormaPagamentoDAO().getDescricao(despesa.getIdFormaPagamento());
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return;
+			if(janelaCriarDespesa.validaCampos()){
+				Despesa despesa = janelaCriarDespesa.retornaDespesa();
+				
+				String descricaoCategoria;
+				String descricaoPagamento;
+				try {
+					descricaoCategoria = new CategoriaDAO().getDescricao(despesa.getIdCategoria());
+					descricaoPagamento = new FormaPagamentoDAO().getDescricao(despesa.getIdFormaPagamento());
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return;
+				}
+				
+				DespesaDAO despesaDAO = new DespesaDAO();
+				
+				despesaDAO.inserir(despesa, descricaoCategoria, descricaoPagamento);
+				
+				igPainelDespesas.criarDespesa(despesa);
+				janelaCriarDespesa.finalizaJanelaDespesa();
 			}
-			
-			DespesaDAO despesaDAO = new DespesaDAO();
-			
-			despesaDAO.inserir(despesa, descricaoCategoria, descricaoPagamento);
-			
-			igPainelDespesas.criarDespesa(despesa);
-			janelaCriarDespesa.finalizaJanelaDespesa();
 		}
 		else if(event.getSource() == janelaCriarDespesa.getBotaoCancelar()){
 			janelaCriarDespesa.finalizaJanelaDespesa();
