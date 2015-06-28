@@ -192,7 +192,7 @@ public class CategoriaDAO extends PlanejamentoFinanceiroDAO {
 
 	/**
 	 *   Retorna o id da categoria no banco de dados
-	 * @param descricao descrição <code>String</code> com a descrição da categoria
+	 * @param descricao <code>String</code> com a descrição da categoria
 	 * @return <code>int</code> com o id da categoria no banco de dados, caso não encontre retorna <code>0</code>
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
@@ -210,4 +210,27 @@ public class CategoriaDAO extends PlanejamentoFinanceiroDAO {
 		
 		return id;
 	}
+	
+	/**
+	 *   Retorna a descrição da categoria no banco de dados
+	 * @param id <code>int</code> com o id da categoria
+	 * @return <code>String</code> com a descrição da categoria no banco de dados, caso não encontre retorna <code>null</code>
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public String getDescricao(int id) throws SQLException{
+		String descricao = null;
+		
+		this.abreConexao();
+		String comandoSql = "SELECT descricao FROM categoria WHERE idCategoria=" + id;
+		ResultSet resultadoQuery = this.executaQuery(comandoSql);
+		
+		if(resultadoQuery.next())
+			descricao = resultadoQuery.getString("descricao");
+		
+		this.fechaConexao();
+		
+		return descricao;
+	}
+	
+	
 }//class BDCategoria

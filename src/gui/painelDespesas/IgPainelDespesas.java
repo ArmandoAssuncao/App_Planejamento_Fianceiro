@@ -358,14 +358,6 @@ public class IgPainelDespesas extends JPanel{
 	
 	private void iniciaValoresDespesa(String descricaoCategoria){
 		List<Despesa> arrayDespesasTemp = new ArrayList<Despesa>();
-		int idCategoria;
-		String descricao;
-		String dataDespesa;
-		String dataPagamento;
-		String numeroCheque;
-		String valorDespesa;
-		String numeroParcelas;
-		String formaPagamento;
 		
 		try {
 			arrayDespesasTemp = DespesaDAO.todasAsDespesas();
@@ -377,14 +369,14 @@ public class IgPainelDespesas extends JPanel{
 		//Inicializa as despesas da categoria
 		try {
 			for(Despesa d : arrayDespesasTemp){
-				idCategoria = new CategoriaDAO().getId(descricaoCategoria);
-				descricao = d.getDescricao();
-				dataDespesa = Converte.calendarToString(d.getDataDespesa());
-				dataPagamento = Converte.calendarToString(d.getDataPagamento());
-				numeroCheque = d.getNumeroCheque();
-				valorDespesa = Double.toString(d.getValorDespesa());
-				numeroParcelas = Integer.toString(d.getNumeroParcelas());
-				formaPagamento = new FormaPagamentoDAO().getDescricao(d.getIdFormaPagamento());
+				int idCategoria = new CategoriaDAO().getId(descricaoCategoria);
+				String descricao = d.getDescricao();
+				String dataDespesa = Converte.calendarToString(d.getDataDespesa());
+				String dataPagamento = Converte.calendarToString(d.getDataPagamento());
+				String numeroCheque = d.getNumeroCheque();
+				String valorDespesa = Double.toString(d.getValorDespesa());
+				String numeroParcelas = Integer.toString(d.getNumeroParcelas());
+				String formaPagamento = new FormaPagamentoDAO().getDescricao(d.getIdFormaPagamento());
 				
 				if(d.getIdCategoria() == idCategoria)
 					abasCategoria.criarDespesa(descricaoCategoria, descricao, valorDespesa, dataDespesa, dataPagamento, formaPagamento, numeroParcelas, numeroCheque);
@@ -428,6 +420,34 @@ public class IgPainelDespesas extends JPanel{
 		}
 		
 		return false;
+	}
+	
+	public boolean criarDespesa(Despesa despesa){
+		String descricao = despesa.getDescricao();
+		String dataDespesa = Converte.calendarToString(despesa.getDataDespesa());
+		String dataPagamento = Converte.calendarToString(despesa.getDataPagamento());
+		String numeroCheque = despesa.getNumeroCheque();
+		String valorDespesa = Double.toString(despesa.getValorDespesa());
+		String numeroParcelas = Integer.toString(despesa.getNumeroParcelas());
+		String formaPagamento;
+		String nomeCategoria;
+		
+		try {
+			nomeCategoria = new CategoriaDAO().getDescricao(despesa.getIdCategoria());
+			formaPagamento = new FormaPagamentoDAO().getDescricao(despesa.getIdFormaPagamento());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		if( abasCategoria.criarDespesa(nomeCategoria, descricao, valorDespesa,
+				dataDespesa, dataPagamento, formaPagamento, numeroParcelas, numeroCheque)){
+			
+			atualizaPainelTitulo();
+			return true;
+		}
+		else
+			return false;
 	}
 	
 	// Getters e setters

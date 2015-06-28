@@ -34,7 +34,7 @@ public class TEPainelDespesas implements ActionListener{
 		}
 		else if(e.getSource() == painelDespesas.getBotaoAdicionarDespesa()){
 			if(painelDespesas.getAbasCategoria().getNumeroDeAbas() != 0){
-				new JanelaCriarDespesa(painelDespesas.getAbasCategoria());
+				new JanelaCriarDespesa(painelDespesas, painelDespesas.getAbasCategoria());
 				//painelDespesas.atualizaPainelTitulo();
 			}
 				

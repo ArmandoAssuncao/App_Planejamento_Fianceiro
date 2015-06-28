@@ -48,7 +48,7 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 			
 			String comandoInsercao = "INSERT INTO despesa VALUES ";
 			
-			String comandoSql = comandoInsercao  + String.format("%s, \'%s\', %d, \'%s\', \'%s\', %d, %d, "+valorDespesa +", %d",
+			String comandoSql = comandoInsercao  + String.format("%s, \'%s\', %d, \'%s\', \'%s\', %d, \'%s\', "+valorDespesa +", %d",
 					" NEXT VALUE FOR seq_despesa ", descricao,despesa.getIdCategoria(), dataDaDespesa,dataDoPagamento,
 					despesa.getIdFormaPagamento(),numeroCheque,numeroParcelas) ;
 			
