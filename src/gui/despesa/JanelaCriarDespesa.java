@@ -9,6 +9,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,10 +19,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import persistencia.CategoriaDAO;
+import persistencia.FormaPagamentoDAO;
+import classes.Categoria;
+import classes.Despesa;
+import classes.MetaMensal;
 import validacoes.ValidarDados;
 import enumeracoes.FormaPagamento;
 import eventos.despesa.TEJanelaCriarDespesa;
+import funcoes.Converte;
 import gui.painelDespesas.AbasCategoria;
+import gui.painelDespesas.IgPainelDespesas;
 
 public class JanelaCriarDespesa extends JDialog{
 	private final String TITULO_JANELA= "Criar Despesa";
@@ -53,10 +62,10 @@ public class JanelaCriarDespesa extends JDialog{
 	private JComboBox<String> jComboBoxTipoDoPagamento;
 	private JComboBox<String> jComboBoxCategoria;
 
-	public JanelaCriarDespesa(AbasCategoria abasCategoria) {
+	public JanelaCriarDespesa(IgPainelDespesas painelDespesas, AbasCategoria abasCategoria) {
 		setTitle(TITULO_JANELA);
 		
-		trataEventosDespesa = new TEJanelaCriarDespesa(this);
+		trataEventosDespesa = new TEJanelaCriarDespesa(this, painelDespesas);
 		this.abasCategoria = abasCategoria;
 		
 		iniciaElementos();
@@ -304,37 +313,37 @@ public class JanelaCriarDespesa extends JDialog{
 		dispose();
 	}
 	
-	public void criarDespesa(){
-		if(validaCampos()){
-			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
-			String categoria = jComboBoxCategoria.getItemAt(jComboBoxCategoria.getSelectedIndex());
-			String descricao = textFieldDescricao.getText();
-			String valor = textFieldValorDespesa.getText();
-			String dataDaDespesa = textFieldDataDaDespesa.getText();
-			String dataDoPagamento = textFieldDataDoPagamento.getText();
-			String tipoDoPagamento = jComboBoxTipoDoPagamento.getItemAt(jComboBoxTipoDoPagamento.getSelectedIndex());
-			String parcelas = "";
-			String numeroDoCheque = "";
-			if( tipoDoPagamento.equals(FormaPagamento.PRAZO.getFormaPagamento()) )
-				parcelas = textFieldTipoDoPagamentoInfo.getText();
-			else if( tipoDoPagamento.equals(FormaPagamento.CHEQUE.getFormaPagamento()) )
-				numeroDoCheque = textFieldTipoDoPagamentoInfo.getText();
-			
-			if(abasCategoria.criarDespesa(categoria, descricao, valor, dataDaDespesa, dataDoPagamento, tipoDoPagamento, parcelas, numeroDoCheque));
-			
-			abasCategoria.setSelectedIndex(jComboBoxCategoria.getSelectedIndex());
-			
-			finalizaJanelaDespesa();
-			
-			//Se a condição for true, cria a aba e exibe uma janela confirmando a criação.
-			/*if( abasCategoria.criarCategoria(getTextFieldDescricao().getText()) ){
-				finalizaJanelaDespesa();				
-			}
-			else{
-				new JanelaAviso("Criar categoria", "J� existe uma categoria com esse nome.");
-			}*/
-		}
-	}
+//	public void criarDespesa(){
+//		if(validaCampos()){
+//			//Implementar a parte de adicionar no banco ////////////////////////////////////////////////////////
+//			String categoria = jComboBoxCategoria.getItemAt(jComboBoxCategoria.getSelectedIndex());
+//			String descricao = textFieldDescricao.getText();
+//			String valor = textFieldValorDespesa.getText();
+//			String dataDaDespesa = textFieldDataDaDespesa.getText();
+//			String dataDoPagamento = textFieldDataDoPagamento.getText();
+//			String tipoDoPagamento = jComboBoxTipoDoPagamento.getItemAt(jComboBoxTipoDoPagamento.getSelectedIndex());
+//			String parcelas = "";
+//			String numeroDoCheque = "";
+//			if( tipoDoPagamento.equals(FormaPagamento.PRAZO.getFormaPagamento()) )
+//				parcelas = textFieldTipoDoPagamentoInfo.getText();
+//			else if( tipoDoPagamento.equals(FormaPagamento.CHEQUE.getFormaPagamento()) )
+//				numeroDoCheque = textFieldTipoDoPagamentoInfo.getText();
+//			
+//			if(abasCategoria.criarDespesa(categoria, descricao, valor, dataDaDespesa, dataDoPagamento, tipoDoPagamento, parcelas, numeroDoCheque));
+//			
+//			abasCategoria.setSelectedIndex(jComboBoxCategoria.getSelectedIndex());
+//			
+//			finalizaJanelaDespesa();
+//			
+//			//Se a condição for true, cria a aba e exibe uma janela confirmando a criação.
+//			/*if( abasCategoria.criarCategoria(getTextFieldDescricao().getText()) ){
+//				finalizaJanelaDespesa();				
+//			}
+//			else{
+//				new JanelaAviso("Criar categoria", "J� existe uma categoria com esse nome.");
+//			}*/
+//		}
+//	}
 	
 	private boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
@@ -381,6 +390,41 @@ public class JanelaCriarDespesa extends JDialog{
 		}
 		
 		return true;
+	}
+	
+	public Despesa retornaDespesa(){
+		String categoria = jComboBoxCategoria.getItemAt(jComboBoxCategoria.getSelectedIndex());
+		String descricao = textFieldDescricao.getText();
+		String valor = textFieldValorDespesa.getText();
+		String dataDaDespesa = textFieldDataDaDespesa.getText();
+		String dataDoPagamento = textFieldDataDoPagamento.getText();
+		String tipoDoPagamento = jComboBoxTipoDoPagamento.getItemAt(jComboBoxTipoDoPagamento.getSelectedIndex());
+		String parcelas = textFieldTipoDoPagamentoInfo.getText();
+		String numeroDoCheque = textFieldTipoDoPagamentoInfo.getText();
+		if(parcelas.equals("")) parcelas = "1";
+		
+		Despesa despesa = new Despesa();
+		despesa.setDescricao(descricao);
+		despesa.setDataDespesa(Converte.stringToCalendar(dataDaDespesa));
+		despesa.setDataPagamento(Converte.stringToCalendar(dataDoPagamento));
+		despesa.setNumeroCheque(numeroDoCheque);
+		
+		try{
+			despesa.setValorDespesa(Double.parseDouble(valor));
+			despesa.setNumeroParcelas(Integer.parseInt(parcelas));
+		}
+		catch(NumberFormatException e){
+			e.printStackTrace();
+		}
+		
+		try {
+			despesa.setIdCategoria(new CategoriaDAO().getId(categoria));
+			despesa.setIdFormaPagamento(new FormaPagamentoDAO().getId(tipoDoPagamento));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return despesa;
 	}
 	
 	

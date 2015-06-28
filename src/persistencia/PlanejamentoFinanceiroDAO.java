@@ -83,7 +83,7 @@ public class PlanejamentoFinanceiroDAO extends BancoDeDados implements Runnable{
 					//this.removeTabelas();
 					System.out.println("Tabelas do banco de dados criadas");
 					this.criaTabelas();
-					//this.insereDados();
+					this.insereDados();
 				}
 				catch(IOException e){
 					e.printStackTrace();
