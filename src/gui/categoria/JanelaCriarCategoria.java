@@ -43,11 +43,13 @@ public class JanelaCriarCategoria extends JDialog{
 	private JButton botaoCancelar;
 	private JLabel labelDescricao;
 	private JLabel labelMeta;
+	private JLabel labelMetaProcentagem;
 	private JLabel labelTitulo;
 	private JLabel labelSubTitulo;
 	private JLabel labelErroCampo;
 	private JTextField textFieldDescricao;
 	private JTextField textFieldMeta;
+	private JTextField textFieldMetaPorcentagem;
 
 	/**
 	 * Cria uma instância do <code>JDialog</code> 
@@ -127,8 +129,10 @@ public class JanelaCriarCategoria extends JDialog{
 		labelErroCampo.setText(" ");
 		labelDescricao.setText("* Nome da Categoria:");
 		labelMeta.setText("Meta da Categoria:");
+		labelMetaProcentagem.setText("Alerta aos(%):");
 		textFieldDescricao.setPreferredSize(new Dimension(120,25));
 		textFieldMeta.setPreferredSize(new Dimension(120,25));
+		textFieldMetaPorcentagem.setPreferredSize(new Dimension(120,25));
 		
 		botaoCriar.setText("Criar");
 		botaoCriar.addActionListener(trataEventosCategoria);
@@ -170,7 +174,16 @@ public class JanelaCriarCategoria extends JDialog{
 		
 		constraints.gridx = 1;
 		constraints.gridy = 3;
-		constraints.insets = new Insets(200, 120, 0, -110);
+		constraints.anchor = GridBagConstraints.LINE_END;
+		painelCampos.add(labelMetaProcentagem, constraints);
+		
+		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_START;
+		painelCampos.add(textFieldMetaPorcentagem, constraints);
+		
+		constraints.gridx = 1;
+		constraints.gridy = 4;
+		constraints.insets = new Insets(150, 120, 0, -110);
 		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(botaoCriar, constraints);
 		constraints.gridx = 2;
@@ -194,11 +207,13 @@ public class JanelaCriarCategoria extends JDialog{
 		botaoCancelar = new JButton();
 		labelDescricao = new JLabel();
 		labelMeta = new JLabel();
+		labelMetaProcentagem = new JLabel();
 		labelTitulo = new JLabel();
 		labelSubTitulo = new JLabel();
 		labelErroCampo = new JLabel();
 		textFieldDescricao = new JTextField();
 		textFieldMeta = new JTextField();
+		textFieldMetaPorcentagem = new JTextField();
 	}
 	
 	/**
