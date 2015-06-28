@@ -6,8 +6,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class TabelaDaCategoria extends JTable{
-	private final int TAM_TABELA_X = 500;
-	private final int TAM_TABELA_Y = 500;
+//	private final int TAM_TABELA_X = 500;
+//	private final int TAM_TABELA_Y = 500;
 	
 	private final static String[] nomeColunas = {"Descrição", "Valor", "Data da Despesa", "Data do Pagamento", "Tipo Pagamento", "Parcelas", "Número do cheque"};
 	DefaultTableModel modelo;

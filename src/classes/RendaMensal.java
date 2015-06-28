@@ -14,6 +14,7 @@ import java.util.Calendar;
 public class RendaMensal {
 	private double valor;
 	private Calendar dataRenda;
+	private int id;
 	
 	/**
 	 * Construtor padrão.
@@ -64,6 +65,14 @@ public class RendaMensal {
 		this.dataRenda = data;
 	}
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	/**
 	 * Retorna uma referência em String da descrição, data e do valor da renda mensal.
 	 * @return <code>String</code> referente aos dados cadastrados.
@@ -71,10 +80,9 @@ public class RendaMensal {
 	@Override
 	public String toString() {
 		return "Renda Mensal [ " + 
-				String.format("Data da Renda: %02d/%02d/%04d", 
+				String.format("Data da Renda: %02d/%02d/%02d, Valor: %.2f", 
 						dataRenda.get(Calendar.DAY_OF_MONTH),
 						dataRenda.get(Calendar.MONTH) + 1,
-						dataRenda.get(Calendar.YEAR) + 
-						String.format(" , Valor: %.2f", valor)) + " ]";
+						dataRenda.get(Calendar.YEAR), valor) + " ]";
 	}
 }

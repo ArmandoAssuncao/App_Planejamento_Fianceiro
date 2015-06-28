@@ -7,7 +7,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -15,6 +19,9 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import persistencia.RendaDAO;
+import persistencia.RendaMensalDAO;
+import classes.Renda;
 import classes.RendaMensal;
 import eventos.painelRenda.TEPainelRenda;
 
@@ -22,10 +29,8 @@ public class IgPainelRenda extends JPanel {
 	public final int TAM_PAINEL_X = 800;
 	public final int TAM_PAINEL_Y = 600;
 	
-
 	ArrayList<RendaMensal> arrayListRendaMensal;
 	private TEPainelRenda trataEventosRenda;
-	private AbasRenda abasRenda;
 	private TabelaRendaMensal tabelaRendaMensal;
 	
 	private JPanel painelBotoes;
@@ -40,28 +45,23 @@ public class IgPainelRenda extends JPanel {
 
 		trataEventosRenda = new TEPainelRenda(this, framePrincipal);
 		iniciaElementos();
+		iniciaValoresRenda();
 		criaPainelTitulo();
 		criaPainelBotoes();
 			
-		for(int i = 0;i<15;i++)//TODO apagar 
-		tabelaRendaMensal.adicionaLinha("Data", "valor");
+		for(int i = 1;i<15;i++)//TODO apagar 
+		tabelaRendaMensal.adicionaLinha("Descrição","Data", "valor");
 		
 		add(painelTitulo, BorderLayout.NORTH);
-		add(abasRenda, BorderLayout.WEST);
+		add(tabelaRendaMensal,BorderLayout.WEST);
 		add(painelBotoes,BorderLayout.EAST);
 		
-		
+		setVisible(true);
 		setBackground(Color.GREEN);
 	}
 
 	private void iniciaElementos() {
-		tabelaRendaMensal = new TabelaRendaMensal();
 		arrayListRendaMensal = new ArrayList<RendaMensal>();
-		
-		abasRenda = new AbasRenda();
-		
-		for(int i = 0;i<15;i++)
-			abasRenda.criarAbaRenda("Renda "+i);
 		
 		painelBotoes = new JPanel();
 		painelTitulo = new JPanel();
@@ -71,8 +71,7 @@ public class IgPainelRenda extends JPanel {
 		botaoEditarRenda = new JButton();
 		
 		tabelaRendaMensal = new TabelaRendaMensal();
-		tabelaRendaMensal.setPreferredSize(new Dimension(900, 500));
-		tabelaRendaMensal.adicionaLinha("data", "valor");
+		tabelaRendaMensal.adicionaLinha("Descrição","data", "valor");
 	}//iniciaElementos()
 
 	private void criaPainelTitulo(){
@@ -94,7 +93,7 @@ public class IgPainelRenda extends JPanel {
 		//Define o layout
 		painelBotoes.setLayout(new GridBagLayout());
 		
-		//configura��es do layout
+		//configurações do layout
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
 		constraints.anchor = GridBagConstraints.FIRST_LINE_START;
@@ -144,15 +143,33 @@ public class IgPainelRenda extends JPanel {
 //		painelBotoes.setVisible(true);  //TODO isso � realmente necess�rio?
 	}//criaPainelBotoes
 
-	
-	public boolean criarAbaRenda(RendaMensal rendaMensal){
-		/*if(abasRenda.criarAbaRenda(rendaMensal.getDescricao())){
-			arrayListRendaMensal.add(rendaMensal);
-			abasRenda.setSelectedIndex(abasRenda.getNumeroDeAbas()-1);
-		
-			return true;
-		}*/
-		return true;
+	private void iniciaValoresRenda(){
+		try {
+			Set<Renda> rendas = new HashSet<Renda>();
+			List<Renda> rendaTemp = RendaDAO.todasAsRendas();
+			List<RendaMensal> rendaMensalTemp = RendaMensalDAO.todasAsRendasMensais();
+			for(Renda renda : rendaTemp){
+				int idRenda = new RendaDAO().getId(renda.getDescricao());
+				
+				System.out.println("idRenda="+idRenda);
+				
+				for(RendaMensal rendaMensal : rendaMensalTemp){
+					
+					System.out.println("idrendaMensal="+new RendaMensalDAO().getId(renda.getDescricao()));
+					
+					if(idRenda == new RendaMensalDAO().getId(renda.getDescricao())){
+//						System.out.println("inserido na lista");
+//						renda.adicionarRendaMensal(rendaMensal);
+//						rendas.add(renda);
+						//TODO arrumar isto 
+						System.out.println(renda+"  "+rendaMensal);
+					}
+				}//for
+			}//for
+			System.out.println("llist rendas\n\n" +rendas);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public JButton getBotaoAddRenda() {

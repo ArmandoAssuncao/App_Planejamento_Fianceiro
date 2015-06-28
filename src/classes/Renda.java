@@ -1,10 +1,11 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 
-import persistencia.RendaDAO;
-
-import classes.RendaMensal;
+import funcoes.Converte;
 
 /**
  * Armazena informações sobre a renda dos gastos.
@@ -15,16 +16,13 @@ import classes.RendaMensal;
  *
  */
 public class Renda{
-	private String descricao;
-	
-	private RendaMensal rendaMensal;
+	private String descricao = new String();
+	private List<RendaMensal> rendasMensais = new ArrayList<RendaMensal>();
 	
 	/**
 	 * Construtor padrão.
 	 */
-	public Renda() {
-		rendaMensal = new RendaMensal();
-	}//Renda()
+	public Renda() {}//Renda()
 	
 	/**
 	 * Construtor sobrecarregado da classe Renda. Recebe o seguinte parâmetro:
@@ -34,17 +32,17 @@ public class Renda{
 		this.descricao = descricao;
 	}//Renda()
 	
-	/**
-	 * Construtor sobrecarregado da classe Renda. Recebe os seguintes parâmetro:
-	 * @param descricao <code>String</code> da renda.
-	 * @param dataRenda <code>Calendar</code> da renda.
-	 * @param valor <code>double</code> da renda.
-	 */
-	public Renda(String descricao, Calendar dataRenda, double valor){
-		this.descricao = descricao;
-		rendaMensal.setDataRenda(dataRenda);
-		rendaMensal.setValor(valor);
-	}//Renda()
+//	/**
+//	 * Construtor sobrecarregado da classe Renda. Recebe os seguintes parâmetro:
+//	 * @param descricao <code>String</code> da renda.
+//	 * @param dataRenda <code>Calendar</code> da renda.
+//	 * @param valor <code>double</code> da renda.
+//	 */
+//	public Renda(String descricao, Calendar dataRenda, double valor){
+//		this.descricao = descricao;
+//		rendasMensais.setDataRenda(dataRenda);
+//		rendasMensais.setValor(valor);
+//	}//Renda()
 	
 	
 	/** Retornar uma <code>String</code> com a descrição da renda
@@ -62,47 +60,54 @@ public class Renda{
 	}
 	
 	
-	/** Retornar uma <code>RendaMensal</code> com a renda mensal da renda
+	/** Retorna um objeto <code>RendaMensal</code>.
+	 * @param data data da rendaMensal
 	 * @return <code>RendaMensal</code> com a renda mensal da renda
-	 */
-	public RendaMensal getRendaMensal() {
-		return rendaMensal;
+	 */	
+	public RendaMensal obterRendaMensal(Calendar data){
+		for(Iterator<RendaMensal> rendaIterator = rendasMensais.iterator();rendaIterator.hasNext();){
+			RendaMensal renda = rendaIterator.next();
+			if(Converte.calendarToString(renda.getDataRenda()).equals(Converte.calendarToString(renda.getDataRenda())))
+				return renda;
+		}
+		return null;
 	}
 
-	/** Define a renda mensal da renda
-	 * @param rendaMensal <code>RendaMensal</code> com a nova renda mensal da renda
+	/** Insere uma renda mensal.
+	 * @param rendaMensal objeto <code>RendaMensal</code> a ser inserido.
+	 * @return <code>true</code> se a inserção foi realizada,<code>false</code> se não..
 	 */
-	public void setRendaMensal(RendaMensal rendaMensal) {
-		this.rendaMensal = rendaMensal;
+	public boolean adicionarRendaMensal(RendaMensal rendaMensal) {
+		return rendasMensais.add(rendaMensal);
 	}
 	
-	/** Retornar um <code>Calendar</code> com a data da renda mensal da renda
-	 * @return <code>Calendar</code> com a data da renda mensal da renda
-	 */
-	public Calendar getDataRenda() {
-		return rendaMensal.getDataRenda();
-	}
-
-	/** Define a data da renda mensal da renda
-	 * @param dataRenda <code>Calendar</code> com a nova data da renda mensal da renda
-	 */
-	public void dataRenda(Calendar dataRenda) {
-		this.rendaMensal.setDataRenda(dataRenda);
-	}
+//	/** Retornar um <code>Calendar</code> com a data da renda mensal da renda
+//	 * @return <code>Calendar</code> com a data da renda mensal da renda
+//	 */
+//	public Calendar getDataRenda() {
+//		return rendasMensais.getDataRenda();
+//	}
+//
+//	/** Define a data da renda mensal da renda
+//	 * @param dataRenda <code>Calendar</code> com a nova data da renda mensal da renda
+//	 */
+//	public void dataRenda(Calendar dataRenda) {
+//		this.rendasMensais.setDataRenda(dataRenda);
+//	}
 	
-	/** Retornar um <code>double</code> com o valor da renda mensal da renda
-	 * @return <code>double</code> com valor da renda mensal da renda
-	 */
-	public double getValorRenda() {
-		return rendaMensal.getValor();
-	}
-
-	/** Define o valor da renda mensal da renda
-	 * @param valorRenda <code>double</code> com o novo valor da renda mensal da renda
-	 */
-	public void setValorRenda(double valorRenda) {
-		this.rendaMensal.setValor(valorRenda);
-	}
+//	/** Retornar um <code>double</code> com o valor da renda mensal da renda
+//	 * @return <code>double</code> com valor da renda mensal da renda
+//	 */
+//	public double getValorRenda() {
+//		return rendasMensais.getValor();
+//	}
+//
+//	/** Define o valor da renda mensal da renda
+//	 * @param valorRenda <code>double</code> com o novo valor da renda mensal da renda
+//	 */
+//	public void setValorRenda(double valorRenda) {
+//		this.rendasMensais.setValor(valorRenda);
+//	}
 
 	/**
 	 * Retorna uma referência em String da descrição da Renda.
@@ -110,7 +115,6 @@ public class Renda{
 	 */
 	@Override
 	public String toString() {
-		return "Renda [ descricao:" + descricao + " ]" + rendaMensal.toString();
+		return "Renda [ descricao:" + descricao + " ]" + rendasMensais.toString();
 	}
-
 }//class Renda

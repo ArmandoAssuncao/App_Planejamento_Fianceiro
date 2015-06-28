@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import classes.Renda;
 import classes.RendaMensal;
 
 /**
@@ -40,7 +41,7 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 		try{
 			if(!exists(rendaMensal.getDataRenda(), descricaoRenda)){//Verifica se existe uma meta mensal com a mesma data e descrição de renda;
 				int idRenda = getId(descricaoRenda);
-				
+
 				String comandoSql = comandoInsercao + "(" + idRenda + ",\'" + dataRenda + "\'," + valor + ")";
 				try {
 					this.executaUpdate(comandoSql);
@@ -216,16 +217,16 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 	}//pesquisar*/
 	
 	/**
-	 * Retorna todas as entradas da tabela meta_mensal.
-	 * @return {@code List<RendaMensal>} com todas as metas mensais da tabela
+	 * Retorna todas as entradas da tabela renda_mensal.
+	 * @return {@code List<RendaMensal>} com todas as rendas mensais da tabela
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	public static List<RendaMensal> todasAsMetasMensais() throws SQLException{
-		List<RendaMensal> metasMensais = new ArrayList<RendaMensal>();
+	public static List<RendaMensal> todasAsRendasMensais() throws SQLException{
+		List<RendaMensal> rendaMensais = new ArrayList<RendaMensal>();
 		
 		BANCO_DE_DADOS_PF.abreConexao();
 		
-		String comandoSql = "SELECT * FROM meta_mensal";
+		String comandoSql = "SELECT * FROM renda_mensal";
 		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
 		
 		while(resultadoQuery.next()){
@@ -233,11 +234,11 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 			Calendar dataRenda = Converte.stringToCalendar( resultadoQuery.getString("dataRenda") );
 			double valor = resultadoQuery.getDouble("valor");
 			
-			metasMensais.add(new RendaMensal(dataRenda, valor));
+			rendaMensais.add(new RendaMensal(dataRenda, valor));
 		}//while
 		
 		BANCO_DE_DADOS_PF.fechaConexao();
-		return metasMensais;
+		return rendaMensais;
 	}
 
 	/**
@@ -246,7 +247,7 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 	 * @return <code>int</code> com o id da renda no banco de dados, caso não encontre retorna <code>0</code>
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	private int getId(String descricao) throws SQLException{
+	public int getId(String descricao) throws SQLException{
 		int id = 0;
 		
 		this.abreConexao();
