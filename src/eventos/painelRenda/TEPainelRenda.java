@@ -1,6 +1,7 @@
 package eventos.painelRenda;
 
 import gui.painelRenda.IgPainelRenda;
+import gui.renda.JanelaCriarRenda;
 
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,7 @@ public class TEPainelRenda implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == painelRenda.getBotaoAddRenda())
-			System.out.println("adicionar");
+			new JanelaCriarRenda(painelRenda);
 		else if(e.getSource() == painelRenda.getBotaoExcluirRenda())
 			System.out.println("excluir");
 		else System.out.println("editar ");

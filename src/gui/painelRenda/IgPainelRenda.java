@@ -162,7 +162,7 @@ public class IgPainelRenda extends JPanel {
 				}//for
 				rendas.add(renda);
 			}//for
-			
+
 			//Adiciona os valores de renda na interface gráfica.
 			for(Iterator<Renda> iteratorRenda = rendas.iterator();iteratorRenda.hasNext();){
 				Renda r = iteratorRenda.next();
