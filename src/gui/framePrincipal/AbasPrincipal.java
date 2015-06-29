@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Window;
 
-import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
 public class AbasPrincipal extends JTabbedPane{
@@ -34,7 +33,7 @@ public class AbasPrincipal extends JTabbedPane{
 		painelGraficos = new PainelGraficos(framePrincipal);
         igPainelRenda = new IgPainelRenda(framePrincipal);
 		
-        String fonteDefault = new JLabel().getFont().getFontName(); //Pega a fonte default do sistema
+     //   String fonteDefault = new JLabel().getFont().getFontName(); //Pega a fonte default do sistema
 		Font fonte = new Font(Font.SANS_SERIF, Font.BOLD, 14);
 		setFont(fonte);
         

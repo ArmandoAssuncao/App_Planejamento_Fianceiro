@@ -19,14 +19,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.toedter.calendar.JDateChooser;
-
 import persistencia.CategoriaDAO;
 import persistencia.FormaPagamentoDAO;
-import classes.Categoria;
-import classes.Despesa;
-import classes.MetaMensal;
 import validacoes.ValidarDados;
+import classes.Despesa;
+
+import com.toedter.calendar.JDateChooser;
+
 import enumeracoes.FormaPagamento;
 import eventos.despesa.TEJanelaCriarDespesa;
 import funcoes.Converte;

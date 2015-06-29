@@ -261,4 +261,20 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 		
 		return id;
 	}
+	
+	public int getId(String descricao,String data) throws SQLException{
+		int id = 0;
+		
+		this.abreConexao();
+		/* select * from renda where descricao='renda2' and idrenda = (select idrenda from renda_mensal where datarenda='22/22/2222')*/
+		String comandoSql = "SELECT idRenda FROM renda WHERE descricao=\'" + descricao + "\' and idRenda = (select idRenda from renda_mensal where datarenda=\'"+data+"\')";
+		ResultSet resultadoQuery = this.executaQuery(comandoSql);
+		
+		if(resultadoQuery.next())
+			id = resultadoQuery.getInt(1); //valor da coluna um, unica coluna
+		
+		this.fechaConexao();
+		
+		return id;
+	}
 }//class RendaMensalDAO

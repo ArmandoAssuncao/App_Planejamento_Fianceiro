@@ -308,6 +308,7 @@ public class JanelaCriarCategoria extends JDialog{
 				metaMensal.setValor( Double.parseDouble(textFieldMeta.getText()) );
 			if(textFieldMetaPorcentagem.getText().equals(""))
 				textFieldMetaPorcentagem.setText("70");
+			//TODO exceção ocorrendo aki ao tentar cadastrar uma nova categoria.
 			metaMensal.setAlerta(Double.parseDouble(textFieldMetaPorcentagem.getText()));
 		}
 		catch(NumberFormatException e){

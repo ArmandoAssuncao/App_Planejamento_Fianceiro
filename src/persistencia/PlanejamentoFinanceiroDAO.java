@@ -113,7 +113,6 @@ public class PlanejamentoFinanceiroDAO extends BancoDeDados implements Runnable{
 	/** Abre e executa os comando de um arquivo SQL
 	 * @param arquivo <code>String</code> com o endereco do arquivo sql
 	 * @return <code>boolean</code> com <code>true</code> se o arquivo foi aberto e executado e <code>false</code> senão.
-	 * @see com.arthurassuncao.sistel.persistencia.BancoDeDados#abreArquivoSQL(java.lang.String)
 	 */
 	@Override
 	public boolean abreArquivoSQL(String arquivo){

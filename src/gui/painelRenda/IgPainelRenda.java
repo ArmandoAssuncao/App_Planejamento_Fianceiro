@@ -10,6 +10,7 @@ import java.awt.Window;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -24,6 +25,7 @@ import persistencia.RendaMensalDAO;
 import classes.Renda;
 import classes.RendaMensal;
 import eventos.painelRenda.TEPainelRenda;
+import funcoes.Converte;
 
 public class IgPainelRenda extends JPanel {
 	public final int TAM_PAINEL_X = 800;
@@ -45,12 +47,12 @@ public class IgPainelRenda extends JPanel {
 
 		trataEventosRenda = new TEPainelRenda(this, framePrincipal);
 		iniciaElementos();
-		iniciaValoresRenda();
 		criaPainelTitulo();
 		criaPainelBotoes();
-			
-		for(int i = 1;i<15;i++)//TODO apagar 
-		tabelaRendaMensal.adicionaLinha("Descrição","Data", "valor");
+		iniciaValoresRenda();
+
+//		for(int i = 1;i<15;i++)//TODO apagar 
+//		tabelaRendaMensal.adicionaLinha("Descrição","Data", "valor");
 		
 		add(painelTitulo, BorderLayout.NORTH);
 		add(tabelaRendaMensal,BorderLayout.WEST);
@@ -147,26 +149,29 @@ public class IgPainelRenda extends JPanel {
 		try {
 			Set<Renda> rendas = new HashSet<Renda>();
 			List<Renda> rendaTemp = RendaDAO.todasAsRendas();
+			//System.out.println(rendaTemp.size()+"\n"+rendaTemp); TODO APAGAR
 			List<RendaMensal> rendaMensalTemp = RendaMensalDAO.todasAsRendasMensais();
+			//System.out.println("\nrendasmensaistemp\n"+rendaMensalTemp.size()+"\n"+rendaMensalTemp); TODO APAGAR
+			
 			for(Renda renda : rendaTemp){
-				int idRenda = new RendaDAO().getId(renda.getDescricao());
-				
-				System.out.println("idRenda="+idRenda);
-				
+				int idRenda = new RendaDAO().getId(renda.getDescricao());				
 				for(RendaMensal rendaMensal : rendaMensalTemp){
-					
-					System.out.println("idrendaMensal="+new RendaMensalDAO().getId(renda.getDescricao()));
-					
-					if(idRenda == new RendaMensalDAO().getId(renda.getDescricao())){
-//						System.out.println("inserido na lista");
-//						renda.adicionarRendaMensal(rendaMensal);
-//						rendas.add(renda);
-						//TODO arrumar isto 
-						System.out.println(renda+"  "+rendaMensal);
+					if(idRenda == new RendaMensalDAO().getId(renda.getDescricao(),Converte.calendarToString(rendaMensal.getDataRenda()))){
+						renda.adicionarRendaMensal(rendaMensal);
 					}
 				}//for
+				rendas.add(renda);
 			}//for
-			System.out.println("llist rendas\n\n" +rendas);
+			
+			//Adiciona os valores de renda na interface gráfica.
+			for(Iterator<Renda> iteratorRenda = rendas.iterator();iteratorRenda.hasNext();){
+				Renda r = iteratorRenda.next();
+				for(Iterator<RendaMensal> rmIterator = r.getRendasMensais().iterator(); rmIterator.hasNext();){
+					RendaMensal rm = rmIterator.next();
+					tabelaRendaMensal.adicionaLinha(r.getDescricao(),Converte.calendarToString(rm.getDataRenda()), Double.toString(rm.getValor()));
+				}
+			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

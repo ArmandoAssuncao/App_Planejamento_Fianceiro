@@ -2,8 +2,6 @@ package classes;
 
 import java.util.Calendar;
 
-import persistencia.CategoriaDAO;
-
 /**
  * Armazena informações sobre a categoria dos gastos.
  * Possui os parâmetro <code>String</code> descrição.
@@ -112,7 +110,7 @@ public class Categoria{
 	}
 
 	/** Define o valor da meta mensal da categoria
-	 * @param valorMeta <code>double</code> com o novo valor da meta mensal da categoria
+	 * @param valorAlerta <code>double</code> com o novo valor do alerta da categoria
 	 */
 	public void setValorAlerta(double valorAlerta) {
 		this.metaMensal.setValor(valorAlerta);

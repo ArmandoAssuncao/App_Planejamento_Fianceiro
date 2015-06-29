@@ -30,9 +30,9 @@ public class TEJanelaCriarDespesa implements ActionListener{
 	 * @param janelaCriarDespesa janela de onde vem os eventos.
 	 * @param igPainelDespesas painel interno da janela //TODO está certo?
 	 */
-	public TEJanelaCriarDespesa(JanelaCriarDespesa janelaCriarDespesa, IgPainelDespesas painelDespesas) {
+	public TEJanelaCriarDespesa(JanelaCriarDespesa janelaCriarDespesa, IgPainelDespesas igPainelDespesas) {
 		this.janelaCriarDespesa = janelaCriarDespesa;
-		this.igPainelDespesas = painelDespesas;
+		this.igPainelDespesas = igPainelDespesas;
 	}
 
 	@Override

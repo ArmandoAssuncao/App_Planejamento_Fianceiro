@@ -60,6 +60,14 @@ public class Renda{
 	}
 	
 	
+	public List<RendaMensal> getRendasMensais() {
+		return rendasMensais;
+	}
+
+	public void setRendasMensais(List<RendaMensal> rendasMensais) {
+		this.rendasMensais = rendasMensais;
+	}
+
 	/** Retorna um objeto <code>RendaMensal</code>.
 	 * @param data data da rendaMensal
 	 * @return <code>RendaMensal</code> com a renda mensal da renda

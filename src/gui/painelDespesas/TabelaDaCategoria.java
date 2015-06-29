@@ -21,6 +21,7 @@ public class TabelaDaCategoria extends JTable{
 		
 		//setPreferredSize(new Dimension(TAM_TABELA_X, TAM_TABELA_Y));
 		setBackground(Color.WHITE);
+		setEnabled(false);
 		setVisible(true);
 	}
 	
