@@ -9,6 +9,7 @@ import java.awt.Insets;
 import java.awt.Window;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -145,6 +146,13 @@ public class IgPainelRenda extends JPanel {
 //		painelBotoes.setVisible(true);  //TODO isso � realmente necess�rio?
 	}//criaPainelBotoes
 
+	public boolean criarRenda(Renda renda,Calendar data){
+		RendaMensal rm = renda.obterRendaMensal(data);
+		tabelaRendaMensal.adicionaLinha(renda.getDescricao(),Converte.calendarToString(rm.getDataRenda()),Double.toString(rm.getValor()));
+		System.out.println("dsfsad");
+		return true;
+	} 
+	
 	private void iniciaValoresRenda(){
 		try {
 			Set<Renda> rendas = new HashSet<Renda>();

@@ -17,11 +17,21 @@ import javax.swing.JTextField;
 
 import validacoes.ValidarDados;
 import classes.Categoria;
+<<<<<<< HEAD
+import classes.Renda;
+import classes.RendaMensal;
+
+import com.toedter.calendar.JDateChooser;
+
+import eventos.renda.TEJanelaCriarRenda;
+import funcoes.Converte;
+=======
 import classes.MetaMensal;
 import eventos.categoria.TEJanelaCriarCategoria;
 import eventos.renda.TEJanelaCriarRenda;
 import funcoes.Converte;
 import gui.painelDespesas.IgPainelDespesas;
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 import gui.painelRenda.IgPainelRenda;
 
 /**
@@ -50,6 +60,11 @@ public class JanelaCriarRenda extends JDialog{
 	private JLabel labelErroCampo;
 	private JTextField textFieldDescricao;
 	private JTextField textFieldValor;
+<<<<<<< HEAD
+	private JDateChooser dataJDateChooser;
+	private JLabel labelData;
+=======
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 
 	/**
 	 * Cria uma instância do <code>JDialog</code> 
@@ -108,7 +123,11 @@ public class JanelaCriarRenda extends JDialog{
 		painelTitulo.add(labelSubTitulo, BorderLayout.SOUTH);
 		
 		painelTitulo.setPreferredSize(new Dimension(TAM_X, TAM_Y));
+<<<<<<< HEAD
+		painelTitulo.setBackground(Color.GREEN); //TODO 
+=======
 		painelTitulo.setBackground(Color.GREEN);
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 		painelTitulo.setVisible(true);
 		
 		return painelTitulo;
@@ -128,7 +147,12 @@ public class JanelaCriarRenda extends JDialog{
 		
 		labelErroCampo.setText(" ");
 		labelDescricao.setText("* Nome da Renda:");
+<<<<<<< HEAD
+		labelValor.setText("* Valor:");
+		labelData.setText("* Data de recebimento: ");
+=======
 		labelValor.setText("Valor:");
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 		textFieldDescricao.setPreferredSize(new Dimension(120,25));
 		textFieldValor.setPreferredSize(new Dimension(120,25));
 		
@@ -170,6 +194,19 @@ public class JanelaCriarRenda extends JDialog{
 		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(textFieldValor, constraints);
 		
+<<<<<<< HEAD
+		
+		constraints.gridx = 1;
+		constraints.gridy = 3;
+		constraints.anchor = GridBagConstraints.LINE_END;
+		painelCampos.add(labelData, constraints);
+		
+		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_START;
+		painelCampos.add(dataJDateChooser, constraints);
+		
+=======
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 		constraints.gridx = 1;
 		constraints.gridy = 4;
 		constraints.insets = new Insets(150, 120, 0, -110);
@@ -179,12 +216,22 @@ public class JanelaCriarRenda extends JDialog{
 		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(botaoCancelar, constraints);
 		
+<<<<<<< HEAD
+		
+		
+=======
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 		painelCampos.setPreferredSize(new Dimension(TAM_X, TAM_Y));
 		painelCampos.setBackground(Color.WHITE);
 		painelCampos.setVisible(true);
 		return painelCampos;
 	}
+<<<<<<< HEAD
+
+
+=======
 	
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 	/**
 	 * Inicia as variáveis de instância do <code>JDialog</code>
 	 */
@@ -201,6 +248,11 @@ public class JanelaCriarRenda extends JDialog{
 		labelErroCampo = new JLabel();
 		textFieldDescricao = new JTextField();
 		textFieldValor = new JTextField();
+<<<<<<< HEAD
+		dataJDateChooser = new JDateChooser();
+		labelData = new JLabel();
+=======
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 	}
 	
 	/**
@@ -219,12 +271,20 @@ public class JanelaCriarRenda extends JDialog{
 		labelErroCampo = null;
 		textFieldDescricao = null;
 		textFieldValor = null;
+<<<<<<< HEAD
+		dataJDateChooser = null;
+=======
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 	}
 	
 	/**
 	 * Libera os recursos alocados para a janela.
 	 */
+<<<<<<< HEAD
+	public void finalizaJanelaRenda(){
+=======
 	public void finalizaJanelaCategoria(){
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 		liberaElementos();
 		dispose();
 	}
@@ -238,6 +298,10 @@ public class JanelaCriarRenda extends JDialog{
 		
 		//valida o campo descricao
 		String descricao = textFieldDescricao.getText();
+<<<<<<< HEAD
+		System.out.println(descricao);
+=======
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 		if(!ValidarDados.validarVazio(descricao)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
 			return false;
@@ -255,6 +319,16 @@ public class JanelaCriarRenda extends JDialog{
 			return false;
 		}
 
+<<<<<<< HEAD
+		//valida o campo valor
+		String valor = textFieldValor.getText();
+		if(!ValidarDados.validarTamanho(valor, 5)){
+			labelErroCampo.setText("O campo \"Valor\" não pode ter mais que 5 caracteres.");
+			return false;
+		}
+		else if(!ValidarDados.validarNumeroDouble(valor)){
+			labelErroCampo.setText("O campo \"Valor\" só aceita números. Se precisar, use um ponto(\".\") como separador.");
+=======
 		//valida o campo meta
 		String meta = textFieldValor.getText();
 		if(!ValidarDados.validarTamanho(meta, 5)){
@@ -263,12 +337,25 @@ public class JanelaCriarRenda extends JDialog{
 		}
 		else if(!ValidarDados.validarNumeroDouble(meta)){
 			labelErroCampo.setText("O campo \"Meta\" só aceita números. Se precisar, use um ponto(\".\") como separador.");
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 			return false;
 		}
 		
 		return true;
 	}
 	
+<<<<<<< HEAD
+	public Renda retornaRenda(){
+		RendaMensal rendaMensal = new RendaMensal();
+		rendaMensal.setValor(Double.parseDouble(textFieldValor.getText()));
+		rendaMensal.setDataRenda(dataJDateChooser.getCalendar());
+
+		Renda renda = new Renda();
+		renda.adicionarRendaMensal(rendaMensal);
+		renda.setDescricao(textFieldDescricao.getText());
+		
+		return renda;
+=======
 	public Categoria retornaCategoria(){
 		MetaMensal metaMensal = new MetaMensal();
 		
@@ -292,6 +379,7 @@ public class JanelaCriarRenda extends JDialog{
 		categoria.setMetaMensal(metaMensal);
 		
 		return categoria;
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 	}
 
 	// Getters e setters
@@ -307,7 +395,16 @@ public class JanelaCriarRenda extends JDialog{
 		return textFieldDescricao;
 	}
 
+<<<<<<< HEAD
+	public JTextField getTextFieldValor() {
+		return textFieldValor;
+	}
+
+	public JDateChooser getDataJDateChooser() {
+		return dataJDateChooser;
+=======
 	public JTextField getTextFieldMeta() {
 		return textFieldValor;
+>>>>>>> 80426265dc0b1f451f6e4db0d3c809650bb99aa8
 	}	
 }
