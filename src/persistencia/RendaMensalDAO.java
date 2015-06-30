@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import classes.Despesa;
 import classes.Renda;
 import classes.RendaMensal;
 
@@ -239,6 +240,43 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 		
 		BANCO_DE_DADOS_PF.fechaConexao();
 		return rendaMensais;
+	}
+	
+	/**
+	 * Retorna todas as entradas do mês e ano da tabela renda_mensal.
+	 * @param mesAno <code>Calendar</code> com o mês e ano selecionado.
+	 * @return {@code List<RendaMensal>} com todas as rendas mensais do mês e ano da tabela
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public static List<RendaMensal> rendaMensalDoMesAno(Calendar mesAno) throws SQLException{
+		List<RendaMensal> rendasMensal = new ArrayList<RendaMensal>();
+		BANCO_DE_DADOS_PF.abreConexao();
+		
+		String comandoSql = "SELECT * FROM renda_mensal";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
+		
+		try {
+			while(resultadoQuery.next()){
+				//int idRenda = resultadoQuery.getInt("idRenda");//TODO
+				Calendar dataRenda = Converte.stringToCalendar(resultadoQuery.getString("dataRenda"));
+				double valor = resultadoQuery.getDouble("valor");
+				
+				String mes = String.valueOf(mesAno.get(Calendar.MONTH));
+				String ano = String.valueOf(mesAno.get(Calendar.YEAR));
+				String mesBD = String.valueOf(dataRenda.get(Calendar.MONTH)+1);
+				String anoBD = String.valueOf(dataRenda.get(Calendar.YEAR));
+				
+				if(mes.equals(mesBD) && ano.equals(anoBD)){
+					rendasMensal.add(new RendaMensal(dataRenda, valor));
+				}
+			}//while
+		} catch (NumberFormatException | SQLException e) {
+			e.printStackTrace();
+			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
+		}
+		
+		BANCO_DE_DADOS_PF.fechaConexao();
+		return rendasMensal;
 	}
 
 	/**

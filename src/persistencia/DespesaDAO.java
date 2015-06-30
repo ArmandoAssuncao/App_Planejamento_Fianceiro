@@ -221,4 +221,48 @@ public class DespesaDAO extends PlanejamentoFinanceiroDAO {
 		BANCO_DE_DADOS_PF.fechaConexao();
 		return despesas;
 	}
+	
+	/**
+	 * Retorna todas as entradas do mês e ano da tabela despesa.
+	 * @param mesAno <code>Calendar</code> com o mês e ano selecionado.
+	 * @return {@code List<Despesa>} com todas as despesas do mês e ano da tabela
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public static List<Despesa> despesasDoMesAno(Calendar mesAno) throws SQLException{
+		List<Despesa> despesas = new ArrayList<Despesa>();
+		BANCO_DE_DADOS_PF.abreConexao();
+		
+		String comandoSql = "SELECT * FROM despesa";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
+		
+		try {
+			while(resultadoQuery.next()){
+				String descricao = resultadoQuery.getString("descricao");
+				int idDespesa = resultadoQuery.getInt("idDespesa");
+				int idCategoria = resultadoQuery.getInt("idCategoria");
+				Calendar dataDespesa = Converte.stringToCalendar(resultadoQuery.getString("dataDespesa"));
+				Calendar dataPagamento = Converte.stringToCalendar(resultadoQuery.getString("dataPagamento"));
+				int idFormaPagamento = resultadoQuery.getInt("idFormaPagamento");
+				String numeroCheque = resultadoQuery.getString("numeroCheque");
+				double valor = resultadoQuery.getDouble("valor");
+				int numeroDeParcelas = resultadoQuery.getInt("numeroDeParcelas");
+				
+				String mes = String.valueOf(mesAno.get(Calendar.MONTH));
+				String ano = String.valueOf(mesAno.get(Calendar.YEAR));
+				String mesBD = String.valueOf(dataDespesa.get(Calendar.MONTH)+1);
+				String anoBD = String.valueOf(dataDespesa.get(Calendar.YEAR));
+				
+				if(mes.equals(mesBD) && ano.equals(anoBD)){
+					despesas.add(new Despesa(idDespesa, descricao, dataDespesa, dataPagamento, numeroCheque, valor, numeroDeParcelas,idCategoria,idFormaPagamento));
+				}
+				
+			}//while
+		} catch (NumberFormatException | SQLException e) {
+			e.printStackTrace();
+			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
+		}
+		
+		BANCO_DE_DADOS_PF.fechaConexao();
+		return despesas;
+	}
 }//class BDDespesa
