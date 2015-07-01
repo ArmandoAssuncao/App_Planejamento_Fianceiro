@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -32,6 +33,10 @@ public class GraficosJFreeChart {
 		true, // Show legend
 		true, // Use tooltips
 		false); // Configure chart to generate URLs?
+		
+		//Obtem a referencia do Grafico para definir a transparencia.
+		PiePlot3D plot = (PiePlot3D) grafico.getPlot();
+		plot.setForegroundAlpha(0.60F);
 		
 		grafico.setBackgroundPaint(new Color(240,240,240));
 		return new ChartPanel(grafico);

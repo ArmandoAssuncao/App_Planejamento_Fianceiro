@@ -340,15 +340,14 @@ public class JanelaCriarDespesa extends JDialog{
 		labelErroCampo.setForeground(Color.RED);
 		
 		//valida o campo descricao
+		textFieldDescricao.requestFocusInWindow();
 		String descricao = textFieldDescricao.getText();
 		if(!ValidarDados.validarVazio(descricao)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
-			textFieldDescricao.requestFocusInWindow();
 			return false;
 		}
 		else if(!ValidarDados.validarTamanho(descricao, 25)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
-			textFieldDescricao.requestFocusInWindow();
 			return false;
 		}
 		else if(!ValidarDados.validarString(descricao)){
@@ -357,15 +356,14 @@ public class JanelaCriarDespesa extends JDialog{
 		}
 
 		//valida o campo valor
+		textFieldValorDespesa.requestFocusInWindow();
 		String valor = textFieldValorDespesa.getText();
 		if(!ValidarDados.validarTamanho(valor, 10)){
 			labelErroCampo.setText("O campo \"Valor\" não pode ter mais que 10 caracteres.");
-			textFieldValorDespesa.requestFocusInWindow();
 			return false;
 		}
 		else if(!ValidarDados.validarNumeroDouble(valor)){
 			labelErroCampo.setText("O campo \"Valor\" só aceita números. Se precisar, use um ponto(\".\") como separador.");
-			textFieldValorDespesa.requestFocusInWindow();
 			return false;
 		}
 		
@@ -379,7 +377,6 @@ public class JanelaCriarDespesa extends JDialog{
 		//valida o campo data do Pagamento
 		if(jDateChooserDataDoPagamento.getCalendar() == null){
 			labelErroCampo.setText("Campo \"Data do Pagamento\" incorreto, insira a data no formato DD/MM/AAAA");
-			jDateChooserDataDoPagamento.grabFocus();
 			jDateChooserDataDoPagamento.requestFocusInWindow();
 			return false;
 		}
@@ -387,22 +384,24 @@ public class JanelaCriarDespesa extends JDialog{
 		//valida o campo Parcelas
 		if(textFieldNumeroDeParcelas.isEnabled()){
 			String parcelas = textFieldNumeroDeParcelas.getText();
+			textFieldNumeroDeParcelas.requestFocusInWindow();
 			if(!ValidarDados.validarVazio(parcelas)){
 				labelErroCampo.setText("O campo \"Numero de parcelas\" não pode ficar vazio.");
 				return false;
 			}
 			else if(!ValidarDados.validarTamanho(parcelas, 5)){
-				labelErroCampo.setText("O campo \"Numero do cheque\" não pode ter mais que 5 caracteres.");
+				labelErroCampo.setText("O campo \"Numero de parcelas\" não pode ter mais que 5 caracteres.");
 				return false;
 			}
-			else if(!parcelas.matches("[1,9]([0-9]){0,4}")){
-				labelErroCampo.setText("O campo \"Numero de Parcelas\" só aceita números iniciando de 1.");
+			else if(!parcelas.matches("[1-9]([0-9]){0,4}")){
+				labelErroCampo.setText("O campo \"Numero de Parcelas\" só aceita números positivos.");
 				return false;
 			}
 		}
 		
 		//valida o campo Numero do cheque
 		if(textFieldNumeroDoCheque.isEnabled()){
+			textFieldNumeroDoCheque.requestFocusInWindow();
 			String cheque = textFieldNumeroDoCheque.getText();
 			if(!ValidarDados.validarVazio(cheque)){
 				labelErroCampo.setText("O campo \"Numero do cheque\" não pode ficar vazio.");

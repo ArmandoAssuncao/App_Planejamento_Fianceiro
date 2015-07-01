@@ -41,12 +41,10 @@ public class TEPainelGraficos implements ActionListener{
 			int valorSaldoAtual;
 			
 			Calendar mesAno = Calendar.getInstance();
-			//mesAno.set(2015, 5, 1); //TODO Pegar o mes e ano do ComboBox
 			System.out.println(mesAno.get(Calendar.MONTH));
 			
 			try {
 				idInvestimento = new CategoriaDAO().getId("Investimentos");
-				RendaMensalDAO.rendaMensalDoMesAno(mesAno);
 				despesas.addAll(DespesaDAO.despesasDoMesAno(mesAno));
 				rendasMensal.addAll(RendaMensalDAO.rendaMensalDoMesAno(mesAno));
 			} catch (SQLException e1) {
@@ -73,12 +71,15 @@ public class TEPainelGraficos implements ActionListener{
 			painelGraficos.adicionarGrafico("Balanço Mensal", new String[]{"Investimentos", "Gastos", "Receitas", "Saldo Atual"},
 					new int[]{valorTotalInvestimentos, valorTotalGastos, valorTotalRendas, valorSaldoAtual}, 1);
 		}
+		
 		else if(event.getSource() == painelGraficos.getBotaoGraficoBarraCategoria()){
 			painelGraficos.adicionarGrafico("titulo Barra", new String[]{"campo1", "campo2"}, new int[]{1,2}, 2);
 		}
+		
 		else if(event.getSource() == painelGraficos.getBotaoGraficoLinhaMetaMensal()){
 			painelGraficos.adicionarGrafico("titulo Linha", new String[]{"campo1", "campo2"}, new int[]{1,2}, 3);
 		}
+		
 		else if(event.getSource() == painelGraficos.getBotaoGraficoPizzaFormaPagamento()){
 			painelGraficos.adicionarGrafico("titulo Pizza forma pagamento", new String[]{"campo1", "campo2"}, new int[]{1,2}, 1);
 		}

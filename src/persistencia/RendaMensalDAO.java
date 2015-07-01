@@ -261,7 +261,7 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 				
 				String mes = String.valueOf(mesAno.get(Calendar.MONTH));
 				String ano = String.valueOf(mesAno.get(Calendar.YEAR));
-				String mesBD = String.valueOf(dataRenda.get(Calendar.MONTH)+1);
+				String mesBD = String.valueOf(dataRenda.get(Calendar.MONTH));
 				String anoBD = String.valueOf(dataRenda.get(Calendar.YEAR));
 				
 				if(mes.equals(mesBD) && ano.equals(anoBD)){
