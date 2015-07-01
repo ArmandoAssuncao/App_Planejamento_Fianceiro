@@ -19,7 +19,7 @@ public class TabelaRendaMensal extends JTable{
 		setModel(modelo);
 		
 		setBackground(Color.WHITE);
-		setPreferredSize(new Dimension(TAM_TABELA_X,TAM_TABELA_Y));
+		//setPreferredSize(new Dimension(TAM_TABELA_X,TAM_TABELA_Y));
 		setEnabled(false);
 		setVisible(true); //TODO apagar isto?
 		

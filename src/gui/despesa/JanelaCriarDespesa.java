@@ -343,10 +343,12 @@ public class JanelaCriarDespesa extends JDialog{
 		String descricao = textFieldDescricao.getText();
 		if(!ValidarDados.validarVazio(descricao)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
+			textFieldDescricao.requestFocusInWindow();
 			return false;
 		}
 		else if(!ValidarDados.validarTamanho(descricao, 25)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
+			textFieldDescricao.requestFocusInWindow();
 			return false;
 		}
 
@@ -354,17 +356,27 @@ public class JanelaCriarDespesa extends JDialog{
 		String valor = textFieldValorDespesa.getText();
 		if(!ValidarDados.validarTamanho(valor, 10)){
 			labelErroCampo.setText("O campo \"Valor\" não pode ter mais que 10 caracteres.");
+			textFieldValorDespesa.requestFocusInWindow();
 			return false;
 		}
 		else if(!ValidarDados.validarNumeroDouble(valor)){
-			labelErroCampo.setText("O campo \"Valor\" só aceita número e um \".\"");
+			labelErroCampo.setText("O campo \"Valor\" só aceita números. Se precisar, use um ponto(\".\") como separador.");
+			textFieldValorDespesa.requestFocusInWindow();
 			return false;
 		}
 		
 		//valida o campo data da Despesa
-		String dataDespesa = Converte.calendarToString(jDateChooserDataDaDespesa.getCalendar());
-		if(!ValidarDados.validarVazio(dataDespesa)){
-			labelErroCampo.setText("O campo \"Data da Despesa\" não pode ficar vazio.");
+		if(jDateChooserDataDaDespesa.getCalendar() == null){
+			labelErroCampo.setText("Campo \"Data da Despesa\" incorreto, insira a data no formato DD/MM/AAAA");
+			jDateChooserDataDaDespesa.requestFocusInWindow();
+			return false;
+		}
+		
+		//valida o campo data do Pagamento
+		if(jDateChooserDataDoPagamento.getCalendar() == null){
+			labelErroCampo.setText("Campo \"Data do Pagamento\" incorreto, insira a data no formato DD/MM/AAAA");
+			jDateChooserDataDoPagamento.grabFocus();
+			jDateChooserDataDoPagamento.requestFocusInWindow();
 			return false;
 		}
 		
@@ -379,8 +391,8 @@ public class JanelaCriarDespesa extends JDialog{
 				labelErroCampo.setText("O campo \"Numero do cheque\" não pode ter mais que 5 caracteres.");
 				return false;
 			}
-			else if(!parcelas.matches("[0-9]{1,5}")){
-				labelErroCampo.setText("O campo \"Numero de Parcelas\" só aceita números.");
+			else if(!parcelas.matches("[1,9]([0-9]){0,4}")){
+				labelErroCampo.setText("O campo \"Numero de Parcelas\" só aceita números iniciando de 1.");
 				return false;
 			}
 		}

@@ -19,6 +19,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 
 import persistencia.RendaDAO;
@@ -35,6 +36,7 @@ public class IgPainelRenda extends JPanel {
 	ArrayList<RendaMensal> arrayListRendaMensal;
 	private TEPainelRenda trataEventosRenda;
 	private TabelaRendaMensal tabelaRendaMensal;
+	private JScrollPane barraRolagem;
 	
 	private JPanel painelBotoes;
 	private JPanel painelTitulo;
@@ -51,12 +53,14 @@ public class IgPainelRenda extends JPanel {
 		criaPainelTitulo();
 		criaPainelBotoes();
 		iniciaValoresRenda();
-
-//		for(int i = 1;i<15;i++)//TODO apagar 
-//		tabelaRendaMensal.adicionaLinha("Descrição","Data", "valor");
 		
+		//barra de rolagem da tabela
+		barraRolagem = new JScrollPane();
+		barraRolagem.setViewportView(tabelaRendaMensal);
+		barraRolagem.setPreferredSize(new Dimension(750, 500));
+
 		add(painelTitulo, BorderLayout.NORTH);
-		add(tabelaRendaMensal,BorderLayout.WEST);
+		add(barraRolagem,BorderLayout.WEST);
 		add(painelBotoes,BorderLayout.EAST);
 		
 		botaoExcluirRenda.setVisible(false); 
