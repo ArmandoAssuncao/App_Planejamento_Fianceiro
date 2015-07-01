@@ -78,10 +78,12 @@ public class IgPainelDespesas extends JPanel{
 		setPreferredSize(new Dimension(TAM_PAINEL_X, TAM_PAINEL_Y));
 		//setBackground(Color.WHITE); TODO
 		
+		botaoNovaCategoria.setVisible(true);
+		botaoEditarCategoria.setVisible(true);
 		botaoExcluirCategoria.setVisible(false);
+		botaoAdicionarDespesa.setVisible(true);
 		botaoExcluirDespesa.setVisible(false);
 		botaoEditarDespesa.setVisible(false);
-		botaoEditarCategoria.setVisible(false);
 		
 		setVisible(true);
 	}
@@ -366,9 +368,12 @@ public class IgPainelDespesas extends JPanel{
 			descricaoCategoria = arrayCategoriaTemp.get(indice).getDescricao();
 			iniciaValoresDespesa(descricaoCategoria);
 		}
-
+		
 		if(abasCategoria.getNumeroDeAbas() > 0)
 			abasCategoria.setSelectedIndex(0);
+		
+		//Faz a aba selecionada aparecer na tela
+		abasCategoria.updateUI();
 	
 	}//iniciaValoresCategoria()
 	

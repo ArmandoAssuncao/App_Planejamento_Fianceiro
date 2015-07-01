@@ -41,7 +41,7 @@ public class TEPainelGraficos implements ActionListener{
 			int valorSaldoAtual;
 			
 			Calendar mesAno = Calendar.getInstance();
-			mesAno.set(2015, 6, 1); //TODO Pegar o mes e ano do ComboBox
+			//mesAno.set(2015, 5, 1); //TODO Pegar o mes e ano do ComboBox
 			System.out.println(mesAno.get(Calendar.MONTH));
 			
 			try {
