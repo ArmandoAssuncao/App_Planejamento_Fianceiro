@@ -124,18 +124,6 @@ public class JanelaBalancoMensal extends JDialog {
 			jComboBoxMes.addItem("01/"+mes+"/"+ano);
 		}
 		
-		/*if(primeiraData != null){
-			int primeiroMes = primeiraData.get(Calendar.MONTH);
-			int primeiroAno = primeiraData.get(Calendar.YEAR);
-			int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
-			int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
-			for(int i = primeiroAno; i <= anoAtual; i++){
-				for(int j = primeiroMes; j <= mesAtual; j++){
-					jComboBoxMes.addItem(j+"/"+i);
-				}
-			}
-		}*/
-		
 		jComboBoxMes.addActionListener(teJanelaBalancoMensal);
 		
 		painelBotoes.add(labelData);
@@ -150,7 +138,7 @@ public class JanelaBalancoMensal extends JDialog {
 	}
 	
 	public void adicionarTituloTabela(String titulo, int posicaoColuna){
-		String tracos = "";
+		String tracos = "...........................";
 		String linha[] = new String[NUM_COLUNAS];
 		for(int i = 0; i < NUM_COLUNAS; i++){
 			if(i == posicaoColuna)

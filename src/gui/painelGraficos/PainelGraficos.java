@@ -173,14 +173,14 @@ public class PainelGraficos extends JPanel {
 		painelBotoes.setVisible(true);
 	}
 	
-	public void adicionarGrafico(String tituloGrafico, String[] campos, int[] valores, int tipoGrafico){
+	public void adicionarGrafico(String tituloGrafico, String[] campos, Double[] valores, int tipoGrafico){
 		painelDeGraficos.removeAll();
 		if(tipoGrafico == 1)
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoPizza(tituloGrafico, campos, valores));
 		else if(tipoGrafico == 2)
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoBarra(tituloGrafico, campos, valores));
 		else if(tipoGrafico == 3)
-			painelDeGraficos.add(GraficosJFreeChart.painelGraficoBarra(tituloGrafico, campos, valores));
+			painelDeGraficos.add(GraficosJFreeChart.painelGraficoLinha(tituloGrafico, campos, valores));
 		
 		painelDeGraficos.revalidate();
 	}

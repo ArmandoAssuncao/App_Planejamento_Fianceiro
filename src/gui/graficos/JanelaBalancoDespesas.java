@@ -136,7 +136,7 @@ public class JanelaBalancoDespesas extends JDialog {
 	}
 	
 	public void adicionarTituloTabela(String titulo, int posicaoColuna){
-		String tracos = "";
+		String tracos = ".....................................";
 		String linha[] = new String[NUM_COLUNAS];
 		for(int i = 0; i < NUM_COLUNAS; i++){
 			if(i == posicaoColuna)

@@ -31,6 +31,7 @@ public class TEJanelaEditarCategoria  implements ActionListener{
 				MetaMensal novaMetaMensal = novaCategoria.getMetaMensal();
 				
 				Categoria antigaCategoria = janelaEditarCategoria.retornaAntigaCategoria();
+				//MetaMensal antigaMetaMensal = antigaCategoria.getMetaMensal();
 				
 				CategoriaDAO categoriaDAO = new CategoriaDAO();
 				MetaMensalDAO metaMensalDAO = new MetaMensalDAO();

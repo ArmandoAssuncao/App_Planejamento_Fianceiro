@@ -128,7 +128,7 @@ public class TEJanelaBalancoDespesas  implements ActionListener {
 			
 			//Adiciona pagamento prazo
 			janelaBalancoDespesas.adicionarLinhaVaziaTabela(60);
-			janelaBalancoDespesas.adicionarTituloTabela("Cheque", 1);
+			janelaBalancoDespesas.adicionarTituloTabela("Prazo", 1);
 			//janelaBalancoMensal.adicionarLinhaVaziaTabela(20);
 			janelaBalancoDespesas.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"});
 			for(int indice = 0; indice < arrayDespesasPrazo.size(); indice++){

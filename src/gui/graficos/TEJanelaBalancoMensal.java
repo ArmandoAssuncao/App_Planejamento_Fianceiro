@@ -43,9 +43,6 @@ public class TEJanelaBalancoMensal  implements ActionListener {
 			List<Despesa> arrayDespesasInvestimentos = new ArrayList<>();
 			List<Despesa> arrayDespesasGastos = new ArrayList<>();
 			
-			String tituloReceita = "Receitas";
-			String tituloGastos = "Gastos";
-			
 			int idInvestimento;
 			double valorTotalInvestimentos = 0;
 			double valorTotalGastos = 0;

@@ -20,11 +20,11 @@ public class GraficosJFreeChart {
 	 * @param valores <code>String[]</code> com os valores dos campos do grafico.
 	 * @return um <code>JPanel</code> com o grafico
 	 */
-	public static JPanel painelGraficoPizza(String tituloDoGrafico, String[] campos, int[] valores){
+	public static JPanel painelGraficoPizza(String tituloDoGrafico, String[] campos, Double[] valores){
 		DefaultPieDataset pieDataset = new DefaultPieDataset();
 		
 		for(int i = 0; i < campos.length; i++){
-			pieDataset.setValue(campos[i], new Integer(valores[i]));
+			pieDataset.setValue(campos[i], new Double(valores[i]));
 		}
 		 
 		JFreeChart grafico = ChartFactory.createPieChart3D(
@@ -42,7 +42,7 @@ public class GraficosJFreeChart {
 		return new ChartPanel(grafico);
 	}
 	
-	public static JPanel painelGraficoLinha(String tituloDoGrafico, String[] campos, int[] valores){
+	public static JPanel painelGraficoLinha(String tituloDoGrafico, String[] campos, Double[] valores){
 		DefaultCategoryDataset ds = new DefaultCategoryDataset();
 		ds.addValue(40.5, "maximo", "dia 1");
 		ds.addValue(38.2, "maximo", "dia 2");
@@ -59,15 +59,14 @@ public class GraficosJFreeChart {
 		return new ChartPanel(grafico);
 	}
 	
-	public static JPanel painelGraficoBarra(String tituloDoGrafico, String[] campos, int[] valores){
+	public static JPanel painelGraficoBarra(String tituloDoGrafico, String[] campos, Double[] valores){
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+
+		for(int i = 0; i < campos.length; i++){
+			dataset.addValue(valores[i], "Categoria", campos[i]);
+		}
 		
-		dataset.addValue(new Double(30.0), "SO", "Windows");
-		dataset.addValue(new Double(20.0), "SO", "Linux");
-		dataset.addValue(new Double(10.5), "SO", "Solaris");
-		dataset.addValue(new Double(4.0), "SO", "Mac");
-		
-		JFreeChart grafico = ChartFactory.createBarChart(tituloDoGrafico, // chart title
+		JFreeChart grafico = ChartFactory.createBarChart3D(tituloDoGrafico, // chart title
 		         null, // domain axis label
 		         null, // range axis label
 		         dataset, // data

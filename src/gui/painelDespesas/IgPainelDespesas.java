@@ -173,7 +173,7 @@ public class IgPainelDespesas extends JPanel{
 		constraints.gridy = 1;
 		painelBotoes.add(botaoExcluirCategoria, constraints);
 		constraints.gridy = 2;
-		constraints.insets = new Insets(0, 0, 50, 0);
+		constraints.insets = new Insets(0, 0, 25, 0);
 		painelBotoes.add(botaoEditarCategoria, constraints);
 		constraints.gridy = 3;
 		constraints.insets = new Insets(0, 0, 25, 0);
