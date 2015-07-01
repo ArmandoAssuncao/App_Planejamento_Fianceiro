@@ -38,6 +38,7 @@ public class TEPainelGraficos implements ActionListener{
 			int valorTotalInvestimentos = 0;
 			int valorTotalGastos = 0;
 			int valorTotalRendas = 0;
+			int valorSaldoAtual;
 			
 			Calendar mesAno = Calendar.getInstance();
 			mesAno.set(2015, 6, 1); //TODO Pegar o mes e ano do ComboBox
@@ -66,8 +67,10 @@ public class TEPainelGraficos implements ActionListener{
 				valorTotalRendas += rendasMensal.get(indice).getValor();
 			}
 			
+			valorSaldoAtual = valorTotalRendas - valorTotalGastos - valorTotalInvestimentos;
+			
 			//TODO COLOCAR TAMBÉM O SALDO ATUAL
-			painelGraficos.adicionarGrafico("titulo Pizza", new String[]{"Investimentos", "Gastos", "Receitas"}, new int[]{valorTotalInvestimentos, valorTotalGastos, valorTotalRendas}, 1);
+			painelGraficos.adicionarGrafico("Balanço Mensal", new String[]{"Investimentos", "Gastos", "Receitas", "Saldo Atual"}, new int[]{valorTotalInvestimentos, valorTotalGastos, valorTotalRendas, valorSaldoAtual}, 1);
 		}
 		else if(event.getSource() == painelGraficos.getBotaoGraficoBarraCategoria()){
 			painelGraficos.adicionarGrafico("titulo Barra", new String[]{"campo1", "campo2"}, new int[]{1,2}, 2);

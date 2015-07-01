@@ -30,7 +30,7 @@ public class GraficosJFreeChart {
 		tituloDoGrafico, // Title
 		pieDataset, // Dataset
 		true, // Show legend
-		false, // Use tooltips
+		true, // Use tooltips
 		false); // Configure chart to generate URLs?
 		
 		grafico.setBackgroundPaint(new Color(240,240,240));
