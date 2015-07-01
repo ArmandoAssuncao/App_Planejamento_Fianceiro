@@ -5,8 +5,13 @@ import gui.renda.JanelaCriarRenda;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
 
+import persistencia.RendaDAO;
+import persistencia.RendaMensalDAO;
 import classes.Renda;
+import classes.RendaMensal;
 
 /**
  * Classe para tratar os eventos da janela Criar Renda.
@@ -43,11 +48,25 @@ public class TEJanelaCriarRenda implements ActionListener {
 		if (e.getSource() == janelaCriarRenda.getBotaoCriar()){
 			if(janelaCriarRenda.validaCampos()){
 				Renda renda = janelaCriarRenda.retornaRenda();
-				 
+				RendaMensal rm = renda.getRendasMensais().iterator().next(); 
 				
+				RendaDAO rendaDAO = new RendaDAO();
+				RendaMensalDAO rendaMensalDAO = new RendaMensalDAO();
 				
-				igPainelRenda.criarRenda(renda,janelaCriarRenda.getDataJDateChooser().getCalendar());
-				janelaCriarRenda.finalizaJanelaRenda();
+				try {
+					if(!rendaDAO.exists(renda.getDescricao()))
+						rendaDAO.inserir(renda);
+					else System.out.println("renda ja existente");
+					if(!rendaMensalDAO.exists(rm.getDataRenda(),renda.getDescricao())){
+						rendaMensalDAO.inserir(rm, renda.getDescricao());
+						igPainelRenda.criarRenda(renda,janelaCriarRenda.getDataJDateChooser().getCalendar());
+						janelaCriarRenda.finalizaJanelaRenda();
+					}
+					else System.out.println("renda mensal ja existente");
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				
 			}//if
 		}//if
 		

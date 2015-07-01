@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -279,7 +280,10 @@ public class JanelaCriarRenda extends JDialog{
 
 		//valida o campo valor
 		String valor = textFieldValor.getText();
-		if(!ValidarDados.validarTamanho(valor, 5)){
+		if(!ValidarDados.validarVazio(valor)){
+			labelErroCampo.setText("O campo \"Valor\" não pode ficar vazio.");
+			return false;
+		}else if(!ValidarDados.validarTamanho(valor, 5)){
 			labelErroCampo.setText("O campo \"Valor\" não pode ter mais que 5 caracteres.");
 			return false;
 		}
@@ -288,6 +292,12 @@ public class JanelaCriarRenda extends JDialog{
 			return false;
 		}
 		
+		//valida o campo dataJDateChooser
+		Date data = dataJDateChooser.getDate();
+		if(data == null){
+				labelErroCampo.setText("Campo \"Data\" preenchido incorretamente.");
+				return false;
+		}
 		return true;
 	}
 	

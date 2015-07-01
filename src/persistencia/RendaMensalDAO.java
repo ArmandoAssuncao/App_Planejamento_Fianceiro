@@ -1,17 +1,15 @@
 package persistencia;
 
-import funcoes.Converte;
-import gui.JanelaMensagem;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import classes.Despesa;
 import classes.Renda;
 import classes.RendaMensal;
+import funcoes.Converte;
+import gui.JanelaMensagem;
 
 /**
  * Classe para manipular objetos da classe <code>RendaMensal</code> no banco de dados.
@@ -38,7 +36,7 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 		String dataRenda = Converte.calendarToString(rendaMensal.getDataRenda());
 		double valor = rendaMensal.getValor();
 		
-		String comandoInsercao = "INSERT INTO meta_mensal VALUES";
+		String comandoInsercao = "INSERT INTO renda_mensal VALUES";
 		try{
 			if(!exists(rendaMensal.getDataRenda(), descricaoRenda)){//Verifica se existe uma meta mensal com a mesma data e descrição de renda;
 				int idRenda = getId(descricaoRenda);
@@ -172,7 +170,7 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 		
 		String data = Converte.calendarToString(dataRenda);
 		
-		String comandoSql = "" + "SELECT COUNT(*) AS contagem FROM meta_mensal WHERE idRenda=" + id + " AND dataRenda=\'" + data + "\'";
+		String comandoSql = "" + "SELECT COUNT(*) AS contagem FROM renda_mensal WHERE idRenda=" + id + " AND dataRenda=\'" + data + "\'";
 		ResultSet resultadoQuery = this.executaQuery(comandoSql);
 		
 		resultadoQuery.next();
