@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import classes.Categoria;
+import classes.Despesa;
 import classes.MetaMensal;
 
 /**
@@ -74,7 +75,7 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 	public boolean atualizarDados(MetaMensal novaMetaMensal, Calendar mesAnoMeta, String descricaoCategoria){
 		//verifica se existe a MetaMensal
 		try {
-			if(exists(mesAnoMeta, descricaoCategoria))
+			if(!exists(mesAnoMeta, descricaoCategoria))
 				return false;
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -188,7 +189,7 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 	
 	/**
 	 * Pesquisa categoria pela descricao
-	 * @param descricao <code>String</code> com a descrição da <code>Categoria</code> a ser pesquisada. 
+	 * @param descricao <code>String</code> com a descrição da <code>Categoria</code> a ser pesquisada.
 	 * @return {@code List<Categoria>} com as categorias que tem na descrição a descrição especificado
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
@@ -241,6 +242,44 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 		
 		BANCO_DE_DADOS_PF.fechaConexao();
 		return metasMensais;
+	}
+	
+	/**
+	 * Retorna a entrada da tabela com id e data iguais ao do argumento.
+	 * @param idCategoria <code>int</code> com o id da <code>Categoria</code> associada a <code>MetaMensal</code>a ser pesquisada.
+	 * @param mesAno <code>Calendar</code> com a data da <code>MetaMensal</code> a ser pesquisada.
+	 * @return metaMensal<code>MetaMensal</code> com a meta mensal
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public static MetaMensal pesquisaMetaMensal(int idCategoria, Calendar mesAno) throws SQLException{
+		MetaMensal metaMensal = new MetaMensal();
+		
+		BANCO_DE_DADOS_PF.abreConexao();
+		
+		String comandoSql = "SELECT * FROM meta_mensal";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
+		
+		while(resultadoQuery.next()){
+			int id = resultadoQuery.getInt("idCategoria");
+			Calendar mesAnoMeta = Converte.stringToCalendar( resultadoQuery.getString("mesAnoMeta") );
+			double valor = resultadoQuery.getDouble("valor");
+			double alerta = resultadoQuery.getDouble("alerta");
+			
+			String mes = String.valueOf(mesAno.get(Calendar.MONTH));
+			String ano = String.valueOf(mesAno.get(Calendar.YEAR));
+			String mesBD = String.valueOf(mesAnoMeta.get(Calendar.MONTH));
+			String anoBD = String.valueOf(mesAnoMeta.get(Calendar.YEAR));
+			
+			if(mes.equals(mesBD) && ano.equals(anoBD) && id == idCategoria){
+				metaMensal.setValor(valor);
+				metaMensal.setMesAnoMeta(mesAnoMeta);
+				metaMensal.setAlerta(alerta);
+				break;
+			}
+		}//while
+		
+		BANCO_DE_DADOS_PF.fechaConexao();
+		return metaMensal;
 	}
 
 	/**

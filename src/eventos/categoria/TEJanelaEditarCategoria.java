@@ -52,7 +52,7 @@ public class TEJanelaEditarCategoria  implements ActionListener{
 						}
 					}
 					else{
-						JanelaMensagem.mostraMensagem(null, "Editar Categoria", "Já existe uma categoria com esse nome.");
+						JanelaMensagem.mostraMensagem(null, "Editar Categoria", "Já existe uma categoria com esse nome.");//Não é executado
 					}
 				}
 				catch(SQLException e){

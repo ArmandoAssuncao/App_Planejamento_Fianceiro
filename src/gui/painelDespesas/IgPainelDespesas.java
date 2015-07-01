@@ -317,10 +317,9 @@ public class IgPainelDespesas extends JPanel{
 		String descricao = arrayCategoria.get(abasCategoria.getSelectedIndex()).getDescricao();
 		double valorMeta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorMeta();
 		double valorAlerta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorAlerta();
-		double totalDespesasPorcentagem = (abasCategoria.getValorTotalDespesas() * 100)/valorMeta;
-		
-		if(valorMeta == 0){
-			totalDespesasPorcentagem = 0;
+		double totalDespesasPorcentagem = (abasCategoria.getValorTotalDespesas() * 100);
+		if(valorMeta != 0){
+			totalDespesasPorcentagem = (abasCategoria.getValorTotalDespesas() * 100)/valorMeta;
 		}
 		
 		avisoMetaDefinido = false;
@@ -330,7 +329,7 @@ public class IgPainelDespesas extends JPanel{
 			avisoMetaDefinido = true;
 			avisoMetaTotal = true;
 		}
-		else if(totalDespesasPorcentagem >= valorAlerta){
+		else if(totalDespesasPorcentagem > valorAlerta){
 			labelValorTotalDespesasPorcentagemValor.setForeground(Color.YELLOW);
 			avisoMetaDefinido = true;
 		}

@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.sql.SQLException;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -15,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import persistencia.CategoriaDAO;
+import persistencia.MetaMensalDAO;
 import classes.Categoria;
 import classes.MetaMensal;
 import validacoes.ValidarDados;
@@ -37,15 +40,19 @@ public class JanelaEditarCategoria extends JDialog{
 	private JButton botaoCancelar;
 	private JLabel labelNovaDescricao;
 	private JLabel labelNovaMeta;
+	private JLabel labelNovaMetaProcentagem;
 	private JLabel labelAntigaDescricao;
 	private JLabel labelAntigaMeta;
 	private JLabel labelAntigaDescricaoValor;
 	private JLabel labelAntigaMetaValor;
+	private JLabel labelAntigaMetaProcentagem;
+	private JLabel labelAntigaMetaProcentagemValor;
 	private JLabel labelTitulo;
 	private JLabel labelSubTitulo;
 	private JLabel labelErroCampo;
 	private JTextField textFieldNovaDescricao;
 	private JTextField textFieldNovaMeta;
+	private JTextField textFieldNovaMetaPorcentagem;
 
 	public JanelaEditarCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
@@ -109,15 +116,38 @@ public class JanelaEditarCategoria extends JDialog{
 		
 		GridBagConstraints constraints = new GridBagConstraints();
 		
+		Categoria categoria = new Categoria();
+		categoria.setDescricao(igPainelDespesas.getDescricaoCategoria());
+		int idCategoria;
+		Calendar calendar = Calendar.getInstance();
+		MetaMensal metaMensal = null;
+		
+		try {
+			idCategoria = new CategoriaDAO().getId(categoria.getDescricao());
+			metaMensal = MetaMensalDAO.pesquisaMetaMensal(idCategoria, calendar);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		labelErroCampo.setText(" ");
 		labelNovaDescricao.setText("Novo Nome da Categoria:");
 		labelNovaMeta.setText("Nova Meta da Categoria:");
+		labelNovaMetaProcentagem.setText("Novo Alerta(%):");
 		labelAntigaDescricao.setText("Antigo Nome da Categoria:");
-		labelAntigaDescricaoValor.setText( igPainelDespesas.getDescricaoCategoria() );
+		labelAntigaDescricaoValor.setText( categoria.getDescricao() );
 		labelAntigaMeta.setText("Antiga Meta:");
 		labelAntigaMetaValor.setText( String.valueOf(igPainelDespesas.getMetaCategoriaValor()) );
+		labelAntigaMetaProcentagem.setText("Antigo Alerta(%):");
+		labelAntigaMetaProcentagemValor.setText(String.valueOf(metaMensal.getAlerta()));
 		textFieldNovaDescricao.setPreferredSize(new Dimension(120,25));
 		textFieldNovaMeta.setPreferredSize(new Dimension(120,25));
+		textFieldNovaMetaPorcentagem.setPreferredSize(new Dimension(120,25));
+		
+		textFieldNovaDescricao.setEnabled(true);
+		if(igPainelDespesas.getAbasCategoria().getSelectedIndex() < 18){
+			textFieldNovaDescricao.setEnabled(false);
+			textFieldNovaDescricao.setToolTipText("Você não pode editar o nome dessa categoria");
+		}
 		
 		botaoEditar.setText("Editar");
 		botaoEditar.addActionListener(trataEventosCategoria);
@@ -134,6 +164,7 @@ public class JanelaEditarCategoria extends JDialog{
 		constraints.weightx = 1;
 		painelCampos.add(labelErroCampo, constraints);
 		
+		//linha 1
 		constraints.gridx = 1;
 		constraints.gridy = 1;
 		constraints.gridwidth = 1;
@@ -142,41 +173,59 @@ public class JanelaEditarCategoria extends JDialog{
 		constraints.insets = new Insets(0, 100, 10, -90);
 		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelAntigaDescricao, constraints);
-		
 		constraints.gridx = 2;
 		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(labelAntigaDescricaoValor, constraints);
 		
+		//linha 2
 		constraints.gridx = 1;
 		constraints.gridy = 2;
 		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelAntigaMeta, constraints);
-		
 		constraints.gridx = 2;
 		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(labelAntigaMetaValor, constraints);
 		
+		//linha 3
 		constraints.gridx = 1;
 		constraints.gridy = 3;
 		constraints.anchor = GridBagConstraints.LINE_END;
-		painelCampos.add(labelNovaDescricao, constraints);
+		painelCampos.add(labelAntigaMetaProcentagem, constraints);
+		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_START;
+		painelCampos.add(labelAntigaMetaProcentagemValor, constraints);
 		
+		//linha 4
+		constraints.gridx = 1;
+		constraints.gridy = 4;
+		constraints.anchor = GridBagConstraints.LINE_END;
+		painelCampos.add(labelNovaDescricao, constraints);
 		constraints.gridx = 2;
 		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(textFieldNovaDescricao, constraints);
 		
+		//linha 5
 		constraints.gridx = 1;
-		constraints.gridy = 4;
+		constraints.gridy = 5;
 		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(labelNovaMeta, constraints);
-		
 		constraints.gridx = 2;
 		constraints.anchor = GridBagConstraints.LINE_START;
 		painelCampos.add(textFieldNovaMeta, constraints);
 		
+		//linha 6
 		constraints.gridx = 1;
-		constraints.gridy = 5;
-		constraints.insets = new Insets(180, 100, 0, -90);
+		constraints.gridy = 6;
+		constraints.anchor = GridBagConstraints.LINE_END;
+		painelCampos.add(labelNovaMetaProcentagem, constraints);
+		constraints.gridx = 2;
+		constraints.anchor = GridBagConstraints.LINE_START;
+		painelCampos.add(textFieldNovaMetaPorcentagem, constraints);
+		
+		//linha 7
+		constraints.gridx = 1;
+		constraints.gridy = 7;
+		constraints.insets = new Insets(140, 100, 0, -90);
 		constraints.anchor = GridBagConstraints.LINE_END;
 		painelCampos.add(botaoEditar, constraints);
 		constraints.gridx = 2;
@@ -202,10 +251,14 @@ public class JanelaEditarCategoria extends JDialog{
 		labelErroCampo = new JLabel();
 		textFieldNovaDescricao = new JTextField();
 		textFieldNovaMeta = new JTextField();
+		textFieldNovaMetaPorcentagem = new JTextField();
 		labelNovaDescricao = new JLabel();
 		labelNovaMeta = new JLabel();
+		labelNovaMetaProcentagem = new JLabel();
 		labelAntigaDescricaoValor = new JLabel();
 		labelAntigaMetaValor = new JLabel();
+		labelAntigaMetaProcentagem = new JLabel();
+		labelAntigaMetaProcentagemValor = new JLabel();
 	}
 	
 	private void liberaElementos(){
@@ -223,8 +276,12 @@ public class JanelaEditarCategoria extends JDialog{
 		textFieldNovaMeta = null;
 		labelNovaDescricao = null;
 		labelNovaMeta = null;
+		labelNovaMetaProcentagem = null;
+		textFieldNovaMetaPorcentagem = null;
 		labelAntigaDescricaoValor = null;
 		labelAntigaMetaValor = null;
+		labelAntigaMetaProcentagem = null;
+		labelAntigaMetaProcentagemValor = null;
 	}
 	
 	public void finalizaJanelaCategoria(){
