@@ -18,11 +18,11 @@ public class ValidarDados {
 		return true;
 	}
 	
-	public static boolean validarString(String str, String valoresPossiveis){
-		if(!str.matches(valoresPossiveis + "*")){
-			return false;
+	public static boolean validarString(String str){
+		if(str.matches("[/[a-z0-9áàâãéèêíïóôõöúçñ_-]/i]+")){
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	public static boolean validarNumeroDouble(String str){

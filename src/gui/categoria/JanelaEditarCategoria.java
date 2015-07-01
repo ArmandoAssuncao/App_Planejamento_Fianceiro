@@ -294,19 +294,11 @@ public class JanelaEditarCategoria extends JDialog{
 		
 		///valida o campo descricao
 		String descricao = textFieldNovaDescricao.getText();
-		if(!ValidarDados.validarVazio(descricao)){
-			/*labelErroCampo.setText("O campo \"Nome\" não pode ficar vazio.");
-			return false;*/
-		}
-		else if(!ValidarDados.validarTamanho(descricao, 25)){
+		if(!ValidarDados.validarTamanho(descricao, 25)){
 			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
 			return false;
 		}
-		else if(!ValidarDados.validarInicioString(descricao, "[a-zA-Z]")){
-			labelErroCampo.setText("O campo \"Nome\" tem que iniciar com uma letra");
-			return false;
-		}
-		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-]")){
+		else if(!ValidarDados.validarString(descricao)){
 			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
 			return false;
 		}

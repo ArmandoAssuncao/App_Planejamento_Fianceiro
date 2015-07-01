@@ -351,6 +351,10 @@ public class JanelaCriarDespesa extends JDialog{
 			textFieldDescricao.requestFocusInWindow();
 			return false;
 		}
+		else if(!ValidarDados.validarString(descricao)){
+			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
+			return false;
+		}
 
 		//valida o campo valor
 		String valor = textFieldValorDespesa.getText();

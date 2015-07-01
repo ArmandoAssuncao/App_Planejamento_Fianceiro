@@ -259,11 +259,7 @@ public class JanelaCriarCategoria extends JDialog{
 			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
 			return false;
 		}
-		else if(!ValidarDados.validarInicioString(descricao, "[a-zA-Z]")){
-			labelErroCampo.setText("O campo \"Nome\" tem que iniciar com uma letra");
-			return false;
-		}
-		else if(!ValidarDados.validarString(descricao, "[a-zA-z0-9_-]")){
+		else if(!ValidarDados.validarString(descricao)){
 			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
 			return false;
 		}
@@ -306,10 +302,12 @@ public class JanelaCriarCategoria extends JDialog{
 		try{
 			if(!textFieldMeta.getText().equals(""))
 				metaMensal.setValor( Double.parseDouble(textFieldMeta.getText()) );
+			
 			if(textFieldMetaPorcentagem.getText().equals(""))
-				textFieldMetaPorcentagem.setText("70");
-			//TODO exceção ocorrendo aki ao tentar cadastrar uma nova categoria.
-			metaMensal.setAlerta(Double.parseDouble(textFieldMetaPorcentagem.getText()));
+				metaMensal.setAlerta(70);
+			else
+				metaMensal.setAlerta(Double.parseDouble(textFieldMetaPorcentagem.getText()));
+			
 		}
 		catch(NumberFormatException e){
 			e.printStackTrace();
