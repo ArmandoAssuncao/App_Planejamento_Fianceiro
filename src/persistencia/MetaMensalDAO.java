@@ -74,7 +74,7 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 	public boolean atualizarDados(MetaMensal novaMetaMensal, Calendar mesAnoMeta, String descricaoCategoria){
 		//verifica se existe a MetaMensal
 		try {
-			if(!exists(mesAnoMeta, descricaoCategoria))
+			if(exists(mesAnoMeta, descricaoCategoria))
 				return false;
 		} catch (SQLException e2) {
 			e2.printStackTrace();
@@ -99,7 +99,7 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 		String comandoUpdate = "UPDATE meta_mensal SET ";
 		String clausulaWhere = " WHERE idCategoria=" + id + " AND mesAnoMeta=\'" + novoMesAnoMeta + "\'";
 		
-		String comandoSql = comandoUpdate + "valor=" + novoValor + "AND alerta=" + novoAlerta + clausulaWhere;
+		String comandoSql = comandoUpdate + "valor=" + novoValor + ", alerta=" + novoAlerta + clausulaWhere;
 		
 		try {
 			this.executaUpdate(comandoSql);
