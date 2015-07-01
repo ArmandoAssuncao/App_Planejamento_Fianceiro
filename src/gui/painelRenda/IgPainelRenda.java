@@ -59,8 +59,11 @@ public class IgPainelRenda extends JPanel {
 		add(tabelaRendaMensal,BorderLayout.WEST);
 		add(painelBotoes,BorderLayout.EAST);
 		
+		botaoExcluirRenda.setVisible(false); 
+		botaoEditarRenda.setVisible(false);
+		
 		setVisible(true);
-		setBackground(Color.GREEN);
+		//setBackground(Color.GREEN); TODO
 	}
 
 	private void iniciaElementos() {
@@ -142,7 +145,7 @@ public class IgPainelRenda extends JPanel {
 		painelBotoes.add(botaoEditarRenda,constraints);
 		
 		painelBotoes.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-		painelBotoes.setBackground(Color.RED); //TODO Apagar
+		//painelBotoes.setBackground(Color.RED); //TODO Apagar
 //		painelBotoes.setVisible(true);  //TODO isso � realmente necess�rio?
 	}//criaPainelBotoes
 

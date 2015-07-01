@@ -6,7 +6,6 @@ import gui.renda.JanelaCriarRenda;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.List;
 
 import persistencia.RendaDAO;
 import persistencia.RendaMensalDAO;
@@ -32,7 +31,6 @@ public class TEJanelaCriarRenda implements ActionListener {
 	 * 
 	 * @param janelaCriarRenda janela de onde vem os eventos.
 	 * @param igPainelRenda painel interno da janela //TODO está certo?
-	 * @wbp.parser.entryPoint
 	 */
 	public TEJanelaCriarRenda(JanelaCriarRenda janelaCriarRenda, IgPainelRenda igPainelRenda) {
 		this.janelaCriarRenda = janelaCriarRenda;

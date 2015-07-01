@@ -76,7 +76,13 @@ public class IgPainelDespesas extends JPanel{
 		
 		
 		setPreferredSize(new Dimension(TAM_PAINEL_X, TAM_PAINEL_Y));
-		setBackground(Color.WHITE);
+		//setBackground(Color.WHITE); TODO
+		
+		botaoExcluirCategoria.setVisible(false);
+		botaoExcluirDespesa.setVisible(false);
+		botaoEditarDespesa.setVisible(false);
+		botaoEditarCategoria.setVisible(false);
+		
 		setVisible(true);
 	}
 

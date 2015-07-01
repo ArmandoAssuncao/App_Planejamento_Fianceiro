@@ -10,8 +10,9 @@ CREATE TABLE IF NOT EXISTS renda_mensal(
     idRenda INTEGER NOT NULL,
     dataRenda VARCHAR_IGNORECASE(10),
 	valor DOUBLE,
+    CONSTRAINT pk_renda_mesal PRIMARY KEY (idRenda, dataRenda),
     CONSTRAINT fk_renda_mensal FOREIGN KEY (idRenda) REFERENCES renda(idRenda) ON DELETE CASCADE,
-	CONSTRAINT pk_renda_mesal PRIMARY KEY (idRenda, dataRenda)
+	/*CONSTRAINT pk_renda_mesal PRIMARY KEY (idRenda, dataRenda)*/
 );
 /* Forma Pagamento */
 CREATE TABLE IF NOT EXISTS forma_pagamento(
