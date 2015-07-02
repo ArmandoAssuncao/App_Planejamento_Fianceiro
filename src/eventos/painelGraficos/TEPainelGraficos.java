@@ -1,5 +1,6 @@
 package eventos.painelGraficos;
 
+import gui.graficos.JanelaBalancoMensal;
 import gui.painelGraficos.PainelGraficos;
 
 import java.awt.Window;
@@ -28,6 +29,7 @@ public class TEPainelGraficos implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == painelGraficos.getBotaoBalancoTotal()){
+			new JanelaBalancoMensal();
 		}
 		else if(event.getSource() == painelGraficos.getBotaoBalancoDespesa()){
 		}

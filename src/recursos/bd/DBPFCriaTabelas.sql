@@ -43,8 +43,8 @@ CREATE TABLE IF NOT EXISTS despesa(
 );
 /* Planejamento Mensal */
 CREATE TABLE IF NOT EXISTS planejamento_mensal(
-	mesAnoPlanejamento VARCHAR_IGNORECASE(10),
     idDespesa INTEGER NOT NULL,
+    mesAnoPlanejamento VARCHAR_IGNORECASE(10),
     CONSTRAINT fk_planejamento_despesa FOREIGN KEY (idDespesa) REFERENCES despesa(idDespesa) ON DELETE CASCADE,
 	CONSTRAINT pk_planejamento_mensal PRIMARY KEY (mesAnoPlanejamento, idDespesa)
 );
@@ -71,6 +71,7 @@ CREATE SEQUENCE seq_renda START WITH 1;
 CREATE SEQUENCE seq_forma_pagamento START WITH 1;
 CREATE SEQUENCE seq_categoria START WITH 1;
 CREATE SEQUENCE seq_despesa START WITH 1;
+CREATE SEQUENCE seq_planejamento_mensal_despesa START WITH 1;
 CREATE SEQUENCE seq_configuracoes START WITH 1;
 /* usar nextval('seq_candidato') para usar o proximo id valido no postgres*/
 /* NEXT VALUE FOR seq_candidato no hsql*/
