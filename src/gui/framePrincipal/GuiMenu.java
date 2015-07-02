@@ -10,6 +10,8 @@ public class GuiMenu extends JMenuBar{
 	
 	TEGuiMenu trataEventosMenu;
 	
+	private JMenuItem menuItemSair;
+	private JMenuItem menuItemApagarTudo;
 	private JMenuItem menuItemAdicionarRenda;
 	private JMenuItem menuItemEditarRenda;
 	private JMenuItem menuItemRemoverRenda;
@@ -19,6 +21,8 @@ public class GuiMenu extends JMenuBar{
 	private JMenuItem menuItemAddCategoria;
 	private JMenuItem menuItemEditarCategoria;
 	private JMenuItem menuItemExcluirCategoria;
+	private JMenuItem menuItemBalancoMensal;
+	private JMenuItem menuItemBalancoMensalDespesas;
 	private JMenuItem menuItemAbrirBD;
 	private JMenuItem menuItemAutor;
 	
@@ -27,6 +31,15 @@ public class GuiMenu extends JMenuBar{
 		//setPreferredSize(new Dimension(190,20));
 		
 		this.trataEventosMenu = new TEGuiMenu(this);
+		
+		JMenu menuArquivo = new JMenu("Arquivo");
+		add(menuArquivo);		
+
+		menuItemApagarTudo = new JMenuItem("Apagar todos dados...");
+		menuArquivo.add(menuItemApagarTudo);
+		
+		menuItemSair = new JMenuItem("Sair");
+		menuArquivo.add(menuItemSair);
 		
 		JMenu menuRenda = new JMenu("Renda");
 		add(menuRenda);		
@@ -39,6 +52,20 @@ public class GuiMenu extends JMenuBar{
 		
 		menuItemRemoverRenda = new JMenuItem("Excluir Renda");
 		menuRenda.add(menuItemRemoverRenda);
+		
+		
+		
+		JMenu menuCategoria = new JMenu("Categoria");
+		add(menuCategoria);
+		
+		menuItemAddCategoria = new JMenuItem("Adicionar Categoria");
+		menuCategoria.add(menuItemAddCategoria);
+		
+		menuItemEditarCategoria = new JMenuItem("Editar Categoria");
+		menuCategoria.add(menuItemEditarCategoria);
+		
+		menuItemExcluirCategoria = new JMenuItem("Excluir Categoria");
+		menuCategoria.add(menuItemExcluirCategoria);
 		
 		
 		
@@ -56,24 +83,14 @@ public class GuiMenu extends JMenuBar{
 		
 		
 		
-		JMenu menuCategoria = new JMenu("Categoria");
-		add(menuCategoria);
+		JMenu menuBalanco = new JMenu("Balanços");
+		add(menuBalanco);
 		
-		menuItemAddCategoria = new JMenuItem("Adicionar Categoria");
-		menuCategoria.add(menuItemAddCategoria);
+		menuItemBalancoMensal = new JMenuItem("Balanço Mensal...");
+		menuBalanco.add(menuItemBalancoMensal);
 		
-		menuItemEditarCategoria = new JMenuItem("Editar Categoria");
-		menuCategoria.add(menuItemEditarCategoria);
-		
-		menuItemExcluirCategoria = new JMenuItem("Excluir Categoria");
-		menuCategoria.add(menuItemExcluirCategoria);
-		
-
-		JMenu menuExibir = new JMenu("Exibir");
-		add(menuExibir);
-		
-		JMenu menuEditar = new JMenu("Editar");
-		add(menuEditar);
+		menuItemBalancoMensalDespesas = new JMenuItem("Balanço Despesas...");
+		menuBalanco.add(menuItemBalancoMensalDespesas);
 		
 		
 		JMenu menuConfiguracoes = new JMenu("Configurações");
@@ -88,47 +105,72 @@ public class GuiMenu extends JMenuBar{
 		
 		menuItemAutor = new JMenuItem("Autor");
 		menuSobre.add(menuItemAutor);
-
+		
+		menuItemSair.setVisible(true);
+		menuItemApagarTudo.setVisible(false);
+		menuItemAdicionarRenda.setVisible(true);
+		menuItemEditarRenda.setVisible(false);//
+		menuItemRemoverRenda.setVisible(false);//
+		menuItemAddDespesa.setVisible(true);
+		menuItemEditarDespesa.setVisible(false);//
+		menuItemExcluirDespesa.setVisible(false);//
+		menuItemAddCategoria.setVisible(true);
+		menuItemEditarCategoria.setVisible(true);
+		menuItemExcluirCategoria.setVisible(false);//
+		menuItemBalancoMensal.setVisible(true);
+		menuItemBalancoMensalDespesas.setVisible(true);
+		menuItemAbrirBD.setVisible(true); //TODO mudar pra false
+		menuItemAutor.setVisible(true);
 		
 		//Adiciona o tratador de eventos
+		menuItemSair.addActionListener(trataEventosMenu);
+		menuItemApagarTudo.addActionListener(trataEventosMenu);
+		
+		menuItemAdicionarRenda.addActionListener(trataEventosMenu);
+		menuItemEditarRenda.addActionListener(trataEventosMenu);
+		menuItemRemoverRenda.addActionListener(trataEventosMenu);
+		
+		menuItemAddDespesa.addActionListener(trataEventosMenu);
+		menuItemEditarDespesa.addActionListener(trataEventosMenu);
+		menuItemExcluirDespesa.addActionListener(trataEventosMenu);
+		
+		menuItemAddCategoria.addActionListener(trataEventosMenu);
+		menuItemEditarCategoria.addActionListener(trataEventosMenu);
+		menuItemExcluirCategoria.addActionListener(trataEventosMenu);
+		
+		menuItemBalancoMensal.addActionListener(trataEventosMenu);
+		menuItemBalancoMensalDespesas.addActionListener(trataEventosMenu);
+		
 		menuItemAbrirBD.addActionListener(trataEventosMenu);
+		menuItemAutor.addActionListener(trataEventosMenu);
 	}
-	
+
+	public JMenuItem getMenuItemSair() {
+		return menuItemSair;
+	}
+
+	public JMenuItem getMenuItemApagarTudo() {
+		return menuItemApagarTudo;
+	}
 
 	public JMenuItem getMenuItemAdicionarRenda() {
 		return menuItemAdicionarRenda;
-	}
-
-	public JMenuItem getMenuItemEditarRenda() {
-		return menuItemEditarRenda;
-	}
-
-	public JMenuItem getMenuItemRemoverRenda() {
-		return menuItemRemoverRenda;
 	}
 
 	public JMenuItem getMenuItemAddDespesa() {
 		return menuItemAddDespesa;
 	}
 
-	public JMenuItem getMenuItemEditarDespesa() {
-		return menuItemEditarDespesa;
-	}
-
-	public JMenuItem getMenuItemExcluirDespesa() {
-		return menuItemExcluirDespesa;
-	}
-
 	public JMenuItem getMenuItemAddCategoria() {
 		return menuItemAddCategoria;
 	}
 
-	public JMenuItem getMenuItemEditarCategoria() {
-		return menuItemEditarCategoria;
+	public JMenuItem getMenuItemBalancoMensal() {
+		return menuItemBalancoMensal;
 	}
 
-	public JMenuItem getMenuItemExcluirCategoria() {
-		return menuItemExcluirCategoria;
+	public JMenuItem getMenuItemBalancoMensalDespesas() {
+		return menuItemBalancoMensalDespesas;
 	}
 
 	public JMenuItem getMenuItemAbrirBD() {
