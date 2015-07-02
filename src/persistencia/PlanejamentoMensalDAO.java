@@ -1,15 +1,13 @@
 package persistencia;
 
-import funcoes.Converte;
-import gui.JanelaMensagem;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import classes.Despesa;
+import funcoes.Converte;
+import gui.JanelaMensagem;
 
 /**
  * Classe para manipular a tabela planejamento_mensal no banco de dados.

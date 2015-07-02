@@ -3,7 +3,13 @@ package funcoes;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
+/**
+ * Classe para realizar operações de conversão de dados.
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ */
 public final class Converte {
 	/**
 	 * Retorna uma representação em <code>String</code> da data.

@@ -10,15 +10,30 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Trata os eventos do painel de despesas
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ *@see ActionListener
+ */
 public class TEPainelDespesas implements ActionListener{
 	private IgPainelDespesas painelDespesas;
 	Window janelaPai;
-	
+	/**
+	 * Cria uma instância do tratador de eventos da igDespesas.
+	 * 
+	 * @param painelDespesas painel que será manipulado.
+	 * @param janelaPai janela onde o painelDespesas está contido.
+	 */
 	public TEPainelDespesas(IgPainelDespesas painelDespesas, Window janelaPai) {
 		this.janelaPai = janelaPai;
 		this.painelDespesas = painelDespesas;
 	}
-
+	
+	/**
+	 * Trata o evento de mudança do estado
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == painelDespesas.getBotaoNovaCategoria()){

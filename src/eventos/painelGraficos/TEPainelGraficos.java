@@ -21,15 +21,31 @@ import classes.Despesa;
 import classes.MetaMensal;
 import classes.RendaMensal;
 
+/**
+ * Trata os eventos do painel de gráficos
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ *@see ActionListener
+ */
 public class TEPainelGraficos implements ActionListener{
 	private PainelGraficos painelGraficos;
 	Window janelaPai;
 	
+	/**
+	 * Cria uma instância do tratador de eventos do <code>PainelGraficos</code>
+	 * 
+	 * @param painelGraficos painel que será manipulado.
+	 * @param janelaPai janela onde o painelDespesas está contido.
+	 */
 	public TEPainelGraficos(PainelGraficos painelGraficos, Window janelaPai) {
 		this.janelaPai = janelaPai;
 		this.painelGraficos = painelGraficos;
 	}
-
+	
+	/**
+	 * Trata o evento de mudança do estado
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == painelGraficos.getBotaoBalancoTotal()){

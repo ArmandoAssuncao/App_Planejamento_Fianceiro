@@ -15,11 +15,21 @@ public class TEJanelaRemoverCategoria implements ActionListener{
 	private JanelaRemoverCategoria janelaRemoverCategoria;
 	private IgPainelDespesas igPainelDespesas;
 	
+	/**
+	 * Cria uma instância do tratador de eventos da janela.
+	 * 
+	 * @param janelaRemoverCategoria janela de onde vem os eventos.
+	 * @param igPainelDespesas painel interno da janela //TODO está certo?
+	 */
 	public TEJanelaRemoverCategoria(JanelaRemoverCategoria janelaRemoverCategoria, IgPainelDespesas igPainelDespesas) {
 		this.janelaRemoverCategoria = janelaRemoverCategoria;
 		this.igPainelDespesas = igPainelDespesas;
 	}
-
+	
+	/**
+	 * Trata os eventos de clique da janela.
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == janelaRemoverCategoria.getBotaoRemover()){

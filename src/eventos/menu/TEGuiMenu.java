@@ -15,6 +15,7 @@ import persistencia.PlanejamentoFinanceiroDAO;
  * @author Armando Assunção
  * @author Richardson William
  *
+ *@see ActionListener
  */
 public class TEGuiMenu implements ActionListener{
 	private GuiMenu guiMenu;

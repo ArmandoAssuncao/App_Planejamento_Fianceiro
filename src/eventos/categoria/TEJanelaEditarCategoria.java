@@ -13,15 +13,33 @@ import persistencia.MetaMensalDAO;
 import classes.Categoria;
 import classes.MetaMensal;
 
+/**
+ * Classe para tratar os eventos da janela Editar Categoria.
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ *@see ActionListener
+ */
 public class TEJanelaEditarCategoria  implements ActionListener{
 	private JanelaEditarCategoria janelaEditarCategoria;
 	private IgPainelDespesas igPainelDespesas;
 	
+	/**
+	 * Cria uma instância do tratador de eventos da janela.
+	 * 
+	 * @param janelaEditarCategoria janela de onde vem os eventos.
+	 * @param igPainelDespesas painel interno da janela //TODO está certo?
+	 */
 	public TEJanelaEditarCategoria(JanelaEditarCategoria janelaEditarCategoria, IgPainelDespesas igPainelDespesas) {
 		this.janelaEditarCategoria = janelaEditarCategoria;
 		this.igPainelDespesas = igPainelDespesas;
 	}
 
+	/**
+	 * Trata os eventos de clique da janela.
+	 * 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		//botão Criar
