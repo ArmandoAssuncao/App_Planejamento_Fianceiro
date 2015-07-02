@@ -1,16 +1,26 @@
 package gui.painelGraficos;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.labels.ItemLabelAnchor;
+import org.jfree.chart.labels.ItemLabelPosition;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.ui.TextAnchor;
 
 public class GraficosJFreeChart {
 	
@@ -56,28 +66,40 @@ public class GraficosJFreeChart {
 		    "Valor", ds, PlotOrientation.VERTICAL, true, true, false);
 		
 		grafico.setBackgroundPaint(new Color(240,240,240));
-		return new ChartPanel(grafico);
+		
+		ChartPanel painelGrafico = new ChartPanel(grafico);
+		
+		return painelGrafico;
 	}
 	
 	public static JPanel painelGraficoBarra(String tituloDoGrafico, String[] campos, Double[] valores){
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
 		for(int i = 0; i < campos.length; i++){
-			dataset.addValue(valores[i], "Categoria", campos[i]);
+			dataset.addValue(valores[i], campos[i], "Categoria");
 		}
 		
 		JFreeChart grafico = ChartFactory.createBarChart3D(tituloDoGrafico, // chart title
-		         null, // domain axis label
-		         null, // range axis label
+		         "", // domain axis label
+		         "Meta", // range axis label
 		         dataset, // data
 		         PlotOrientation.VERTICAL, // orientation
-		         false, // include legend
-		         true, // tooltips?
-		         true); // URLs?)
+		         true, // include legend
+		         true, // tooltips
+		         true); // URLs
 		
+		
+		//grafico.setBorderVisible(true);
 		grafico.setBackgroundPaint(new Color(240,240,240));
 		
-		return new ChartPanel(grafico);
+        CategoryPlot plot = (CategoryPlot) grafico.getPlot();
+        plot.setBackgroundPaint(Color.LIGHT_GRAY);
+        plot.setRangeGridlinePaint(Color.WHITE);
+       
+        ChartPanel painelGrafico = new ChartPanel(grafico);
+        painelGrafico.setPreferredSize(new Dimension(730,450));
+		
+		return painelGrafico;
 	}
 	
 

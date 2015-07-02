@@ -8,8 +8,10 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
 import eventos.painelGraficos.TEPainelGraficos;
@@ -71,10 +73,10 @@ public class PainelGraficos extends JPanel {
 	}
 	
 	private void criaPainelDeGraficos(){
-		final int TAM_X = 500;
-		final int TAM_Y = 130;
+		//final int TAM_X = 700;
+		//final int TAM_Y = 130;
 		
-		painelDeGraficos.setPreferredSize(new Dimension(TAM_X, TAM_Y));
+		//painelDeGraficos.setPreferredSize(new Dimension(TAM_X, TAM_Y));
 	}
 	
 	private void criaPainelBotoes(){
@@ -95,61 +97,67 @@ public class PainelGraficos extends JPanel {
 		//botao Banlanço mensal
 		String labelBalancoTotal = "Balanço Mensal";
 		botaoBalancoTotal.setText(labelBalancoTotal);
-		//ImageIcon iconeBalancoTotal = new ImageIcon("imagens/img_botaoNovaCategoria.png");
-		//botaoBalancoTotal.setIcon(iconeBalancoTotal);
-		//botaoBalancoTotal.setMargin(new Insets(0,-20,0,0));
-		//botaoBalancoTotal.setHorizontalTextPosition(JButton.RIGHT);
+		ImageIcon iconeBalancoTotal = new ImageIcon("imagens/img_botaoBalancoMensal.png");
+		botaoBalancoTotal.setIcon(iconeBalancoTotal);
+		botaoBalancoTotal.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoBalancoTotal.setIconTextGap(10);
+		botaoBalancoTotal.setHorizontalTextPosition(JButton.RIGHT);
 		botaoBalancoTotal.setPreferredSize(new Dimension(150,50));
 		botaoBalancoTotal.addActionListener(trataEventosGraficos);
 		
 		//botao Balanço mensal das despesas pela forma de pagamento
-		String labelBalancoDespesa = "<html>Balanço Mensal <br>Forma de Pagamento</html>";
+		String labelBalancoDespesa = "<html>Formas de Pagamento</html>";
 		botaoBalancoDespesa.setText(labelBalancoDespesa);
-		//ImageIcon iconeBalancoDespesa = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
-		//botaoBalancoDespesa.setIcon(iconeBalancoDespesa);
-		//botaoBalancoDespesa.setMargin(new Insets(0,-10,0,0));
-		//botaoBalancoDespesa.setHorizontalTextPosition(JButton.RIGHT);
+		ImageIcon iconeBalancoDespesa = new ImageIcon("imagens/img_botaoBalancoMensal.png");
+		botaoBalancoDespesa.setIcon(iconeBalancoDespesa);
+		botaoBalancoDespesa.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoBalancoDespesa.setIconTextGap(10);
+		botaoBalancoDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoBalancoDespesa.setPreferredSize(new Dimension(150,50));
 		botaoBalancoDespesa.addActionListener(trataEventosGraficos);
 		
 		//botao Grafico valores da receita
-		String labelGraficoPizzaTotal = "<html>Grafico<br>Valores da Receita</html>";
+		String labelGraficoPizzaTotal = "Receitas";
 		botaoGraficoPizzaTotal.setText(labelGraficoPizzaTotal);
-		//ImageIcon iconeGraficoPizzaTotal = new ImageIcon("imagens/img_botaoEditarCategoria.png");
-		//botaoGraficoPizzaTotal.setIcon(iconeGraficoPizzaTotal);
-		//botaoGraficoPizzaTotal.setMargin(new Insets(0,-20,0,0));
-		//botaoGraficoPizzaTotal.setHorizontalTextPosition(JButton.RIGHT);
+		ImageIcon iconeGraficoPizzaTotal = new ImageIcon("imagens/img_botaoGraficoPizza.png");
+		botaoGraficoPizzaTotal.setIcon(iconeGraficoPizzaTotal);
+		botaoGraficoPizzaTotal.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoGraficoPizzaTotal.setIconTextGap(10);
+		botaoGraficoPizzaTotal.setHorizontalTextPosition(JButton.RIGHT);
 		botaoGraficoPizzaTotal.setPreferredSize(new Dimension(150,50));
 		botaoGraficoPizzaTotal.addActionListener(trataEventosGraficos);
 		
 		
 		//Botao Grafico categorias
-		String labelGraficoBarraCategoria = "<html>Grafico<br>Categorias";
+		String labelGraficoBarraCategoria = "Categorias";
 		botaoGraficoBarraCategoria.setText(labelGraficoBarraCategoria);
-//		ImageIcon iconeGraficoBarraCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
-//		botaoGraficoBarraCategoria.setIcon(iconeGraficoBarraCategoria);
-//		botaoGraficoBarraCategoria.setMargin(new Insets(0,0,0,0));
-//		botaoGraficoBarraCategoria.setHorizontalTextPosition(JButton.RIGHT);
+		ImageIcon iconeGraficoBarraCategoria = new ImageIcon("imagens/img_botaoGraficoBarra.png");
+		botaoGraficoBarraCategoria.setIcon(iconeGraficoBarraCategoria);
+		botaoGraficoBarraCategoria.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoGraficoBarraCategoria.setIconTextGap(10);
+		botaoGraficoBarraCategoria.setHorizontalTextPosition(JButton.RIGHT);
 		botaoGraficoBarraCategoria.setPreferredSize(new Dimension(150,50));
 		botaoGraficoBarraCategoria.addActionListener(trataEventosGraficos);
 		
 		//Botao Grafico Metas mensal
-		String labelGraficoLinhaMetaMensal = "<html>Grafico<br>Metas Mensal";
+		String labelGraficoLinhaMetaMensal = "<html>Metas Mensal</html>";
 		botaoGraficoLinhaMetaMensal.setText(labelGraficoLinhaMetaMensal);
-//		ImageIcon iconeGraficoLinhaMetaMensal = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
-//		botaoGraficoLinhaMetaMensal.setIcon(iconeGraficoLinhaMetaMensal);
-//		botaoGraficoLinhaMetaMensal.setMargin(new Insets(0,0,0,0));
-//		botaoGraficoLinhaMetaMensal.setHorizontalTextPosition(JButton.RIGHT);
+		ImageIcon iconeGraficoLinhaMetaMensal = new ImageIcon("imagens/img_botaoGraficoLinha.png");
+		botaoGraficoLinhaMetaMensal.setIcon(iconeGraficoLinhaMetaMensal);
+		botaoGraficoLinhaMetaMensal.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoGraficoLinhaMetaMensal.setIconTextGap(10);
+		botaoGraficoLinhaMetaMensal.setHorizontalTextPosition(JButton.RIGHT);
 		botaoGraficoLinhaMetaMensal.setPreferredSize(new Dimension(150,50));
 		botaoGraficoLinhaMetaMensal.addActionListener(trataEventosGraficos);
 		
 		//Botao Grafico Forma de Pagamento
-		String labelGraficoPizzaFormaPagamento = "<html>Grafico<br>Formas de Pagamento";
+		String labelGraficoPizzaFormaPagamento = "<html>Formas de Pagamento</html>";
 		botaoGraficoPizzaFormaPagamento.setText(labelGraficoPizzaFormaPagamento);
-//		ImageIcon iconeGraficoPizzaFormaPagamento = new ImageIcon("imagens/img_botaoEditarCategoria.png");
-//		botaoGraficoPizzaFormaPagamento.setIcon(iconeGraficoPizzaFormaPagamento);
-//		botaoGraficoPizzaFormaPagamento.setMargin(new Insets(0,0,0,0));
-//		botaoGraficoPizzaFormaPagamento.setHorizontalTextPosition(JButton.RIGHT);
+		ImageIcon iconeGraficoPizzaFormaPagamento = new ImageIcon("imagens/img_botaoGraficoPizza.png");
+		botaoGraficoPizzaFormaPagamento.setIcon(iconeGraficoPizzaFormaPagamento);
+		botaoGraficoPizzaFormaPagamento.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoGraficoPizzaFormaPagamento.setIconTextGap(10);
+		botaoGraficoPizzaFormaPagamento.setHorizontalTextPosition(JButton.RIGHT);
 		botaoGraficoPizzaFormaPagamento.setPreferredSize(new Dimension(150,50));
 		botaoGraficoPizzaFormaPagamento.addActionListener(trataEventosGraficos);
 		
@@ -175,6 +183,8 @@ public class PainelGraficos extends JPanel {
 	
 	public void adicionarGrafico(String tituloGrafico, String[] campos, Double[] valores, int tipoGrafico){
 		painelDeGraficos.removeAll();
+		painelDeGraficos.repaint();
+		
 		if(tipoGrafico == 1)
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoPizza(tituloGrafico, campos, valores));
 		else if(tipoGrafico == 2)
@@ -182,7 +192,7 @@ public class PainelGraficos extends JPanel {
 		else if(tipoGrafico == 3)
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoLinha(tituloGrafico, campos, valores));
 		
-		painelDeGraficos.revalidate();
+		painelDeGraficos.validate();
 	}
 
 	public JButton getBotaoBalancoTotal() {

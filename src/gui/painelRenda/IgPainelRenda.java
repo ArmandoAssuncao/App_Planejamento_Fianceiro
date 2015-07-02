@@ -114,7 +114,7 @@ public class IgPainelRenda extends JPanel {
 		
 		//botao Adicionar Renda
 		String labelbotaoAddRenda = "Adicionar Renda";
-		ImageIcon iconeNovaCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
+		ImageIcon iconeNovaCategoria = new ImageIcon("imagens/img_botaoAdicionarRenda.png");
 		botaoAddRenda.setText(labelbotaoAddRenda);
 		botaoAddRenda.setIcon(iconeNovaCategoria);
 		botaoAddRenda.setMargin(new Insets(0,-20,0,0));

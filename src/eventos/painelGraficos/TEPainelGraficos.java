@@ -96,10 +96,6 @@ public class TEPainelGraficos implements ActionListener{
 		}
 		
 		else if(event.getSource() == painelGraficos.getBotaoGraficoBarraCategoria()){
-			painelGraficos.adicionarGrafico("titulo Barra", new String[]{"campo1", "campo2"}, new Double[]{1.0,2.0}, 2);
-		}
-		
-		else if(event.getSource() == painelGraficos.getBotaoGraficoLinhaMetaMensal()){
 			List<Categoria> arrayCategorias = new ArrayList<>();
 			List<MetaMensal> arrayMetasMensal = new ArrayList<>();
 			
@@ -130,6 +126,11 @@ public class TEPainelGraficos implements ActionListener{
 			
 			
 			painelGraficos.adicionarGrafico("Gráfico das Categorias", dados, valores, 2);
+		}
+		
+		else if(event.getSource() == painelGraficos.getBotaoGraficoLinhaMetaMensal()){
+			painelGraficos.adicionarGrafico("titulo Barra", new String[]{"campo1", "campo2"}, new Double[]{1.0,2.0}, 2);
+			
 		}
 		
 		else if(event.getSource() == painelGraficos.getBotaoGraficoPizzaFormaPagamento()){
@@ -165,7 +166,7 @@ public class TEPainelGraficos implements ActionListener{
 				}
 			}
 			
-			painelGraficos.adicionarGrafico("Balanço Mensal por Forma de Pagamento", new String[]{"À Vista", "Cartão de Credito", "Cheque", "Prazo"},
+			painelGraficos.adicionarGrafico("Balanço Mensal da Forma de Pagamento", new String[]{"À Vista", "Cartão de Credito", "Cheque", "Prazo"},
 					new Double[]{valorTotalAVista, valorTotalCartao, valorTotalCheque, valorTotalPrazo}, 1);
 		}
 	}
