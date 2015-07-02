@@ -2,7 +2,6 @@ package eventos.menu;
 
 import gui.JanelaMensagem;
 import gui.framePrincipal.GuiMenu;
-import gui.renda.JanelaCriarRenda;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,13 +10,26 @@ import java.sql.SQLException;
 
 import persistencia.PlanejamentoFinanceiroDAO;
 
+/**
+ * Trata os eventos da barra de menu
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ */
 public class TEGuiMenu implements ActionListener{
 	private GuiMenu guiMenu;
 	
+	/**
+	 * Cria uma instância do tratador de eventos da barra de menu
+	 * @param guiMenu barra de menu do tipo <code>GuiMenu</code> que será manipulada.
+	 */
 	public TEGuiMenu(GuiMenu guiMenu) {
 		this.guiMenu = guiMenu;
 	}
 
+	/**
+	 * Trata o evento de mudança do estado da barra de menu
+	 */
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == guiMenu.getMenuItemApagarTudo()){

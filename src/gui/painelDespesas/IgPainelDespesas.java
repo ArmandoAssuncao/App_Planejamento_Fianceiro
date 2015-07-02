@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -111,6 +112,7 @@ public class IgPainelDespesas extends JPanel{
 		botaoNovaCategoria.setMargin(new Insets(0,-20,0,0));
 		botaoNovaCategoria.setHorizontalTextPosition(JButton.RIGHT);
 		botaoNovaCategoria.setPreferredSize(new Dimension(150,50));
+		botaoNovaCategoria.setMnemonic(KeyEvent.VK_V);
 		botaoNovaCategoria.addActionListener(trataEventosDespesas);
 		
 		//botao Excluir Categoria
@@ -131,6 +133,7 @@ public class IgPainelDespesas extends JPanel{
 		botaoEditarCategoria.setMargin(new Insets(0,-20,0,0));
 		botaoEditarCategoria.setHorizontalTextPosition(JButton.RIGHT);
 		botaoEditarCategoria.setPreferredSize(new Dimension(150,50));
+		botaoEditarCategoria.setMnemonic(KeyEvent.VK_E);
 		botaoEditarCategoria.addActionListener(trataEventosDespesas);
 		
 		
@@ -142,6 +145,7 @@ public class IgPainelDespesas extends JPanel{
 		botaoAdicionarDespesa.setMargin(new Insets(0,0,0,0));
 		botaoAdicionarDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoAdicionarDespesa.setPreferredSize(new Dimension(150,50));
+		botaoAdicionarDespesa.setMnemonic(KeyEvent.VK_N);
 		botaoAdicionarDespesa.addActionListener(trataEventosDespesas);
 		
 		//Botao Excluir Despesa

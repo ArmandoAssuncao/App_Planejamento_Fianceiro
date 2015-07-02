@@ -7,6 +7,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -119,6 +120,7 @@ public class IgPainelRenda extends JPanel {
 		botaoAddRenda.setMargin(new Insets(0,-20,0,0));
 		botaoAddRenda.setHorizontalTextPosition(JButton.RIGHT);
 		botaoAddRenda.setPreferredSize(new Dimension(150,50));
+		botaoAddRenda.setMnemonic(KeyEvent.VK_I);
 		botaoAddRenda.addActionListener(trataEventosRenda);
 		
 		//botao Excluir Renda

@@ -17,7 +17,7 @@ public class PlanejamentoFinanceiro {
 	 * Cria uma instância do programa
 	 * @param args <code>String[]</code> com os argumentos de linha de comando. Não são utilizados.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		//inicia as threads
 		PlanejamentoFinanceiroDAO BancoDados = PlanejamentoFinanceiroDAO.getInstance();
 		Thread threadBancoDeDados = new Thread(BancoDados);
