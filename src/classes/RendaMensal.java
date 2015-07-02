@@ -22,6 +22,18 @@ public class RendaMensal {
 	public RendaMensal() {
 		super();
 	}
+	
+	/**
+	 * Construtor sobrecarregado, recebe os seguintes parâmetros:
+	 * @param id <code>int</code> da renda associada a renda mensal. 
+	 * @param data <code>Calendar</code> com a data da receita.
+	 * @param valor <code>double</code> da renda mensal.
+	 */
+	public RendaMensal(int id, Calendar data, double valor) {
+		setId(id);
+		setValor(valor);
+		setDataRenda(data);
+	}
 
 	/**
 	 * Construtor sobrecarregado, recebe os seguintes parâmetros:
@@ -65,10 +77,18 @@ public class RendaMensal {
 		this.dataRenda = data;
 	}
 
+	/**
+	 * Retorna o id da renda.
+	 * @return <code>int</code> id.
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Atribui o id da renda.
+	 * @param id <code>int</code>
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}

@@ -22,9 +22,10 @@ import javax.swing.table.DefaultTableModel;
  *
  */
 public class JanelaBalancoMensal extends JDialog {
-	private final String TITULO_JANELA= "Nova Categoria";
+	private final String TITULO_JANELA= "Balanço Mensal";
 	private final int TAM_JANELA_X = 800;
 	private final int TAM_JANELA_Y = 600;
+	private final int NUM_COLUNAS = 7;
 	
 	private TEJanelaBalancoMensal teJanelaBalancoMensal;
 	
@@ -62,15 +63,14 @@ public class JanelaBalancoMensal extends JDialog {
 		JPanel painelBalanco = new JPanel(new BorderLayout(0,0));
 
 		tabela = new JTable();
-		modelo = new DefaultTableModel(0, 7);
+		modelo = new DefaultTableModel(0, NUM_COLUNAS);
 		tabela.setRowHeight(20);
 		tabela.setModel(modelo);
 		tabela.setTableHeader(null);
 		
 		String fonteDefault = new JTable().getFont().getFontName(); //Pega a fonte default do sistema
-		Font fonte = new Font(fonteDefault, Font.PLAIN, 14);
+		Font fonte = new Font(fonteDefault, Font.PLAIN, 12);
 		tabela.setFont(fonte);
-		modelo.addRow(new String[]{"aa"});
 		
 		DefaultTableCellRenderer esquerda = new DefaultTableCellRenderer();
 		DefaultTableCellRenderer centralizado = new DefaultTableCellRenderer();
@@ -80,13 +80,13 @@ public class JanelaBalancoMensal extends JDialog {
 		centralizado.setHorizontalAlignment(SwingConstants.CENTER);
 		direita.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		tabela.getColumnModel().getColumn(0).setCellRenderer(esquerda);
-		tabela.getColumnModel().getColumn(1).setCellRenderer(direita);
-		tabela.getColumnModel().getColumn(2).setCellRenderer(direita);
-		tabela.getColumnModel().getColumn(3).setCellRenderer(direita);
-		tabela.getColumnModel().getColumn(4).setCellRenderer(direita);
-		tabela.getColumnModel().getColumn(5).setCellRenderer(direita);
-		tabela.getColumnModel().getColumn(6).setCellRenderer(direita);
+		tabela.getColumnModel().getColumn(0).setCellRenderer(centralizado);
+		tabela.getColumnModel().getColumn(1).setCellRenderer(centralizado);
+		tabela.getColumnModel().getColumn(2).setCellRenderer(centralizado);
+		tabela.getColumnModel().getColumn(3).setCellRenderer(centralizado);
+		tabela.getColumnModel().getColumn(4).setCellRenderer(centralizado);
+		tabela.getColumnModel().getColumn(5).setCellRenderer(centralizado);
+		tabela.getColumnModel().getColumn(6).setCellRenderer(centralizado);
 		
 		
 		JScrollPane barraRolagem = new JScrollPane();
@@ -101,8 +101,8 @@ public class JanelaBalancoMensal extends JDialog {
 		JPanel painelBotoes = new JPanel();
 		
 		jComboBoxMes = new JComboBox<String>();
-		jComboBoxMes.addItem("10/10/2010");
-		jComboBoxMes.addItem("10/10/2011");
+		jComboBoxMes.addItem("02/07/2015");
+		jComboBoxMes.addItem("02/06/2015");
 		
 		jComboBoxMes.addActionListener(teJanelaBalancoMensal);
 		
@@ -110,17 +110,33 @@ public class JanelaBalancoMensal extends JDialog {
 		return painelBotoes;
 	}
 	
-	public void adicionarTituloTabela(String titulo){
-		tabela.setRowHeight(tabela.getRowCount(), 30);
-		modelo.addRow(new String[]{titulo});
+	public void limpaTabela(){
+		int tamanho = modelo.getRowCount();
+		for(int i = tamanho-1; i >= 0; i--)
+			modelo.removeRow(i);
+	}
+	
+	public void adicionarTituloTabela(String titulo, int posicaoColuna){
+		String tracos = "................................";
+		String linha[] = new String[NUM_COLUNAS];
+		for(int i = 0; i < NUM_COLUNAS; i++){
+			if(i == posicaoColuna)
+				linha[i] = titulo;
+			else{
+				linha[i] = tracos;
+			}
+		}
+		modelo.addRow(linha);
+		tabela.setRowHeight(tabela.getRowCount()-1, 40);
 	}
 	
 	public void adicionarDadosTabela(String[] dados){
 		modelo.addRow(dados);
 	}
 	
-	public void adicionarLinhaVaziaTabela(){
+	public void adicionarLinhaVaziaTabela(int espacamento){
 		modelo.addRow(new String[]{});
+		tabela.setRowHeight(tabela.getRowCount()-1, espacamento);
 	}
 	
 	public JComboBox<String> getjComboBoxMes() {

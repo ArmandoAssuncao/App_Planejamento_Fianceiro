@@ -210,4 +210,25 @@ public class RendaDAO extends PlanejamentoFinanceiroDAO {
 		
 		return id;
 	}
+	
+	/**
+	 *   Retorna a descrição da Renda no banco de dados
+	 * @param id <code>int</code> com o id da renda
+	 * @return <code>String</code> com a descrição da renda no banco de dados, caso não encontre retorna <code>null</code>
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public String getDescricao(int id) throws SQLException{
+		String descricao = null;
+		
+		this.abreConexao();
+		String comandoSql = "SELECT descricao FROM renda WHERE idRenda=" + id;
+		ResultSet resultadoQuery = this.executaQuery(comandoSql);
+		
+		if(resultadoQuery.next())
+			descricao = resultadoQuery.getString("descricao");
+		
+		this.fechaConexao();
+		
+		return descricao;
+	}
 }//class BDRenda

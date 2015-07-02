@@ -229,11 +229,11 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
 		
 		while(resultadoQuery.next()){
-			//int idRenda = resultadoQuery.getInt("idRenda");
+			int idRenda = resultadoQuery.getInt("idRenda");
 			Calendar dataRenda = Converte.stringToCalendar( resultadoQuery.getString("dataRenda") );
 			double valor = resultadoQuery.getDouble("valor");
 			
-			rendaMensais.add(new RendaMensal(dataRenda, valor));
+			rendaMensais.add(new RendaMensal(idRenda, dataRenda, valor));
 		}//while
 		
 		BANCO_DE_DADOS_PF.fechaConexao();
@@ -255,7 +255,7 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 		
 		try {
 			while(resultadoQuery.next()){
-				//int idRenda = resultadoQuery.getInt("idRenda");//TODO
+				int idRenda = resultadoQuery.getInt("idRenda");
 				Calendar dataRenda = Converte.stringToCalendar(resultadoQuery.getString("dataRenda"));
 				double valor = resultadoQuery.getDouble("valor");
 				
@@ -265,7 +265,7 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 				String anoBD = String.valueOf(dataRenda.get(Calendar.YEAR));
 				
 				if(mes.equals(mesBD) && ano.equals(anoBD)){
-					rendasMensal.add(new RendaMensal(dataRenda, valor));
+					rendasMensal.add(new RendaMensal(idRenda, dataRenda, valor));
 				}
 			}//while
 		} catch (NumberFormatException | SQLException e) {
@@ -298,6 +298,12 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 		return id;
 	}
 	
+	/**
+	 *   Retorna o id da renda associada a RendaMensal no banco de dados
+	 * @param descricao <code>String</code> com a descrição da renda
+	 * @return <code>int</code> com o id da renda no banco de dados, caso não encontre retorna <code>0</code>
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
 	public int getId(String descricao,String data) throws SQLException{
 		int id = 0;
 		
@@ -313,4 +319,5 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 		
 		return id;
 	}
+	
 }//class RendaMensalDAO

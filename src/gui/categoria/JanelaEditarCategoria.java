@@ -64,9 +64,6 @@ public class JanelaEditarCategoria extends JDialog{
 		
 		add(criaPainelPrincipal());
 		
-		labelNovaDescricao.setVisible(false);
-		textFieldNovaDescricao.setVisible(false);
-		
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setSize(TAM_JANELA_X, TAM_JANELA_Y);
 		setBackground(Color.PINK);
@@ -295,16 +292,18 @@ public class JanelaEditarCategoria extends JDialog{
 	public boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		
-//		///valida o campo descricao
-//		String descricao = textFieldNovaDescricao.getText();
-//		if(!ValidarDados.validarTamanho(descricao, 25)){
-//			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
-//			return false;
-//		}
-//		else if(!ValidarDados.validarString(descricao)){
-//			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
-//			return false;
-//		}
+		///valida o campo descricao
+		String descricao = textFieldNovaDescricao.getText();
+		if(!ValidarDados.validarVazio(descricao)){
+		}
+		else if(!ValidarDados.validarTamanho(descricao, 25)){
+			labelErroCampo.setText("O campo \"Nome\" não pode ter mais que 25 caracteres.");
+			return false;
+		}
+		else if(!ValidarDados.validarString(descricao)){
+			labelErroCampo.setText("O campo \"Nome\" só aceita letras, numeros, \"_\" e \"-\"");
+			return false;
+		}
 
 		//valida o campo meta
 		String meta = textFieldNovaMeta.getText();
