@@ -57,11 +57,12 @@ public class IgPainelRenda extends JPanel {
 		//barra de rolagem da tabela
 		barraRolagem = new JScrollPane();
 		barraRolagem.setViewportView(tabelaRendaMensal);
-		barraRolagem.setPreferredSize(new Dimension(750, 500));
+		barraRolagem.setPreferredSize(new Dimension(tabelaRendaMensal.TAM_TABELA_X, tabelaRendaMensal.TAM_TABELA_Y));
 
 		add(painelTitulo, BorderLayout.NORTH);
 		add(barraRolagem,BorderLayout.WEST);
 		add(painelBotoes,BorderLayout.EAST);
+		add(tabelaRendaMensal.getTableHeader(),BorderLayout.PAGE_START);
 		
 		botaoExcluirRenda.setVisible(false); 
 		botaoEditarRenda.setVisible(false);
@@ -81,7 +82,6 @@ public class IgPainelRenda extends JPanel {
 		botaoEditarRenda = new JButton();
 		
 		tabelaRendaMensal = new TabelaRendaMensal();
-		tabelaRendaMensal.adicionaLinha("Descrição","data", "valor");
 	}//iniciaElementos()
 
 	private void criaPainelTitulo(){

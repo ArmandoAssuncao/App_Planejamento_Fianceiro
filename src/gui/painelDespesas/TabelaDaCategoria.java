@@ -13,6 +13,9 @@ public class TabelaDaCategoria extends JTable{
 	DefaultTableModel modelo;
 
 	public TabelaDaCategoria() {
+		setAutoCreateRowSorter(true);
+		setFillsViewportHeight(true);
+		setOpaque(true);
 		
 		modelo = new DefaultTableModel(nomeColunas, 0);
 		modelo.addRow(new String[]{"","","","","","",""});

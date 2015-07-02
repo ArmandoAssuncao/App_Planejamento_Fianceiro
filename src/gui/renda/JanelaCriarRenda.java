@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -17,14 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import validacoes.ValidarDados;
-import classes.Categoria;
 import classes.Renda;
 import classes.RendaMensal;
 
 import com.toedter.calendar.JDateChooser;
 
 import eventos.renda.TEJanelaCriarRenda;
-import funcoes.Converte;
 import gui.painelRenda.IgPainelRenda;
 
 /**
@@ -284,7 +281,7 @@ public class JanelaCriarRenda extends JDialog{
 			return false;
 		}
 		else if(!ValidarDados.validarNumeroDouble(valor)){
-			labelErroCampo.setText("O campo \"Valor\" só aceita números. Se precisar, use um ponto(\".\") como separador.");
+			labelErroCampo.setText("O campo \"Valor\" só aceita números. Se precisar, use um ponto(\".\") como separador.O valor deve ser positivo");
 			return false;
 		}
 		

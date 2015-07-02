@@ -1,7 +1,6 @@
 package gui.painelRenda;
 
 import java.awt.Color;
-import java.awt.Dimension;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -9,13 +8,15 @@ import javax.swing.table.DefaultTableModel;
 public class TabelaRendaMensal extends JTable{	
 	private final static String[] nomeColunas = {"Descrição","Data","Valor"};
 	DefaultTableModel modelo;
-	private final int TAM_TABELA_X = 750;
-	private final int TAM_TABELA_Y = 500;
+	public final int TAM_TABELA_X = 750;
+	public final int TAM_TABELA_Y = 500;
 	
 	public TabelaRendaMensal() {
+		setAutoCreateRowSorter(true);
+		setFillsViewportHeight(true);
+		setOpaque(true);
+		
 		modelo = new DefaultTableModel(nomeColunas, 0);
-		modelo.addRow(new String[]{"","",""});
-		modelo.removeRow(0);
 		setModel(modelo);
 		
 		setBackground(Color.WHITE);
