@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import persistencia.CategoriaDAO;
 import persistencia.DespesaDAO;
 import persistencia.FormaPagamentoDAO;
+import persistencia.PlanejamentoMensalDAO;
 import classes.Despesa;
 
 /**
@@ -52,8 +53,11 @@ public class TEJanelaCriarDespesa implements ActionListener{
 				}
 				
 				DespesaDAO despesaDAO = new DespesaDAO();
+				PlanejamentoMensalDAO planejamentoMensalDAO = new PlanejamentoMensalDAO();
 				
 				despesaDAO.inserir(despesa, descricaoCategoria, descricaoPagamento);
+				//não usa o primeiro arg
+				planejamentoMensalDAO.inserir(1, despesa.getDataDespesa());
 				
 				igPainelDespesas.criarDespesa(despesa);
 				janelaCriarDespesa.finalizaJanelaDespesa();
