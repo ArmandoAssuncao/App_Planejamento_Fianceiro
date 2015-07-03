@@ -122,7 +122,8 @@ public class PlanejamentoFinanceiroDAO extends BancoDeDados implements Runnable{
 		}
 		catch(IOException e){
 			e.printStackTrace();
-			new JanelaAviso(null, e.getMessage());
+			 JanelaMensagem.mostraMensagemWarning(null, e.getMessage());
+			//new JanelaAviso(null, e.getMessage());	
 			abriu = false;
 		}
 		catch(SQLException e){
