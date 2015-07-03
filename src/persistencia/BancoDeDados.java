@@ -122,7 +122,8 @@ public abstract class BancoDeDados {
 		}
 		catch(SQLException e){
 			e.printStackTrace();
-			new JanelaAviso(null, e.getMessage());
+			 JanelaMensagem.mostraMensagemWarning(null, e.getMessage());
+			//new JanelaAviso(null, e.getMessage());
 		}
 		//System.out.println("fechou a conexao");
 	}
@@ -208,7 +209,9 @@ public abstract class BancoDeDados {
 		}
 		catch(SqlToolError e){
 			e.printStackTrace();
-			new JanelaAviso(null, e.getMessage());
+			 JanelaMensagem.mostraMensagemWarning(null, e.getMessage());
+			
+			 //new JanelaAviso(null, e.getMessage());
 			abriu = false;
 		}
 		this.fechaConexao();
