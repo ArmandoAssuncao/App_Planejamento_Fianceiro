@@ -4,8 +4,9 @@ import java.io.InputStream;
 import java.net.URL;
 
 /** Classe para carregar recursos como imagens, icones, fontes etc
- * @author Arthur Assuncao
  * 
+ * @author Armando Assunção
+ * @author Richardson William
  *
  */
 public abstract class Recursos {
