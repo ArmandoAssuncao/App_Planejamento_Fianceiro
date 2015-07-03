@@ -1,6 +1,5 @@
 package persistencia;
 
-import gui.JanelaAviso;
 import gui.JanelaMensagem;
 
 import java.io.File;
@@ -128,7 +127,8 @@ public class PlanejamentoFinanceiroDAO extends BancoDeDados implements Runnable{
 		}
 		catch(SQLException e){
 			e.printStackTrace();
-			new JanelaAviso(null, e.getMessage());
+			//new JanelaAviso(null, e.getMessage());
+			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
 			abriu = false;
 		}
 		return abriu;

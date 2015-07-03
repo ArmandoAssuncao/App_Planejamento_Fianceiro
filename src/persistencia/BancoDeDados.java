@@ -1,6 +1,5 @@
 package persistencia;
 
-import gui.JanelaAviso;
 import gui.JanelaMensagem;
 
 import java.io.File;
@@ -143,7 +142,7 @@ public abstract class BancoDeDados {
 		}
 		catch(SQLException e){
 			e.printStackTrace();
-			new JanelaAviso(null, e.getMessage());
+			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
 			return null;
 		}
 		finally{
