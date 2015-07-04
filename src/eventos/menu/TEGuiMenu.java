@@ -1,7 +1,10 @@
 package eventos.menu;
 
 import gui.JanelaMensagem;
+import gui.categoria.JanelaCriarCategoria;
+import gui.categoria.JanelaEditarCategoria;
 import gui.framePrincipal.GuiMenu;
+import gui.renda.JanelaCriarRenda;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,7 +62,15 @@ public class TEGuiMenu implements ActionListener{
 		}
 		
 		else if(event.getSource() == guiMenu.getMenuItemAdicionarRenda()){
-			//new JanelaCriarRenda(igPainelRenda)
+			new JanelaCriarRenda(guiMenu.getIgPainelRenda());
+		}
+		
+		else if(event.getSource() == guiMenu.getMenuItemAddCategoria()){
+			new JanelaCriarCategoria(guiMenu.getIgPainelDespesas());
+		}
+		
+		else if(event.getSource() == guiMenu.getMenuItemEditarCategoria()){
+			new JanelaEditarCategoria(guiMenu.getIgPainelDespesas());
 		}
 		
 		

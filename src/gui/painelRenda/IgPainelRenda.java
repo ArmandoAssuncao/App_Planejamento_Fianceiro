@@ -29,6 +29,7 @@ import classes.Renda;
 import classes.RendaMensal;
 import eventos.painelRenda.TEPainelRenda;
 import funcoes.Converte;
+import gui.framePrincipal.GuiPrincipal;
 
 public class IgPainelRenda extends JPanel {
 	public final int TAM_PAINEL_X = 800;
@@ -46,8 +47,10 @@ public class IgPainelRenda extends JPanel {
 	private JButton botaoExcluirRenda;
 	private JButton botaoEditarRenda;
 	
-	public IgPainelRenda(Window framePrincipal) {
+	public IgPainelRenda(GuiPrincipal framePrincipal) {
 		setLayout(new BorderLayout(0,5));
+		
+		framePrincipal.getGuiMenu().setIgPainelRenda(this);
 
 		trataEventosRenda = new TEPainelRenda(this, framePrincipal);
 		iniciaElementos();
@@ -158,7 +161,6 @@ public class IgPainelRenda extends JPanel {
 	public boolean criarRenda(Renda renda,Calendar data){
 		RendaMensal rm = renda.obterRendaMensal(data);
 		tabelaRendaMensal.adicionaLinha(renda.getDescricao(),Converte.calendarToString(rm.getDataRenda()),Double.toString(rm.getValor()));
-		System.out.println("dsfsad");
 		return true;
 	} 
 	

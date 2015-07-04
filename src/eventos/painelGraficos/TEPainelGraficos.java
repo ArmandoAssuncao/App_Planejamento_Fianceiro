@@ -102,12 +102,15 @@ public class TEPainelGraficos implements ActionListener{
 		else if(event.getSource() == painelGraficos.getBotaoGraficoBarraCategoria()){
 			List<Categoria> arrayCategorias = new ArrayList<>();
 			List<Despesa> arrayDespesas = new ArrayList<Despesa>();
+			List<RendaMensal> rendasMensal = new ArrayList<RendaMensal>();
+			Double valorTotalRendas = 0.0;
 			
 			Calendar mesAno = Calendar.getInstance();
 			
 			try {
 				arrayCategorias.addAll(CategoriaDAO.todasAsCategorias());
 				arrayDespesas.addAll(DespesaDAO.despesasDoMesAno(mesAno));
+				rendasMensal.addAll(RendaMensalDAO.rendaMensalDoMesAno(mesAno));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -126,7 +129,17 @@ public class TEPainelGraficos implements ActionListener{
 				valores[arrayDespesas.get(j).getIdCategoria() -1] += arrayDespesas.get(j).getValorDespesa();
 			}
 			
-			painelGraficos.adicionarGrafico("Gastos das Categorias", dados, valores, 2);
+			//Valor total das rendas
+			for(int indice = 0; indice < rendasMensal.size(); indice++){
+				valorTotalRendas += rendasMensal.get(indice).getValor();
+			}
+			
+			if(painelGraficos.getRadioButtonVerEmPorcentagem().isSelected()){
+				for(int i = 0; i < arrayCategorias.size(); i++)
+					valores[i] = valores[i]/valorTotalRendas*100;
+			}
+			
+			painelGraficos.adicionarGrafico("Gastos por Categorias", dados, valores, 2);
 		}
 		
 		//
@@ -194,7 +207,7 @@ public class TEPainelGraficos implements ActionListener{
 				}
 			}
 			
-			painelGraficos.adicionarGrafico("Balanço Mensal da Forma de Pagamento", new String[]{"À Vista", "Cartão de Credito", "Cheque", "Prazo"},
+			painelGraficos.adicionarGrafico("Gastos por Forma de Pagamento", new String[]{"À Vista", "Cartão de Credito", "Cheque", "Prazo"},
 					new Double[]{valorTotalAVista, valorTotalCartao, valorTotalCheque, valorTotalPrazo}, 1);
 		}
 	}

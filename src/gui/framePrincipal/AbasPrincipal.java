@@ -29,7 +29,7 @@ public class AbasPrincipal extends JTabbedPane{
 	PainelGraficos painelGraficos;
     IgPainelRenda igPainelRenda;
 	
-	public AbasPrincipal(Window framePrincipal){
+	public AbasPrincipal(GuiPrincipal framePrincipal){
 		painelInicio = new PainelInicio(framePrincipal);
 		painelDespesas = new IgPainelDespesas(framePrincipal);
 		painelGraficos = new PainelGraficos(framePrincipal);

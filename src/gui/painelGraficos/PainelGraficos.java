@@ -12,11 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
@@ -39,6 +41,8 @@ public class PainelGraficos extends JPanel {
 	private JButton botaoGraficoLinhaMetaMensal;
 	private JButton botaoGraficoPizzaFormaPagamento;
 	JComboBox<String> jComboBoxCategorias;
+	JRadioButton radioButtonVerEmReal;
+	JRadioButton radioButtonVerEmPorcentagem;
 
 	public PainelGraficos(Window framePrincipal) {
 		setLayout(new BorderLayout(0, 3));
@@ -72,6 +76,8 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoLinhaMetaMensal = new JButton();
 		botaoGraficoPizzaFormaPagamento = new JButton();
 		jComboBoxCategorias = new JComboBox<String>();
+		radioButtonVerEmReal = new JRadioButton();
+		radioButtonVerEmPorcentagem = new JRadioButton();
 	}
 	
 	private void criaPainelTitulo(){
@@ -100,9 +106,6 @@ public class PainelGraficos extends JPanel {
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.NONE;
 		constraints.anchor = GridBagConstraints.CENTER;
-		constraints.insets = new Insets(0, 0, 25, 0);
-		constraints.gridx = 0;
-		constraints.gridy = 0;
 		
 		//botao Banlanço mensal
 		String labelBalancoTotal = "Balanço Mensal";
@@ -137,6 +140,16 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoPizzaTotal.setPreferredSize(new Dimension(150,50));
 		botaoGraficoPizzaTotal.addActionListener(trataEventosGraficos);
 		
+		//Botao Grafico Forma de Pagamento
+		String labelGraficoPizzaFormaPagamento = "<html>Formas de Pagamento</html>";
+		botaoGraficoPizzaFormaPagamento.setText(labelGraficoPizzaFormaPagamento);
+		ImageIcon iconeGraficoPizzaFormaPagamento = new ImageIcon("imagens/img_botaoGraficoPizza.png");
+		botaoGraficoPizzaFormaPagamento.setIcon(iconeGraficoPizzaFormaPagamento);
+		botaoGraficoPizzaFormaPagamento.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoGraficoPizzaFormaPagamento.setIconTextGap(10);
+		botaoGraficoPizzaFormaPagamento.setHorizontalTextPosition(JButton.RIGHT);
+		botaoGraficoPizzaFormaPagamento.setPreferredSize(new Dimension(150,50));
+		botaoGraficoPizzaFormaPagamento.addActionListener(trataEventosGraficos);
 		
 		//Botao Grafico categorias
 		String labelGraficoBarraCategoria = "Categorias";
@@ -149,16 +162,26 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoBarraCategoria.setPreferredSize(new Dimension(150,50));
 		botaoGraficoBarraCategoria.addActionListener(trataEventosGraficos);
 		
-		//Botao Grafico Forma de Pagamento
-		String labelGraficoPizzaFormaPagamento = "<html>Formas de Pagamento</html>";
-		botaoGraficoPizzaFormaPagamento.setText(labelGraficoPizzaFormaPagamento);
-		ImageIcon iconeGraficoPizzaFormaPagamento = new ImageIcon("imagens/img_botaoGraficoPizza.png");
-		botaoGraficoPizzaFormaPagamento.setIcon(iconeGraficoPizzaFormaPagamento);
-		botaoGraficoPizzaFormaPagamento.setHorizontalAlignment(SwingConstants.LEFT);
-		botaoGraficoPizzaFormaPagamento.setIconTextGap(10);
-		botaoGraficoPizzaFormaPagamento.setHorizontalTextPosition(JButton.RIGHT);
-		botaoGraficoPizzaFormaPagamento.setPreferredSize(new Dimension(150,50));
-		botaoGraficoPizzaFormaPagamento.addActionListener(trataEventosGraficos);
+		radioButtonVerEmReal.setText("Real");
+		radioButtonVerEmReal.setSelected(true);
+		radioButtonVerEmReal.setBackground(Color.WHITE);
+		
+		radioButtonVerEmPorcentagem.setText("Porcentagem");
+		radioButtonVerEmPorcentagem.setBackground(Color.WHITE);
+		
+		ButtonGroup buttonGroupVer = new ButtonGroup();
+		buttonGroupVer.add(radioButtonVerEmReal);
+		buttonGroupVer.add(radioButtonVerEmPorcentagem);
+		
+		//Painel com o botão e comboBox
+		JPanel painelBotaoGraficoCategoria = new JPanel();
+		painelBotaoGraficoCategoria.setBorder(new TitledBorder(""));
+		painelBotaoGraficoCategoria.setPreferredSize(new Dimension(180,90));
+		painelBotaoGraficoCategoria.setBackground(Color.WHITE);
+		
+		painelBotaoGraficoCategoria.add(radioButtonVerEmReal);
+		painelBotaoGraficoCategoria.add(radioButtonVerEmPorcentagem);
+		painelBotaoGraficoCategoria.add(botaoGraficoBarraCategoria);
 		
 		//Botao Grafico Metas mensal
 		String labelGraficoLinhaMetaMensal = "<html>Metas Mensal</html>";
@@ -199,17 +222,20 @@ public class PainelGraficos extends JPanel {
 		
 		
 		//adiciona os botoes
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.insets = new Insets(0, 0, 20, 0);
 		painelBotoes.add(botaoBalancoTotal, constraints);
 		constraints.gridy = 1;
-		constraints.insets = new Insets(0, 0, 20, 0);
+		//constraints.insets = new Insets(0, 0, 0, 0);
 		painelBotoes.add(botaoBalancoDespesa, constraints);
 		constraints.gridy = 2;
-		constraints.insets = new Insets(0, 0, 25, 0);
+		//constraints.insets = new Insets(0, 0, 0, 0);
 		painelBotoes.add(botaoGraficoPizzaTotal, constraints);
 		constraints.gridy = 3;
-		painelBotoes.add(botaoGraficoBarraCategoria, constraints);
-		constraints.gridy = 4;
 		painelBotoes.add(botaoGraficoPizzaFormaPagamento, constraints);
+		constraints.gridy = 4;
+		painelBotoes.add(painelBotaoGraficoCategoria, constraints);
 		constraints.gridy = 5;
 		painelBotoes.add(painelGraficoLinhas, constraints);
 		
@@ -274,6 +300,10 @@ public class PainelGraficos extends JPanel {
 
 	public String getValorjComboBoxCategorias() {
 		return (String)jComboBoxCategorias.getSelectedItem();
+	}
+
+	public JRadioButton getRadioButtonVerEmPorcentagem() {
+		return radioButtonVerEmPorcentagem;
 	}
 	
 }

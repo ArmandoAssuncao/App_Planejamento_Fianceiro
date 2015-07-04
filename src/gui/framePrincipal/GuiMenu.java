@@ -7,6 +7,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import eventos.menu.TEGuiMenu;
+import gui.painelDespesas.IgPainelDespesas;
+import gui.painelRenda.IgPainelRenda;
 
 /**
  * Classe com a barra de menu da janela principal do programa.
@@ -34,6 +36,9 @@ public class GuiMenu extends JMenuBar{
 	private JMenuItem menuItemAbrirBD;
 	private JMenuItem menuItemAutor;
 	
+	private IgPainelDespesas igPainelDespesas;
+	private IgPainelRenda igPainelRenda;
+	
 	/**
 	 * Construtor padrão.
 	 */
@@ -59,15 +64,15 @@ public class GuiMenu extends JMenuBar{
 		menuRenda.setMnemonic(KeyEvent.VK_R);
 		add(menuRenda);		
 
-		menuItemAdicionarRenda = new JMenuItem("Adicionar Renda");
+		menuItemAdicionarRenda = new JMenuItem("Adicionar Renda...");
 		menuItemAdicionarRenda.setMnemonic(KeyEvent.VK_A);
 		menuRenda.add(menuItemAdicionarRenda);
 		
-		menuItemEditarRenda = new JMenuItem("Editar Renda");
+		menuItemEditarRenda = new JMenuItem("Editar Renda...");
 		menuItemEditarRenda.setMnemonic(KeyEvent.VK_E);
 		menuRenda.add(menuItemEditarRenda);
 		
-		menuItemRemoverRenda = new JMenuItem("Excluir Renda");
+		menuItemRemoverRenda = new JMenuItem("Excluir Renda...");
 		menuItemRemoverRenda.setMnemonic(KeyEvent.VK_X);
 		menuRenda.add(menuItemRemoverRenda);
 		
@@ -77,15 +82,15 @@ public class GuiMenu extends JMenuBar{
 		menuCategoria.setMnemonic(KeyEvent.VK_C);
 		add(menuCategoria);
 		
-		menuItemAddCategoria = new JMenuItem("Adicionar Categoria");
+		menuItemAddCategoria = new JMenuItem("Adicionar Categoria...");
 		menuItemAddCategoria.setMnemonic(KeyEvent.VK_A);
 		menuCategoria.add(menuItemAddCategoria);
 		
-		menuItemEditarCategoria = new JMenuItem("Editar Categoria");
+		menuItemEditarCategoria = new JMenuItem("Editar Categoria...");
 		menuItemEditarCategoria.setMnemonic(KeyEvent.VK_E);
 		menuCategoria.add(menuItemEditarCategoria);
 		
-		menuItemExcluirCategoria = new JMenuItem("Excluir Categoria");
+		menuItemExcluirCategoria = new JMenuItem("Excluir Categoria...");
 		menuItemExcluirCategoria.setMnemonic(KeyEvent.VK_X);
 		menuCategoria.add(menuItemExcluirCategoria);
 		
@@ -95,15 +100,15 @@ public class GuiMenu extends JMenuBar{
 		menuDespesa.setMnemonic(KeyEvent.VK_D);
 		add(menuDespesa);
 		
-		menuItemAddDespesa = new JMenuItem("Adicionar Despesa");
+		menuItemAddDespesa = new JMenuItem("Adicionar Despesa...");
 		menuItemAddDespesa.setMnemonic(KeyEvent.VK_A);
 		menuDespesa.add(menuItemAddDespesa);
 		
-		menuItemEditarDespesa = new JMenuItem("Editar Despesa");
+		menuItemEditarDespesa = new JMenuItem("Editar Despesa...");
 		menuItemEditarDespesa.setMnemonic(KeyEvent.VK_E);
 		menuDespesa.add(menuItemEditarDespesa);
 		
-		menuItemExcluirDespesa = new JMenuItem("Excluir Despesa");
+		menuItemExcluirDespesa = new JMenuItem("Excluir Despesa...");
 		menuItemExcluirDespesa.setMnemonic(KeyEvent.VK_X);
 		menuDespesa.add(menuItemExcluirDespesa);
 		
@@ -138,6 +143,7 @@ public class GuiMenu extends JMenuBar{
 		menuItemAutor.setMnemonic(KeyEvent.VK_A);
 		menuSobre.add(menuItemAutor);
 		
+		menuBalanco.setVisible(false);
 		menuItemSair.setVisible(true);
 		menuItemApagarTudo.setVisible(false);
 		menuItemAdicionarRenda.setVisible(true);
@@ -147,7 +153,7 @@ public class GuiMenu extends JMenuBar{
 		menuItemEditarDespesa.setVisible(false);//
 		menuItemExcluirDespesa.setVisible(false);//
 		menuItemAddCategoria.setVisible(true);
-		menuItemEditarCategoria.setVisible(true);
+		menuItemEditarCategoria.setVisible(false);//
 		menuItemExcluirCategoria.setVisible(false);//
 		menuItemBalancoMensal.setVisible(true);
 		menuItemBalancoMensalDespesas.setVisible(true);
@@ -216,6 +222,14 @@ public class GuiMenu extends JMenuBar{
 	public JMenuItem getMenuItemAddCategoria() {
 		return menuItemAddCategoria;
 	}
+	
+	/**
+	 * Retorna a referência do <code>JMenuItem</code> Editar Categoria.
+	 * @return referência do <code>JMenuItem</code>.
+	 */
+	public JMenuItem getMenuItemEditarCategoria() {
+		return menuItemEditarCategoria;
+	}
 
 	/**
 	 * Retorna a referência do <code>JMenuItem</code> Balanço Mensal.
@@ -247,6 +261,39 @@ public class GuiMenu extends JMenuBar{
 	 */
 	public JMenuItem getMenuItemAutor() {
 		return menuItemAutor;
+	}
+
+	
+	/**
+	 * Atribui a referência para <code>IgPainelDespesas</code> 
+	 * @param igPainelDespesas <code>IgPainelDespesas</code>
+	 */
+	public void setIgPainelDespesas(IgPainelDespesas igPainelDespesas) {
+		this.igPainelDespesas = igPainelDespesas;
+	}
+	
+	/**
+	 * Retorna a referência do <code>IgPainelDespesas</code>
+	 * @return referência do <code>IgPainelDespesas</code>.
+	 */
+	public IgPainelDespesas getIgPainelDespesas() {
+		return igPainelDespesas;
+	}
+	
+	/**
+	 * Atribui a referência para <code>IgPainelRenda</code>
+	 * @param igPainelRenda <code>IgPainelRenda</code>
+	 */
+	public void setIgPainelRenda(IgPainelRenda igPainelRenda) {
+		this.igPainelRenda = igPainelRenda;
+	}
+	
+	/**
+	 * Retorna a referência do <code>IgPainelRenda</code>
+	 * @return referência do <code>IgPainelRenda</code>.
+	 */
+	public IgPainelRenda getIgPainelRenda() {
+		return igPainelRenda;
 	}
 	
 }

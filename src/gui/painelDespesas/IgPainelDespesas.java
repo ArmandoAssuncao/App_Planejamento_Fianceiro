@@ -29,6 +29,7 @@ import classes.MetaMensal;
 import eventos.painelDespesa.TEPainelDespesas;
 import funcoes.Converte;
 import gui.JanelaMensagem;
+import gui.framePrincipal.GuiPrincipal;
 
 public class IgPainelDespesas extends JPanel{
 	public final int TAM_PAINEL_X = 800;
@@ -57,8 +58,10 @@ public class IgPainelDespesas extends JPanel{
 	JLabel labelValorTotalDespesasValor;
 	JLabel labelValorTotalDespesasPorcentagemValor;
 	
-	public IgPainelDespesas(Window framePrincipal) {
+	public IgPainelDespesas(GuiPrincipal framePrincipal) {
 		setLayout(new BorderLayout(0,3));
+		
+		framePrincipal.getGuiMenu().setIgPainelDespesas(this);
 		
 		trataEventosDespesas = new TEPainelDespesas(this, framePrincipal);
 		iniciaElementos();

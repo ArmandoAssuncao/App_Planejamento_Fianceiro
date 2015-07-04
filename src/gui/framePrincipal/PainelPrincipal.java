@@ -12,7 +12,7 @@ public class PainelPrincipal extends JPanel{
 	
 	AbasPrincipal abasPrincipal;
 
-	public PainelPrincipal(Window framePrincipal) {
+	public PainelPrincipal(GuiPrincipal framePrincipal) {
 		abasPrincipal = new AbasPrincipal(framePrincipal);
 		//setLayout(new BorderLayout(0,0));
 
