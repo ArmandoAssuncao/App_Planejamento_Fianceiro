@@ -1,12 +1,14 @@
 package gui.painelRenda;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -29,8 +31,10 @@ public class PainelTituloPainelRenda extends JPanel {
 	 * Construtor padrão.
 	 */
 	public PainelTituloPainelRenda() {
-		setSize(750, 140);
 		setPreferredSize(new Dimension(750,140));
+		
+		setBorder(new LineBorder(Color.RED)); //TODO debug, apagar
+		
 		setLayout(new BorderLayout(0, 0));
 		
 		rendaLabel = new JLabel("Renda Mensal");

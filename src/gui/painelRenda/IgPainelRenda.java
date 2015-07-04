@@ -1,6 +1,7 @@
 package gui.painelRenda;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -19,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
 
 import persistencia.RendaDAO;
 import persistencia.RendaMensalDAO;
@@ -49,6 +51,7 @@ public class IgPainelRenda extends JPanel {
 	private JScrollPane barraRolagem;
 	
 	private JPanel painelBotoes;
+	private JPanel painelSuperior;
 	private PainelTituloPainelRenda painelTitulo;
 	
 	private JButton botaoAddRenda;
@@ -73,7 +76,11 @@ public class IgPainelRenda extends JPanel {
 		barraRolagem.setViewportView(tabelaRendaMensal);
 		barraRolagem.setPreferredSize(new Dimension(tabelaRendaMensal.TAM_TABELA_X, tabelaRendaMensal.TAM_TABELA_Y));
 
-		add(painelTitulo, BorderLayout.NORTH);
+		painelSuperior.setLayout(new BorderLayout());
+		painelSuperior.setBorder(new LineBorder(Color.BLUE));
+		painelSuperior.add(painelTitulo, BorderLayout.WEST);
+		
+		add(painelSuperior, BorderLayout.NORTH);
 		add(barraRolagem,BorderLayout.WEST);
 		add(painelBotoes,BorderLayout.EAST);
 		add(tabelaRendaMensal.getTableHeader(),BorderLayout.PAGE_START);
@@ -89,6 +96,7 @@ public class IgPainelRenda extends JPanel {
 		arrayListRendaMensal = new ArrayList<RendaMensal>();
 		
 		painelBotoes = new JPanel();
+		painelSuperior = new JPanel();
 		painelTitulo = new PainelTituloPainelRenda();
 		
 		botaoAddRenda = new JButton();
