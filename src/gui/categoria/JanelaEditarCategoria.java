@@ -423,6 +423,19 @@ public class JanelaEditarCategoria extends JDialog{
 			e.printStackTrace();
 		}
 		
+		//Se o campo for vazio, atribui o antigo alerta da meta
+		try{
+			if(!textFieldNovaMetaPorcentagem.getText().equals(""))
+				metaMensal.setAlerta( Double.parseDouble(textFieldNovaMetaPorcentagem.getText()) );
+			
+			else{
+				metaMensal.setAlerta( Double.parseDouble(labelAntigaMetaProcentagemValor.getText()) );
+			}
+		}
+		catch(NumberFormatException e){
+			e.printStackTrace();
+		}
+		
 		Categoria categoria = new Categoria();
 		categoria.setMetaMensal(metaMensal);
 		//Se o campo for vazio, atribui a antiga descrição

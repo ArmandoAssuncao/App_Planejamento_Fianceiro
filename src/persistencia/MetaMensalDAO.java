@@ -96,6 +96,28 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 		double novoValor = novaMetaMensal.getValor();
 		double novoAlerta = novaMetaMensal.getAlerta();
 		
+		String comandoSqlTodos = "SELECT * FROM meta_mensal";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSqlTodos);
+		try {
+			while(resultadoQuery.next()){
+				int idCategoria = resultadoQuery.getInt("idCategoria");
+				Calendar mesAnoBD = Converte.stringToCalendar(resultadoQuery.getString("mesAnoMeta"));
+				
+				String mes = String.valueOf(mesAnoMeta.get(Calendar.MONTH));
+				String ano = String.valueOf(mesAnoMeta.get(Calendar.YEAR));
+				String mesBD = String.valueOf(mesAnoBD.get(Calendar.MONTH));
+				String anoBD = String.valueOf(mesAnoBD.get(Calendar.YEAR));
+				
+				if(mes.equals(mesBD) && ano.equals(anoBD) && id == idCategoria){
+					novoMesAnoMeta = Converte.calendarToString(mesAnoBD);
+					break;
+				}
+			}//while
+		} catch (NumberFormatException | SQLException e) {
+			e.printStackTrace();
+			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
+		}
+		
 		String comandoUpdate = "UPDATE meta_mensal SET ";
 		String clausulaWhere = " WHERE idCategoria=" + id + " AND mesAnoMeta=\'" + novoMesAnoMeta + "\'";
 		
@@ -156,7 +178,6 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
 	public boolean exists(Calendar mesAnoMeta, String descricaoCategoria) throws SQLException{
-		int contagem = 0;
 		this.abreConexao();
 		
 		int id = 0;
@@ -170,20 +191,32 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 			return false;
 		}
 		
-		String data = Converte.calendarToString(mesAnoMeta);
+		String comandoSql = "SELECT * FROM meta_mensal";
+		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
 		
-		String comandoSql = "" + "SELECT COUNT(*) AS contagem FROM meta_mensal WHERE idCategoria=" + id + " AND mesAnoMeta=\'" + data + "\'";
-		ResultSet resultadoQuery = this.executaQuery(comandoSql);
-		
-		resultadoQuery.next();
-		String contagemCategorias = resultadoQuery.getString("contagem");
-		if (contagemCategorias != null){
-			contagem = Integer.parseInt(contagemCategorias);
+		try {
+			while(resultadoQuery.next()){
+				int idCategoria = resultadoQuery.getInt("idCategoria");
+				Calendar mesAnoBD = Converte.stringToCalendar(resultadoQuery.getString("mesAnoMeta"));
+				
+				String mes = String.valueOf(mesAnoMeta.get(Calendar.MONTH));
+				String ano = String.valueOf(mesAnoMeta.get(Calendar.YEAR));
+				String mesBD = String.valueOf(mesAnoBD.get(Calendar.MONTH));
+				String anoBD = String.valueOf(mesAnoBD.get(Calendar.YEAR));
+				
+				if(mes.equals(mesBD) && ano.equals(anoBD) && id == idCategoria){
+					this.fechaConexao();
+					return true;
+				}
+			}//while
+		} catch (NumberFormatException | SQLException e) {
+			e.printStackTrace();
+			JanelaMensagem.mostraMensagemErroBD(null, e.getMessage());
 		}
 		
 		this.fechaConexao();
 		
-		return contagem > 0 ? true : false;
+		return  false;
 	}
 	
 	/**
