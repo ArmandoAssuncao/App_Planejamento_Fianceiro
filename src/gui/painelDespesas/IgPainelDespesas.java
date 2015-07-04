@@ -10,6 +10,7 @@ import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -243,12 +244,36 @@ public class IgPainelDespesas extends JPanel{
 		List<MetaMensal> arrayMetaMensalTemp = new ArrayList<MetaMensal>();
 		List<Categoria> arrayCategoriaTemp = new ArrayList<Categoria>();
 		
+		//Inicia só as metas desse mês
+		Calendar mesAno = Calendar.getInstance();
+		
 		try {
 			arrayCategoriaTemp = CategoriaDAO.todasAsCategorias();
-			arrayMetaMensalTemp = MetaMensalDAO.todasAsMetasMensais();
+			arrayMetaMensalTemp = MetaMensalDAO.metaMensalDoMesAno(mesAno);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();
+		}
+		
+		
+		System.out.println("asdsadsadas " + arrayMetaMensalTemp.size());
+		
+		//Inicia as metas caso o mês mude
+		if(arrayMetaMensalTemp.size() == 0){
+			CategoriaDAO categoriaDAO = new CategoriaDAO();
+			MetaMensalDAO metaMensalDAO = new MetaMensalDAO();
+			String descricao;
+			for(int i = 0; i < arrayCategoriaTemp.size(); i++){
+				descricao = arrayCategoriaTemp.get(i).getDescricao();
+				MetaMensal metaMensal = null;
+				try {
+					metaMensal = new MetaMensal(categoriaDAO.getId(descricao), mesAno, 0.0, 70.0);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				arrayMetaMensalTemp.add(metaMensal);
+				metaMensalDAO.inserir(metaMensal, descricao);
+			}
 		}
 		
 		//Inicializa as abas das categoria
