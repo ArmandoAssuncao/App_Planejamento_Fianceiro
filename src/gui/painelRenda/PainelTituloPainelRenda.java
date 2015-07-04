@@ -21,11 +21,9 @@ import net.miginfocom.swing.MigLayout;
 public class PainelTituloPainelRenda extends JPanel {
 	private JLabel rendaLabel;
 	private JPanel panel;
-	private JPanel sulPanel;
 	private JLabel valorQtdRendasLabel;
 	private JLabel valorTotalRendasLabel;
 	private JLabel mediaDeRendaLabel;
-	private JLabel alertaLabel;
 
 	/**
 	 * Construtor padrão.
@@ -70,12 +68,6 @@ public class PainelTituloPainelRenda extends JPanel {
 		JLabel metaLabel = new JLabel("de média de renda ");
 		panel.add(metaLabel, "cell 14 1");
 		
-		sulPanel  = new JPanel();
-		add(sulPanel,BorderLayout.SOUTH);
-		
-		alertaLabel = new JLabel("<dynamic>");
-		sulPanel.add(alertaLabel);
-		
 		setVisible(true);
 	}//construtor
 	
@@ -87,7 +79,14 @@ public class PainelTituloPainelRenda extends JPanel {
 	public void atualizarPainel(int qtdRendas, double somaRendas){
 		valorQtdRendasLabel.setText(Integer.toString(qtdRendas));
 		valorTotalRendasLabel.setText("R$ " + String.format("%.2f", somaRendas));
-		mediaDeRendaLabel.setText("R$ " + String.format("%.2f", somaRendas/qtdRendas));
+		
+		double mediaRenda;
+		if(qtdRendas !=0)
+			mediaRenda = somaRendas/qtdRendas;
+		else
+			mediaRenda = 0;
+		
+		mediaDeRendaLabel.setText("R$ " + String.format("%.2f", mediaRenda));
 		
 	}//atualizarPainel
 }//class PainelTituloPainelRenda
