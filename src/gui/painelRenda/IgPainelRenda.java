@@ -1,7 +1,6 @@
 package gui.painelRenda;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,12 +15,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.border.Border;
 
 import persistencia.RendaDAO;
 import persistencia.RendaMensalDAO;
@@ -40,7 +37,7 @@ public class IgPainelRenda extends JPanel {
 	private JScrollPane barraRolagem;
 	
 	private JPanel painelBotoes;
-	private JPanel painelTitulo;
+	private PainelTituloPainelRenda painelTitulo;
 	
 	private JButton botaoAddRenda;
 	private JButton botaoExcluirRenda;
@@ -51,7 +48,7 @@ public class IgPainelRenda extends JPanel {
 
 		trataEventosRenda = new TEPainelRenda(this, framePrincipal);
 		iniciaElementos();
-		criaPainelTitulo();
+		//criaPainelTitulo();
 		criaPainelBotoes();
 		iniciaValoresRenda();
 		
@@ -76,7 +73,7 @@ public class IgPainelRenda extends JPanel {
 		arrayListRendaMensal = new ArrayList<RendaMensal>();
 		
 		painelBotoes = new JPanel();
-		painelTitulo = new JPanel();
+		painelTitulo = new PainelTituloPainelRenda();
 		
 		botaoAddRenda = new JButton();
 		botaoExcluirRenda = new JButton();
@@ -84,18 +81,6 @@ public class IgPainelRenda extends JPanel {
 		
 		tabelaRendaMensal = new TabelaRendaMensal();
 	}//iniciaElementos()
-
-	private void criaPainelTitulo(){
-		final int TAM_X = 300;
-		final int TAM_Y = 130;
-		
-		Border borda = BorderFactory.createLineBorder(Color.BLACK, 2);
-		
-		painelTitulo.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-		painelTitulo.setBackground(Color.LIGHT_GRAY);
-		painelTitulo.setBorder(borda);
-		painelTitulo.setVisible(true);
-	}
 
 	private void criaPainelBotoes(){
 		final int TAM_X = 200;
@@ -158,10 +143,19 @@ public class IgPainelRenda extends JPanel {
 	public boolean criarRenda(Renda renda,Calendar data){
 		RendaMensal rm = renda.obterRendaMensal(data);
 		tabelaRendaMensal.adicionaLinha(renda.getDescricao(),Converte.calendarToString(rm.getDataRenda()),Double.toString(rm.getValor()));
-		System.out.println("dsfsad");
+		System.out.println("Renda criada"); //TODO debug
+		
+		atualizarPainelTitulo();
 		return true;
 	} 
 	
+	private void atualizarPainelTitulo() {
+		//Obtem a qtd de rendas e a soma
+		int qtd = tabelaRendaMensal.qtdRendasMensal();
+		double soma = tabelaRendaMensal.getSomaRendasMensal();
+		painelTitulo.atualizarPainel(qtd, soma);
+	}
+
 	private void iniciaValoresRenda(){
 		try {
 			Set<Renda> rendas = new HashSet<Renda>();
@@ -192,6 +186,7 @@ public class IgPainelRenda extends JPanel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		atualizarPainelTitulo();
 	}
 	
 	public JButton getBotaoAddRenda() {

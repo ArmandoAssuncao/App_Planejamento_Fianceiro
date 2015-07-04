@@ -14,7 +14,7 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.FlowLayout;
 
 /**
- * Painel de título da janela <code>IgPainelDespeas</code>.
+ * Painel de título da janela <code>IgPainelDespesas</code>.
  * 
  * @author Armando Assunção
  * @author Richardson William
@@ -97,11 +97,11 @@ public class PainelTituloPainelDespesas extends JPanel {
 	 */
 	public void atualizarPainel(String nomeCategoria,int qtdDespesas, double somaDespesas, double metaPorcentagem,
 			double valorMetaDinheiro){
-		System.out.printf("\n%s %d %f %f %f",nomeCategoria,qtdDespesas,somaDespesas,metaPorcentagem,valorMetaDinheiro );
+		//TODO debug: System.out.printf("\n%s %d %f %f %f",nomeCategoria,qtdDespesas,somaDespesas,metaPorcentagem,valorMetaDinheiro );
 		nomeCategoriaLabel.setText(nomeCategoria);
 		valorQtdDespesasLabel.setText(Integer.toString(qtdDespesas));
-		valorTotalDespesasLabel.setText("R$ " + Double.toString(somaDespesas));
-		gastoPrevistoLabel.setText("R$ " + Double.toString(valorMetaDinheiro));
+		valorTotalDespesasLabel.setText("R$ " + String.format("%.2f", somaDespesas));
+		gastoPrevistoLabel.setText("R$ " + String.format("%.2f", valorMetaDinheiro));
 		
 		double porcentagemGasta = somaDespesas/valorMetaDinheiro*100;
 		
