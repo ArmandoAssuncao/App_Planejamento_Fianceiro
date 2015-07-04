@@ -11,6 +11,7 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
+import java.awt.FlowLayout;
 
 /**
  * Painel de título da janela <code>IgPainelDespeas</code>.
@@ -21,12 +22,14 @@ import net.miginfocom.swing.MigLayout;
  *@see IgPainelDespesas
  */
 public class PainelTituloPainelDespesas extends JPanel {
-	private JLabel valorTotalDespesasLabel;
-	private JLabel alertaLabel;
 	private JLabel nomeCategoriaLabel;
-	private JLabel valorQtdDespesasLabel;
 	private JProgressBar metaProgressBar;
+	private JPanel alertaPanel;
+	private JPanel panel;
+	private JLabel valorQtdDespesasLabel;
+	private JLabel valorTotalDespesasLabel;
 	private JLabel gastoPrevistoLabel;
+	private JLabel alertaLabel;
 
 	/**
 	 * Construtor padrão.
@@ -40,41 +43,46 @@ public class PainelTituloPainelDespesas extends JPanel {
 		metaProgressBar.setStringPainted(true);
 		add(metaProgressBar, BorderLayout.SOUTH);
 		
-		nomeCategoriaLabel = new JLabel();
+		nomeCategoriaLabel = new JLabel("<dynamic>");
 		nomeCategoriaLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		nomeCategoriaLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(nomeCategoriaLabel, BorderLayout.NORTH);
 		
 		JPanel centroPanel = new JPanel();
 		add(centroPanel, BorderLayout.CENTER);
-		centroPanel.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][][][][][]", "[][][][][][]"));
+		centroPanel.setLayout(new BorderLayout(0, 0));
 		
-		valorQtdDespesasLabel = new JLabel();
+		alertaPanel = new JPanel();
+		centroPanel.add(alertaPanel, BorderLayout.SOUTH);
+		alertaPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		alertaLabel = new JLabel("<dynamic>");
+		alertaPanel.add(alertaLabel);
+		
+		panel = new JPanel();
+		centroPanel.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][]", "[][]"));
+		
+		valorQtdDespesasLabel = new JLabel("<dynamic>");
 		valorQtdDespesasLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		centroPanel.add(valorQtdDespesasLabel, "cell 1 1");
+		panel.add(valorQtdDespesasLabel, "cell 1 1");
 		
-		JLabel qtdDespesasLabel = new JLabel("despesas cadatradas");
-		centroPanel.add(qtdDespesasLabel, "cell 2 1");
+		JLabel qtdDespesasLabel = new JLabel("despesas cadastradas");
+		panel.add(qtdDespesasLabel, "cell 2 1");
 		
-		valorTotalDespesasLabel = new JLabel();
+		valorTotalDespesasLabel = new JLabel("<dynamic>");
 		valorTotalDespesasLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		centroPanel.add(valorTotalDespesasLabel, "cell 6 1 2 1");
+		panel.add(valorTotalDespesasLabel, "cell 7 1");
 		
 		JLabel totalDespesasLabel = new JLabel("total das despesas");
-		centroPanel.add(totalDespesasLabel, "cell 8 1");
+		panel.add(totalDespesasLabel, "cell 8 1");
 		
-		gastoPrevistoLabel = new JLabel("");
+		gastoPrevistoLabel = new JLabel("<dynamic>");
 		gastoPrevistoLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		gastoPrevistoLabel.setEnabled(true);
-		centroPanel.add(gastoPrevistoLabel, "cell 13 1");
+		panel.add(gastoPrevistoLabel, "cell 13 1");
 		
 		JLabel metaLabel = new JLabel("de gasto previsto");
-		centroPanel.add(metaLabel, "cell 14 1");
-		
-		alertaLabel = new JLabel();
-		alertaLabel.setToolTipText("");
-		alertaLabel.setForeground(Color.BLACK);
-		centroPanel.add(alertaLabel, "cell 8 5,alignx center,aligny baseline");
+		panel.add(metaLabel, "cell 14 1");
 		
 		setVisible(true);
 	}//construtor
