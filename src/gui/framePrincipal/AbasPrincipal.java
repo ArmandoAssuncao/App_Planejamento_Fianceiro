@@ -54,7 +54,7 @@ public class AbasPrincipal extends JTabbedPane{
 		add(NOME_ABA_3, painelDespesas);
 		add(NOME_ABA_4, painelGraficos);
 		
-		setSelectedIndex(1); //TODO debug, apagar.
+		setSelectedIndex(2); //TODO debug, apagar.
 		
 		//Atualiza componente da aba selecionada
 		addChangeListener(new ChangeListener() {

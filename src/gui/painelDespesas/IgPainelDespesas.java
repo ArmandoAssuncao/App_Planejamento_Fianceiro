@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,8 +14,8 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -32,33 +31,43 @@ import funcoes.Converte;
 import gui.JanelaMensagem;
 import gui.framePrincipal.GuiPrincipal;
 
+/**
+	Define o painel de <code>Despesa</code>.
+* @author Armando Assunção
+* @author Richardson William
+*
+*/
 public class IgPainelDespesas extends JPanel{
+	/**
+	 * Largura do painel.
+	 */
 	public final int TAM_PAINEL_X = 800;
+	/**
+	 * Altura do painel.
+	 */
 	public final int TAM_PAINEL_Y = 600;
 	
 	boolean avisoMetaTotal = false;
 	boolean avisoMetaDefinido = false;
 	
-	List<Categoria> arrayCategoria = new ArrayList<Categoria>();
-	AbasCategoria abasCategoria;
-	JPanel painelBotoes;
-	PainelTituloPainelDespesas painelTitulo;
-	TEPainelDespesas trataEventosDespesas;
+	private List<Categoria> arrayCategoria = new ArrayList<Categoria>();
+	private AbasCategoria abasCategoria;
+	private JPanel painelBotoes;
+	private JPanel painelSuperior;
+	private PainelTituloPainelDespesas painelTitulo;
+	private TEPainelDespesas trataEventosDespesas;
 	
-	JButton botaoNovaCategoria;
-	JButton botaoExcluirCategoria;
-	JButton botaoEditarCategoria;
-	JButton botaoAdicionarDespesa;
-	JButton botaoExcluirDespesa;
-	JButton botaoEditarDespesa;
+	private JButton botaoNovaCategoria;
+	private JButton botaoExcluirCategoria;
+	private JButton botaoEditarCategoria;
+	private JButton botaoAdicionarDespesa;
+	private JButton botaoExcluirDespesa;
+	private JButton botaoEditarDespesa;
 	
-	//Labels do painelTitulo
-	JLabel labelNomeCategoriaValor;
-	JLabel labelMetaCategoriaValor;
-	JLabel labelNumeroDeDespesasValor;
-	JLabel labelValorTotalDespesasValor;
-	JLabel labelValorTotalDespesasPorcentagemValor;
-	
+	/**
+	 * Construtor padrão.
+	 * @param framePrincipal componente pai.
+	 */
 	public IgPainelDespesas(GuiPrincipal framePrincipal) {
 		setLayout(new BorderLayout(0,3));
 		
@@ -72,8 +81,13 @@ public class IgPainelDespesas extends JPanel{
 		criaPainelBotoes();
 		
 		criaPainelTitulo();
-	
-		add(painelTitulo, BorderLayout.NORTH);
+		
+		painelSuperior.setLayout(new BorderLayout());
+		painelSuperior.setBorder(new LineBorder(Color.BLUE)); //TODO debug
+		painelTitulo.setBorder(new LineBorder(Color.RED));   //TODO debug
+		painelSuperior.add(painelTitulo, BorderLayout.WEST);
+		
+		add(painelSuperior, BorderLayout.NORTH);
 		add(abasCategoria, BorderLayout.WEST);
 		add(painelBotoes, BorderLayout.EAST);
 		
@@ -91,9 +105,11 @@ public class IgPainelDespesas extends JPanel{
 		setVisible(true);
 	}//construtor
 	
+	
 	private void iniciaElementos(){
 		abasCategoria = new AbasCategoria();
 		painelBotoes = new JPanel();
+		painelSuperior = new JPanel();
 		painelTitulo = new PainelTituloPainelDespesas();
 		botaoNovaCategoria = new JButton();
 		botaoExcluirCategoria = new JButton();
@@ -101,12 +117,9 @@ public class IgPainelDespesas extends JPanel{
 		botaoAdicionarDespesa = new JButton();
 		botaoExcluirDespesa = new JButton();
 		botaoEditarDespesa = new JButton();
-		labelNomeCategoriaValor = new JLabel();
-		labelMetaCategoriaValor = new JLabel();
-		labelNumeroDeDespesasValor = new JLabel();
-		labelValorTotalDespesasValor = new JLabel();
-		labelValorTotalDespesasPorcentagemValor = new JLabel();
 	}
+	
+	
 	private void criaPainelBotoes(){
 		final int TAM_X = 200;
 		final int TAM_Y = 400;
@@ -206,7 +219,7 @@ public class IgPainelDespesas extends JPanel{
 		painelBotoes.setVisible(true);
 	}
 	
-
+	
 	private void criaPainelTitulo(){
 		//Atualiza os labels do painel Titulo sempre quando muda de categoria(aba).
 		abasCategoria.addChangeListener(new ChangeListener() {
@@ -224,6 +237,7 @@ public class IgPainelDespesas extends JPanel{
 		atualizaPainelTitulo();
 	}
 	
+
 	/**
 	 * Atualiza o painel de título da janela.
 	 */
@@ -324,6 +338,11 @@ public class IgPainelDespesas extends JPanel{
 		}
 	}
 	
+	/**
+	 * Cria uma <code>Categoria</code> e adiciona a aba correspondente
+	 * @param categoria objeto <code>Categoria</code> que será adicionado.
+	 * @return <code>true</code> em caso de sucesso na operação, <code>false</code> em caso contrário.
+	 */
 	//cria uma nova categoria
 	public boolean criarCategoria(Categoria categoria){
 		if( abasCategoria.criarCategoria(categoria.getDescricao())){
@@ -337,6 +356,11 @@ public class IgPainelDespesas extends JPanel{
 			return false;
 	}
 
+	/**
+	 * Edita a <code>Categoria</code> selecionada.
+	 * @param categoria objeto <code>Categoria</code> com os novos atributos.
+	 * @return <code>true</code> em caso de sucesso na operação, <code>false</code> em caso contrário.
+	 */
 	public boolean editarCategoria(Categoria categoria){
 		if( abasCategoria.editarCategoria(categoria.getDescricao())){
 			arrayCategoria.set(abasCategoria.getSelectedIndex(), categoria);
@@ -348,6 +372,10 @@ public class IgPainelDespesas extends JPanel{
 			return false;
 	}
 	
+	/**
+	 * Remove a Categoria selecionada.
+	 * @return <code>true</code> em caso de sucesso na operação, <code>false</code> em caso contrário.
+	 */
 	public boolean removerCategoria(){
 		int abaSelecionada = abasCategoria.getSelectedIndex();
 		if( abasCategoria.removerCategoria(getDescricaoCategoria())){
@@ -360,6 +388,11 @@ public class IgPainelDespesas extends JPanel{
 		return false;
 	}
 	
+	/**
+	 * Adiciona o objeto despesa na tabela e o salva no banco de dados.
+	 * @param despesa objeto que será salvo.
+	 * @return <code>true</code> em caso de sucesso na operação, <code>false</code> em caso contrário.
+	 */
 	public boolean criarDespesa(Despesa despesa){
 		String descricao = despesa.getDescricao();
 		String dataDespesa = Converte.calendarToString(despesa.getDataDespesa());
@@ -390,6 +423,7 @@ public class IgPainelDespesas extends JPanel{
 			return false;
 	}
 	
+	
 	private void exibeMsgAvisoMeta(){
 		double valorMeta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorMeta();
 		double valorAlerta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorAlerta();
@@ -407,38 +441,74 @@ public class IgPainelDespesas extends JPanel{
 	}
 	
 	// Getters e setters
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão nova categoria.
+	 */
 	public JButton getBotaoNovaCategoria() {
 		return botaoNovaCategoria;
 	}
 	
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão excluir categoria.
+	 */
 	public JButton getBotaoExcluirCategoria() {
 		return botaoExcluirCategoria;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão editar categoria.
+	 */
 	public JButton getBotaoEditarCategoria() {
 		return botaoEditarCategoria;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão adicionar despesa.
+	 */
 	public JButton getBotaoAdicionarDespesa() {
 		return botaoAdicionarDespesa;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão excluir despesa.
+	 */
 	public JButton getBotaoExcluirDespesa() {
 		return botaoExcluirDespesa;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão editar despesa.
+	 */
 	public JButton getBotaoEditarDespesa() {
 		return botaoEditarDespesa;
 	}
 
+	/**
+	 *  Retorna uma referência de uma <code>AbasCategoria</code>.
+	 * @return objeto <code>AbasCategoria</code>.
+	 */
 	public AbasCategoria getAbasCategoria() {
 		return abasCategoria;
 	}
 	
+	/**
+	 * Retorna a descrição da <code>Categoria</code>.
+	 * @return <code>String</code> com a descrição da categoria.
+	 */
 	public String getDescricaoCategoria(){
 		return arrayCategoria.get(abasCategoria.getSelectedIndex()).getDescricao();
 	}
 	
+	/**
+	 * Retorna o valor da meta da categoria.
+	 * @return <code>double</code> com a meta da categoria.
+	 */
 	public double getMetaCategoriaValor(){
 		return arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorMeta();
 	}
