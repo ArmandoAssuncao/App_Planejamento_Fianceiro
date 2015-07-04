@@ -2,7 +2,6 @@ package gui.graficos;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import funcoes.Converte;
 import persistencia.MetaMensalDAO;
 
 /**
@@ -131,12 +129,21 @@ public class JanelaBalancoMensal extends JDialog {
 		return painelBotoes;
 	}
 	
+	/**
+	 * Limpa a tabela, removendo todas as linhas
+	 */
 	public void limpaTabela(){
 		int tamanho = modelo.getRowCount();
 		for(int i = tamanho-1; i >= 0; i--)
 			modelo.removeRow(i);
 	}
 	
+	
+	/**
+	 * Adiciona um título a tabela na posição indicada.
+	 * @param titulo <code>String</code> com o título 
+	 * @param posicaoColuna <code>int</code> indicando a posição a ser inserido o título.
+	 */
 	public void adicionarTituloTabela(String titulo, int posicaoColuna){
 		String tracos = "...........................";
 		String linha[] = new String[NUM_COLUNAS];
@@ -151,19 +158,34 @@ public class JanelaBalancoMensal extends JDialog {
 		tabela.setRowHeight(tabela.getRowCount()-1, 40);
 	}
 	
+	/**Adiciona dados a tabela.
+	 * @param dados array de <code>String</code> com os dados a serem adicionados.
+	 */
 	public void adicionarDadosTabela(String[] dados){
 		modelo.addRow(dados);
 	}
 	
+	/**
+	 * Adiciona uma linha vazia na tabela.
+	 * @param espacamento altura da linha em pixels
+	 */
 	public void adicionarLinhaVaziaTabela(int espacamento){
 		modelo.addRow(new String[]{});
 		tabela.setRowHeight(tabela.getRowCount()-1, espacamento);
 	}
 	
+	/**
+	 * Retorna a referência do <code>JComboBox</code> mês.
+	 * @return <code>JComboBox</code> mês.
+	 */
 	public JComboBox<String> getjComboBoxMes() {
 		return jComboBoxMes;
 	}
 
+	/**
+	 * Retorna a referência do texto correspondente no <code>JComboBox</code>, na posição selecionada.
+	 * @return <code>String</code> do mês correspondente.
+	 */
 	public String getTextoJComboBoxMes() {
 		return jComboBoxMes.getItemAt(jComboBoxMes.getSelectedIndex());
 	}
