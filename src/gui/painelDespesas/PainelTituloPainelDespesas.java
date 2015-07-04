@@ -115,8 +115,8 @@ public class PainelTituloPainelDespesas extends JPanel {
 			metaProgressBar.setForeground(new Color(204, 204, 0)); //Amarelo Escuro
 			alertaLabel.setText("Você ultrapassou a margem de segurança de gastos");	
 		}else{
-			metaProgressBar.setForeground(new Color(99,209,62)); //Verde Escuro
-			alertaLabel.setText("");	
+			metaProgressBar.setForeground(new Color(0,132,232)); //Verde Escuro
+			alertaLabel.setText("");
 		}
 		metaProgressBar.setValue((int)porcentagemGasta);
 	}//atualizarPainel
