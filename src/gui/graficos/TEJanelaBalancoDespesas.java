@@ -27,7 +27,7 @@ public class TEJanelaBalancoDespesas  implements ActionListener {
 			
 			Calendar mesAno = Converte.stringToCalendar(janelaBalancoDespesas.getTextoJComboBoxMes());
 			
-			List<Despesa> arrayDespesas = new ArrayList<>(500);
+			List<Despesa> arrayDespesas;
 			List<Despesa> arrayDespesasAVista = new ArrayList<>();
 			List<Despesa> arrayDespesasPrazo = new ArrayList<>();
 			List<Despesa> arrayDespesasCheque = new ArrayList<>();
@@ -41,7 +41,7 @@ public class TEJanelaBalancoDespesas  implements ActionListener {
 			
 			//Obtem as despesas
 			try {
-				arrayDespesas.addAll(DespesaDAO.despesasDoMesAno(mesAno));
+				arrayDespesas = DespesaDAO.despesasDoMesAno(mesAno);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 				return;

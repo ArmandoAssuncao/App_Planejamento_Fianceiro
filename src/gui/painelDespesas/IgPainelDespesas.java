@@ -246,7 +246,6 @@ public class IgPainelDespesas extends JPanel{
 		
 		//Inicia só as metas desse mês
 		Calendar mesAno = Calendar.getInstance();
-		
 		try {
 			arrayCategoriaTemp = CategoriaDAO.todasAsCategorias();
 			arrayMetaMensalTemp = MetaMensalDAO.metaMensalDoMesAno(mesAno);
@@ -254,9 +253,6 @@ public class IgPainelDespesas extends JPanel{
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
-		System.out.println("asdsadsadas " + arrayMetaMensalTemp.size());
 		
 		//Inicia as metas caso o mês mude
 		if(arrayMetaMensalTemp.size() == 0){
@@ -299,8 +295,10 @@ public class IgPainelDespesas extends JPanel{
 	private void iniciaValoresDespesa(String descricaoCategoria){
 		List<Despesa> arrayDespesasTemp = new ArrayList<Despesa>();
 		
+		//Inicia só as despesas desse mês
+		Calendar mesAno = Calendar.getInstance();
 		try {
-			arrayDespesasTemp = DespesaDAO.todasAsDespesas();
+			arrayDespesasTemp = DespesaDAO.despesasDoMesAno(mesAno);
 		}
 		catch (SQLException e) {
 			e.printStackTrace();

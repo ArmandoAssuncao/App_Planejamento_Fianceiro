@@ -116,6 +116,8 @@ public class JanelaBalancoDespesas extends JDialog {
 			e.printStackTrace();
 		}
 		
+		System.out.println("aaaa" + arrayDatas.size());//TODO
+		
 		for(int i = 0; i < arrayDatas.size(); i++){
 			int mes = arrayDatas.get(i).get(Calendar.MONTH) +1;
 			int ano = arrayDatas.get(i).get(Calendar.YEAR);

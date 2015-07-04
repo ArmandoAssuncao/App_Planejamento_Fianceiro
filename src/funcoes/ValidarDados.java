@@ -47,7 +47,7 @@ public class ValidarDados {
 	 * @return <code>true</code> se está correta, <code>false</code> em caso contrário.
 	 */
 	public static boolean validarString(String str){
-		if(str.toLowerCase().matches("[a-z0-9áàâãéèêíïóôõöúçñ_-]+")){
+		if(str.toLowerCase().matches("[a-z0-9áàâãéèêíïóôõöúçñ _-]+")){
 			return true;
 		}
 		return false;
