@@ -20,9 +20,9 @@ import persistencia.CategoriaDAO;
 import persistencia.MetaMensalDAO;
 import classes.Categoria;
 import classes.MetaMensal;
-import validacoes.ValidarDados;
 import eventos.categoria.TEJanelaEditarCategoria;
 import funcoes.Converte;
+import funcoes.ValidarDados;
 import gui.painelDespesas.IgPainelDespesas;
 /**
  * Cria uma GUI para a edição dos atributos de uma <code>Categoria</code>. 

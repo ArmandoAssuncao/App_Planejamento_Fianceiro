@@ -1,4 +1,4 @@
-package validacoes;
+package funcoes;
 
 public class ValidarDados {
 	public enum VALIDAR{letra, numero};

@@ -22,7 +22,6 @@ import javax.swing.JTextField;
 
 import persistencia.CategoriaDAO;
 import persistencia.FormaPagamentoDAO;
-import validacoes.ValidarDados;
 import classes.Despesa;
 
 import com.toedter.calendar.JDateChooser;
@@ -30,6 +29,7 @@ import com.toedter.calendar.JDateChooser;
 import enumeracoes.FormaPagamento;
 import eventos.despesa.TEJanelaCriarDespesa;
 import funcoes.Converte;
+import funcoes.ValidarDados;
 import gui.painelDespesas.AbasCategoria;
 import gui.painelDespesas.IgPainelDespesas;
 

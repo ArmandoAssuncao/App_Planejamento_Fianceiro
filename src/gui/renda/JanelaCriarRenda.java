@@ -15,13 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import validacoes.ValidarDados;
 import classes.Renda;
 import classes.RendaMensal;
 
 import com.toedter.calendar.JDateChooser;
 
 import eventos.renda.TEJanelaCriarRenda;
+import funcoes.ValidarDados;
 import gui.painelRenda.IgPainelRenda;
 
 /**

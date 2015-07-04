@@ -17,9 +17,9 @@ import javax.swing.JTextField;
 
 import classes.Categoria;
 import classes.MetaMensal;
-import validacoes.ValidarDados;
 import eventos.categoria.TEJanelaCriarCategoria;
 import funcoes.Converte;
+import funcoes.ValidarDados;
 import gui.painelDespesas.IgPainelDespesas;
 
 /**
