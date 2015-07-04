@@ -9,18 +9,13 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.CategoryAxis;
-import org.jfree.chart.axis.CategoryLabelPositions;
-import org.jfree.chart.labels.ItemLabelAnchor;
-import org.jfree.chart.labels.ItemLabelPosition;
-import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.ui.TextAnchor;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 public class GraficosJFreeChart {
 	
@@ -55,12 +50,30 @@ public class GraficosJFreeChart {
 	public static JPanel painelGraficoLinha(String tituloDoGrafico, String[] campos, Double[] valores){
 		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
 		
-		for(int i = 0; i < valores[1]; i+=50)
-			dataSet.addValue(i, "maximo", new Double(i));
+		for(int i = 0; i < valores.length; i++)
+			dataSet.addValue(i, "maximo", valores[i]);
+		
+		XYSeries series = new XYSeries("Gastos");
+		XYSeries series2 = new XYSeries("Meta");
+
+		series.add(0, 0);
+		series.add(50+400, valores[1]+400);
+		
+		series2.add(600, 300);
+		series2.add(00, 300);
+		
+		XYSeriesCollection dados = new XYSeriesCollection(series);
+		dados.addSeries(series2);
 		
 		// cria o gráfico
-		JFreeChart grafico = ChartFactory.createLineChart(tituloDoGrafico, "Dia",
-		    "Valor", dataSet, PlotOrientation.VERTICAL, true, true, true);
+		JFreeChart grafico = ChartFactory.createXYLineChart(tituloDoGrafico, // chart title
+		         "hjk", // domain axis label
+		         "Meta", // range axis label
+		         dados, // data
+		         PlotOrientation.HORIZONTAL, // orientation
+		         true, // include legend
+		         true, // tooltips
+		         false);
 		
 		grafico.setBackgroundPaint(new Color(240,240,240));
 		

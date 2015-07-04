@@ -151,11 +151,12 @@ public class TEPainelGraficos implements ActionListener{
 			//valor total de cada categoria
 			Double valorTotalCategoria = 0.0;
 			for(int j = 0; j < arrayDespesas.size(); j++){
-				
-				valorTotalCategoria += arrayDespesas.get(j).getValorDespesa();
+				if(arrayDespesas.get(j).getIdCategoria() == idCategoria){
+					valorTotalCategoria += arrayDespesas.get(j).getValorDespesa();
+				}
 			}
 			
-			System.out.println(idCategoria);
+			System.out.println(valorTotalCategoria);
 			painelGraficos.adicionarGrafico("gastos com " + categoriaSelecionada, new String[]{"campo1", "campo2"}, new Double[]{0.0, valorTotalCategoria}, 3);
 		}
 		

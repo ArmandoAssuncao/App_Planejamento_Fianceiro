@@ -24,4 +24,8 @@ public class GuiPrincipal extends JFrame{
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
+
+	public GuiMenu getGuiMenu() {
+		return guiMenu;
+	}
 }

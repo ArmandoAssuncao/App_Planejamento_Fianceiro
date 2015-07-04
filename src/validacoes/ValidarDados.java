@@ -19,7 +19,7 @@ public class ValidarDados {
 	}
 	
 	public static boolean validarString(String str){
-		if(str.matches("[/[a-z0-9áàâãéèêíïóôõöúçñ_-]/i]+")){
+		if(str.toLowerCase().matches("[a-z0-9áàâãéèêíïóôõöúçñ_-]+")){
 			return true;
 		}
 		return false;
