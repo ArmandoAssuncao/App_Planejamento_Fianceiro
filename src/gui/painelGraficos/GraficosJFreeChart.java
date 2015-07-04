@@ -53,17 +53,14 @@ public class GraficosJFreeChart {
 	}
 	
 	public static JPanel painelGraficoLinha(String tituloDoGrafico, String[] campos, Double[] valores){
-		DefaultCategoryDataset ds = new DefaultCategoryDataset();
-		ds.addValue(40.5, "maximo", "dia 1");
-		ds.addValue(38.2, "maximo", "dia 2");
-		ds.addValue(37.3, "maximo", "dia 3");
-		ds.addValue(31.5, "maximo", "dia 4");
-		ds.addValue(35.7, "maximo", "dia 5");
-		ds.addValue(42.5, "maximo", "dia 6");
-	
+		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+		
+		for(int i = 0; i < valores[1]; i+=50)
+			dataSet.addValue(i, "maximo", new Double(i));
+		
 		// cria o gráfico
-		JFreeChart grafico = ChartFactory.createLineChart("Meu Grafico", "Dia", 
-		    "Valor", ds, PlotOrientation.VERTICAL, true, true, false);
+		JFreeChart grafico = ChartFactory.createLineChart(tituloDoGrafico, "Dia",
+		    "Valor", dataSet, PlotOrientation.VERTICAL, true, true, true);
 		
 		grafico.setBackgroundPaint(new Color(240,240,240));
 		

@@ -1,5 +1,6 @@
 package funcoes;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -35,5 +36,12 @@ public final class Converte {
 			e.printStackTrace();
 		}
 		return c;
+	}
+	
+	public static Double double2Decimais(Double valor){
+		DecimalFormat df = new DecimalFormat("#.##");
+		
+		return Double.valueOf( df.format(valor).replace(",", ".") );
+		
 	}
 }

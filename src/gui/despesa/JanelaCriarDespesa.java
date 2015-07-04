@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -431,8 +432,6 @@ public class JanelaCriarDespesa extends JDialog{
 		String numeroDoCheque = textFieldNumeroDoCheque.getText();
 		if(parcelas.equals("")) parcelas = "1";
 		
-		System.out.println(Converte.calendarToString(dataDoPagamento));
-		
 		Despesa despesa = new Despesa();
 		despesa.setDescricao(descricao);
 		despesa.setDataDespesa(dataDaDespesa);
@@ -441,7 +440,7 @@ public class JanelaCriarDespesa extends JDialog{
 		
 		try{
 			if(!valor.equals(""))
-				despesa.setValorDespesa(Double.parseDouble(valor));
+				despesa.setValorDespesa( Converte.double2Decimais(Double.valueOf(valor)) );
 			despesa.setNumeroParcelas(Integer.parseInt(parcelas));
 		}
 		catch(NumberFormatException e){

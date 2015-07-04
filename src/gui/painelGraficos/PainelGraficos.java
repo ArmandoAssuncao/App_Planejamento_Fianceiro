@@ -3,17 +3,26 @@ package gui.painelGraficos;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.TitledBorder;
 
+import classes.Categoria;
+import persistencia.CategoriaDAO;
 import eventos.painelGraficos.TEPainelGraficos;
 
 public class PainelGraficos extends JPanel {
@@ -29,6 +38,7 @@ public class PainelGraficos extends JPanel {
 	private JButton botaoGraficoBarraCategoria;
 	private JButton botaoGraficoLinhaMetaMensal;
 	private JButton botaoGraficoPizzaFormaPagamento;
+	JComboBox<String> jComboBoxCategorias;
 
 	public PainelGraficos(Window framePrincipal) {
 		setLayout(new BorderLayout(0, 3));
@@ -61,7 +71,7 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoBarraCategoria = new JButton();
 		botaoGraficoLinhaMetaMensal = new JButton();
 		botaoGraficoPizzaFormaPagamento = new JButton();
-		
+		jComboBoxCategorias = new JComboBox<String>();
 	}
 	
 	private void criaPainelTitulo(){
@@ -81,15 +91,15 @@ public class PainelGraficos extends JPanel {
 	
 	private void criaPainelBotoes(){
 		final int TAM_X = 200;
-		final int TAM_Y = 400;
+		final int TAM_Y = 500;
 		
 		//Define o layout
 		painelBotoes.setLayout(new GridBagLayout());
 		
 		//configurações do layout
 		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.fill = GridBagConstraints.BOTH;
-		constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+		constraints.fill = GridBagConstraints.NONE;
+		constraints.anchor = GridBagConstraints.CENTER;
 		constraints.insets = new Insets(0, 0, 25, 0);
 		constraints.gridx = 0;
 		constraints.gridy = 0;
@@ -139,17 +149,6 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoBarraCategoria.setPreferredSize(new Dimension(150,50));
 		botaoGraficoBarraCategoria.addActionListener(trataEventosGraficos);
 		
-		//Botao Grafico Metas mensal
-		String labelGraficoLinhaMetaMensal = "<html>Metas Mensal</html>";
-		botaoGraficoLinhaMetaMensal.setText(labelGraficoLinhaMetaMensal);
-		ImageIcon iconeGraficoLinhaMetaMensal = new ImageIcon("imagens/img_botaoGraficoLinha.png");
-		botaoGraficoLinhaMetaMensal.setIcon(iconeGraficoLinhaMetaMensal);
-		botaoGraficoLinhaMetaMensal.setHorizontalAlignment(SwingConstants.LEFT);
-		botaoGraficoLinhaMetaMensal.setIconTextGap(10);
-		botaoGraficoLinhaMetaMensal.setHorizontalTextPosition(JButton.RIGHT);
-		botaoGraficoLinhaMetaMensal.setPreferredSize(new Dimension(150,50));
-		botaoGraficoLinhaMetaMensal.addActionListener(trataEventosGraficos);
-		
 		//Botao Grafico Forma de Pagamento
 		String labelGraficoPizzaFormaPagamento = "<html>Formas de Pagamento</html>";
 		botaoGraficoPizzaFormaPagamento.setText(labelGraficoPizzaFormaPagamento);
@@ -161,10 +160,48 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoPizzaFormaPagamento.setPreferredSize(new Dimension(150,50));
 		botaoGraficoPizzaFormaPagamento.addActionListener(trataEventosGraficos);
 		
+		//Botao Grafico Metas mensal
+		String labelGraficoLinhaMetaMensal = "<html>Metas Mensal</html>";
+		botaoGraficoLinhaMetaMensal.setText(labelGraficoLinhaMetaMensal);
+		ImageIcon iconeGraficoLinhaMetaMensal = new ImageIcon("imagens/img_botaoGraficoLinha.png");
+		botaoGraficoLinhaMetaMensal.setIcon(iconeGraficoLinhaMetaMensal);
+		botaoGraficoLinhaMetaMensal.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoGraficoLinhaMetaMensal.setIconTextGap(10);
+		botaoGraficoLinhaMetaMensal.setHorizontalTextPosition(JButton.RIGHT);
+		botaoGraficoLinhaMetaMensal.setPreferredSize(new Dimension(150,50));
+		botaoGraficoLinhaMetaMensal.addActionListener(trataEventosGraficos);
+		
+		//Painel com o botão e comboBox
+		JPanel painelGraficoLinhas = new JPanel();
+		painelGraficoLinhas.setBorder(new TitledBorder(""));
+		painelGraficoLinhas.setPreferredSize(new Dimension(180,90));
+		painelGraficoLinhas.setBackground(Color.WHITE);
+		JLabel labelCategoria = new JLabel("Categoria:");
+		labelCategoria.setFont(new Font(labelCategoria.getFont().getFontName(), Font.PLAIN, 10));
+		
+		jComboBoxCategorias.setMaximumRowCount(5);
+		jComboBoxCategorias.setPreferredSize(new Dimension(99,20));
+		
+		List<Categoria> arrayCategorias = null;
+		try {
+			arrayCategorias = CategoriaDAO.todasAsCategorias();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for(int i = 0; i < arrayCategorias.size(); i++){
+			jComboBoxCategorias.addItem(arrayCategorias.get(i).getDescricao());
+		}
+		
+		painelGraficoLinhas.add(labelCategoria);
+		painelGraficoLinhas.add(jComboBoxCategorias);
+		painelGraficoLinhas.add(botaoGraficoLinhaMetaMensal);
+		
+		
+		
 		//adiciona os botoes
 		painelBotoes.add(botaoBalancoTotal, constraints);
 		constraints.gridy = 1;
-		constraints.insets = new Insets(0, 0, 50, 0);
+		constraints.insets = new Insets(0, 0, 20, 0);
 		painelBotoes.add(botaoBalancoDespesa, constraints);
 		constraints.gridy = 2;
 		constraints.insets = new Insets(0, 0, 25, 0);
@@ -172,9 +209,9 @@ public class PainelGraficos extends JPanel {
 		constraints.gridy = 3;
 		painelBotoes.add(botaoGraficoBarraCategoria, constraints);
 		constraints.gridy = 4;
-		painelBotoes.add(botaoGraficoLinhaMetaMensal, constraints);
-		constraints.gridy = 5;
 		painelBotoes.add(botaoGraficoPizzaFormaPagamento, constraints);
+		constraints.gridy = 5;
+		painelBotoes.add(painelGraficoLinhas, constraints);
 		
 		painelBotoes.setPreferredSize(new Dimension(TAM_X, TAM_Y));
 		painelBotoes.setBackground(Color.WHITE);
@@ -193,6 +230,22 @@ public class PainelGraficos extends JPanel {
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoLinha(tituloGrafico, campos, valores));
 		
 		painelDeGraficos.validate();
+	}
+	
+	public void AtualizaComponentes(){
+		jComboBoxCategorias.removeAllItems();
+		
+		List<Categoria> arrayCategorias = null;
+		try {
+			arrayCategorias = CategoriaDAO.todasAsCategorias();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for(int i = 0; i < arrayCategorias.size(); i++){
+			jComboBoxCategorias.addItem(arrayCategorias.get(i).getDescricao());
+		}
+		
+		painelDeGraficos.removeAll();
 	}
 
 	public JButton getBotaoBalancoTotal() {
@@ -217,6 +270,10 @@ public class PainelGraficos extends JPanel {
 
 	public JButton getBotaoGraficoPizzaFormaPagamento() {
 		return botaoGraficoPizzaFormaPagamento;
+	}
+
+	public String getValorjComboBoxCategorias() {
+		return (String)jComboBoxCategorias.getSelectedItem();
 	}
 	
 }

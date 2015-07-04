@@ -11,6 +11,8 @@ import java.awt.Font;
 import java.awt.Window;
 
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class AbasPrincipal extends JTabbedPane{
 	private final int TAM_PAINEL_X = 990;
@@ -41,6 +43,17 @@ public class AbasPrincipal extends JTabbedPane{
 		add(NOME_ABA_2, igPainelRenda);
 		add(NOME_ABA_3, painelDespesas);
 		add(NOME_ABA_4, painelGraficos);
+		
+		//Atualiza componente da aba selecionada
+		addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent event) {
+				if(getSelectedIndex() == 3){
+					painelGraficos.AtualizaComponentes();
+				}
+				
+			}
+		});
 		
 		setTabPlacement(JTabbedPane.LEFT);
 		setPreferredSize(new Dimension(TAM_PAINEL_X, TAM_PAINEL_Y));

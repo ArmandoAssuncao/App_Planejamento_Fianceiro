@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -54,6 +55,8 @@ public class TEPainelGraficos implements ActionListener{
 		else if(event.getSource() == painelGraficos.getBotaoBalancoDespesa()){
 			new JanelaBalancoDespesas();
 		}
+		
+		//
 		else if(event.getSource() == painelGraficos.getBotaoGraficoPizzaTotal()){
 			List<Despesa> despesas = new ArrayList<Despesa>();
 			List<RendaMensal> rendasMensal = new ArrayList<RendaMensal>();
@@ -95,44 +98,68 @@ public class TEPainelGraficos implements ActionListener{
 					new Double[]{valorTotalInvestimentos, valorTotalGastos, valorTotalRendas, valorSaldoAtual}, 1);
 		}
 		
+		//
 		else if(event.getSource() == painelGraficos.getBotaoGraficoBarraCategoria()){
 			List<Categoria> arrayCategorias = new ArrayList<>();
-			List<MetaMensal> arrayMetasMensal = new ArrayList<>();
+			List<Despesa> arrayDespesas = new ArrayList<Despesa>();
 			
 			Calendar mesAno = Calendar.getInstance();
-			System.out.println(mesAno.get(Calendar.MONTH));
 			
 			try {
-				arrayMetasMensal.addAll(MetaMensalDAO.metaMensalDoMesAno(mesAno));
+				arrayCategorias.addAll(CategoriaDAO.todasAsCategorias());
+				arrayDespesas.addAll(DespesaDAO.despesasDoMesAno(mesAno));
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			
-			String dados[] = new String[arrayMetasMensal.size()];
-			Double valores[] = new Double[arrayMetasMensal.size()];
+			String dados[] = new String[arrayCategorias.size()];
+			Double valores[] = new Double[arrayCategorias.size()];
+			Arrays.fill(valores, 0.0);
 			
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			
-			try {
-				for(int i = 0; i < arrayMetasMensal.size(); i++){
-					int idCategoria = arrayMetasMensal.get(i).getId(); 
-					
-					dados[i] = categoriaDAO.getDescricao(idCategoria);
-					valores[i] = arrayMetasMensal.get(i).getValor();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			//nome de cada categoria
+			for(int i = 0; i < arrayCategorias.size(); i++){
+				dados[i] = arrayCategorias.get(i).getDescricao();
 			}
 			
+			//valor total de cada categoria
+			for(int j = 0; j < arrayDespesas.size(); j++){
+				valores[arrayDespesas.get(j).getIdCategoria() -1] += arrayDespesas.get(j).getValorDespesa();
+			}
 			
-			painelGraficos.adicionarGrafico("Gráfico das Categorias", dados, valores, 2);
+			painelGraficos.adicionarGrafico("Gastos das Categorias", dados, valores, 2);
 		}
 		
+		//
 		else if(event.getSource() == painelGraficos.getBotaoGraficoLinhaMetaMensal()){
-			painelGraficos.adicionarGrafico("titulo Barra", new String[]{"campo1", "campo2"}, new Double[]{1.0,2.0}, 2);
+			List<Categoria> arrayCategorias = new ArrayList<>();
+			List<Despesa> arrayDespesas = new ArrayList<Despesa>();
+			MetaMensal MetaMensal = null;
+			int idCategoria = 0;
 			
+			String categoriaSelecionada = painelGraficos.getValorjComboBoxCategorias();
+			
+			Calendar mesAno = Calendar.getInstance();
+			
+			try {
+				idCategoria = new CategoriaDAO().getId(categoriaSelecionada);
+				MetaMensal = MetaMensalDAO.pesquisaMetaMensal(idCategoria, mesAno);
+				arrayDespesas.addAll(DespesaDAO.despesasDoMesAno(mesAno));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			//valor total de cada categoria
+			Double valorTotalCategoria = 0.0;
+			for(int j = 0; j < arrayDespesas.size(); j++){
+				
+				valorTotalCategoria += arrayDespesas.get(j).getValorDespesa();
+			}
+			
+			System.out.println(idCategoria);
+			painelGraficos.adicionarGrafico("gastos com " + categoriaSelecionada, new String[]{"campo1", "campo2"}, new Double[]{0.0, valorTotalCategoria}, 3);
 		}
 		
+		//
 		else if(event.getSource() == painelGraficos.getBotaoGraficoPizzaFormaPagamento()){
 			List<Despesa> despesas = new ArrayList<Despesa>();
 			Double valorTotalAVista = 0.0;
