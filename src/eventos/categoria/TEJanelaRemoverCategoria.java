@@ -11,6 +11,14 @@ import java.sql.SQLException;
 import classes.Categoria;
 import persistencia.CategoriaDAO;
 
+/**
+ *  * Classe para tratar os eventos da janela Remover Categoria.
+
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ *@see ActionListener
+ */
 public class TEJanelaRemoverCategoria implements ActionListener{
 	private JanelaRemoverCategoria janelaRemoverCategoria;
 	private IgPainelDespesas igPainelDespesas;

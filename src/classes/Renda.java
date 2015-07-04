@@ -59,15 +59,19 @@ public class Renda{
 		this.descricao = descricao;
 	}
 	
-	
+	/**
+	 *  Retorna uma lista de rendas mensais armazenadas no objeto <code>Renda</code>. 
+	 * @return o objeto List.
+	 */
 	public List<RendaMensal> getRendasMensais() {
 		return rendasMensais;
 	}
 
-	public void setRendasMensais(List<RendaMensal> rendasMensais) {
-		this.rendasMensais = rendasMensais;
-	}
-
+//É necessário este método?	
+//	public void setResndasMensais(List<RendaMensal> rendasMensais) {
+//		this.rendasMensais = rendasMensais;
+//	}
+	
 	/** Retorna um objeto <code>RendaMensal</code>.
 	 * @param data data da rendaMensal
 	 * @return <code>RendaMensal</code> com a renda mensal da renda

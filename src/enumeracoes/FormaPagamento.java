@@ -8,10 +8,26 @@ package enumeracoes;
  *
  */
 public enum FormaPagamento {
+	/**
+	 * Pagamento a vista.
+	 */
 	AVISTA("A Vista"),
+	
+	/**
+	 * Pagamento com cartão.
+	 */
 	CARTAO("Cartão de Credito"),
+	
+	/**
+	 * Pagamento com cheque
+	 */
 	CHEQUE("Cheque"),
+	
+	/**
+	 * Pagamento a prazo.
+	 */
 	PRAZO("Prazo");
+
 	private String formaPagamento;
 	
 	/**
