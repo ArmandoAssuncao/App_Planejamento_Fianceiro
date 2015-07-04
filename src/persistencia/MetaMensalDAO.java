@@ -408,14 +408,19 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 		
 		while(resultadoQuery.next()){
 			data = Converte.stringToCalendar(resultadoQuery.getString("mesAnoMeta"));
-			System.out.println(data.get(Calendar.MONTH));
-			if(datas.size() == 0)
+			boolean mesExistente = false;
+			
+			if(datas.size() == 0 && data != null)
 				datas.add(data);
+			
 			for(int i = 0; i < datas.size(); i++){
-				if(!(datas.get(i).get(Calendar.MONTH) == data.get(Calendar.MONTH) && datas.get(i).get(Calendar.YEAR) == data.get(Calendar.YEAR))){
-					datas.add(data);
-					break;
+				if(datas.get(i).get(Calendar.MONTH) == data.get(Calendar.MONTH) && datas.get(i).get(Calendar.YEAR) == data.get(Calendar.YEAR) ){
+					System.out.println("true");
+					mesExistente = true;
 				}
+			}
+			if(!mesExistente){
+				datas.add(data);
 			}
 		}
 		
