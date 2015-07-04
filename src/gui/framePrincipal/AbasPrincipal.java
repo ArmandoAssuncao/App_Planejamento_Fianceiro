@@ -8,12 +8,18 @@ import gui.painelRenda.IgPainelRenda;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Window;
 
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Define as abas principais do programa.
+ *  
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ */
 public class AbasPrincipal extends JTabbedPane{
 	private final int TAM_PAINEL_X = 990;
 	private final int TAM_PAINEL_Y = 645;
@@ -29,6 +35,10 @@ public class AbasPrincipal extends JTabbedPane{
 	PainelGraficos painelGraficos;
     IgPainelRenda igPainelRenda;
 	
+    /**
+     * Cria uma instância do painel de abas.
+     * @param framePrincipal componente pai
+     */
 	public AbasPrincipal(GuiPrincipal framePrincipal){
 		painelInicio = new PainelInicio(framePrincipal);
 		painelDespesas = new IgPainelDespesas(framePrincipal);

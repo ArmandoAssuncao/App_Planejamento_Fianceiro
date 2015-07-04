@@ -38,6 +38,11 @@ public final class Converte {
 		return c;
 	}
 	
+	/**
+	 * Dado um valor <code>double</code>, este método substitui o separador de "," (vírgula) por "." (ponto).
+	 * @param valor valor a ser manipulado.
+	 * @return valor modificado.
+	 */
 	public static Double double2Decimais(Double valor){
 		DecimalFormat df = new DecimalFormat("#.##");
 		

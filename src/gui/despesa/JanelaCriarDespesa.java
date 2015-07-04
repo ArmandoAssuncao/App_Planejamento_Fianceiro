@@ -10,7 +10,6 @@ import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.Calendar;
 
 import javax.swing.JButton;
@@ -33,6 +32,13 @@ import funcoes.ValidarDados;
 import gui.painelDespesas.AbasCategoria;
 import gui.painelDespesas.IgPainelDespesas;
 
+/**
+ * Cria uma GUI para a obtenção dos atributos de uma <code>Despesa</code>. 
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ */
 public class JanelaCriarDespesa extends JDialog{
 	private final String TITULO_JANELA= "Criar Despesa";
 	private final int TAM_JANELA_X = 500;
@@ -66,6 +72,11 @@ public class JanelaCriarDespesa extends JDialog{
 	private JComboBox<String> jComboBoxTipoDoPagamento;
 	private JComboBox<String> jComboBoxCategoria;
 
+	/**
+	 * Cria uma instância do <code>JDialog</code>
+	 * @param painelDespesas componente pai
+	 * @param abasCategoria aba da categoria onde a despesa será cadastrada
+	 */
 	public JanelaCriarDespesa(IgPainelDespesas painelDespesas, AbasCategoria abasCategoria) {
 		setTitle(TITULO_JANELA);
 		
@@ -332,11 +343,18 @@ public class JanelaCriarDespesa extends JDialog{
 		jComboBoxCategoria = null;
 	}
 	
+	/**
+	 * Libera os recursos alocados para a janela.
+	 */
 	public void finalizaJanelaDespesa(){
 		liberaElementos();
 		dispose();
 	}
 	
+	/**
+	 * Valida os campos digitados pelo usuário.
+	 * @return <code>true</code> se os dados estão corretos, <code>fase</code> caso contrário
+	 */
 	public boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		
@@ -421,6 +439,10 @@ public class JanelaCriarDespesa extends JDialog{
 		return true;
 	}
 	
+	/**
+	 * Cria e retorna um novo objeto Despesa com valores inseridos pelo usuário.
+	 * @return novo objeto Despesa
+	 */
 	public Despesa retornaDespesa(){
 		String categoria = jComboBoxCategoria.getItemAt(jComboBoxCategoria.getSelectedIndex());
 		String descricao = textFieldDescricao.getText();
@@ -458,20 +480,37 @@ public class JanelaCriarDespesa extends JDialog{
 	}
 	
 	
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão criar.
+	 */
 	public JButton getBotaoCriar() {
 		return botaoCriar;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão cancelar.
+	 */
 	public JButton getBotaoCancelar() {
 		return botaoCancelar;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JTextField</code>.
+	 * @return o campo de texto descrição
+	 */
 	public JTextField getTextFieldDescricao() {
 		return textFieldDescricao;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JTextField</code>.
+	 * @return o campo de texto valor despesa.
+	 */
 	public JTextField gettextFieldValorDespesa() {
 		return textFieldValorDespesa;
 	}
+
 	
 }
