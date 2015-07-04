@@ -129,12 +129,20 @@ public class JanelaBalancoDespesas extends JDialog {
 		return painelBotoes;
 	}
 	
+	/**
+	 * Limpa a tabela, removento dotas as linhas
+	 */
 	public void limpaTabela(){
 		int tamanho = modelo.getRowCount();
 		for(int i = tamanho-1; i >= 0; i--)
 			modelo.removeRow(i);
 	}
 	
+	/**
+	 * Adiciona um título a tabela.
+	 * @param titulo <code>String</code> com o título da tabela
+	 * @param posicaoColuna posição indicando onde o título será colocado
+	 *///TODO revisar comentario
 	public void adicionarTituloTabela(String titulo, int posicaoColuna){
 		String tracos = ".....................................";
 		String linha[] = new String[NUM_COLUNAS];
@@ -149,19 +157,35 @@ public class JanelaBalancoDespesas extends JDialog {
 		tabela.setRowHeight(tabela.getRowCount()-1, 40);
 	}
 	
+	/**
+	 * Adiciona uma nova linha na tabela
+	 * @param dados dados que serão adicionados na tabela
+	 */
 	public void adicionarDadosTabela(String[] dados){
 		modelo.addRow(dados);
 	}
 	
+	/**
+	 * Adiciona uma linha vazia na tabela
+	 * @param espacamento espaçamento vertical da célula em pixels
+	 *///TODO revisar comentario
 	public void adicionarLinhaVaziaTabela(int espacamento){
 		modelo.addRow(new String[]{});
 		tabela.setRowHeight(tabela.getRowCount()-1, espacamento);
 	}
 	
+	/**
+	 * Retorna a referência do <code>JComboBox</code> mês.
+	 * @return <code>JComboBox</code> mês.
+	 */
 	public JComboBox<String> getjComboBoxMes() {
 		return jComboBoxMes;
 	}
 
+	/**
+	 * Retorna a referência do texto correspondente no <code>JComboBox</code>, na posição selecionada.
+	 * @return <code>String</code> do mês correspondente.
+	 */
 	public String getTextoJComboBoxMes() {
 		return jComboBoxMes.getItemAt(jComboBoxMes.getSelectedIndex());
 	}
