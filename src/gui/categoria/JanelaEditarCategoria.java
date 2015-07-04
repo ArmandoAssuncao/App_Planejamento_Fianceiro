@@ -24,7 +24,13 @@ import validacoes.ValidarDados;
 import eventos.categoria.TEJanelaEditarCategoria;
 import funcoes.Converte;
 import gui.painelDespesas.IgPainelDespesas;
-
+/**
+ * Cria uma GUI para a edição dos atributos de uma <code>Categoria</code>. 
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ */
 public class JanelaEditarCategoria extends JDialog{
 	private final String TITULO_JANELA= "Editar Categoria";
 	private final int TAM_JANELA_X = 500;
@@ -53,7 +59,11 @@ public class JanelaEditarCategoria extends JDialog{
 	private JTextField textFieldNovaDescricao;
 	private JTextField textFieldNovaMeta;
 	private JTextField textFieldNovaMetaPorcentagem;
-
+	
+	/**
+	 * Cria uma instância do <code>JDialog</code> 
+	 * @param igPainelDespesas <code>JPanel</code> com parte do conteúdo da janela. 
+	 */ //TODO revisar comentario
 	public JanelaEditarCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
 		
@@ -73,6 +83,10 @@ public class JanelaEditarCategoria extends JDialog{
 		setVisible(true);
 	}
 	
+	/**
+	 * Cria o painel principal do <code>JDialog</code>.
+	 * @return retorna o painel criado.
+	 */
 	private JPanel criaPainelPrincipal(){
 		painelPrincipal.setLayout(new BorderLayout(0, 0));
 		
@@ -85,7 +99,10 @@ public class JanelaEditarCategoria extends JDialog{
 		return painelPrincipal;
 	}
 	
-	
+	/**
+	 * Criao o painel de título do <code>JDialog</code>
+	 * @return retorna o painel criado.
+	 */
 	private JPanel criaPainelTitulo(){
 		final int TAM_X = this.getWidth();
 		final int TAM_Y = 70;
@@ -107,7 +124,10 @@ public class JanelaEditarCategoria extends JDialog{
 		return painelTitulo;
 	}
 	
-	
+	/**
+	 * Cria o painel para armazenar os campos do <code>JDialog</code>
+	 * @return retorna o painel criado.
+	 */
 	private JPanel criaPainelCampos(){
 		final int TAM_X = this.getWidth();
 		final int TAM_Y = 400;
@@ -238,6 +258,9 @@ public class JanelaEditarCategoria extends JDialog{
 		return painelCampos;
 	}
 	
+	/**
+	 * Inicia as variáveis de instância do <code>JDialog</code>
+	 */
 	private void iniciaElementos(){
 		painelPrincipal = new JPanel();
 		painelCampos = new JPanel();
@@ -261,6 +284,9 @@ public class JanelaEditarCategoria extends JDialog{
 		labelAntigaMetaProcentagemValor = new JLabel();
 	}
 	
+	/**
+	 * Libera os recursos alocados para as variáveis de instância da classe
+	 */
 	private void liberaElementos(){
 		painelPrincipal = null;
 		painelCampos = null;
@@ -284,11 +310,18 @@ public class JanelaEditarCategoria extends JDialog{
 		labelAntigaMetaProcentagemValor = null;
 	}
 	
+	/**
+	 * Libera os recursos alocados para a janela.
+	 */
 	public void finalizaJanelaCategoria(){
 		liberaElementos();
 		dispose();
 	}
 	
+	/**
+	 * Valida os campos digitados pelo usuário.
+	 * @return <code>true</code> se os dados estão corretos, <code>fase</code> caso contrário
+	 */
 	public boolean validaCampos(){
 		labelErroCampo.setForeground(Color.RED);
 		
@@ -330,23 +363,43 @@ public class JanelaEditarCategoria extends JDialog{
 		return true;
 	}
 	
-	
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão editar.
+	 */
 	public JButton getBotaoEditar() {
 		return botaoEditar;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão cancelar.
+	 */
 	public JButton getBotaoCancelar() {
 		return botaoCancelar;
 	}
-
+	
+	/**
+	 *  Retorna uma referência de um <code>JTextField</code>.
+	 * @return o campo de texto nova descrição.
+	 */
 	public JTextField getTextFieldNovaDescricao() {
 		return textFieldNovaDescricao;
 	}
-
+	
+	/**
+	 *  Retorna uma referência de um <code>JTextField</code>.
+	 * @return o campo de texto nova meta.
+	 */
 	public JTextField getTextFieldNovaMeta() {
 		return textFieldNovaMeta;
 	}
 	
+	/**
+	 *  Retorna uma referência de uma <code>Categoria</code>.
+	 * @return nova categoria
+	 */
+	//TODO revisar comentario javadoc
 	public Categoria retornaNovaCategoria(){
 		MetaMensal metaMensal = new MetaMensal();
 		
@@ -381,6 +434,10 @@ public class JanelaEditarCategoria extends JDialog{
 		return categoria;
 	}
 	
+	/**
+	 * Retorna a referência de uma <code>Categoria</code>
+	 * @return categoria antiga
+	 *///TODO revisar comentario
 	public Categoria retornaAntigaCategoria(){
 		MetaMensal metaMensal = new MetaMensal();
 

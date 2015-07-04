@@ -3,7 +3,6 @@ package gui.painelDespesas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -13,12 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -43,7 +40,7 @@ public class IgPainelDespesas extends JPanel{
 	List<Categoria> arrayCategoria = new ArrayList<Categoria>();
 	AbasCategoria abasCategoria;
 	JPanel painelBotoes;
-	JPanel painelTitulo;
+	PainelTituloPainelDespesas painelTitulo;
 	TEPainelDespesas trataEventosDespesas;
 	
 	JButton botaoNovaCategoria;
@@ -69,8 +66,9 @@ public class IgPainelDespesas extends JPanel{
 		iniciaValoresCategoria();
 		
 		criaPainelBotoes();
-		criaPainelTitulo();
 		
+		criaPainelTitulo();
+	
 		add(painelTitulo, BorderLayout.NORTH);
 		add(abasCategoria, BorderLayout.WEST);
 		add(painelBotoes, BorderLayout.EAST);
@@ -87,8 +85,24 @@ public class IgPainelDespesas extends JPanel{
 		botaoEditarDespesa.setVisible(false);
 		
 		setVisible(true);
+	}//construtor
+	
+	private void iniciaElementos(){
+		abasCategoria = new AbasCategoria();
+		painelBotoes = new JPanel();
+		painelTitulo = new PainelTituloPainelDespesas();
+		botaoNovaCategoria = new JButton();
+		botaoExcluirCategoria = new JButton();
+		botaoEditarCategoria = new JButton();
+		botaoAdicionarDespesa = new JButton();
+		botaoExcluirDespesa = new JButton();
+		botaoEditarDespesa = new JButton();
+		labelNomeCategoriaValor = new JLabel();
+		labelMetaCategoriaValor = new JLabel();
+		labelNumeroDeDespesasValor = new JLabel();
+		labelValorTotalDespesasValor = new JLabel();
+		labelValorTotalDespesasPorcentagemValor = new JLabel();
 	}
-
 	private void criaPainelBotoes(){
 		final int TAM_X = 200;
 		final int TAM_Y = 400;
@@ -188,39 +202,11 @@ public class IgPainelDespesas extends JPanel{
 		painelBotoes.setVisible(true);
 	}
 	
+
 	private void criaPainelTitulo(){
-		final int TAM_X = 500;
-		final int TAM_Y = 130;
-		
-		GridBagLayout gridBag = new GridBagLayout();
-		gridBag.columnWidths = new int[]{0, 0, 0, 0, 0}; //A cada coluna adicionada, aumentar um campo com {0}.
-		gridBag.rowHeights = new int[]{0, 0, 0, 0}; //A cada linha adicionada, aumentar um campo com {0}.
-		gridBag.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE}; //A cada coluna adicionada, aumentar um campo com {0.0}.
-		gridBag.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE}; //A cada linha adicionada, aumentar um campo com {0.0}.
-		
-		painelTitulo.setLayout(gridBag);
-		
-		GridBagConstraints constraints = new GridBagConstraints();
-		constraints.fill = GridBagConstraints.BOTH;
-		constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-		constraints.insets = new Insets(0, 0, 0, 0);
-		
-		JLabel labelNomeCategoria = new JLabel();
-		JLabel labelMetaCategoria = new JLabel();
-		JLabel labelNumeroDeDespesas = new JLabel();
-		JLabel labelValorTotalDespesas = new JLabel();
-		JLabel labelValorTotalDespesasPorcentagem = new JLabel();
-		
-		labelNomeCategoria.setText("Nome da Categoria:");
-		labelMetaCategoria.setText("Meta da Categoria:");
-		labelNumeroDeDespesas.setText("Número de despesas:");
-		labelValorTotalDespesas.setText("Total das despesas:");
-		labelValorTotalDespesasPorcentagem.setText("Total das despesas %:");
-		
-		atualizaPainelTitulo();
-		
 		//Atualiza os labels do painel Titulo sempre quando muda de categoria(aba).
 		abasCategoria.addChangeListener(new ChangeListener() {
+			
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				if(abasCategoria.getNumeroDeAbas() != 0 && arrayCategoria.size() != 0)
@@ -228,126 +214,28 @@ public class IgPainelDespesas extends JPanel{
 			}
 		});
 		
-		//Define a fonte
-		String fonteDefault = new JLabel().getFont().getFontName(); //Pega a fonte default do sistema
-		Font fonte = new Font(fonteDefault, Font.PLAIN, 14);
-		labelNomeCategoria.setFont(fonte);
-		labelNomeCategoriaValor.setFont(fonte);
-		labelMetaCategoria.setFont(fonte);
-		labelMetaCategoriaValor.setFont(fonte);
-		labelNumeroDeDespesas.setFont(fonte);
-		labelNumeroDeDespesasValor.setFont(fonte);
-		labelValorTotalDespesas.setFont(fonte);
-		labelValorTotalDespesasValor.setFont(fonte);
-		labelValorTotalDespesasPorcentagem.setFont(fonte);
-		labelValorTotalDespesasPorcentagemValor.setFont(fonte);
-		
-		//linha 0
-		constraints.gridx = 0;
-		constraints.gridy = 0;
-		constraints.insets.set(10, 5, 0, 0);
-		painelTitulo.add(labelNomeCategoria, constraints);
-		constraints.gridx = 1;
-		constraints.gridwidth = 3;
-		painelTitulo.add(labelNomeCategoriaValor, constraints);
-		constraints.gridx = 2;
-		constraints.gridwidth = 1;
-		constraints.insets.set(10, 250, 0, 0);
-		painelTitulo.add(labelMetaCategoria, constraints);
-		constraints.gridx = 3;
-		constraints.insets.set(10, 5, 0, 0);
-		painelTitulo.add(labelMetaCategoriaValor, constraints);
-		
-		//linha 1
-		constraints.gridx = 0;
-		constraints.gridy = 1;
-		constraints.insets.set(10, 5, 0, 0);
-		painelTitulo.add(labelNumeroDeDespesas, constraints);
-		constraints.gridx = 1;
-		constraints.gridwidth = 3;
-		painelTitulo.add(labelNumeroDeDespesasValor, constraints);
-		constraints.gridx = 2;
-		constraints.gridwidth = 1;
-		constraints.insets.set(10, 250, 0, 0);
-		painelTitulo.add(labelValorTotalDespesas, constraints);
-		constraints.gridx = 3;
-		constraints.insets.set(10, 5, 0, 0);
-		painelTitulo.add(labelValorTotalDespesasValor, constraints);
-		
-		//linha 2
-		constraints.gridx = 2;
-		constraints.gridy = 2;
-		constraints.insets.set(10, 250, 0, 0);
-		painelTitulo.add(labelValorTotalDespesasPorcentagem, constraints);
-		constraints.gridx = 3;
-		constraints.insets.set(10, 5, 0, 0);
-		painelTitulo.add(labelValorTotalDespesasPorcentagemValor, constraints);
-		
-		Border borda = BorderFactory.createLineBorder(Color.BLACK, 2);
-		painelTitulo.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-		painelTitulo.setBackground(Color.LIGHT_GRAY);
-		painelTitulo.setBorder(borda);
-		painelTitulo.setVisible(true);
-	}//painelTitulo()
-	
-
-	private void iniciaElementos(){
-		abasCategoria = new AbasCategoria();
-		painelBotoes = new JPanel();
-		painelTitulo = new JPanel();
-		botaoNovaCategoria = new JButton();
-		botaoExcluirCategoria = new JButton();
-		botaoEditarCategoria = new JButton();
-		botaoAdicionarDespesa = new JButton();
-		botaoExcluirDespesa = new JButton();
-		botaoEditarDespesa = new JButton();
-		labelNomeCategoriaValor = new JLabel();
-		labelMetaCategoriaValor = new JLabel();
-		labelNumeroDeDespesasValor = new JLabel();
-		labelValorTotalDespesasValor = new JLabel();
-		labelValorTotalDespesasPorcentagemValor = new JLabel();
+		/*Após adicionar o tratador de eventos chama o método para atualizar o 
+		 * painel para corresponder com a aba selecionada.
+		 */
+		atualizaPainelTitulo();
 	}
 	
+	/**
+	 * Atualiza o painel de título da janela.
+	 */
 	private void atualizaPainelTitulo(){
-		if(abasCategoria.getNumeroDeAbas() == 0){
-			labelNomeCategoriaValor.setText("");
-			labelMetaCategoriaValor.setText("");
-			labelNumeroDeDespesasValor.setText("");
-			labelValorTotalDespesasValor.setText("");
-			labelValorTotalDespesasPorcentagemValor.setText("");
-			return;
-		}
-		
 		String descricao = arrayCategoria.get(abasCategoria.getSelectedIndex()).getDescricao();
-		double valorMeta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorMeta();
 		double valorAlerta = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorAlerta();
-		double totalDespesasPorcentagem = (abasCategoria.getValorTotalDespesas() * 100);
-		if(valorMeta != 0){
-			totalDespesasPorcentagem = (abasCategoria.getValorTotalDespesas() * 100)/valorMeta;
-		}
+		double somaDespesas = abasCategoria.getValorTotalDespesas();
+		int totalDespesas = abasCategoria.getNumeroDeDespesasDaCategoria();
+		double valorMetaPorcentagem = arrayCategoria.get(abasCategoria.getSelectedIndex()).getValorMeta();
 		
-		avisoMetaDefinido = false;
-		avisoMetaTotal = false;
-		if(totalDespesasPorcentagem >= 100){
-			labelValorTotalDespesasPorcentagemValor.setForeground(Color.RED);
-			avisoMetaDefinido = true;
-			avisoMetaTotal = true;
-		}
-		else if(totalDespesasPorcentagem > valorAlerta){
-			labelValorTotalDespesasPorcentagemValor.setForeground(Color.YELLOW);
-			avisoMetaDefinido = true;
-		}
-		else{
-			labelValorTotalDespesasPorcentagemValor.setForeground(Color.BLACK);
-		}
-		
-		labelNomeCategoriaValor.setText(descricao);
-		labelMetaCategoriaValor.setText("$" + valorMeta);
-		labelNumeroDeDespesasValor.setText("" + abasCategoria.getNumeroDeDespesasDaCategoria());
-		labelValorTotalDespesasValor.setText("$" + abasCategoria.getValorTotalDespesas());
-		labelValorTotalDespesasPorcentagemValor.setText( String.format("%.1f%%", totalDespesasPorcentagem));
-	}
+		painelTitulo.atualizarPainel(descricao,totalDespesas,somaDespesas,valorAlerta,valorMetaPorcentagem);
+	}//atualizaPainelTitulo
 	
+	/**
+	 * Inicia as abas de <code>Categoria</code>.
+	 */
 	private void iniciaValoresCategoria(){
 		List<MetaMensal> arrayMetaMensalTemp = new ArrayList<MetaMensal>();
 		List<Categoria> arrayCategoriaTemp = new ArrayList<Categoria>();

@@ -17,6 +17,13 @@ import classes.Categoria;
 import eventos.categoria.TEJanelaRemoverCategoria;
 import gui.painelDespesas.IgPainelDespesas;
 
+/**
+ * Cria uma GUI para a remoção de uma <code>Categoria</code>. 
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ */
 public class JanelaRemoverCategoria extends JDialog {
 	private final String TITULO_JANELA= "Remover Categoria";
 	private final int TAM_JANELA_X = 500;
@@ -38,6 +45,10 @@ public class JanelaRemoverCategoria extends JDialog {
 	private JLabel labelMeta;
 	private JLabel labelMetaValor;
 	
+	/**
+	 * Cria uma instância do <code>JDialog</code> 
+	 * @param igPainelDespesas <code>JPanel</code> com parte do conteúdo da janela. 
+	 *///TODO revisar comentario
 	public JanelaRemoverCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
 		
@@ -58,6 +69,10 @@ public class JanelaRemoverCategoria extends JDialog {
 		setVisible(true);
 	}
 	
+	/**
+	 * Cria o painel principal do <code>JDialog</code>.
+	 * @return retorna o painel criado.
+	 */
 	private JPanel criaPainelPrincipal(){
 		painelPrincipal.setLayout(new BorderLayout(0, 0));
 		
@@ -70,7 +85,10 @@ public class JanelaRemoverCategoria extends JDialog {
 		return painelPrincipal;
 	}
 	
-	
+	/**
+	 * Cria o painel de título do <code>JDialog</code>
+	 * @return retorna o painel criado.
+	 */
 	private JPanel criaPainelTitulo(){
 		final int TAM_X = this.getWidth();
 		final int TAM_Y = 70;
@@ -92,7 +110,10 @@ public class JanelaRemoverCategoria extends JDialog {
 		return painelTitulo;
 	}
 	
-	
+	/**
+	 * Cria o painel para armazenar os campos do <code>JDialog</code>
+	 * @return retorna o painel criado.
+	 */
 	private JPanel criaPainelCampos(){
 		final int TAM_X = this.getWidth();
 		final int TAM_Y = 400;
@@ -158,6 +179,9 @@ public class JanelaRemoverCategoria extends JDialog {
 		return painelCampos;
 	}
 	
+	/**
+	 * Inicia as variáveis de instância do <code>JDialog</code>
+	 */
 	private void iniciaElementos(){
 		painelPrincipal = new JPanel();
 		painelCampos = new JPanel();
@@ -173,6 +197,9 @@ public class JanelaRemoverCategoria extends JDialog {
 		labelMetaValor = new JLabel();
 	}
 	
+	/**
+	 * Libera os recursos alocados para as variáveis de instância da classe
+	 */
 	private void liberaElementos(){
 		painelPrincipal = null;
 		painelCampos = null;
@@ -188,27 +215,51 @@ public class JanelaRemoverCategoria extends JDialog {
 		labelMetaValor = null;
 	}
 	
+	/**
+	 * Libera os recursos alocados para a janela.
+	 */
 	public void finalizaJanelaCategoria(){
 		liberaElementos();
 		dispose();
 	}
 
+	/**
+	 *  Retorna a referência de um <code>JButton</code>.
+	 * @return botão remover
+	 */
 	public JButton getBotaoRemover() {
 		return botaoRemover;
 	}
-
+	
+	/**
+	 *  Retorna a referência de um <code>JButton</code>.
+	 * @return botão cancelar
+	 */
 	public JButton getBotaoCancelar() {
 		return botaoCancelar;
 	}
 
+	/**
+	 *  Retorna a referência de um <code>JLabel</code>.
+	 * @return label descrição
+	 */
 	public JLabel getlabelDescricaoValor() {
 		return labelDescricaoValor;
 	}
 
+	/**
+	 *  Retorna a referência de um <code>JLabel</code>.
+	 * @return label meta
+	 */
 	public JLabel getLabelMetaValor() {
 		return labelMetaValor;
 	}
 	
+	/**
+	 * Cria e retorna um novo objeto Categoria
+	 * @return novo objeto Categoria
+	 */
+	//TODO por que a classe remover categoria tem um metodo retorna categoria?
 	public Categoria retornaCategoria(){
 		Categoria categoria = new Categoria();
 		categoria.setDescricao( labelDescricaoValor.getText() );

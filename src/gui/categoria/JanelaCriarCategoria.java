@@ -53,8 +53,8 @@ public class JanelaCriarCategoria extends JDialog{
 
 	/**
 	 * Cria uma instância do <code>JDialog</code> 
-	 * @param igPainelDespesas <code>JPanel</code> com parte do conteúdo da janela. //TODO revisar comentario
-	 */
+	 * @param igPainelDespesas <code>JPanel</code> com parte do conteúdo da janela. 
+	 *///TODO revisar comentario
 	public JanelaCriarCategoria(IgPainelDespesas igPainelDespesas) {
 		setTitle(TITULO_JANELA);
 		
@@ -90,7 +90,7 @@ public class JanelaCriarCategoria extends JDialog{
 	}
 	
 	/**
-	 * Criao o painel de título do <code>JDialog</code>
+	 * Cria o painel de título do <code>JDialog</code>
 	 * @return retorna o painel criado.
 	 */
 	private JPanel criaPainelTitulo(){
@@ -289,6 +289,10 @@ public class JanelaCriarCategoria extends JDialog{
 		return true;
 	}
 	
+	/**
+	 * Cria e retorna um novo objeto Categoria com valores padrão.
+	 * @return novo objeto Categoria
+	 */
 	public Categoria retornaCategoria(){
 		MetaMensal metaMensal = new MetaMensal();
 		
@@ -321,18 +325,34 @@ public class JanelaCriarCategoria extends JDialog{
 	}
 
 	// Getters e setters
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão criar.
+	 */
 	public JButton getBotaoCriar() {
 		return botaoCriar;
 	}
-
+	
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão cancelar.
+	 */
 	public JButton getBotaoCancelar() {
 		return botaoCancelar;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JTextField</code>.
+	 * @return o campo de texto descrição.
+	 */
 	public JTextField getTextFieldDescricao() {
 		return textFieldDescricao;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JTextField</code>.
+	 * @return o campo de texto meta.
+	 */
 	public JTextField getTextFieldMeta() {
 		return textFieldMeta;
 	}	
