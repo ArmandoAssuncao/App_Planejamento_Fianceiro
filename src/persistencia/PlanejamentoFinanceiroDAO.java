@@ -58,7 +58,8 @@ public class PlanejamentoFinanceiroDAO extends BancoDeDados implements Runnable{
 			this.iniciaBanco();
 		}
 		catch (SQLException e) {
-			JanelaMensagem.mostraMensagemErroBD(null, "Falha ao iniciar o banco de dados: \n" + e.getMessage() + "\n\nPrograma sera finalizado");
+			//JanelaMensagem.mostraMensagemErroBD(null, "Falha ao iniciar o banco de dados: \n" + e.getMessage() + "\n\nPrograma sera finalizado");
+			JanelaMensagem.mostraMensagemErroBD(null, "Falha ao iniciar o banco de dados. O programa será finalizado.");
 			System.exit(0);
 		}
 	}

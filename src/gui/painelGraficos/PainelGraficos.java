@@ -1,3 +1,4 @@
+
 package gui.painelGraficos;
 
 import java.awt.BorderLayout;
@@ -9,7 +10,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ButtonGroup;
@@ -21,18 +21,27 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-import classes.Categoria;
 import persistencia.CategoriaDAO;
+import classes.Categoria;
 import eventos.painelGraficos.TEPainelGraficos;
 
+/**
+Define o painel de relatórios e gráficos.
+* @author Armando Assunção
+* @author Richardson William
+*
+*/
+//TODO revisar comentario acima
 public class PainelGraficos extends JPanel {
-	private JPanel painelTitulo;
+	private PainelTituloPainelGraficos painelTitulo;
 	private JPanel painelDeGraficos;
 	private JPanel painelBotoes;
+	private JPanel painelSuperior;
 	
-	TEPainelGraficos trataEventosGraficos;
+	private TEPainelGraficos trataEventosGraficos;
 	
 	private JButton botaoBalancoTotal;
 	private JButton botaoBalancoDespesa;
@@ -40,10 +49,14 @@ public class PainelGraficos extends JPanel {
 	private JButton botaoGraficoBarraCategoria;
 	private JButton botaoGraficoLinhaMetaMensal;
 	private JButton botaoGraficoPizzaFormaPagamento;
-	JComboBox<String> jComboBoxCategorias;
-	JRadioButton radioButtonVerEmReal;
-	JRadioButton radioButtonVerEmPorcentagem;
+	private JComboBox<String> jComboBoxCategorias;
+	private JRadioButton radioButtonVerEmReal;
+	private JRadioButton radioButtonVerEmPorcentagem;
 
+	/**
+	 * Construtor padrão.
+	 * @param framePrincipal componente pai.
+	 */
 	public PainelGraficos(Window framePrincipal) {
 		setLayout(new BorderLayout(0, 3));
 		
@@ -51,13 +64,17 @@ public class PainelGraficos extends JPanel {
 		
 		iniciaElementos();
 		
-		criaPainelTitulo();
 		criaPainelDeGraficos();
 		criaPainelBotoes();
 		
+		painelSuperior.setLayout(new BorderLayout());
+		painelSuperior.setBorder(new LineBorder(Color.BLUE)); //TODO debug
+		painelTitulo.setBorder(new LineBorder(Color.RED));   //TODO debug
+		painelSuperior.add(painelTitulo, BorderLayout.WEST);
+		
 		add(painelBotoes, BorderLayout.EAST);
 		add(painelDeGraficos, BorderLayout.CENTER);
-		add(painelTitulo, BorderLayout.NORTH);
+		add(painelSuperior, BorderLayout.NORTH);
 
 		painelDeGraficos.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		setPreferredSize(new Dimension(800,600));
@@ -66,7 +83,8 @@ public class PainelGraficos extends JPanel {
 	}
 	
 	private void iniciaElementos(){
-		painelTitulo = new JPanel();
+		painelTitulo = new PainelTituloPainelGraficos();
+		painelSuperior = new JPanel();
 		painelBotoes = new JPanel();
 		painelDeGraficos = new JPanel();
 		botaoBalancoTotal = new JButton();
@@ -78,14 +96,6 @@ public class PainelGraficos extends JPanel {
 		jComboBoxCategorias = new JComboBox<String>();
 		radioButtonVerEmReal = new JRadioButton();
 		radioButtonVerEmPorcentagem = new JRadioButton();
-	}
-	
-	private void criaPainelTitulo(){
-		final int TAM_X = 500;
-		final int TAM_Y = 130;
-		
-		painelTitulo.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-		painelTitulo.setVisible(true);
 	}
 	
 	private void criaPainelDeGraficos(){
@@ -244,6 +254,13 @@ public class PainelGraficos extends JPanel {
 		painelBotoes.setVisible(true);
 	}
 	
+	/**
+	 * 	Adiciona um gráfico no painel  
+	 * @param tituloGrafico <code>String</code> com o título do gráfico.
+	 * @param campos vetor de <code>String</code> com os campos que serão adicionados ao gráfico
+	 * @param valores vetor de <code>Double</code> com os dados que serão adicionados ao gráfico 
+	 * @param tipoGrafico tipo de grafico a ser desenhado.
+	 */
 	public void adicionarGrafico(String tituloGrafico, String[] campos, Double[] valores, int tipoGrafico){
 		painelDeGraficos.removeAll();
 		painelDeGraficos.repaint();
@@ -258,7 +275,10 @@ public class PainelGraficos extends JPanel {
 		painelDeGraficos.validate();
 	}
 	
-	public void AtualizaComponentes(){
+	/**
+	 * Atualiza os componentes gráficos.
+	 */
+	public void atualizaComponentes(){
 		jComboBoxCategorias.removeAllItems();
 		
 		List<Categoria> arrayCategorias = null;
@@ -274,34 +294,66 @@ public class PainelGraficos extends JPanel {
 		painelDeGraficos.removeAll();
 	}
 
+	/**
+	 * Obtém a referência de um <code>JButton</code>
+	 * @return botão balanço total.
+	 */
 	public JButton getBotaoBalancoTotal() {
 		return botaoBalancoTotal;
 	}
 
+	/**
+	 * Obtém a referência de um <code>JButton</code>
+	 * @return botão balanço despesa.
+	 */
 	public JButton getBotaoBalancoDespesa() {
 		return botaoBalancoDespesa;
 	}
 
+	/**
+	 * Obtém a referência de um <code>JButton</code>
+	 * @return botão gráfico pizza.
+	 */
 	public JButton getBotaoGraficoPizzaTotal() {
 		return botaoGraficoPizzaTotal;
 	}
 
+	/**
+	 * Obtém a referência de um <code>JButton</code>
+	 * @return botão gráfico de barra de <code>Categoria</code>.
+	 */
 	public JButton getBotaoGraficoBarraCategoria() {
 		return botaoGraficoBarraCategoria;
 	}
 
+	/**
+	 * Obtém a referência de um <code>JButton</code>
+	 * @return botão gráfico de linha de <code>MetaMensal</code>.
+	 */
 	public JButton getBotaoGraficoLinhaMetaMensal() {
 		return botaoGraficoLinhaMetaMensal;
 	}
 
+	/**
+	 * Obtém a referência de um <code>JButton</code>
+	 * @return botão gráfico de pizza de <code>FormaPagamento</code>.
+	 */
 	public JButton getBotaoGraficoPizzaFormaPagamento() {
 		return botaoGraficoPizzaFormaPagamento;
 	}
 
+	/**
+	 * Obtém a referência de um <code>String</code> contida no <code>JComboBox</code> Categorias.
+	 * @return <code>String</code> correspondente no <code>JComboBox</code> Categorias.
+	 */
 	public String getValorjComboBoxCategorias() {
 		return (String)jComboBoxCategorias.getSelectedItem();
 	}
 
+	/**
+	 * Obtém a referência do botão de radio verEmPorcentagem.
+	 * @return botão de radio
+	 */
 	public JRadioButton getRadioButtonVerEmPorcentagem() {
 		return radioButtonVerEmPorcentagem;
 	}
