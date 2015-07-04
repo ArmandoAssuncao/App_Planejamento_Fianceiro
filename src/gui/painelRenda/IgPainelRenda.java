@@ -27,8 +27,20 @@ import classes.RendaMensal;
 import eventos.painelRenda.TEPainelRenda;
 import funcoes.Converte;
 
+/**
+Define o painel de <code>Renda</code>.
+* @author Armando Assunção
+* @author Richardson William
+*
+*/
 public class IgPainelRenda extends JPanel {
+	/**
+	 * Largura do painel
+	 */
 	public final int TAM_PAINEL_X = 800;
+	/**
+	 * Altura do painel
+	 */
 	public final int TAM_PAINEL_Y = 600;
 	
 	ArrayList<RendaMensal> arrayListRendaMensal;
@@ -43,6 +55,10 @@ public class IgPainelRenda extends JPanel {
 	private JButton botaoExcluirRenda;
 	private JButton botaoEditarRenda;
 	
+	/**
+	 * Construtor padrão.
+	 * @param framePrincipal componente pai.
+	 */
 	public IgPainelRenda(Window framePrincipal) {
 		setLayout(new BorderLayout(0,5));
 
@@ -140,6 +156,12 @@ public class IgPainelRenda extends JPanel {
 //		painelBotoes.setVisible(true);  //TODO isso � realmente necess�rio?
 	}//criaPainelBotoes
 
+	/**
+	 * Cria uma <code>Renda</code> e adiciona à tabela. 
+	 * @param renda objeto <code>Renda</code> a ser adicionado
+	 * @param data objeto <code>Calendar</code> a ser adicionado
+	 * @return <code>true</code> em caso de sucesso na operação, <code>false</code> em caso contrário.
+	 */
 	public boolean criarRenda(Renda renda,Calendar data){
 		RendaMensal rm = renda.obterRendaMensal(data);
 		tabelaRendaMensal.adicionaLinha(renda.getDescricao(),Converte.calendarToString(rm.getDataRenda()),Double.toString(rm.getValor()));
@@ -189,15 +211,28 @@ public class IgPainelRenda extends JPanel {
 		atualizarPainelTitulo();
 	}
 	
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão adicionar renda.
+	 */
 	public JButton getBotaoAddRenda() {
 		return botaoAddRenda;
 	}
-
+	
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão excluir renda.
+	 */
 	public JButton getBotaoExcluirRenda() {
 		return botaoExcluirRenda;
 	}
-
+	
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão editar renda.
+	 */
 	public JButton getBotaoEditarRenda() {
 		return botaoEditarRenda;
 	}
+
 }

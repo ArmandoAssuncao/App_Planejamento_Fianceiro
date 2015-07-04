@@ -294,6 +294,10 @@ public class JanelaCriarRenda extends JDialog{
 		return true;
 	}
 	
+	/**
+	 * Cria e retorna um novo objeto Renda com valores inseridos pelo usuário.
+	 * @return novo objeto Renda
+	 */
 	public Renda retornaRenda(){
 		RendaMensal rendaMensal = new RendaMensal();
 		rendaMensal.setValor(Double.parseDouble(textFieldValor.getText()));
@@ -307,22 +311,42 @@ public class JanelaCriarRenda extends JDialog{
 	}
 
 	// Getters e setters
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão criar.
+	 */
 	public JButton getBotaoCriar() {
 		return botaoCriar;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JButton</code>.
+	 * @return botão cancelar.
+	 */
 	public JButton getBotaoCancelar() {
 		return botaoCancelar;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JTextField</code>.
+	 * @return o campo de texto descrição
+	 */
 	public JTextField getTextFieldDescricao() {
 		return textFieldDescricao;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JTextField</code>.
+	 * @return o campo de texto valor
+	 */
 	public JTextField getTextFieldValor() {
 		return textFieldValor;
 	}
 
+	/**
+	 *  Retorna uma referência de um <code>JDateChooser</code>.
+	 * @return o JDateChooser.
+	 */
 	public JDateChooser getDataJDateChooser() {
 		return dataJDateChooser;
 	}	

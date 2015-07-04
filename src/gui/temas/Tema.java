@@ -75,6 +75,9 @@ public class Tema {
 		return this.menu;
 	}
 
+	/**
+	 * Muda o tema do aplicativo.
+	 */
 	public static void mudaTema(){
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -90,6 +93,10 @@ public class Tema {
 		Tema.repinta(true, true);
 	}
 
+	/**
+	 * ?????
+	 * @param temas
+	 */
 	public static void mudaTema(String... temas){
 		if(temas == null){
 			return;

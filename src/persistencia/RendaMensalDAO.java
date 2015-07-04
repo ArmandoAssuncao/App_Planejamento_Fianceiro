@@ -301,6 +301,7 @@ public class RendaMensalDAO extends PlanejamentoFinanceiroDAO {
 	/**
 	 *   Retorna o id da renda associada a RendaMensal no banco de dados
 	 * @param descricao <code>String</code> com a descrição da renda
+	 * @param data data no formato dd/mm/aaaa com a data da renda a ser pesquisada.
 	 * @return <code>int</code> com o id da renda no banco de dados, caso não encontre retorna <code>0</code>
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
