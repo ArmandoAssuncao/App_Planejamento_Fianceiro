@@ -3,18 +3,21 @@ package gui.painelGraficos;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.text.DecimalFormat;
 
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Marker;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -133,7 +136,7 @@ public class GraficosJFreeChart {
         CategoryPlot plot = (CategoryPlot) grafico.getPlot();
         plot.setBackgroundPaint(Color.LIGHT_GRAY);
         plot.setRangeGridlinePaint(Color.WHITE);
-       
+        
         ChartPanel painelGrafico = new ChartPanel(grafico);
         painelGrafico.setPreferredSize(new Dimension(730,450));
 		

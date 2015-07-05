@@ -34,7 +34,7 @@ public class PainelTituloPainelRenda extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		rendaLabel = new JLabel("Renda Mensal");
-		rendaLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		rendaLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		rendaLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(rendaLabel, BorderLayout.NORTH);
 		
@@ -49,26 +49,32 @@ public class PainelTituloPainelRenda extends JPanel {
 		panel.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][]", "[][]"));
 		panel.setBackground(new Color(205, 205, 205));//TODO COR
 		
-		valorQtdRendasLabel = new JLabel("<dynamic>");
-		valorQtdRendasLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		Font fontValores = new Font("Tahoma", Font.PLAIN, 18);
+		Font fontLabels = new Font("Tahoma", Font.PLAIN, 12);
+		
+		valorQtdRendasLabel = new JLabel("<>");
+		valorQtdRendasLabel.setFont(fontValores);
 		panel.add(valorQtdRendasLabel, "cell 1 1");
 		
 		JLabel qtdRendasLabel = new JLabel("rendas mensal cadastradas");
+		qtdRendasLabel.setFont(fontLabels);
 		panel.add(qtdRendasLabel, "cell 2 1");
 		
-		valorTotalRendasLabel = new JLabel("<dynamic>");
-		valorTotalRendasLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(valorTotalRendasLabel, "cell 7 1");
+		valorTotalRendasLabel = new JLabel("<>");
+		valorTotalRendasLabel.setFont(fontValores);
+		panel.add(valorTotalRendasLabel, "cell 12 1");
 		
-		JLabel totalRendaasLabel = new JLabel("de renda neste mês");
-		panel.add(totalRendaasLabel, "cell 8 1");
+		JLabel totalRendaasLabel = new JLabel("de renda     ");
+		totalRendaasLabel.setFont(fontLabels);
+		panel.add(totalRendaasLabel, "cell 13 1");
 		
-		mediaDeRendaLabel = new JLabel("<dynamic>");
-		mediaDeRendaLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(mediaDeRendaLabel, "cell 13 1");
+		mediaDeRendaLabel = new JLabel("<>");
+		mediaDeRendaLabel.setFont(fontValores);
+		//panel.add(mediaDeRendaLabel, "cell 23 1");
 		
 		JLabel metaLabel = new JLabel("de média de renda ");
-		panel.add(metaLabel, "cell 14 1");
+		metaLabel.setFont(fontLabels);
+		//panel.add(metaLabel, "cell 24 1");
 		
 		setBackground(new Color(205, 205, 205));//TODO COR
 		setVisible(true);

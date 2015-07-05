@@ -43,7 +43,7 @@ public class PainelTituloPainelDespesas extends JPanel {
 		add(metaProgressBar, BorderLayout.SOUTH);
 		
 		nomeCategoriaLabel = new JLabel("<dynamic>");
-		nomeCategoriaLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		nomeCategoriaLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		nomeCategoriaLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(nomeCategoriaLabel, BorderLayout.NORTH);
 		
@@ -65,26 +65,33 @@ public class PainelTituloPainelDespesas extends JPanel {
 		panel.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][]", "[][]"));
 		panel.setBackground(new Color(205, 205, 205));//TODO COR
 		
-		valorQtdDespesasLabel = new JLabel("<dynamic>");
-		valorQtdDespesasLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		
+		Font fontValores = new Font("Tahoma", Font.PLAIN, 18);
+		Font fontLabels = new Font("Tahoma", Font.PLAIN, 12);
+		
+		valorQtdDespesasLabel = new JLabel("<>");
+		valorQtdDespesasLabel.setFont(fontValores);
 		panel.add(valorQtdDespesasLabel, "cell 1 1");
 		
 		JLabel qtdDespesasLabel = new JLabel("despesas cadastradas");
+		qtdDespesasLabel.setFont(fontLabels);
 		panel.add(qtdDespesasLabel, "cell 2 1");
 		
-		valorTotalDespesasLabel = new JLabel("<dynamic>");
-		valorTotalDespesasLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(valorTotalDespesasLabel, "cell 7 1");
+		valorTotalDespesasLabel = new JLabel("<>");
+		valorTotalDespesasLabel.setFont(fontValores);
+		panel.add(valorTotalDespesasLabel, "cell 12 1");
 		
-		JLabel totalDespesasLabel = new JLabel("total das despesas");
-		panel.add(totalDespesasLabel, "cell 8 1");
+		JLabel totalDespesasLabel = new JLabel("já gastos     ");
+		totalDespesasLabel.setFont(fontLabels);
+		panel.add(totalDespesasLabel, "cell 13 1");
 		
-		gastoPrevistoLabel = new JLabel("<dynamic>");
-		gastoPrevistoLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(gastoPrevistoLabel, "cell 13 1");
+		gastoPrevistoLabel = new JLabel("<>");
+		gastoPrevistoLabel.setFont(fontValores);
+		panel.add(gastoPrevistoLabel, "cell 23 1");
 		
 		JLabel metaLabel = new JLabel("de gasto previsto");
-		panel.add(metaLabel, "cell 14 1");
+		metaLabel.setFont(fontLabels);
+		panel.add(metaLabel, "cell 24 1");
 		
 		setBackground(new Color(205, 205, 205));//TODO COR
 		setVisible(true);
