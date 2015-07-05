@@ -147,7 +147,7 @@ public class PainelTituloPainelGraficos extends JPanel {
 			valorCamposDoisLabel.setText("para o alerta de gastos");
 		else
 			valorCamposDoisLabel.setText("desde o alerta de gastos");
-		valorDadosDoisLabel.setText("R$ "+ String.format("%.2f", 50.0f));
+		valorDadosDoisLabel.setText("R$ "+ String.format("%.2f", valores[1]));
 		
 		valorCamposTresLabel.setText("");
 		valorDadosTresLabel.setText("");
