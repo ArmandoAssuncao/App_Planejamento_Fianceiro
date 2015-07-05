@@ -1,3 +1,4 @@
+
 package classes;
 
 import java.util.Calendar;
@@ -120,6 +121,6 @@ public class MetaMensal {
 	 */
 	@Override
 	public String toString() {
-		return "Meta Mensal [ Mes/Ano da Meta:" + mesAnoMeta + String.format(", Valor R$ %1.2f", valor) + String.format(", Alerta %1.2f%%", alerta) + " ]";
+		return "Meta Mensal [ ID: " + id + " Mes/Ano da Meta:" + mesAnoMeta + String.format(", Valor R$ %1.2f", valor) + String.format(", Alerta %1.2f%%", alerta) + " ]";
 	}//toString()
 }//class MetaMensal

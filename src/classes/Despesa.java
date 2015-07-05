@@ -61,7 +61,7 @@ public class Despesa {
 	 */
 	@Override
 	public String toString() {
-		return "ID: " + idDespesa + ", descricao:" + descricao +			
+		return "ID: " + idDespesa + ", ID Categoria:"+idCategoria+",  descricao:" + descricao +			
 																String.format(", Data da despesa: %02d/%02d/%04d", 
 																			dataDespesa.get(Calendar.DAY_OF_MONTH),
 																			dataDespesa.get(Calendar.MONTH) + 1, 

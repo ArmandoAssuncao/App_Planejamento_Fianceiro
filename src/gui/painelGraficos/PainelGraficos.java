@@ -286,8 +286,7 @@ public class PainelGraficos extends JPanel {
 		if(tipoGrafico == 1){	
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoPizza(tituloGrafico, campos, valores));
 
-			//TODO encontrar uma melhor maneira de identificar se os dados a serem inseridos no painel de título são em dinheiro ou valores de porcentagem.
-			painelTitulo.atualizarPainelTituloGp(campos, valores, tituloGrafico);
+			painelTitulo.atualizarPainelTituloGp(campos, valores);
 		}else if(tipoGrafico == 2)
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoBarra(tituloGrafico, campos, valores));
 		else if(tipoGrafico == 3){

@@ -1,4 +1,4 @@
-/*Forma de pagamento*/
+﻿/*Forma de pagamento*/
 INSERT INTO forma_pagamento VALUES (NEXT VALUE FOR seq_forma_pagamento, 'A Vista');
 INSERT INTO forma_pagamento VALUES (NEXT VALUE FOR seq_forma_pagamento, 'Cartão de Credito');
 INSERT INTO forma_pagamento VALUES (NEXT VALUE FOR seq_forma_pagamento, 'Cheque');
@@ -12,7 +12,7 @@ INSERT INTO categoria VALUES (NEXT VALUE FOR seq_categoria, 'Diversos');
 INSERT INTO categoria VALUES (NEXT VALUE FOR seq_categoria, 'Educação');
 INSERT INTO categoria VALUES (NEXT VALUE FOR seq_categoria, 'Energia Eletrica');
 INSERT INTO categoria VALUES (NEXT VALUE FOR seq_categoria, 'Esporte');
-INSERT INTO categoria VALUES (NEXT VALUE FOR seq_categoria, 'Farmâcia');
+INSERT INTO categoria VALUES (NEXT VALUE FOR seq_categoria, 'Farmácia');
 INSERT INTO categoria VALUES (NEXT VALUE FOR seq_categoria, 'Gasolina');
 INSERT INTO categoria VALUES (NEXT VALUE FOR seq_categoria, 'Gastos Pessoais');
 INSERT INTO categoria VALUES (NEXT VALUE FOR seq_categoria, 'Habitação');
