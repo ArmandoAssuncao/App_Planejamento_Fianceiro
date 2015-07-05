@@ -257,6 +257,8 @@ public class IgPainelDespesas extends JPanel{
 	private void iniciaValoresCategoria(){
 		List<MetaMensal> arrayMetaMensalTemp = new ArrayList<MetaMensal>();
 		List<Categoria> arrayCategoriaTemp = new ArrayList<Categoria>();
+		CategoriaDAO categoriaDAO = new CategoriaDAO();
+		MetaMensalDAO metaMensalDAO = new MetaMensalDAO();
 		
 		//Inicia só as metas desse mês
 		Calendar mesAno = Calendar.getInstance();
@@ -270,8 +272,6 @@ public class IgPainelDespesas extends JPanel{
 		
 		//Inicia as metas caso o mês mude
 		if(arrayMetaMensalTemp.size() == 0){
-			CategoriaDAO categoriaDAO = new CategoriaDAO();
-			MetaMensalDAO metaMensalDAO = new MetaMensalDAO();
 			String descricao;
 			for(int i = 0; i < arrayCategoriaTemp.size(); i++){
 				descricao = arrayCategoriaTemp.get(i).getDescricao();
@@ -288,7 +288,20 @@ public class IgPainelDespesas extends JPanel{
 		
 		//Inicializa as abas das categoria
 		for(int indice = 0; indice < arrayMetaMensalTemp.size(); indice++){
-			arrayCategoriaTemp.get(indice).setMetaMensal(arrayMetaMensalTemp.get(indice));
+			int idCategoria = 1;
+			try {
+				idCategoria = categoriaDAO.getId(arrayCategoriaTemp.get(indice).getDescricao());
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			for(int j = 0; j < arrayMetaMensalTemp.size(); j++){
+				if(idCategoria == arrayMetaMensalTemp.get(j).getId()){
+					arrayCategoriaTemp.get(indice).setMetaMensal(arrayMetaMensalTemp.get(j));
+					break;
+				}
+			}
+			
 			criarCategoria(arrayCategoriaTemp.get(indice));
 		}
 		
@@ -318,20 +331,25 @@ public class IgPainelDespesas extends JPanel{
 			e.printStackTrace();
 		}
 		
+		int idCategoria = 0;
+		try{
+			idCategoria = new CategoriaDAO().getId(descricaoCategoria);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		try{
 		//Inicializa as despesas da categoria
-		try {
 			for(Despesa d : arrayDespesasTemp){
-				int idCategoria = new CategoriaDAO().getId(descricaoCategoria);
-				String descricao = d.getDescricao();
-				String dataDespesa = Converte.calendarToString(d.getDataDespesa());
-				String dataPagamento = Converte.calendarToString(d.getDataPagamento());
-				String numeroCheque = d.getNumeroCheque();
-				String valorDespesa = Double.toString(d.getValorDespesa());
-				String numeroParcelas = Integer.toString(d.getNumeroParcelas());
-				String formaPagamento = new FormaPagamentoDAO().getDescricao(d.getIdFormaPagamento());
-				
-				if(d.getIdCategoria() == idCategoria)
+				if(d.getIdCategoria() == idCategoria){
+					String descricao = d.getDescricao();
+					String dataDespesa = Converte.calendarToString(d.getDataDespesa());
+					String dataPagamento = Converte.calendarToString(d.getDataPagamento());
+					String numeroCheque = d.getNumeroCheque();
+					String valorDespesa = Double.toString(d.getValorDespesa());
+					String numeroParcelas = Integer.toString(d.getNumeroParcelas());
+					String formaPagamento = new FormaPagamentoDAO().getDescricao(d.getIdFormaPagamento());
 					abasCategoria.criarDespesa(descricaoCategoria, descricao, valorDespesa, dataDespesa, dataPagamento, formaPagamento, numeroParcelas, numeroCheque);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
