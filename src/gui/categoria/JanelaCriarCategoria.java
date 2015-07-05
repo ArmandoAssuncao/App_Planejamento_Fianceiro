@@ -15,6 +15,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import org.jfree.chart.block.LineBorder;
+
 import classes.Categoria;
 import classes.MetaMensal;
 import eventos.categoria.TEJanelaCriarCategoria;
@@ -66,7 +68,7 @@ public class JanelaCriarCategoria extends JDialog{
 		
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setSize(TAM_JANELA_X, TAM_JANELA_Y);
-		setBackground(Color.PINK);   //TODO apagar
+		setBackground(Color.WHITE);
 		setLocationRelativeTo(igPainelDespesas);
 		setResizable(false);
 		setModal(true);
@@ -83,7 +85,7 @@ public class JanelaCriarCategoria extends JDialog{
 		painelPrincipal.add(criaPainelTitulo(), BorderLayout.NORTH);
 		painelPrincipal.add(criaPainelCampos(), BorderLayout.SOUTH);
 		
-		painelPrincipal.setBackground(Color.PINK);
+		painelPrincipal.setBackground(Color.WHITE);
 		painelPrincipal.setVisible(true);
 		
 		return painelPrincipal;
@@ -94,7 +96,7 @@ public class JanelaCriarCategoria extends JDialog{
 	 * @return retorna o painel criado.
 	 */
 	private JPanel criaPainelTitulo(){
-		final int TAM_X = this.getWidth();
+		final int TAM_X = 0;
 		final int TAM_Y = 70;
 		
 		painelTitulo.setLayout(new BorderLayout(0,0));

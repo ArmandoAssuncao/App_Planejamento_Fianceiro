@@ -15,9 +15,11 @@ import java.util.List;
 
 import persistencia.CategoriaDAO;
 import persistencia.DespesaDAO;
+import persistencia.MetaMensalDAO;
 import persistencia.RendaMensalDAO;
 import classes.Categoria;
 import classes.Despesa;
+import classes.MetaMensal;
 import classes.RendaMensal;
 
 /**
@@ -144,7 +146,7 @@ public class TEPainelGraficos implements ActionListener{
 		else if(event.getSource() == painelGraficos.getBotaoGraficoLinhaMetaMensal()){
 			//List<Categoria> arrayCategorias = new ArrayList<>();
 			List<Despesa> arrayDespesas = new ArrayList<Despesa>();
-			//MetaMensal MetaMensal = null;
+			MetaMensal metaMensal = null;
 			int idCategoria = 0;
 			
 			String categoriaSelecionada = painelGraficos.getValorjComboBoxCategorias();
@@ -153,7 +155,7 @@ public class TEPainelGraficos implements ActionListener{
 			
 			try {
 				idCategoria = new CategoriaDAO().getId(categoriaSelecionada);
-				//MetaMensal = MetaMensalDAO.pesquisaMetaMensal(idCategoria, mesAno);
+				metaMensal = MetaMensalDAO.pesquisaMetaMensal(idCategoria, mesAno);
 				arrayDespesas.addAll(DespesaDAO.despesasDoMesAno(mesAno));
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -167,8 +169,11 @@ public class TEPainelGraficos implements ActionListener{
 				}
 			}
 			
+			double alerta = metaMensal.getAlerta();
+			double valorMeta = metaMensal.getValor();
+			
 			System.out.println(valorTotalCategoria);
-			painelGraficos.adicionarGrafico("gastos com " + categoriaSelecionada, new String[]{"campo1", "campo2"}, new Double[]{0.0, valorTotalCategoria}, 3);
+			painelGraficos.adicionarGrafico("gastos com " + categoriaSelecionada, new String[]{"campo1", "campo2"}, new Double[]{valorTotalCategoria, alerta, valorMeta}, 3);
 		}
 		
 		//

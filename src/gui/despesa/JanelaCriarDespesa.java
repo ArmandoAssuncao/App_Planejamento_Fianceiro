@@ -100,7 +100,7 @@ public class JanelaCriarDespesa extends JDialog{
 		painelPrincipal.add(criaPainelTitulo(), BorderLayout.NORTH);
 		painelPrincipal.add(criaPainelCampos(), BorderLayout.SOUTH);
 		
-		painelPrincipal.setBackground(Color.PINK);
+		painelPrincipal.setBackground(Color.WHITE);
 		painelPrincipal.setVisible(true);
 		
 		return painelPrincipal;

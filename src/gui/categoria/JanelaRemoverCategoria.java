@@ -62,7 +62,7 @@ public class JanelaRemoverCategoria extends JDialog {
 		
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setSize(TAM_JANELA_X, TAM_JANELA_Y);
-		setBackground(Color.PINK);
+		setBackground(Color.WHITE);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		setModal(true);
@@ -79,7 +79,7 @@ public class JanelaRemoverCategoria extends JDialog {
 		painelPrincipal.add(criaPainelTitulo(), BorderLayout.NORTH);
 		painelPrincipal.add(criaPainelCampos(), BorderLayout.SOUTH);
 		
-		painelPrincipal.setBackground(Color.PINK);
+		painelPrincipal.setBackground(Color.WHITE);
 		painelPrincipal.setVisible(true);
 		
 		return painelPrincipal;

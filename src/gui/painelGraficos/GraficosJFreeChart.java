@@ -10,12 +10,18 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.Marker;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.ValueMarker;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import org.jfree.ui.RectangleAnchor;
+import org.jfree.ui.TextAnchor;
 
 public class GraficosJFreeChart {
 	
@@ -50,35 +56,57 @@ public class GraficosJFreeChart {
 	public static JPanel painelGraficoLinha(String tituloDoGrafico, String[] campos, Double[] valores){
 		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
 		
-		for(int i = 0; i < valores.length; i++)
-			dataSet.addValue(i, "maximo", valores[i]);
+		dataSet.addValue(0, "", valores[0]);
 		
-		XYSeries series = new XYSeries("Gastos");
-		XYSeries series2 = new XYSeries("Meta");
-
+		XYSeries series = new XYSeries("Gastos: " + valores[0]);
 		series.add(0, 0);
-		series.add(50+400, valores[1]+400);
-		
-		series2.add(600, 300);
-		series2.add(00, 300);
+		series.add(0, valores[0]);
 		
 		XYSeriesCollection dados = new XYSeriesCollection(series);
-		dados.addSeries(series2);
 		
 		// cria o gráfico
 		JFreeChart grafico = ChartFactory.createXYLineChart(tituloDoGrafico, // chart title
-		         "hjk", // domain axis label
-		         "Meta", // range axis label
+		         "", // domain axis label
+		         "Valor", // range axis label
 		         dados, // data
 		         PlotOrientation.HORIZONTAL, // orientation
 		         true, // include legend
 		         true, // tooltips
 		         false);
 		
+		//Linha de marcação
+		Marker target = new ValueMarker(valores[2]);
+		target.setPaint(Color.RED);
+	    target.setLabel("100%");
+        target.setLabelAnchor(RectangleAnchor.RIGHT);
+        target.setLabelTextAnchor(TextAnchor.CENTER_LEFT);
+        target.setLabelFont(new Font(target.getLabelFont().getName(), Font.BOLD, 11));
+        
+        //Linha de marcação 2
+        double porcentagem = valores[2]/100*valores[1];
+		Marker target2 = new ValueMarker(porcentagem);
+		target2.setPaint(Color.YELLOW);
+		target2.setLabel(valores[1] + "%");
+		target2.setLabelAnchor(RectangleAnchor.BOTTOM_RIGHT);
+		target2.setLabelTextAnchor(TextAnchor.CENTER_LEFT);
+		target2.setLabelFont(new Font(target2.getLabelFont().getName(), Font.BOLD, 11));
+		
+		
+		XYPlot plot = grafico.getXYPlot();
+		plot.addRangeMarker(target);
+		plot.addRangeMarker(target2);
+		
+		plot.getDomainAxis().setAxisLineVisible(false);
+		plot.getDomainAxis().setTickLabelPaint(new Color(240,240,240));
+		
+		//Define a cor da linha
+		XYItemRenderer renderer = plot.getRenderer();
+		renderer.setSeriesPaint(0, new Color(20, 150, 255));
+		
+		
 		grafico.setBackgroundPaint(new Color(240,240,240));
-		
-		ChartPanel painelGrafico = new ChartPanel(grafico);
-		
+
+		ChartPanel painelGrafico = new ChartPanel(grafico);		
 		return painelGrafico;
 	}
 	
