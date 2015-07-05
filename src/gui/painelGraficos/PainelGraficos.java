@@ -9,6 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Window;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -59,12 +60,10 @@ public class PainelGraficos extends JPanel {
 	 */
 	public PainelGraficos(Window framePrincipal) {
 		setLayout(new BorderLayout(0, 3));
-		
+				
 		trataEventosGraficos = new TEPainelGraficos(this, framePrincipal);
 		
 		iniciaElementos();
-		
-		criaPainelDeGraficos();
 		criaPainelBotoes();
 		
 		painelSuperior.setLayout(new BorderLayout());
@@ -98,14 +97,8 @@ public class PainelGraficos extends JPanel {
 		radioButtonVerEmPorcentagem = new JRadioButton();
 	}
 	
-	private void criaPainelDeGraficos(){
-		//final int TAM_X = 700;
-		//final int TAM_Y = 130;
-		
-		//painelDeGraficos.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-	}
-	
 	private void criaPainelBotoes(){
+		
 		final int TAM_X = 200;
 		final int TAM_Y = 500;
 		
@@ -120,6 +113,7 @@ public class PainelGraficos extends JPanel {
 		//botao Banlanço mensal
 		String labelBalancoTotal = "Balanço Mensal";
 		botaoBalancoTotal.setText(labelBalancoTotal);
+		botaoBalancoTotal.setMnemonic(KeyEvent.VK_B);
 		ImageIcon iconeBalancoTotal = new ImageIcon("imagens/img_botaoBalancoMensal.png");
 		botaoBalancoTotal.setIcon(iconeBalancoTotal);
 		botaoBalancoTotal.setHorizontalAlignment(SwingConstants.LEFT);
@@ -128,9 +122,11 @@ public class PainelGraficos extends JPanel {
 		botaoBalancoTotal.setPreferredSize(new Dimension(150,50));
 		botaoBalancoTotal.addActionListener(trataEventosGraficos);
 		
+		
 		//botao Balanço mensal das despesas pela forma de pagamento
 		String labelBalancoDespesa = "<html>Formas de Pagamento</html>";
 		botaoBalancoDespesa.setText(labelBalancoDespesa);
+		botaoBalancoDespesa.setMnemonic(KeyEvent.VK_F);
 		ImageIcon iconeBalancoDespesa = new ImageIcon("imagens/img_botaoBalancoMensal.png");
 		botaoBalancoDespesa.setIcon(iconeBalancoDespesa);
 		botaoBalancoDespesa.setHorizontalAlignment(SwingConstants.LEFT);
@@ -142,6 +138,7 @@ public class PainelGraficos extends JPanel {
 		//botao Grafico valores da receita
 		String labelGraficoPizzaTotal = "Receitas";
 		botaoGraficoPizzaTotal.setText(labelGraficoPizzaTotal);
+		botaoGraficoPizzaTotal.setMnemonic(KeyEvent.VK_E);
 		ImageIcon iconeGraficoPizzaTotal = new ImageIcon("imagens/img_botaoGraficoPizza.png");
 		botaoGraficoPizzaTotal.setIcon(iconeGraficoPizzaTotal);
 		botaoGraficoPizzaTotal.setHorizontalAlignment(SwingConstants.LEFT);
@@ -153,6 +150,7 @@ public class PainelGraficos extends JPanel {
 		//Botao Grafico Forma de Pagamento
 		String labelGraficoPizzaFormaPagamento = "<html>Formas de Pagamento</html>";
 		botaoGraficoPizzaFormaPagamento.setText(labelGraficoPizzaFormaPagamento);
+		botaoGraficoPizzaFormaPagamento.setMnemonic(KeyEvent.VK_M);
 		ImageIcon iconeGraficoPizzaFormaPagamento = new ImageIcon("imagens/img_botaoGraficoPizza.png");
 		botaoGraficoPizzaFormaPagamento.setIcon(iconeGraficoPizzaFormaPagamento);
 		botaoGraficoPizzaFormaPagamento.setHorizontalAlignment(SwingConstants.LEFT);
@@ -164,6 +162,7 @@ public class PainelGraficos extends JPanel {
 		//Botao Grafico categorias
 		String labelGraficoBarraCategoria = "Categorias";
 		botaoGraficoBarraCategoria.setText(labelGraficoBarraCategoria);
+		botaoGraficoBarraCategoria.setMnemonic(KeyEvent.VK_T);
 		ImageIcon iconeGraficoBarraCategoria = new ImageIcon("imagens/img_botaoGraficoBarra.png");
 		botaoGraficoBarraCategoria.setIcon(iconeGraficoBarraCategoria);
 		botaoGraficoBarraCategoria.setHorizontalAlignment(SwingConstants.LEFT);
@@ -173,10 +172,12 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoBarraCategoria.addActionListener(trataEventosGraficos);
 		
 		radioButtonVerEmReal.setText("Real");
+		radioButtonVerEmReal.setMnemonic(KeyEvent.VK_L);
 		radioButtonVerEmReal.setSelected(true);
 		radioButtonVerEmReal.setBackground(Color.WHITE);
 		
 		radioButtonVerEmPorcentagem.setText("Porcentagem");
+		radioButtonVerEmPorcentagem.setMnemonic(KeyEvent.VK_P);
 		radioButtonVerEmPorcentagem.setBackground(Color.WHITE);
 		
 		ButtonGroup buttonGroupVer = new ButtonGroup();
@@ -196,6 +197,7 @@ public class PainelGraficos extends JPanel {
 		//Botao Grafico Metas mensal
 		String labelGraficoLinhaMetaMensal = "<html>Metas Mensal</html>";
 		botaoGraficoLinhaMetaMensal.setText(labelGraficoLinhaMetaMensal);
+		botaoGraficoLinhaMetaMensal.setMnemonic(KeyEvent.VK_N);
 		ImageIcon iconeGraficoLinhaMetaMensal = new ImageIcon("imagens/img_botaoGraficoLinha.png");
 		botaoGraficoLinhaMetaMensal.setIcon(iconeGraficoLinhaMetaMensal);
 		botaoGraficoLinhaMetaMensal.setHorizontalAlignment(SwingConstants.LEFT);
@@ -210,6 +212,8 @@ public class PainelGraficos extends JPanel {
 		painelGraficoLinhas.setPreferredSize(new Dimension(180,90));
 		painelGraficoLinhas.setBackground(Color.WHITE);
 		JLabel labelCategoria = new JLabel("Categoria:");
+		labelCategoria.setDisplayedMnemonic(KeyEvent.VK_G);
+		labelCategoria.setLabelFor(jComboBoxCategorias);
 		labelCategoria.setFont(new Font(labelCategoria.getFont().getFontName(), Font.PLAIN, 10));
 		
 		jComboBoxCategorias.setMaximumRowCount(5);
@@ -265,9 +269,12 @@ public class PainelGraficos extends JPanel {
 		painelDeGraficos.removeAll();
 		painelDeGraficos.repaint();
 		
-		if(tipoGrafico == 1)
+		if(tipoGrafico == 1){	
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoPizza(tituloGrafico, campos, valores));
-		else if(tipoGrafico == 2)
+
+			//TODO encontrar uma melhor maneira de identificar se os dados a serem inseridos no painel de título são em dinheiro ou valores de porcentagem.
+			painelTitulo.atualizarPainelTituloGp(campos, valores, tituloGrafico);
+		}else if(tipoGrafico == 2)
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoBarra(tituloGrafico, campos, valores));
 		else if(tipoGrafico == 3)
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoLinha(tituloGrafico, campos, valores));
@@ -293,7 +300,8 @@ public class PainelGraficos extends JPanel {
 		
 		painelDeGraficos.removeAll();
 	}
-
+		
+	//Getters
 	/**
 	 * Obtém a referência de um <code>JButton</code>
 	 * @return botão balanço total.
@@ -357,5 +365,5 @@ public class PainelGraficos extends JPanel {
 	public JRadioButton getRadioButtonVerEmPorcentagem() {
 		return radioButtonVerEmPorcentagem;
 	}
-	
+
 }

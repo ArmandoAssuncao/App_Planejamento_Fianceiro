@@ -23,9 +23,16 @@ import net.miginfocom.swing.MigLayout;
 public class PainelTituloPainelGraficos extends JPanel {
 	private JLabel tituloLabel;
 	private JPanel panel;
-	private JLabel valorQtdRendasLabel;
-	private JLabel valorTotalRendasLabel;
-	private JLabel mediaDeRendaLabel;
+	private JLabel valorDadosUmLabel;
+	private JLabel valorDadosTresLabel;
+	private JLabel valorDadosDoisLabel;
+	private JLabel valorDadosQuatroLabel;
+	private JLabel valorCamposQuatroLabel;
+	private JLabel valorCamposTresLabel;
+	private JLabel valorCamposUmLabel;
+	private JLabel valorCamposDoisLabel;
+	private JLabel valorDadosCincoLabel;
+	private JLabel valorCamposCincoLabel;
 
 	/**
 	 * Construtor padrão.
@@ -47,40 +54,77 @@ public class PainelTituloPainelGraficos extends JPanel {
 		centroPanel.setLayout(null);
 		
 		panel = new JPanel();
-		panel.setBounds(7, 7, 736, 59);
+		panel.setBounds(7, 0, 736, 85);
 		centroPanel.add(panel);
-		panel.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][]", "[][]"));
+		panel.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][][][][]", "[][]"));
 		
-		valorQtdRendasLabel = new JLabel("<dynamic>");
-		valorQtdRendasLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(valorQtdRendasLabel, "cell 1 1");
+		valorDadosUmLabel = new JLabel("< >");
+		valorDadosUmLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		panel.add(valorDadosUmLabel, "cell 0 0,alignx right,aligny center");
 		
-		JLabel qtdRendasLabel = new JLabel("rendas mensal cadastradas");
-		panel.add(qtdRendasLabel, "cell 2 1");
+		valorCamposUmLabel = new JLabel("campo1");
+		panel.add(valorCamposUmLabel, "cell 1 0,alignx left,aligny center");
 		
-		valorTotalRendasLabel = new JLabel("<dynamic>");
-		valorTotalRendasLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(valorTotalRendasLabel, "cell 7 1");
+		valorDadosDoisLabel = new JLabel("< >");
+		valorDadosDoisLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		panel.add(valorDadosDoisLabel, "cell 9 0,alignx right,aligny center");
 		
-		JLabel totalRendaasLabel = new JLabel("de renda neste mês");
-		panel.add(totalRendaasLabel, "cell 8 1");
+		valorCamposDoisLabel = new JLabel("campo2");
+		panel.add(valorCamposDoisLabel, "cell 10 0,alignx left,aligny center");
 		
-		mediaDeRendaLabel = new JLabel("<dynamic>");
-		mediaDeRendaLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(mediaDeRendaLabel, "cell 13 1");
+		valorDadosCincoLabel = new JLabel("< >");
+		valorDadosCincoLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		panel.add(valorDadosCincoLabel, "cell 18 0,alignx right");
 		
-		JLabel metaLabel = new JLabel("de média de renda ");
-		panel.add(metaLabel, "cell 14 1");
+		valorCamposCincoLabel = new JLabel("campo5");
+		panel.add(valorCamposCincoLabel, "cell 19 0,alignx left");
+		
+		valorDadosTresLabel = new JLabel("< >");
+		valorDadosTresLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		panel.add(valorDadosTresLabel, "cell 0 1,alignx right,aligny center");
+		
+		valorCamposTresLabel = new JLabel("campo3");
+		panel.add(valorCamposTresLabel, "cell 1 1,alignx left,aligny center");
+		
+		valorDadosQuatroLabel = new JLabel("< >");
+		valorDadosQuatroLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
+		panel.add(valorDadosQuatroLabel, "cell 9 1,alignx right,aligny center");
+		
+		valorCamposQuatroLabel = new JLabel("campo4");
+		panel.add(valorCamposQuatroLabel, "cell 10 1,alignx left,aligny center");
 		
 		setVisible(true);
 	}//construtor
 	
 	/**
-	 * Atualiza o painel título de gráficoss
+	 * Atualiza o painel título da aba gráficos, quando o gráfico gerado for de pizza.
+	 * @param valores Valores numéricos a serem colocados no painel de título
+	 * @param campos Campos correspondentes aos valores a serem colocados na barra de título
+	 * @param tituloGrafico tipo de gráfico.
 	 */
-	public void atualizarPainel(){
+	//tipo de grafico: 1 - valores reais, 2 - valores em porcentagem
+	public void atualizarPainelTituloGp(String[] campos, Double[] valores,String tituloGrafico){
+		valorCamposUmLabel.setText(campos[0]);
+		valorDadosUmLabel.setText(valorDadosPainel(tituloGrafico, valores[0]));
 		
+		valorCamposDoisLabel.setText(campos[1]);
+		valorDadosDoisLabel.setText(valorDadosPainel(tituloGrafico, valores[1]));
 		
+		valorCamposTresLabel.setText(campos[2]);
+		valorDadosTresLabel.setText(valorDadosPainel(tituloGrafico, valores[2]));
+		
+		valorCamposQuatroLabel.setText(campos[3]);
+		valorDadosQuatroLabel.setText(valorDadosPainel(tituloGrafico, valores[3]));
+		
+		valorCamposCincoLabel.setText("");
+		valorDadosCincoLabel.setText("");
 	}//atualizarPainel
-
+	
+	private String valorDadosPainel(String tituloGrafico,double valor){
+		if(tituloGrafico.contains("Mensal"))
+			return "R$ "+ String.format("%.2f", valor);
+		else if (tituloGrafico.contains("Pagamento"))
+			return valor + "%";
+		return null;
+	}
 }//class PainelTituloPainelGraficos 
