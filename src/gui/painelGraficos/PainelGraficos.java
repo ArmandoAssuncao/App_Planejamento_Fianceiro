@@ -276,9 +276,11 @@ public class PainelGraficos extends JPanel {
 			painelTitulo.atualizarPainelTituloGp(campos, valores, tituloGrafico);
 		}else if(tipoGrafico == 2)
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoBarra(tituloGrafico, campos, valores));
-		else if(tipoGrafico == 3)
+		else if(tipoGrafico == 3){
 			painelDeGraficos.add(GraficosJFreeChart.painelGraficoLinha(tituloGrafico, campos, valores));
-		
+			
+			painelTitulo.atualizarPainelTituloGl(getValorjComboBoxCategorias());
+		}
 		painelDeGraficos.validate();
 	}
 	

@@ -127,4 +127,33 @@ public class PainelTituloPainelGraficos extends JPanel {
 			return valor + "%";
 		return null;
 	}
+	
+	/**
+	 * Atualiza o painel título da aba gráficos, quando o gráfico gerado for de linha.
+	 * @param nomeCategoria nome da Categoria que está no gráfico de linha.
+	 */
+	public void atualizarPainelTituloGl(String nomeCategoria){
+		valorCamposUmLabel.setText("");
+		valorDadosUmLabel.setText(nomeCategoria);
+		
+		Double[] valores = obtemValoresMetaCategoria(nomeCategoria);
+		
+		valorCamposDoisLabel.setText("para o alerta de gastos");
+		valorDadosDoisLabel.setText("R$ "+ String.format("%.2f", 50.0f));
+		
+		valorCamposTresLabel.setText("");
+		valorDadosTresLabel.setText("");
+		
+		valorCamposQuatroLabel.setText("");
+		valorDadosQuatroLabel.setText("");
+		
+		valorCamposCincoLabel.setText("limite de gastos");
+		valorDadosCincoLabel.setText("R$ "+ String.format("%.2f", 100f));
+	}
+
+	private Double[] obtemValoresMetaCategoria(String nomeCategoria) {
+		Double[] valores = new Double[2];
+		//TODO
+		return valores;
+	}
 }//class PainelTituloPainelGraficos 
