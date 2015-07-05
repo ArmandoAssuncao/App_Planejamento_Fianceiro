@@ -32,6 +32,8 @@ import gui.painelDespesas.IgPainelDespesas;
  *
  */
 public class JanelaEditarCategoria extends JDialog{
+	private static final long serialVersionUID = -7444718308416312826L;
+	
 	private final String TITULO_JANELA= "Editar Categoria";
 	private final int TAM_JANELA_X = 500;
 	private final int TAM_JANELA_Y = 500;

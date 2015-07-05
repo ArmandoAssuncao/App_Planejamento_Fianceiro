@@ -13,15 +13,10 @@ import javax.swing.JPanel;
  *
  */
 public class PainelPrincipal extends JPanel{
-	/**
-	 * Largura da janela.
-	 */
-	public final int TAM_PAINEL_PRINCIPAL_X = 1000;
-	
-	/**
-	 * Altura da janela.
-	 */
-	public final int TAM_PAINEL_PRINCIPAL_Y = 500;
+	private static final long serialVersionUID = -3568035952394414647L;
+
+	private final int TAM_PAINEL_PRINCIPAL_X = 1000;
+	private final int TAM_PAINEL_PRINCIPAL_Y = 500;
 	
 	AbasPrincipal abasPrincipal;
 

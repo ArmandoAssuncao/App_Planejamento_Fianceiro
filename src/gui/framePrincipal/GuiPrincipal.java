@@ -10,16 +10,12 @@ import javax.swing.JFrame;
  *
  */
 public class GuiPrincipal extends JFrame{
-	private final static String TITULO_PRINCIPAL = "Planejamento Financeiro";
-	/**
-	 * Largura da janela.
-	 */
-	public final int TAM_JANELA_PRINCIPAL_X = 1000;
+	private static final long serialVersionUID = -340886102589057719L;
 	
-	/**
-	 * Altura da janela.
-	 */
-	public final int TAM_JANELA_PRINCIPAL_Y = 700;
+	private final static String TITULO_PRINCIPAL = "Planejamento Financeiro";
+	
+	private final int TAM_JANELA_PRINCIPAL_X = 1000;
+	private final int TAM_JANELA_PRINCIPAL_Y = 700;
 
 	private GuiMenu guiMenu = new GuiMenu();
 	private PainelPrincipal painelPrincipal = new PainelPrincipal(this);

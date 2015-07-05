@@ -15,8 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import org.jfree.chart.block.LineBorder;
-
 import classes.Categoria;
 import classes.MetaMensal;
 import eventos.categoria.TEJanelaCriarCategoria;
@@ -32,6 +30,8 @@ import gui.painelDespesas.IgPainelDespesas;
  *
  */
 public class JanelaCriarCategoria extends JDialog{
+	private static final long serialVersionUID = -541384016797852478L;
+	
 	private final String TITULO_JANELA= "Nova Categoria";
 	private final int TAM_JANELA_X = 500;
 	private final int TAM_JANELA_Y = 500;

@@ -40,6 +40,8 @@ import gui.painelDespesas.IgPainelDespesas;
  *
  */
 public class JanelaCriarDespesa extends JDialog{
+	private static final long serialVersionUID = -486161995779335830L;
+	
 	private final String TITULO_JANELA= "Criar Despesa";
 	private final int TAM_JANELA_X = 500;
 	private final int TAM_JANELA_Y = 500;

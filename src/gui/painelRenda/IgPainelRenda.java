@@ -202,9 +202,7 @@ public class IgPainelRenda extends JPanel {
 		try {
 			Set<Renda> rendas = new HashSet<Renda>();
 			List<Renda> rendaTemp = RendaDAO.todasAsRendas();
-			//System.out.println(rendaTemp.size()+"\n"+rendaTemp); TODO APAGAR
 			List<RendaMensal> rendaMensalTemp = RendaMensalDAO.todasAsRendasMensais();
-			//System.out.println("\nrendasmensaistemp\n"+rendaMensalTemp.size()+"\n"+rendaMensalTemp); TODO APAGAR
 			
 			for(Renda renda : rendaTemp){
 				int idRenda = new RendaDAO().getId(renda.getDescricao());				

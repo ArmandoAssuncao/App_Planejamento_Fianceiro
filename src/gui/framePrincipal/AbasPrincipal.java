@@ -21,6 +21,8 @@ import javax.swing.event.ChangeListener;
  *
  */
 public class AbasPrincipal extends JTabbedPane{
+	private static final long serialVersionUID = -1454166607272187474L;
+	
 	private final int TAM_PAINEL_X = 990;
 	private final int TAM_PAINEL_Y = 645;
 	

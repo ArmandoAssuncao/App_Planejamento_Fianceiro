@@ -25,6 +25,8 @@ import gui.painelDespesas.IgPainelDespesas;
  *
  */
 public class JanelaRemoverCategoria extends JDialog {
+	private static final long serialVersionUID = -3690155281659906205L;
+	
 	private final String TITULO_JANELA= "Remover Categoria";
 	private final int TAM_JANELA_X = 500;
 	private final int TAM_JANELA_Y = 500;

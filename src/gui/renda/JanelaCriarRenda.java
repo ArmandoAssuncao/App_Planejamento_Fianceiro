@@ -68,7 +68,7 @@ public class JanelaCriarRenda extends JDialog{
 		
 		setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		setSize(TAM_JANELA_X, TAM_JANELA_Y);
-		setBackground(Color.PINK);   //TODO apagar
+		setBackground(Color.WHITE);
 		setLocationRelativeTo(igPainelRenda);
 		setResizable(false);
 		setModal(true);
@@ -85,7 +85,7 @@ public class JanelaCriarRenda extends JDialog{
 		painelPrincipal.add(criaPainelTitulo(), BorderLayout.NORTH);
 		painelPrincipal.add(criaPainelCampos(), BorderLayout.SOUTH);
 		
-		painelPrincipal.setBackground(Color.PINK);
+		painelPrincipal.setBackground(Color.WHITE);
 		painelPrincipal.setVisible(true);
 		
 		return painelPrincipal;
@@ -110,7 +110,7 @@ public class JanelaCriarRenda extends JDialog{
 		painelTitulo.add(labelSubTitulo, BorderLayout.SOUTH);
 		
 		painelTitulo.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-		painelTitulo.setBackground(Color.GREEN); //TODO 
+		painelTitulo.setBackground(Color.GREEN); 
 		painelTitulo.setVisible(true);
 		
 		return painelTitulo;
@@ -281,7 +281,7 @@ public class JanelaCriarRenda extends JDialog{
 			return false;
 		}
 		else if(!ValidarDados.validarNumeroDouble(valor)){
-			labelErroCampo.setText("O campo \"Valor\" só aceita números. Se precisar, use um ponto(\".\") como separador.O valor deve ser positivo");
+			labelErroCampo.setText("O campo \"Meta\" só aceita números. Se precisar, use um ponto(\".\") como separador.");
 			return false;
 		}
 		

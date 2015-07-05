@@ -17,7 +17,8 @@ import gui.painelRenda.IgPainelRenda;
  *
  */
 public class GuiMenu extends JMenuBar{
-	
+	private static final long serialVersionUID = -3487357919741218958L;
+
 	TEGuiMenu trataEventosMenu;
 	
 	private JMenuItem menuItemSair;
@@ -143,9 +144,9 @@ public class GuiMenu extends JMenuBar{
 		menuItemAutor.setMnemonic(KeyEvent.VK_A);
 		menuSobre.add(menuItemAutor);
 		
-		menuBalanco.setVisible(false);
+		menuBalanco.setVisible(false);//
 		menuItemSair.setVisible(true);
-		menuItemApagarTudo.setVisible(false);
+		menuItemApagarTudo.setVisible(true);
 		menuItemAdicionarRenda.setVisible(true);
 		menuItemEditarRenda.setVisible(false);//
 		menuItemRemoverRenda.setVisible(false);//

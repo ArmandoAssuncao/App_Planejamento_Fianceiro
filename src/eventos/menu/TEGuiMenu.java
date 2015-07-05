@@ -45,7 +45,9 @@ public class TEGuiMenu implements ActionListener{
 				PlanejamentoFinanceiroDAO BD = PlanejamentoFinanceiroDAO.getInstance();
 				try {
 					BD.excluiRegistros();
+					BD.insereDados();
 					JanelaMensagem.mostraMensagem(null, "Deletar todos dados", "A exclusão dos dados foi realizada com sucesso");
+					System.exit(1);
 				}
 				catch (IOException e) {
 					e.printStackTrace();
