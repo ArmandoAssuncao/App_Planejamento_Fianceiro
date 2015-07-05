@@ -75,13 +75,12 @@ public class JanelaCriarDespesa extends JDialog{
 	/**
 	 * Cria uma instância do <code>JDialog</code>
 	 * @param painelDespesas componente pai
-	 * @param abasCategoria aba da categoria onde a despesa será cadastrada
 	 */
-	public JanelaCriarDespesa(IgPainelDespesas painelDespesas, AbasCategoria abasCategoria) {
+	public JanelaCriarDespesa(IgPainelDespesas painelDespesas) {
 		setTitle(TITULO_JANELA);
 		
 		trataEventosDespesa = new TEJanelaCriarDespesa(this, painelDespesas);
-		this.abasCategoria = abasCategoria;
+		this.abasCategoria = painelDespesas.getAbasCategoria();
 		
 		iniciaElementos();
 		

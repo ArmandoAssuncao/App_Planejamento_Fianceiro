@@ -3,6 +3,7 @@ package eventos.menu;
 import gui.JanelaMensagem;
 import gui.categoria.JanelaCriarCategoria;
 import gui.categoria.JanelaEditarCategoria;
+import gui.despesa.JanelaCriarDespesa;
 import gui.framePrincipal.GuiMenu;
 import gui.renda.JanelaCriarRenda;
 
@@ -72,6 +73,12 @@ public class TEGuiMenu implements ActionListener{
 		else if(event.getSource() == guiMenu.getMenuItemEditarCategoria()){
 			new JanelaEditarCategoria(guiMenu.getIgPainelDespesas());
 		}
+		
+		else if(event.getSource() == guiMenu.getMenuItemAddDespesa()){
+			System.out.println("aaaaaaaaaa2323232");
+			new JanelaCriarDespesa(guiMenu.getIgPainelDespesas());
+		}
+		
 		
 		
 		else if(event.getSource() == guiMenu.getMenuItemAbrirBD()){
