@@ -38,7 +38,7 @@ public class PainelTituloPainelGraficos extends JPanel {
 	 * Construtor padrão.
 	 */
 	public PainelTituloPainelGraficos() {
-		setPreferredSize(new Dimension(750,130));
+		setPreferredSize(new Dimension(750,140));
 		
 		setBorder(new LineBorder(Color.RED)); //TODO debug, apagar
 		

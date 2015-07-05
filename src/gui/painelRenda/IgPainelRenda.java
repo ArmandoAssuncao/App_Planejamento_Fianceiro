@@ -3,6 +3,7 @@ package gui.painelRenda;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -18,8 +19,10 @@ import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import persistencia.RendaDAO;
@@ -113,6 +116,9 @@ public class IgPainelRenda extends JPanel {
 		//Define o layout
 		painelBotoes.setLayout(new GridBagLayout());
 		
+		Font fonteBold = new Font(new JLabel().getFont().getName(), Font.BOLD, 11);
+		Insets insetsBotao = new Insets(0,10,0,0);
+		
 		//configurações do layout
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
@@ -125,8 +131,11 @@ public class IgPainelRenda extends JPanel {
 		String labelbotaoAddRenda = "Adicionar Renda";
 		ImageIcon iconeNovaCategoria = new ImageIcon("imagens/img_botaoAdicionarRenda.png");
 		botaoAddRenda.setText(labelbotaoAddRenda);
+		botaoAddRenda.setFont(fonteBold);
+		botaoAddRenda.setMargin(insetsBotao);
 		botaoAddRenda.setIcon(iconeNovaCategoria);
-		botaoAddRenda.setMargin(new Insets(0,-20,0,0));
+		botaoAddRenda.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoAddRenda.setIconTextGap(5);
 		botaoAddRenda.setHorizontalTextPosition(JButton.RIGHT);
 		botaoAddRenda.setPreferredSize(new Dimension(150,50));
 		botaoAddRenda.setMnemonic(KeyEvent.VK_I);
@@ -136,8 +145,11 @@ public class IgPainelRenda extends JPanel {
 		String labelBotaoExcluirRenda = "Excluir Renda";
 		ImageIcon iconeExcluirRenda = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
 		botaoExcluirRenda.setText(labelBotaoExcluirRenda);
+		botaoExcluirRenda.setFont(fonteBold);
+		botaoExcluirRenda.setMargin(insetsBotao);
 		botaoExcluirRenda.setIcon(iconeExcluirRenda);
-		botaoExcluirRenda.setMargin(new Insets(0,-10,0,0));
+		botaoExcluirRenda.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoExcluirRenda.setIconTextGap(5);
 		botaoExcluirRenda.setHorizontalTextPosition(JButton.RIGHT);
 		botaoExcluirRenda.setPreferredSize(new Dimension(150,50));
 		botaoExcluirRenda.addActionListener(trataEventosRenda);
@@ -146,8 +158,11 @@ public class IgPainelRenda extends JPanel {
 		String labelBotaoEditarRenda = "Editar Renda";
 		ImageIcon iconeEditarRenda = new ImageIcon("imagens/img_botaoEditarCategoria.png");
 		botaoEditarRenda.setText(labelBotaoEditarRenda);
+		botaoEditarRenda.setFont(fonteBold);
+		botaoEditarRenda.setMargin(insetsBotao);
 		botaoEditarRenda.setIcon(iconeEditarRenda);
-		botaoEditarRenda.setMargin(new Insets(0,-20,0,0));
+		botaoEditarRenda.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoEditarRenda.setIconTextGap(5);
 		botaoEditarRenda.setHorizontalTextPosition(JButton.RIGHT);
 		botaoEditarRenda.setPreferredSize(new Dimension(150,50));
 		botaoEditarRenda.addActionListener(trataEventosRenda);

@@ -105,6 +105,9 @@ public class PainelGraficos extends JPanel {
 		//Define o layout
 		painelBotoes.setLayout(new GridBagLayout());
 		
+		Font fonteBold = new Font(new JLabel().getFont().getName(), Font.BOLD, 11);
+		Insets insetsBotao = new Insets(0,10,0,0);
+		
 		//configurações do layout
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.NONE;
@@ -116,8 +119,10 @@ public class PainelGraficos extends JPanel {
 		botaoBalancoTotal.setMnemonic(KeyEvent.VK_B);
 		ImageIcon iconeBalancoTotal = new ImageIcon("imagens/img_botaoBalancoMensal.png");
 		botaoBalancoTotal.setIcon(iconeBalancoTotal);
+		botaoBalancoTotal.setFont(fonteBold);
+		botaoBalancoTotal.setMargin(insetsBotao);
 		botaoBalancoTotal.setHorizontalAlignment(SwingConstants.LEFT);
-		botaoBalancoTotal.setIconTextGap(10);
+		botaoBalancoTotal.setIconTextGap(5);
 		botaoBalancoTotal.setHorizontalTextPosition(JButton.RIGHT);
 		botaoBalancoTotal.setPreferredSize(new Dimension(150,50));
 		botaoBalancoTotal.addActionListener(trataEventosGraficos);
@@ -129,6 +134,8 @@ public class PainelGraficos extends JPanel {
 		botaoBalancoDespesa.setMnemonic(KeyEvent.VK_F);
 		ImageIcon iconeBalancoDespesa = new ImageIcon("imagens/img_botaoBalancoMensal.png");
 		botaoBalancoDespesa.setIcon(iconeBalancoDespesa);
+		botaoBalancoDespesa.setFont(fonteBold);
+		botaoBalancoDespesa.setMargin(insetsBotao);
 		botaoBalancoDespesa.setHorizontalAlignment(SwingConstants.LEFT);
 		botaoBalancoDespesa.setIconTextGap(10);
 		botaoBalancoDespesa.setHorizontalTextPosition(JButton.RIGHT);
@@ -141,6 +148,8 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoPizzaTotal.setMnemonic(KeyEvent.VK_E);
 		ImageIcon iconeGraficoPizzaTotal = new ImageIcon("imagens/img_botaoGraficoPizza.png");
 		botaoGraficoPizzaTotal.setIcon(iconeGraficoPizzaTotal);
+		botaoGraficoPizzaTotal.setFont(fonteBold);
+		botaoGraficoPizzaTotal.setMargin(insetsBotao);
 		botaoGraficoPizzaTotal.setHorizontalAlignment(SwingConstants.LEFT);
 		botaoGraficoPizzaTotal.setIconTextGap(10);
 		botaoGraficoPizzaTotal.setHorizontalTextPosition(JButton.RIGHT);
@@ -153,6 +162,8 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoPizzaFormaPagamento.setMnemonic(KeyEvent.VK_M);
 		ImageIcon iconeGraficoPizzaFormaPagamento = new ImageIcon("imagens/img_botaoGraficoPizza.png");
 		botaoGraficoPizzaFormaPagamento.setIcon(iconeGraficoPizzaFormaPagamento);
+		botaoGraficoPizzaFormaPagamento.setFont(fonteBold);
+		botaoGraficoPizzaFormaPagamento.setMargin(insetsBotao);
 		botaoGraficoPizzaFormaPagamento.setHorizontalAlignment(SwingConstants.LEFT);
 		botaoGraficoPizzaFormaPagamento.setIconTextGap(10);
 		botaoGraficoPizzaFormaPagamento.setHorizontalTextPosition(JButton.RIGHT);
@@ -165,6 +176,8 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoBarraCategoria.setMnemonic(KeyEvent.VK_T);
 		ImageIcon iconeGraficoBarraCategoria = new ImageIcon("imagens/img_botaoGraficoBarra.png");
 		botaoGraficoBarraCategoria.setIcon(iconeGraficoBarraCategoria);
+		botaoGraficoBarraCategoria.setFont(fonteBold);
+		botaoGraficoBarraCategoria.setMargin(insetsBotao);
 		botaoGraficoBarraCategoria.setHorizontalAlignment(SwingConstants.LEFT);
 		botaoGraficoBarraCategoria.setIconTextGap(10);
 		botaoGraficoBarraCategoria.setHorizontalTextPosition(JButton.RIGHT);
@@ -200,6 +213,8 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoLinhaMetaMensal.setMnemonic(KeyEvent.VK_N);
 		ImageIcon iconeGraficoLinhaMetaMensal = new ImageIcon("imagens/img_botaoGraficoLinha.png");
 		botaoGraficoLinhaMetaMensal.setIcon(iconeGraficoLinhaMetaMensal);
+		botaoGraficoLinhaMetaMensal.setFont(fonteBold);
+		botaoGraficoLinhaMetaMensal.setMargin(insetsBotao);
 		botaoGraficoLinhaMetaMensal.setHorizontalAlignment(SwingConstants.LEFT);
 		botaoGraficoLinhaMetaMensal.setIconTextGap(10);
 		botaoGraficoLinhaMetaMensal.setHorizontalTextPosition(JButton.RIGHT);
@@ -238,13 +253,12 @@ public class PainelGraficos extends JPanel {
 		//adiciona os botoes
 		constraints.gridx = 0;
 		constraints.gridy = 0;
-		constraints.insets = new Insets(0, 0, 20, 0);
+		constraints.insets = new Insets(5, 0, 18, 0);
 		painelBotoes.add(botaoBalancoTotal, constraints);
 		constraints.gridy = 1;
-		//constraints.insets = new Insets(0, 0, 0, 0);
+		constraints.insets = new Insets(0, 0, 18, 0);
 		painelBotoes.add(botaoBalancoDespesa, constraints);
 		constraints.gridy = 2;
-		//constraints.insets = new Insets(0, 0, 0, 0);
 		painelBotoes.add(botaoGraficoPizzaTotal, constraints);
 		constraints.gridy = 3;
 		painelBotoes.add(botaoGraficoPizzaFormaPagamento, constraints);

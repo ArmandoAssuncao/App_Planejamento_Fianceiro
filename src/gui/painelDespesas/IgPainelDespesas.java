@@ -3,6 +3,7 @@ package gui.painelDespesas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -14,7 +15,9 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -127,6 +130,9 @@ public class IgPainelDespesas extends JPanel{
 		//Define o layout
 		painelBotoes.setLayout(new GridBagLayout());
 		
+		Font fonteBold = new Font(new JLabel().getFont().getName(), Font.BOLD, 11);
+		Insets insetsBotao = new Insets(0,10,0,0);
+		
 		//configurações do layout
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.fill = GridBagConstraints.BOTH;
@@ -139,8 +145,11 @@ public class IgPainelDespesas extends JPanel{
 		String labelBotaoNovaCategoria = "Nova Categoria";
 		ImageIcon iconeNovaCategoria = new ImageIcon("imagens/img_botaoNovaCategoria.png");
 		botaoNovaCategoria.setText(labelBotaoNovaCategoria);
+		botaoNovaCategoria.setFont(fonteBold);
+		botaoNovaCategoria.setMargin(insetsBotao);
 		botaoNovaCategoria.setIcon(iconeNovaCategoria);
-		botaoNovaCategoria.setMargin(new Insets(0,-20,0,0));
+		botaoNovaCategoria.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoNovaCategoria.setIconTextGap(5);
 		botaoNovaCategoria.setHorizontalTextPosition(JButton.RIGHT);
 		botaoNovaCategoria.setPreferredSize(new Dimension(150,50));
 		botaoNovaCategoria.setMnemonic(KeyEvent.VK_V);
@@ -150,8 +159,11 @@ public class IgPainelDespesas extends JPanel{
 		String labelBotaoExcluirCategoria = "Excluir Categoria";
 		ImageIcon iconeExcluirCategoria = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
 		botaoExcluirCategoria.setText(labelBotaoExcluirCategoria);
+		botaoExcluirCategoria.setFont(fonteBold);
+		botaoExcluirCategoria.setMargin(insetsBotao);
 		botaoExcluirCategoria.setIcon(iconeExcluirCategoria);
-		botaoExcluirCategoria.setMargin(new Insets(0,-10,0,0));
+		botaoExcluirCategoria.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoExcluirCategoria.setIconTextGap(5);
 		botaoExcluirCategoria.setHorizontalTextPosition(JButton.RIGHT);
 		botaoExcluirCategoria.setPreferredSize(new Dimension(150,50));
 		botaoExcluirCategoria.addActionListener(trataEventosDespesas);
@@ -160,8 +172,11 @@ public class IgPainelDespesas extends JPanel{
 		String labelBotaoEditarCategoria = "Editar Categoria";
 		ImageIcon iconeEditarCategoria = new ImageIcon("imagens/img_botaoEditarCategoria.png");
 		botaoEditarCategoria.setText(labelBotaoEditarCategoria);
+		botaoEditarCategoria.setFont(fonteBold);
+		botaoEditarCategoria.setMargin(insetsBotao);
 		botaoEditarCategoria.setIcon(iconeEditarCategoria);
-		botaoEditarCategoria.setMargin(new Insets(0,-20,0,0));
+		botaoEditarCategoria.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoEditarCategoria.setIconTextGap(5);
 		botaoEditarCategoria.setHorizontalTextPosition(JButton.RIGHT);
 		botaoEditarCategoria.setPreferredSize(new Dimension(150,50));
 		botaoEditarCategoria.setMnemonic(KeyEvent.VK_E);
@@ -169,11 +184,14 @@ public class IgPainelDespesas extends JPanel{
 		
 		
 		//Botao Nova Despesa
-		String labelBotaoAdicionarDespesa = "Adicionar Despesa";
+		String labelBotaoAdicionarDespesa = "Nova Despesa";
 		ImageIcon iconeAdicionarDespesa = new ImageIcon("imagens/img_botaoNovaCategoria.png");
 		botaoAdicionarDespesa.setText(labelBotaoAdicionarDespesa);
+		botaoAdicionarDespesa.setFont(fonteBold);
+		botaoAdicionarDespesa.setMargin(insetsBotao);
 		botaoAdicionarDespesa.setIcon(iconeAdicionarDespesa);
-		botaoAdicionarDespesa.setMargin(new Insets(0,0,0,0));
+		botaoAdicionarDespesa.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoAdicionarDespesa.setIconTextGap(5);
 		botaoAdicionarDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoAdicionarDespesa.setPreferredSize(new Dimension(150,50));
 		botaoAdicionarDespesa.setMnemonic(KeyEvent.VK_N);
@@ -183,8 +201,11 @@ public class IgPainelDespesas extends JPanel{
 		String labelBotaoExcluirDespesa = "Excluir Despesa";
 		ImageIcon iconeExcluirDespesa = new ImageIcon("imagens/img_botaoExcluirCategoria.png");
 		botaoExcluirDespesa.setText(labelBotaoExcluirDespesa);
+		botaoExcluirDespesa.setFont(fonteBold);
+		botaoExcluirDespesa.setMargin(insetsBotao);
 		botaoExcluirDespesa.setIcon(iconeExcluirDespesa);
-		botaoExcluirDespesa.setMargin(new Insets(0,0,0,0));
+		botaoExcluirDespesa.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoExcluirDespesa.setIconTextGap(5);
 		botaoExcluirDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoExcluirDespesa.setPreferredSize(new Dimension(150,50));
 		botaoExcluirDespesa.addActionListener(trataEventosDespesas);
@@ -193,8 +214,11 @@ public class IgPainelDespesas extends JPanel{
 		String labelBotaoEditarDespesa = "Editar Despesa";
 		ImageIcon iconeEditarDespesa = new ImageIcon("imagens/img_botaoEditarCategoria.png");
 		botaoEditarDespesa.setText(labelBotaoEditarDespesa);
+		botaoEditarDespesa.setFont(fonteBold);
+		botaoEditarDespesa.setMargin(insetsBotao);
 		botaoEditarDespesa.setIcon(iconeEditarDespesa);
-		botaoEditarDespesa.setMargin(new Insets(0,0,0,0));
+		botaoEditarDespesa.setHorizontalAlignment(SwingConstants.LEFT);
+		botaoEditarDespesa.setIconTextGap(5);
 		botaoEditarDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoEditarDespesa.setPreferredSize(new Dimension(150,50));
 		botaoEditarDespesa.addActionListener(trataEventosDespesas);
