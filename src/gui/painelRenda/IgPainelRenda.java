@@ -23,7 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
+import javax.swing.border.BevelBorder;
 
 import persistencia.RendaDAO;
 import persistencia.RendaMensalDAO;
@@ -39,14 +39,6 @@ Define o painel de <code>Renda</code>.
 *
 */
 public class IgPainelRenda extends JPanel {
-	/**
-	 * Largura do painel
-	 */
-	public final int TAM_PAINEL_X = 800;
-	/**
-	 * Altura do painel
-	 */
-	public final int TAM_PAINEL_Y = 600;
 	
 	ArrayList<RendaMensal> arrayListRendaMensal;
 	private TEPainelRenda trataEventosRenda;
@@ -80,7 +72,7 @@ public class IgPainelRenda extends JPanel {
 		barraRolagem.setPreferredSize(new Dimension(tabelaRendaMensal.TAM_TABELA_X, tabelaRendaMensal.TAM_TABELA_Y));
 
 		painelSuperior.setLayout(new BorderLayout());
-		painelSuperior.setBorder(new LineBorder(Color.BLUE));
+		painelSuperior.setBackground(new Color(205, 205, 205));//TODO COR
 		painelSuperior.add(painelTitulo, BorderLayout.WEST);
 		
 		add(painelSuperior, BorderLayout.NORTH);
@@ -88,11 +80,13 @@ public class IgPainelRenda extends JPanel {
 		add(painelBotoes,BorderLayout.EAST);
 		add(tabelaRendaMensal.getTableHeader(),BorderLayout.PAGE_START);
 		
+		painelBotoes.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));//TODO BORDA
+		
 		botaoExcluirRenda.setVisible(false); 
 		botaoEditarRenda.setVisible(false);
-		
+
+		setBackground(new Color(205, 205, 205));//TODO COR
 		setVisible(true);
-		//setBackground(Color.GREEN); TODO
 	}
 
 	private void iniciaElementos() {
@@ -111,7 +105,7 @@ public class IgPainelRenda extends JPanel {
 
 	private void criaPainelBotoes(){
 		final int TAM_X = 200;
-		final int TAM_Y = 400;
+		final int TAM_Y = 0;
 		
 		//Define o layout
 		painelBotoes.setLayout(new GridBagLayout());
@@ -140,6 +134,7 @@ public class IgPainelRenda extends JPanel {
 		botaoAddRenda.setPreferredSize(new Dimension(150,50));
 		botaoAddRenda.setMnemonic(KeyEvent.VK_I);
 		botaoAddRenda.addActionListener(trataEventosRenda);
+		botaoAddRenda.setBackground(null);
 		
 		//botao Excluir Renda
 		String labelBotaoExcluirRenda = "Excluir Renda";
@@ -153,6 +148,7 @@ public class IgPainelRenda extends JPanel {
 		botaoExcluirRenda.setHorizontalTextPosition(JButton.RIGHT);
 		botaoExcluirRenda.setPreferredSize(new Dimension(150,50));
 		botaoExcluirRenda.addActionListener(trataEventosRenda);
+		botaoExcluirRenda.setBackground(null);
 		
 		//botao Editar Renda
 		String labelBotaoEditarRenda = "Editar Renda";
@@ -166,6 +162,7 @@ public class IgPainelRenda extends JPanel {
 		botaoEditarRenda.setHorizontalTextPosition(JButton.RIGHT);
 		botaoEditarRenda.setPreferredSize(new Dimension(150,50));
 		botaoEditarRenda.addActionListener(trataEventosRenda);
+		botaoEditarRenda.setBackground(null);
 		
 		//adiciona os bot�es
 		painelBotoes.add(botaoAddRenda, constraints);
@@ -175,8 +172,8 @@ public class IgPainelRenda extends JPanel {
 		painelBotoes.add(botaoEditarRenda,constraints);
 		
 		painelBotoes.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-		//painelBotoes.setBackground(Color.RED); //TODO Apagar
-//		painelBotoes.setVisible(true);  //TODO isso � realmente necess�rio?
+		painelBotoes.setBackground(new Color(205, 205, 205));//TODO COR
+		painelBotoes.setVisible(true);
 	}//criaPainelBotoes
 
 	/**

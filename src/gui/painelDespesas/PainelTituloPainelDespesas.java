@@ -35,7 +35,6 @@ public class PainelTituloPainelDespesas extends JPanel {
 	 * Construtor padrão.
 	 */
 	public PainelTituloPainelDespesas() {
-		setSize(750, 140);
 		setPreferredSize(new Dimension(750,140));
 		setLayout(new BorderLayout(0, 0));
 		

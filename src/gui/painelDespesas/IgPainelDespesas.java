@@ -19,7 +19,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -42,15 +41,6 @@ import gui.framePrincipal.GuiPrincipal;
 *
 */
 public class IgPainelDespesas extends JPanel{
-	/**
-	 * Largura do painel.
-	 */
-	public final int TAM_PAINEL_X = 800;
-	/**
-	 * Altura do painel.
-	 */
-	public final int TAM_PAINEL_Y = 600;
-	
 	boolean avisoMetaTotal = false;
 	boolean avisoMetaDefinido = false;
 	
@@ -73,7 +63,7 @@ public class IgPainelDespesas extends JPanel{
 	 * @param framePrincipal componente pai.
 	 */
 	public IgPainelDespesas(GuiPrincipal framePrincipal) {
-		setLayout(new BorderLayout(0,3));
+		setLayout(new BorderLayout(0,2));
 		
 		framePrincipal.getGuiMenu().setIgPainelDespesas(this);
 		
@@ -83,12 +73,9 @@ public class IgPainelDespesas extends JPanel{
 		iniciaValoresCategoria();
 		
 		criaPainelBotoes();
-		
 		criaPainelTitulo();
 		
 		painelSuperior.setLayout(new BorderLayout());
-		//painelSuperior.setBorder(new LineBorder(Color.BLUE)); //TODO debug
-		//painelTitulo.setBorder(new LineBorder(Color.BLACK));   //TODO debug
 		painelSuperior.setBackground(new Color(205, 205, 205));//TODO COR
 		painelSuperior.add(painelTitulo, BorderLayout.WEST);
 		
@@ -97,8 +84,6 @@ public class IgPainelDespesas extends JPanel{
 		add(painelBotoes, BorderLayout.EAST);
 		
 		painelBotoes.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));//TODO BORDA
-		
-		setPreferredSize(new Dimension(TAM_PAINEL_X, TAM_PAINEL_Y));
 		
 		botaoNovaCategoria.setVisible(true);
 		botaoEditarCategoria.setVisible(true);

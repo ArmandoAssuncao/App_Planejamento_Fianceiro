@@ -1,14 +1,13 @@
 package gui.painelDespesas;
 
 import java.awt.Color;
-
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import enumeracoes.FormaPagamento;
 
-/**
-Define a tabela da categoria.
+/**Define a tabela da categoria.
+ * 
 * @author Armando Assunção
 * @author Richardson William
 *

@@ -1,5 +1,6 @@
 package gui.painelDespesas;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
@@ -23,7 +24,8 @@ public class AbasCategoria extends JTabbedPane{
 		setFont(fonte);
 		setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 		setPreferredSize(new Dimension(TAM_ABA_X, TAM_ABA_Y));
-		//setBackground(Color.GRAY);
+		//setBackground(new Color(205, 205, 205));//TODO COR
+		setBorder(null);
 		setVisible(true);
 	}
 	
@@ -32,7 +34,6 @@ public class AbasCategoria extends JTabbedPane{
 		//verifica se o nome da aba ja existe
 		for(int indice = 0; indice < getTabCount(); indice++){
 			if(getTitleAt(indice).equalsIgnoreCase(nomeCategoria)){
-				System.out.println("Nome da categoria igual");
 				return false;
 			}
 		}
@@ -40,10 +41,8 @@ public class AbasCategoria extends JTabbedPane{
 		tabela = new TabelaDaCategoria();
 		barraRolagem = new JScrollPane();
 		
-	//	for(int i = 0; i < 20; i++) //TODO APAGAR/////////////////////////////////////////////////
-	//		tabela.adicionaLinha(nomeCategoria + " " + i, "10000.0", "20/11/2015", "1", "1", "1", "1");
-		
 		barraRolagem.setViewportView(tabela);
+		barraRolagem.setBorder(null);
 		
 		add(nomeCategoria, barraRolagem);
 		

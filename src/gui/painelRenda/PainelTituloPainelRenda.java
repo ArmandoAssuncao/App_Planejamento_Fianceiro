@@ -8,7 +8,6 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -31,10 +30,7 @@ public class PainelTituloPainelRenda extends JPanel {
 	 * Construtor padrão.
 	 */
 	public PainelTituloPainelRenda() {
-		setPreferredSize(new Dimension(750,140));
-		
-		setBorder(new LineBorder(Color.RED)); //TODO debug, apagar
-		
+		setPreferredSize(new Dimension(750,138));
 		setLayout(new BorderLayout(0, 0));
 		
 		rendaLabel = new JLabel("Renda Mensal");
@@ -44,12 +40,14 @@ public class PainelTituloPainelRenda extends JPanel {
 		
 		JPanel centroPanel = new JPanel();
 		add(centroPanel, BorderLayout.CENTER);
-		centroPanel.setLayout(null);
+		centroPanel.setLayout(new BorderLayout(0, 0));
+		centroPanel.setBackground(new Color(205, 205, 205));//TODO COR
 		
 		panel = new JPanel();
 		panel.setBounds(7, 7, 736, 59);
 		centroPanel.add(panel);
 		panel.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][]", "[][]"));
+		panel.setBackground(new Color(205, 205, 205));//TODO COR
 		
 		valorQtdRendasLabel = new JLabel("<dynamic>");
 		valorQtdRendasLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -72,6 +70,7 @@ public class PainelTituloPainelRenda extends JPanel {
 		JLabel metaLabel = new JLabel("de média de renda ");
 		panel.add(metaLabel, "cell 14 1");
 		
+		setBackground(new Color(205, 205, 205));//TODO COR
 		setVisible(true);
 	}//construtor
 	
