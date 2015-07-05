@@ -51,10 +51,12 @@ public class PainelTituloPainelDespesas extends JPanel {
 		JPanel centroPanel = new JPanel();
 		add(centroPanel, BorderLayout.CENTER);
 		centroPanel.setLayout(new BorderLayout(0, 0));
+		centroPanel.setBackground(new Color(205, 205, 205));//TODO COR
 		
 		alertaPanel = new JPanel();
 		centroPanel.add(alertaPanel, BorderLayout.SOUTH);
 		alertaPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		alertaPanel.setBackground(new Color(205, 205, 205));//TODO COR
 		
 		alertaLabel = new JLabel("<dynamic>");
 		alertaPanel.add(alertaLabel);
@@ -62,6 +64,7 @@ public class PainelTituloPainelDespesas extends JPanel {
 		panel = new JPanel();
 		centroPanel.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][]", "[][]"));
+		panel.setBackground(new Color(205, 205, 205));//TODO COR
 		
 		valorQtdDespesasLabel = new JLabel("<dynamic>");
 		valorQtdDespesasLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
@@ -84,6 +87,7 @@ public class PainelTituloPainelDespesas extends JPanel {
 		JLabel metaLabel = new JLabel("de gasto previsto");
 		panel.add(metaLabel, "cell 14 1");
 		
+		setBackground(new Color(205, 205, 205));//TODO COR
 		setVisible(true);
 	}//construtor
 	

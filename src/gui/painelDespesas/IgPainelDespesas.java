@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -86,17 +87,18 @@ public class IgPainelDespesas extends JPanel{
 		criaPainelTitulo();
 		
 		painelSuperior.setLayout(new BorderLayout());
-		painelSuperior.setBorder(new LineBorder(Color.BLUE)); //TODO debug
-		painelTitulo.setBorder(new LineBorder(Color.RED));   //TODO debug
+		//painelSuperior.setBorder(new LineBorder(Color.BLUE)); //TODO debug
+		//painelTitulo.setBorder(new LineBorder(Color.BLACK));   //TODO debug
+		painelSuperior.setBackground(new Color(205, 205, 205));//TODO COR
 		painelSuperior.add(painelTitulo, BorderLayout.WEST);
 		
 		add(painelSuperior, BorderLayout.NORTH);
 		add(abasCategoria, BorderLayout.WEST);
 		add(painelBotoes, BorderLayout.EAST);
 		
+		painelBotoes.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));//TODO BORDA
 		
 		setPreferredSize(new Dimension(TAM_PAINEL_X, TAM_PAINEL_Y));
-		//setBackground(Color.WHITE); TODO
 		
 		botaoNovaCategoria.setVisible(true);
 		botaoEditarCategoria.setVisible(true);
@@ -105,6 +107,7 @@ public class IgPainelDespesas extends JPanel{
 		botaoExcluirDespesa.setVisible(false);
 		botaoEditarDespesa.setVisible(false);
 		
+		setBackground(new Color(205, 205, 205));//TODO COR
 		setVisible(true);
 	}//construtor
 	
@@ -125,7 +128,7 @@ public class IgPainelDespesas extends JPanel{
 	
 	private void criaPainelBotoes(){
 		final int TAM_X = 200;
-		final int TAM_Y = 400;
+		final int TAM_Y = 0;
 		
 		//Define o layout
 		painelBotoes.setLayout(new GridBagLayout());
@@ -154,6 +157,7 @@ public class IgPainelDespesas extends JPanel{
 		botaoNovaCategoria.setPreferredSize(new Dimension(150,50));
 		botaoNovaCategoria.setMnemonic(KeyEvent.VK_V);
 		botaoNovaCategoria.addActionListener(trataEventosDespesas);
+		botaoNovaCategoria.setBackground(null);
 		
 		//botao Excluir Categoria
 		String labelBotaoExcluirCategoria = "Excluir Categoria";
@@ -167,6 +171,7 @@ public class IgPainelDespesas extends JPanel{
 		botaoExcluirCategoria.setHorizontalTextPosition(JButton.RIGHT);
 		botaoExcluirCategoria.setPreferredSize(new Dimension(150,50));
 		botaoExcluirCategoria.addActionListener(trataEventosDespesas);
+		botaoExcluirCategoria.setBackground(null);
 		
 		//botao Editar Categoria
 		String labelBotaoEditarCategoria = "Editar Categoria";
@@ -181,7 +186,7 @@ public class IgPainelDespesas extends JPanel{
 		botaoEditarCategoria.setPreferredSize(new Dimension(150,50));
 		botaoEditarCategoria.setMnemonic(KeyEvent.VK_E);
 		botaoEditarCategoria.addActionListener(trataEventosDespesas);
-		
+		botaoEditarCategoria.setBackground(null);
 		
 		//Botao Nova Despesa
 		String labelBotaoAdicionarDespesa = "Nova Despesa";
@@ -196,6 +201,7 @@ public class IgPainelDespesas extends JPanel{
 		botaoAdicionarDespesa.setPreferredSize(new Dimension(150,50));
 		botaoAdicionarDespesa.setMnemonic(KeyEvent.VK_N);
 		botaoAdicionarDespesa.addActionListener(trataEventosDespesas);
+		botaoAdicionarDespesa.setBackground(null);
 		
 		//Botao Excluir Despesa
 		String labelBotaoExcluirDespesa = "Excluir Despesa";
@@ -209,6 +215,7 @@ public class IgPainelDespesas extends JPanel{
 		botaoExcluirDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoExcluirDespesa.setPreferredSize(new Dimension(150,50));
 		botaoExcluirDespesa.addActionListener(trataEventosDespesas);
+		botaoExcluirDespesa.setBackground(null);
 		
 		//Botao Editar Despesa
 		String labelBotaoEditarDespesa = "Editar Despesa";
@@ -222,6 +229,7 @@ public class IgPainelDespesas extends JPanel{
 		botaoEditarDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoEditarDespesa.setPreferredSize(new Dimension(150,50));
 		botaoEditarDespesa.addActionListener(trataEventosDespesas);
+		botaoEditarDespesa.setBackground(null);
 		
 		//adiciona os botoes
 		painelBotoes.add(botaoNovaCategoria, constraints);
@@ -239,7 +247,7 @@ public class IgPainelDespesas extends JPanel{
 		painelBotoes.add(botaoEditarDespesa, constraints);
 		
 		painelBotoes.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-		painelBotoes.setBackground(Color.WHITE);
+		painelBotoes.setBackground(new Color(205, 205, 205));//TODO COR
 		painelBotoes.setVisible(true);
 	}
 	
