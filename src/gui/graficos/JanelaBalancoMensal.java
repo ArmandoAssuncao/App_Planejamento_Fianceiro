@@ -73,6 +73,8 @@ public class JanelaBalancoMensal extends JDialog {
 		tabela.setRowHeight(20);
 		tabela.setModel(modelo);
 		tabela.setTableHeader(null);
+		tabela.setFillsViewportHeight(true);
+		tabela.setOpaque(true);
 		
 		String fonteDefault = new JTable().getFont().getFontName(); //Pega a fonte default do sistema
 		Font fonte = new Font(fonteDefault, Font.PLAIN, 12);
@@ -93,6 +95,9 @@ public class JanelaBalancoMensal extends JDialog {
 		tabela.getColumnModel().getColumn(4).setCellRenderer(centralizado);
 		tabela.getColumnModel().getColumn(5).setCellRenderer(centralizado);
 		tabela.getColumnModel().getColumn(6).setCellRenderer(centralizado);
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
+		tabela.getColumnModel().getColumn(1).setPreferredWidth(110);
+		tabela.getColumnModel().getColumn(3).setPreferredWidth(100);
 		
 		
 		JScrollPane barraRolagem = new JScrollPane();
@@ -119,7 +124,7 @@ public class JanelaBalancoMensal extends JDialog {
 		for(int i = 0; i < arrayDatas.size(); i++){
 			int mes = arrayDatas.get(i).get(Calendar.MONTH) +1;
 			int ano = arrayDatas.get(i).get(Calendar.YEAR);
-			jComboBoxMes.addItem("01/"+mes+"/"+ano);
+			jComboBoxMes.addItem(String.format("%02d/%04d", mes, ano));
 		}
 		
 		jComboBoxMes.addActionListener(teJanelaBalancoMensal);
@@ -127,51 +132,6 @@ public class JanelaBalancoMensal extends JDialog {
 		painelBotoes.add(labelData);
 		painelBotoes.add(jComboBoxMes);
 		return painelBotoes;
-	}
-	
-	/**
-	 * Limpa a tabela, removendo todas as linhas
-	 */
-	public void limpaTabela(){
-		int tamanho = modelo.getRowCount();
-		for(int i = tamanho-1; i >= 0; i--)
-			modelo.removeRow(i);
-	}
-	
-	
-	/**
-	 * Adiciona um título a tabela na posição indicada.
-	 * @param titulo <code>String</code> com o título 
-	 * @param posicaoColuna <code>int</code> indicando a posição a ser inserido o título.
-	 */
-	public void adicionarTituloTabela(String titulo, int posicaoColuna){
-		String tracos = "...........................";
-		String linha[] = new String[NUM_COLUNAS];
-		for(int i = 0; i < NUM_COLUNAS; i++){
-			if(i == posicaoColuna)
-				linha[i] = titulo;
-			else{
-				linha[i] = tracos;
-			}
-		}
-		modelo.addRow(linha);
-		tabela.setRowHeight(tabela.getRowCount()-1, 40);
-	}
-	
-	/**Adiciona dados a tabela.
-	 * @param dados array de <code>String</code> com os dados a serem adicionados.
-	 */
-	public void adicionarDadosTabela(String[] dados){
-		modelo.addRow(dados);
-	}
-	
-	/**
-	 * Adiciona uma linha vazia na tabela.
-	 * @param espacamento altura da linha em pixels
-	 */
-	public void adicionarLinhaVaziaTabela(int espacamento){
-		modelo.addRow(new String[]{});
-		tabela.setRowHeight(tabela.getRowCount()-1, espacamento);
 	}
 	
 	/**
@@ -189,5 +149,12 @@ public class JanelaBalancoMensal extends JDialog {
 	public String getTextoJComboBoxMes() {
 		return jComboBoxMes.getItemAt(jComboBoxMes.getSelectedIndex());
 	}
-	
+
+	/**
+	 * Retorna a referência da <code>JTable</code> tabela.
+	 * @return <code>JTable</code> tabela.
+	 */
+	public JTable getTabela() {
+		return tabela;
+	}
 }

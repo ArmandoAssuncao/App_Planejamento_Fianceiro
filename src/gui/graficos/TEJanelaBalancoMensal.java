@@ -30,10 +30,10 @@ public class TEJanelaBalancoMensal  implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == janelaBalancoMensal.getjComboBoxMes()){
-			janelaBalancoMensal.limpaTabela();
+			FuncoesTabelaBalanco.limpaTabela(janelaBalancoMensal.getTabela());
+			final String[] titulosColuna = new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"};
 			
-			
-			Calendar mesAno = Converte.stringToCalendar(janelaBalancoMensal.getTextoJComboBoxMes());
+			Calendar mesAno = Converte.stringToCalendar("01/"+janelaBalancoMensal.getTextoJComboBoxMes());
 			
 			List<Renda> arrayRendas = new ArrayList<>();
 			List<RendaMensal> arrayRendasMensal = new ArrayList<>();
@@ -116,31 +116,31 @@ public class TEJanelaBalancoMensal  implements ActionListener {
 			System.out.println(valorTotalRendas);
 			
 			String rendas[] = new String[]{"Renda total:", "R$ " + valorTotalRendas};
-			String saldo[] = new String[]{"SaldoAtual", "R$ " + valorSaldoAtual};
-			String gastos[] = new String[]{"Gastos", "R$ " + valorTotalGastos};
-			String investimentos[] = new String[]{"Investimentos", "R$ " + valorTotalInvestimentos};
+			String saldo[] = new String[]{"SaldoAtual:", "R$ " + valorSaldoAtual};
+			String gastos[] = new String[]{"Gastos:", "R$ " + valorTotalGastos};
+			String investimentos[] = new String[]{"Investimentos:", "R$ " + valorTotalInvestimentos};
 			
-			janelaBalancoMensal.adicionarLinhaVaziaTabela(60);
-			janelaBalancoMensal.adicionarDadosTabela(rendas);
-			janelaBalancoMensal.adicionarDadosTabela(gastos);
-			janelaBalancoMensal.adicionarDadosTabela(investimentos);
-			janelaBalancoMensal.adicionarDadosTabela(saldo);
+			FuncoesTabelaBalanco.adicionarLinhaVaziaTabela(janelaBalancoMensal.getTabela(), 60);
+			FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoMensal.getTabela(), rendas);
+			FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoMensal.getTabela(), gastos);
+			FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoMensal.getTabela(), investimentos);
+			FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoMensal.getTabela(), saldo);
 			
 			//Adiciona as rendas
-			janelaBalancoMensal.adicionarLinhaVaziaTabela(60);
-			janelaBalancoMensal.adicionarTituloTabela("Receitas", 1);
-			janelaBalancoMensal.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data"});
+			FuncoesTabelaBalanco.adicionarLinhaVaziaTabela(janelaBalancoMensal.getTabela(), 60);
+			FuncoesTabelaBalanco.adicionarTituloTabela(janelaBalancoMensal.getTabela(), "Receitas", 1, 40);
+			FuncoesTabelaBalanco.adicionarTitulosColunasTabela(janelaBalancoMensal.getTabela(), new String[]{"Descrição", "Valor", "Data"});
 			for(int indice = 0; indice < arrayRendasMensal.size(); indice++){
 				String descricao = arrayRendas.get(indice).getDescricao();
 				double valor = arrayRendasMensal.get(indice).getValor();
 				String data = Converte.calendarToString(arrayRendasMensal.get(indice).getDataRenda());
-				janelaBalancoMensal.adicionarDadosTabela(new String[]{descricao, "R$ " + valor, data});
+				FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoMensal.getTabela(), new String[]{descricao, "R$ " + valor, data});
 			}
 			
 			//Adiciona os Investimentos
-			janelaBalancoMensal.adicionarLinhaVaziaTabela(60);
-			janelaBalancoMensal.adicionarTituloTabela("Investimentos", 1);
-			janelaBalancoMensal.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"});
+			FuncoesTabelaBalanco.adicionarLinhaVaziaTabela(janelaBalancoMensal.getTabela(), 60);
+			FuncoesTabelaBalanco.adicionarTituloTabela(janelaBalancoMensal.getTabela(), "Investimentos", 1, 40);
+			FuncoesTabelaBalanco.adicionarTitulosColunasTabela(janelaBalancoMensal.getTabela(), titulosColuna);
 			for(int indice = 0; indice < arrayDespesasInvestimentos.size(); indice++){
 				String descricao = arrayDespesasInvestimentos.get(indice).getDescricao();
 				double valor = arrayDespesasInvestimentos.get(indice).getValorDespesa();
@@ -148,14 +148,13 @@ public class TEJanelaBalancoMensal  implements ActionListener {
 				String dataPagamento = Converte.calendarToString(arrayDespesasInvestimentos.get(indice).getDataPagamento());
 				int numeroParcelas = arrayDespesasInvestimentos.get(indice).getNumeroParcelas();
 				String numeroCheque = arrayDespesasInvestimentos.get(indice).getNumeroCheque();
-				janelaBalancoMensal.adicionarDadosTabela(new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
+				FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoMensal.getTabela(), new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
 			}
 			
 			//Adiciona as Despesas
-			janelaBalancoMensal.adicionarLinhaVaziaTabela(60);
-			janelaBalancoMensal.adicionarTituloTabela("Gastos", 1);
-			//janelaBalancoMensal.adicionarLinhaVaziaTabela(20);
-			janelaBalancoMensal.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"});
+			FuncoesTabelaBalanco.adicionarLinhaVaziaTabela(janelaBalancoMensal.getTabela(), 60);
+			FuncoesTabelaBalanco.adicionarTituloTabela(janelaBalancoMensal.getTabela(), "Gastos", 1, 40);
+			FuncoesTabelaBalanco.adicionarTitulosColunasTabela(janelaBalancoMensal.getTabela(), titulosColuna);
 			for(int indice = 0; indice < arrayDespesasGastos.size(); indice++){
 				String descricao = arrayDespesasGastos.get(indice).getDescricao();
 				double valor = arrayDespesasGastos.get(indice).getValorDespesa();
@@ -163,7 +162,7 @@ public class TEJanelaBalancoMensal  implements ActionListener {
 				String dataPagamento = Converte.calendarToString(arrayDespesasGastos.get(indice).getDataPagamento());
 				int numeroParcelas = arrayDespesasGastos.get(indice).getNumeroParcelas();
 				String numeroCheque = arrayDespesasGastos.get(indice).getNumeroCheque();
-				janelaBalancoMensal.adicionarDadosTabela(new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
+				FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoMensal.getTabela(), new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
 			}
 		}
 	}

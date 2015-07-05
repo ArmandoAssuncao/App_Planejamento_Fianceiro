@@ -73,6 +73,8 @@ public class JanelaBalancoDespesas extends JDialog {
 		tabela.setRowHeight(20);
 		tabela.setModel(modelo);
 		tabela.setTableHeader(null);
+		tabela.setFillsViewportHeight(true);
+		tabela.setOpaque(true);
 		
 		String fonteDefault = new JTable().getFont().getFontName(); //Pega a fonte default do sistema
 		Font fonte = new Font(fonteDefault, Font.PLAIN, 12);
@@ -93,7 +95,9 @@ public class JanelaBalancoDespesas extends JDialog {
 		tabela.getColumnModel().getColumn(4).setCellRenderer(centralizado);
 		tabela.getColumnModel().getColumn(5).setCellRenderer(centralizado);
 		tabela.getColumnModel().getColumn(6).setCellRenderer(centralizado);
-		
+		tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
+		tabela.getColumnModel().getColumn(1).setPreferredWidth(110);
+		tabela.getColumnModel().getColumn(3).setPreferredWidth(100);
 		
 		JScrollPane barraRolagem = new JScrollPane();
 		barraRolagem.setViewportView(tabela);
@@ -116,12 +120,10 @@ public class JanelaBalancoDespesas extends JDialog {
 			e.printStackTrace();
 		}
 		
-		System.out.println("aaaa" + arrayDatas.size());//TODO
-		
 		for(int i = 0; i < arrayDatas.size(); i++){
 			int mes = arrayDatas.get(i).get(Calendar.MONTH) +1;
 			int ano = arrayDatas.get(i).get(Calendar.YEAR);
-			jComboBoxMes.addItem("01/"+mes+"/"+ano);
+			jComboBoxMes.addItem(String.format("%02d/%04d", mes, ano));
 		}
 		
 		jComboBoxMes.addActionListener(teJanelaBalancoDespesas);
@@ -129,51 +131,6 @@ public class JanelaBalancoDespesas extends JDialog {
 		painelBotoes.add(labelData);
 		painelBotoes.add(jComboBoxMes);
 		return painelBotoes;
-	}
-	
-	/**
-	 * Limpa a tabela, removento dotas as linhas
-	 */
-	public void limpaTabela(){
-		int tamanho = modelo.getRowCount();
-		for(int i = tamanho-1; i >= 0; i--)
-			modelo.removeRow(i);
-	}
-	
-	/**
-	 * Adiciona um título a tabela.
-	 * @param titulo <code>String</code> com o título da tabela
-	 * @param posicaoColuna posição indicando onde o título será colocado
-	 *///TODO revisar comentario
-	public void adicionarTituloTabela(String titulo, int posicaoColuna){
-		String tracos = ".....................................";
-		String linha[] = new String[NUM_COLUNAS];
-		for(int i = 0; i < NUM_COLUNAS; i++){
-			if(i == posicaoColuna)
-				linha[i] = titulo;
-			else{
-				linha[i] = tracos;
-			}
-		}
-		modelo.addRow(linha);
-		tabela.setRowHeight(tabela.getRowCount()-1, 40);
-	}
-	
-	/**
-	 * Adiciona uma nova linha na tabela
-	 * @param dados dados que serão adicionados na tabela
-	 */
-	public void adicionarDadosTabela(String[] dados){
-		modelo.addRow(dados);
-	}
-	
-	/**
-	 * Adiciona uma linha vazia na tabela
-	 * @param espacamento espaçamento vertical da célula em pixels
-	 *///TODO revisar comentario
-	public void adicionarLinhaVaziaTabela(int espacamento){
-		modelo.addRow(new String[]{});
-		tabela.setRowHeight(tabela.getRowCount()-1, espacamento);
 	}
 	
 	/**
@@ -192,4 +149,11 @@ public class JanelaBalancoDespesas extends JDialog {
 		return jComboBoxMes.getItemAt(jComboBoxMes.getSelectedIndex());
 	}
 	
+	/**
+	 * Retorna a referência da <code>JTable</code> tabela.
+	 * @return <code>JTable</code> tabela.
+	 */
+	public JTable getTabela() {
+		return tabela;
+	}
 }

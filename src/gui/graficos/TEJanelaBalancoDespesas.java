@@ -22,10 +22,11 @@ public class TEJanelaBalancoDespesas  implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource() == janelaBalancoDespesas.getjComboBoxMes()){
-			janelaBalancoDespesas.limpaTabela();
+			FuncoesTabelaBalanco.limpaTabela(janelaBalancoDespesas.getTabela());
+			final String[] titulosColuna = new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"};
 			
 			
-			Calendar mesAno = Converte.stringToCalendar(janelaBalancoDespesas.getTextoJComboBoxMes());
+			Calendar mesAno = Converte.stringToCalendar("01/"+janelaBalancoDespesas.getTextoJComboBoxMes());
 			
 			List<Despesa> arrayDespesas;
 			List<Despesa> arrayDespesasAVista = new ArrayList<>();
@@ -77,16 +78,16 @@ public class TEJanelaBalancoDespesas  implements ActionListener {
 			String cheque[] = new String[]{"Cheque", "R$ " + valorTotalDespesasCheque};
 			String prazo[] = new String[]{"A Prazo:", "R$ " + valorTotalDespesasPrazo};
 			
-			janelaBalancoDespesas.adicionarLinhaVaziaTabela(60);
-			janelaBalancoDespesas.adicionarDadosTabela(aVista);
-			janelaBalancoDespesas.adicionarDadosTabela(cartao);
-			janelaBalancoDespesas.adicionarDadosTabela(cheque);
-			janelaBalancoDespesas.adicionarDadosTabela(prazo);
+			FuncoesTabelaBalanco.adicionarLinhaVaziaTabela(janelaBalancoDespesas.getTabela(), 60);
+			FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoDespesas.getTabela(), aVista);
+			FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoDespesas.getTabela(), cartao);
+			FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoDespesas.getTabela(), cheque);
+			FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoDespesas.getTabela(), prazo);
 			
 			//Adiciona pagamento A vista
-			janelaBalancoDespesas.adicionarLinhaVaziaTabela(60);
-			janelaBalancoDespesas.adicionarTituloTabela("A Vista", 1);
-			janelaBalancoDespesas.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"});
+			FuncoesTabelaBalanco.adicionarLinhaVaziaTabela(janelaBalancoDespesas.getTabela(), 60);
+			FuncoesTabelaBalanco.adicionarTituloTabela(janelaBalancoDespesas.getTabela(), "A Vista", 1, 40);
+			FuncoesTabelaBalanco.adicionarTitulosColunasTabela(janelaBalancoDespesas.getTabela(), titulosColuna);
 			for(int indice = 0; indice < arrayDespesasAVista.size(); indice++){
 				String descricao = arrayDespesasAVista.get(indice).getDescricao();
 				double valor = arrayDespesasAVista.get(indice).getValorDespesa();
@@ -94,13 +95,13 @@ public class TEJanelaBalancoDespesas  implements ActionListener {
 				String dataPagamento = Converte.calendarToString(arrayDespesasAVista.get(indice).getDataPagamento());
 				int numeroParcelas = arrayDespesasAVista.get(indice).getNumeroParcelas();
 				String numeroCheque = arrayDespesasAVista.get(indice).getNumeroCheque();
-				janelaBalancoDespesas.adicionarDadosTabela(new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
+				FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoDespesas.getTabela(), new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
 			}
 			
 			//Adiciona pagamento cartao de credito
-			janelaBalancoDespesas.adicionarLinhaVaziaTabela(60);
-			janelaBalancoDespesas.adicionarTituloTabela("Cartão de Crédito", 1);
-			janelaBalancoDespesas.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"});
+			FuncoesTabelaBalanco.adicionarLinhaVaziaTabela(janelaBalancoDespesas.getTabela(), 60);
+			FuncoesTabelaBalanco.adicionarTituloTabela(janelaBalancoDespesas.getTabela(), "Cartão de Crédito", 1, 40);
+			FuncoesTabelaBalanco.adicionarTitulosColunasTabela(janelaBalancoDespesas.getTabela(), titulosColuna);
 			for(int indice = 0; indice < arrayDespesasCartao.size(); indice++){
 				String descricao = arrayDespesasCartao.get(indice).getDescricao();
 				double valor = arrayDespesasCartao.get(indice).getValorDespesa();
@@ -108,14 +109,13 @@ public class TEJanelaBalancoDespesas  implements ActionListener {
 				String dataPagamento = Converte.calendarToString(arrayDespesasCartao.get(indice).getDataPagamento());
 				int numeroParcelas = arrayDespesasCartao.get(indice).getNumeroParcelas();
 				String numeroCheque = arrayDespesasCartao.get(indice).getNumeroCheque();
-				janelaBalancoDespesas.adicionarDadosTabela(new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
+				FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoDespesas.getTabela(), new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
 			}
 			
 			//Adiciona pagamento cheque
-			janelaBalancoDespesas.adicionarLinhaVaziaTabela(60);
-			janelaBalancoDespesas.adicionarTituloTabela("Cheque", 1);
-			//janelaBalancoMensal.adicionarLinhaVaziaTabela(20);
-			janelaBalancoDespesas.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"});
+			FuncoesTabelaBalanco.adicionarLinhaVaziaTabela(janelaBalancoDespesas.getTabela(), 60);
+			FuncoesTabelaBalanco.adicionarTituloTabela(janelaBalancoDespesas.getTabela(), "Cheque", 1, 40);
+			FuncoesTabelaBalanco.adicionarTitulosColunasTabela(janelaBalancoDespesas.getTabela(), titulosColuna);
 			for(int indice = 0; indice < arrayDespesasCheque.size(); indice++){
 				String descricao = arrayDespesasCheque.get(indice).getDescricao();
 				double valor = arrayDespesasCheque.get(indice).getValorDespesa();
@@ -123,14 +123,13 @@ public class TEJanelaBalancoDespesas  implements ActionListener {
 				String dataPagamento = Converte.calendarToString(arrayDespesasCheque.get(indice).getDataPagamento());
 				int numeroParcelas = arrayDespesasCheque.get(indice).getNumeroParcelas();
 				String numeroCheque = arrayDespesasCheque.get(indice).getNumeroCheque();
-				janelaBalancoDespesas.adicionarDadosTabela(new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
+				FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoDespesas.getTabela(), new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
 			}
 			
 			//Adiciona pagamento prazo
-			janelaBalancoDespesas.adicionarLinhaVaziaTabela(60);
-			janelaBalancoDespesas.adicionarTituloTabela("Prazo", 1);
-			//janelaBalancoMensal.adicionarLinhaVaziaTabela(20);
-			janelaBalancoDespesas.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"});
+			FuncoesTabelaBalanco.adicionarLinhaVaziaTabela(janelaBalancoDespesas.getTabela(), 60);
+			FuncoesTabelaBalanco.adicionarTituloTabela(janelaBalancoDespesas.getTabela(), "Prazo", 1, 40);
+			FuncoesTabelaBalanco.adicionarTitulosColunasTabela(janelaBalancoDespesas.getTabela(), titulosColuna);
 			for(int indice = 0; indice < arrayDespesasPrazo.size(); indice++){
 				String descricao = arrayDespesasPrazo.get(indice).getDescricao();
 				double valor = arrayDespesasPrazo.get(indice).getValorDespesa();
@@ -138,7 +137,7 @@ public class TEJanelaBalancoDespesas  implements ActionListener {
 				String dataPagamento = Converte.calendarToString(arrayDespesasPrazo.get(indice).getDataPagamento());
 				int numeroParcelas = arrayDespesasPrazo.get(indice).getNumeroParcelas();
 				String numeroCheque = arrayDespesasPrazo.get(indice).getNumeroCheque();
-				janelaBalancoDespesas.adicionarDadosTabela(new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
+				FuncoesTabelaBalanco.adicionarDadosTabela(janelaBalancoDespesas.getTabela(), new String[]{descricao, "R$ " + valor, data, dataPagamento, "" + numeroParcelas, numeroCheque});
 			}
 		}
 	}

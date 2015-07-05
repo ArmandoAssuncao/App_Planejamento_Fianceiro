@@ -75,7 +75,6 @@ public class TEGuiMenu implements ActionListener{
 		}
 		
 		else if(event.getSource() == guiMenu.getMenuItemAddDespesa()){
-			System.out.println("aaaaaaaaaa2323232");
 			new JanelaCriarDespesa(guiMenu.getIgPainelDespesas());
 		}
 		
