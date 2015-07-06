@@ -30,7 +30,7 @@ public class AbasPrincipal extends JTabbedPane{
 	//private final String NOME_ABA_1 = "<html>C<br>O<br>M<br>E<br>Ç<br>O";
 	private final String NOME_ABA_2 = "<html>R<br>E<br>N<br>D<br>A";
 	private final String NOME_ABA_3 = "<html>D<br>E<br>S<br>P<br>E<br>S<br>A<br>S"; 
-	private final String NOME_ABA_4 = "<html>G<br>R<br>A<br>F<br>&nbsp;í<br>C<br>O<br>S"; 
+	private final String NOME_ABA_4 = "<html>R<br>E<br>L<br>A<br>T<br>Ó<br>R<br>&nbsp;I<br>O"; 
 	
 	PainelInicio painelInicio;
 	IgPainelDespesas painelDespesas;
