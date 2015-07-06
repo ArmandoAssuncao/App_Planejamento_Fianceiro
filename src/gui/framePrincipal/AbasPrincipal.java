@@ -46,17 +46,14 @@ public class AbasPrincipal extends JTabbedPane{
 		painelDespesas = new IgPainelDespesas(framePrincipal);
 		painelGraficos = new PainelGraficos(framePrincipal);
         igPainelRenda = new IgPainelRenda(framePrincipal);
-		
-     //   String fonteDefault = new JLabel().getFont().getFontName(); //Pega a fonte default do sistema
+        
 		Font fonte = new Font(Font.SANS_SERIF, Font.BOLD, 14);
 		setFont(fonte);
         
-		add(NOME_ABA_1, painelInicio);
+		//add(NOME_ABA_1, painelInicio);
 		add(NOME_ABA_2, igPainelRenda);
 		add(NOME_ABA_3, painelDespesas);
 		add(NOME_ABA_4, painelGraficos);
-		
-		setSelectedIndex(3); //TODO debug, apagar.
 		
 		//Atualiza componente da aba selecionada
 		addChangeListener(new ChangeListener() {

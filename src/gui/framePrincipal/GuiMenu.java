@@ -145,6 +145,7 @@ public class GuiMenu extends JMenuBar{
 		menuSobre.add(menuItemAutor);
 		
 		menuBalanco.setVisible(false);//
+		menuConfiguracoes.setVisible(false);//
 		menuItemSair.setVisible(true);
 		menuItemApagarTudo.setVisible(true);
 		menuItemAdicionarRenda.setVisible(true);
