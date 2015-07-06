@@ -134,7 +134,7 @@ public class IgPainelDespesas extends JPanel{
 		
 		//botao Nova Categoria
 		String labelBotaoNovaCategoria = "Nova Categoria";
-		ImageIcon iconeNovaCategoria = new ImageIcon("src/recursos/imagens/img_botaoNovaCategoria.png");
+		ImageIcon iconeNovaCategoria = new ImageIcon(getClass().getResource("/recursos/imagens/img_botaoNovaCategoria.png"));
 		botaoNovaCategoria.setText(labelBotaoNovaCategoria);
 		botaoNovaCategoria.setFont(fonteBold);
 		botaoNovaCategoria.setMargin(insetsBotao);
@@ -149,7 +149,7 @@ public class IgPainelDespesas extends JPanel{
 		
 		//botao Excluir Categoria
 		String labelBotaoExcluirCategoria = "Excluir Categoria";
-		ImageIcon iconeExcluirCategoria = new ImageIcon("src/recursos/imagens/img_botaoExcluirCategoria.png");
+		ImageIcon iconeExcluirCategoria = new ImageIcon(getClass().getResource("/recursos/imagens/img_botaoExcluirCategoria.png"));
 		botaoExcluirCategoria.setText(labelBotaoExcluirCategoria);
 		botaoExcluirCategoria.setFont(fonteBold);
 		botaoExcluirCategoria.setMargin(insetsBotao);
@@ -163,7 +163,7 @@ public class IgPainelDespesas extends JPanel{
 		
 		//botao Editar Categoria
 		String labelBotaoEditarCategoria = "Editar Categoria";
-		ImageIcon iconeEditarCategoria = new ImageIcon("src/recursos/imagens/img_botaoEditarCategoria.png");
+		ImageIcon iconeEditarCategoria = new ImageIcon(getClass().getResource("/recursos/imagens/img_botaoEditarCategoria.png"));
 		botaoEditarCategoria.setText(labelBotaoEditarCategoria);
 		botaoEditarCategoria.setFont(fonteBold);
 		botaoEditarCategoria.setMargin(insetsBotao);
@@ -178,7 +178,7 @@ public class IgPainelDespesas extends JPanel{
 		
 		//Botao Nova Despesa
 		String labelBotaoAdicionarDespesa = "Nova Despesa";
-		ImageIcon iconeAdicionarDespesa = new ImageIcon("src/recursos/imagens/img_botaoNovaCategoria.png");
+		ImageIcon iconeAdicionarDespesa = new ImageIcon(getClass().getResource("/recursos/imagens/img_botaoNovaCategoria.png"));
 		botaoAdicionarDespesa.setText(labelBotaoAdicionarDespesa);
 		botaoAdicionarDespesa.setFont(fonteBold);
 		botaoAdicionarDespesa.setMargin(insetsBotao);
@@ -193,7 +193,7 @@ public class IgPainelDespesas extends JPanel{
 		
 		//Botao Excluir Despesa
 		String labelBotaoExcluirDespesa = "Excluir Despesa";
-		ImageIcon iconeExcluirDespesa = new ImageIcon("src/recursos/imagens/img_botaoExcluirCategoria.png");
+		ImageIcon iconeExcluirDespesa = new ImageIcon(getClass().getResource("/recursos/imagens/img_botaoExcluirCategoria.png"));
 		botaoExcluirDespesa.setText(labelBotaoExcluirDespesa);
 		botaoExcluirDespesa.setFont(fonteBold);
 		botaoExcluirDespesa.setMargin(insetsBotao);
@@ -207,7 +207,7 @@ public class IgPainelDespesas extends JPanel{
 		
 		//Botao Editar Despesa
 		String labelBotaoEditarDespesa = "Editar Despesa";
-		ImageIcon iconeEditarDespesa = new ImageIcon("src/recursos/imagens/img_botaoEditarCategoria.png");
+		ImageIcon iconeEditarDespesa = new ImageIcon(getClass().getResource("/recursos/imagens/img_botaoEditarCategoria.png"));
 		botaoEditarDespesa.setText(labelBotaoEditarDespesa);
 		botaoEditarDespesa.setFont(fonteBold);
 		botaoEditarDespesa.setMargin(insetsBotao);

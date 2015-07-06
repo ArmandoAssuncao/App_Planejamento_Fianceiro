@@ -124,7 +124,7 @@ public class IgPainelRenda extends JPanel {
 		
 		//botao Adicionar Renda
 		String labelbotaoAddRenda = "Adicionar Renda";
-		ImageIcon iconeNovaCategoria = new ImageIcon("src/recursos/imagens/img_botaoAdicionarRenda.png");
+		ImageIcon iconeNovaCategoria = new ImageIcon(getClass().getResource("/recursos/imagens/img_botaoAdicionarRenda.png"));
 		botaoAddRenda.setText(labelbotaoAddRenda);
 		botaoAddRenda.setFont(fonteBold);
 		botaoAddRenda.setMargin(insetsBotao);
@@ -139,7 +139,7 @@ public class IgPainelRenda extends JPanel {
 		
 		//botao Excluir Renda
 		String labelBotaoExcluirRenda = "Excluir Renda";
-		ImageIcon iconeExcluirRenda = new ImageIcon("src/recursos/imagens/img_botaoExcluirCategoria.png");
+		ImageIcon iconeExcluirRenda = new ImageIcon(getClass().getResource("/recursos/imagens/img_botaoExcluirCategoria.png"));
 		botaoExcluirRenda.setText(labelBotaoExcluirRenda);
 		botaoExcluirRenda.setFont(fonteBold);
 		botaoExcluirRenda.setMargin(insetsBotao);
@@ -153,7 +153,7 @@ public class IgPainelRenda extends JPanel {
 		
 		//botao Editar Renda
 		String labelBotaoEditarRenda = "Editar Renda";
-		ImageIcon iconeEditarRenda = new ImageIcon("src/recursos/imagens/img_botaoEditarCategoria.png");
+		ImageIcon iconeEditarRenda = new ImageIcon(getClass().getResource("/recursos/imagens/img_botaoEditarCategoria.png"));
 		botaoEditarRenda.setText(labelBotaoEditarRenda);
 		botaoEditarRenda.setFont(fonteBold);
 		botaoEditarRenda.setMargin(insetsBotao);
