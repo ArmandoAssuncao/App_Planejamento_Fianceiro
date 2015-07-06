@@ -136,26 +136,25 @@ public class RendaDAO extends PlanejamentoFinanceiroDAO {
 	}
 	
 	/**
-	 * Pesquisa renda pela descricao
-	 * @param descricao <code>String</code> com a descrição da <code>Renda</code> a ser pesquisada. 
-	 * @return {@code List<Renda>} com as rendas que tem na descrição a descrição especificado
+	 * Pesquisa renda pelo id
+	 * @param id <code>int</code> com o id da <code>Renda</code> a ser pesquisada. 
+	 * @return <code>Renda</code> com a renda que tem o id especificado
 	 * @throws SQLException possível erro gerado por má configuração do banco de dados
 	 */
-	/*public static List<Renda> pesquisar(String descricao) throws SQLException{
-		List<Renda> rendas = new ArrayList<Renda>();
+	public static Renda pesquisar(int id) throws SQLException{
+		Renda renda = null;
 		
 		BANCO_DE_DADOS_PF.abreConexao();
 		
-		String novaDescricao = BancoDeDados.substituiAspasSimplesPorUmaValidaNoBD(descricao);
-		String comandoSql = "SELECT * FROM renda WHERE descricao LIKE \'%" + novaDescricao + "%\'";
+		String comandoSql = "SELECT * FROM renda WHERE idRenda=" + id;
 		ResultSet resultadoQuery = BANCO_DE_DADOS_PF.executaQuery(comandoSql);
 		
 		try {
 			//resultSet posiciona o cursor antes da primeira linha, entao o next() abaixo ja o coloca na primeira linha, caso haja
 			while(resultadoQuery.next()){
-				novaDescricao = resultadoQuery.getString("descricao");
+				String descricao = resultadoQuery.getString("descricao");
 				
-				rendas.add(new Renda(novaDescricao));
+				renda =new Renda(descricao);
 			}//while
 		} catch (NumberFormatException | SQLException e) {
 			e.printStackTrace();
@@ -163,8 +162,8 @@ public class RendaDAO extends PlanejamentoFinanceiroDAO {
 		}
 		
 		BANCO_DE_DADOS_PF.fechaConexao();
-		return rendas;
-	}//pesquisar*/
+		return renda;
+	}//pesquisar
 	
 	/**
 	 * Retorna todas as entradas da tabela renda.

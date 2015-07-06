@@ -12,9 +12,9 @@ import java.util.Calendar;
  *
  */
 public class RendaMensal {
+	private int id;
 	private double valor;
 	private Calendar dataRenda;
-	private int id;
 	
 	/**
 	 * Construtor padrão.

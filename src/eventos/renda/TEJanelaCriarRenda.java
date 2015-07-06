@@ -30,7 +30,7 @@ public class TEJanelaCriarRenda implements ActionListener {
 	 * Cria uma instância do tratador de eventos da janela.
 	 * 
 	 * @param janelaCriarRenda janela de onde vem os eventos.
-	 * @param igPainelRenda painel interno da janela //TODO está certo?
+	 * @param igPainelRenda painel interno da janela
 	 */
 	public TEJanelaCriarRenda(JanelaCriarRenda janelaCriarRenda, IgPainelRenda igPainelRenda) {
 		this.janelaCriarRenda = janelaCriarRenda;

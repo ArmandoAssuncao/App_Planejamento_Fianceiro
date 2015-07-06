@@ -271,9 +271,6 @@ public class IgPainelDespesas extends JPanel{
 		painelTitulo.atualizarPainel(descricao,totalDespesas,somaDespesas,valorAlerta,valorMetaPorcentagem);
 	}//atualizaPainelTitulo
 	
-	/**
-	 * Inicia as abas de <code>Categoria</code>.
-	 */
 	private void iniciaValoresCategoria(){
 		List<MetaMensal> arrayMetaMensalTemp = new ArrayList<MetaMensal>();
 		List<Categoria> arrayCategoriaTemp = new ArrayList<Categoria>();
