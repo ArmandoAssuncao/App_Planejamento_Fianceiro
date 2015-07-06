@@ -22,10 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
-import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
 
 import persistencia.CategoriaDAO;
 import classes.Categoria;
@@ -120,7 +117,7 @@ public class PainelGraficos extends JPanel {
 		String labelBalancoTotal = "Balanço Mensal";
 		botaoBalancoTotal.setText(labelBalancoTotal);
 		botaoBalancoTotal.setMnemonic(KeyEvent.VK_B);
-		ImageIcon iconeBalancoTotal = new ImageIcon("imagens/img_botaoBalancoMensal.png");
+		ImageIcon iconeBalancoTotal = new ImageIcon("src/recursos/imagens/img_botaoBalancoMensal.png");
 		botaoBalancoTotal.setIcon(iconeBalancoTotal);
 		botaoBalancoTotal.setFont(fonteBold);
 		botaoBalancoTotal.setMargin(insetsBotao);
@@ -136,7 +133,7 @@ public class PainelGraficos extends JPanel {
 		String labelBalancoDespesa = "<html>Formas de Pagamento</html>";
 		botaoBalancoDespesa.setText(labelBalancoDespesa);
 		botaoBalancoDespesa.setMnemonic(KeyEvent.VK_F);
-		ImageIcon iconeBalancoDespesa = new ImageIcon("imagens/img_botaoBalancoMensal.png");
+		ImageIcon iconeBalancoDespesa = new ImageIcon("src/recursos/imagens/img_botaoBalancoMensal.png");
 		botaoBalancoDespesa.setIcon(iconeBalancoDespesa);
 		botaoBalancoDespesa.setFont(fonteBold);
 		botaoBalancoDespesa.setMargin(insetsBotao);
@@ -151,7 +148,7 @@ public class PainelGraficos extends JPanel {
 		String labelGraficoPizzaTotal = "Receitas";
 		botaoGraficoPizzaTotal.setText(labelGraficoPizzaTotal);
 		botaoGraficoPizzaTotal.setMnemonic(KeyEvent.VK_E);
-		ImageIcon iconeGraficoPizzaTotal = new ImageIcon("imagens/img_botaoGraficoPizza.png");
+		ImageIcon iconeGraficoPizzaTotal = new ImageIcon("src/recursos/imagens/img_botaoGraficoPizza.png");
 		botaoGraficoPizzaTotal.setIcon(iconeGraficoPizzaTotal);
 		botaoGraficoPizzaTotal.setFont(fonteBold);
 		botaoGraficoPizzaTotal.setMargin(insetsBotao);
@@ -166,7 +163,7 @@ public class PainelGraficos extends JPanel {
 		String labelGraficoPizzaFormaPagamento = "<html>Formas de Pagamento</html>";
 		botaoGraficoPizzaFormaPagamento.setText(labelGraficoPizzaFormaPagamento);
 		botaoGraficoPizzaFormaPagamento.setMnemonic(KeyEvent.VK_M);
-		ImageIcon iconeGraficoPizzaFormaPagamento = new ImageIcon("imagens/img_botaoGraficoPizza.png");
+		ImageIcon iconeGraficoPizzaFormaPagamento = new ImageIcon("src/recursos/imagens/img_botaoGraficoPizza.png");
 		botaoGraficoPizzaFormaPagamento.setIcon(iconeGraficoPizzaFormaPagamento);
 		botaoGraficoPizzaFormaPagamento.setFont(fonteBold);
 		botaoGraficoPizzaFormaPagamento.setMargin(insetsBotao);
@@ -181,7 +178,7 @@ public class PainelGraficos extends JPanel {
 		String labelGraficoBarraCategoria = "Categorias";
 		botaoGraficoBarraCategoria.setText(labelGraficoBarraCategoria);
 		botaoGraficoBarraCategoria.setMnemonic(KeyEvent.VK_T);
-		ImageIcon iconeGraficoBarraCategoria = new ImageIcon("imagens/img_botaoGraficoBarra.png");
+		ImageIcon iconeGraficoBarraCategoria = new ImageIcon("src/recursos/imagens/img_botaoGraficoBarra.png");
 		botaoGraficoBarraCategoria.setIcon(iconeGraficoBarraCategoria);
 		botaoGraficoBarraCategoria.setFont(fonteBold);
 		botaoGraficoBarraCategoria.setMargin(insetsBotao);
@@ -219,7 +216,7 @@ public class PainelGraficos extends JPanel {
 		String labelGraficoLinhaMetaMensal = "<html>Metas Mensal</html>";
 		botaoGraficoLinhaMetaMensal.setText(labelGraficoLinhaMetaMensal);
 		botaoGraficoLinhaMetaMensal.setMnemonic(KeyEvent.VK_N);
-		ImageIcon iconeGraficoLinhaMetaMensal = new ImageIcon("imagens/img_botaoGraficoLinha.png");
+		ImageIcon iconeGraficoLinhaMetaMensal = new ImageIcon("src/recursos/imagens/img_botaoGraficoLinha.png");
 		botaoGraficoLinhaMetaMensal.setIcon(iconeGraficoLinhaMetaMensal);
 		botaoGraficoLinhaMetaMensal.setFont(fonteBold);
 		botaoGraficoLinhaMetaMensal.setMargin(insetsBotao);

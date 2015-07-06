@@ -28,7 +28,7 @@ public class GuiPrincipal extends JFrame{
 		super(TITULO_PRINCIPAL);
 		
 		//Modifica o ícone do aplicativo
-		ImageIcon img = new ImageIcon("imagens/icone.png");
+		ImageIcon img = new ImageIcon("src/recursos/imagens/icone.png");
 		this.setIconImage(img.getImage());
 		
 		//adiciona o menu
