@@ -74,39 +74,39 @@ public class PainelTituloPainelGraficos extends JPanel {
 		centroPanel.add(panel);
 		panel.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][][][][]", "[][]"));
 		
-		valorDadosUmLabel = new JLabel("< >");
+		valorDadosUmLabel = new JLabel("");
 		valorDadosUmLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		panel.add(valorDadosUmLabel, "cell 0 0,alignx right,aligny center");
 		
-		valorCamposUmLabel = new JLabel("campo1");
+		valorCamposUmLabel = new JLabel("");
 		panel.add(valorCamposUmLabel, "cell 1 0,alignx left,aligny center");
 		
-		valorDadosDoisLabel = new JLabel("< >");
+		valorDadosDoisLabel = new JLabel("");
 		valorDadosDoisLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		panel.add(valorDadosDoisLabel, "cell 9 0,alignx right,aligny center");
 		
-		valorCamposDoisLabel = new JLabel("campo2");
+		valorCamposDoisLabel = new JLabel("");
 		panel.add(valorCamposDoisLabel, "cell 10 0,alignx left,aligny center");
 		
-		valorDadosCincoLabel = new JLabel("< >");
+		valorDadosCincoLabel = new JLabel("");
 		valorDadosCincoLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		panel.add(valorDadosCincoLabel, "cell 18 0,alignx right");
 		
-		valorCamposCincoLabel = new JLabel("campo5");
+		valorCamposCincoLabel = new JLabel("");
 		panel.add(valorCamposCincoLabel, "cell 19 0,alignx left");
 		
-		valorDadosTresLabel = new JLabel("< >");
+		valorDadosTresLabel = new JLabel("");
 		valorDadosTresLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		panel.add(valorDadosTresLabel, "cell 0 1,alignx right,aligny center");
 		
-		valorCamposTresLabel = new JLabel("campo3");
+		valorCamposTresLabel = new JLabel("");
 		panel.add(valorCamposTresLabel, "cell 1 1,alignx left,aligny center");
 		
-		valorDadosQuatroLabel = new JLabel("< >");
+		valorDadosQuatroLabel = new JLabel("");
 		valorDadosQuatroLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
 		panel.add(valorDadosQuatroLabel, "cell 9 1,alignx right,aligny center");
 		
-		valorCamposQuatroLabel = new JLabel("campo4");
+		valorCamposQuatroLabel = new JLabel("");
 		panel.add(valorCamposQuatroLabel, "cell 10 1,alignx left,aligny center");
 		
 		setVisible(true);
@@ -160,15 +160,18 @@ public class PainelTituloPainelGraficos extends JPanel {
 		valorDadosCincoLabel.setText("R$ "+ String.format("%.2f", valores[0]));
 	}
 
+	/**
+	 * Atualiza o painel título da aba gráficos, quando o gráfico gerado for de coluna.
+	 */
 	public void atualizarPainelTituloGc(){
 		try {
 			List<Categoria> todasCategorias = CategoriaDAO.todasAsCategorias();
-			int categoriasStatusAzul = 0,categoriasStatusVermelho=0,categoriasStatusAmarelo=0;
+			int categoriasStatusVermelho=0,categoriasStatusAmarelo=0;
 			for(int i=0;i<todasCategorias.size();i++){
 				STATUS status = verificaStatus(todasCategorias.get(i).getDescricao());
 			
-				if(status == STATUS.AZUL) categoriasStatusAzul++;
-				else if(status == STATUS.AMARELO) categoriasStatusAmarelo++;
+//				if(status == STATUS.AZUL) categoriasStatusAzul++; else
+				 if(status == STATUS.AMARELO) categoriasStatusAmarelo++;
 				else if (status == STATUS.VERMELHO)	categoriasStatusVermelho++;
 			}
 			

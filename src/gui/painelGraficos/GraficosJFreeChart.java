@@ -3,21 +3,18 @@ package gui.painelGraficos;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.text.DecimalFormat;
 
 import javax.swing.JPanel;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.Marker;
 import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.ValueMarker;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -26,6 +23,12 @@ import org.jfree.data.xy.XYSeriesCollection;
 import org.jfree.ui.RectangleAnchor;
 import org.jfree.ui.TextAnchor;
 
+/**
+ * Gerencia a criação de gráficos.
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ */
 public class GraficosJFreeChart {
 	
 	/** Retorna um painel com o grafico do tipo Pizza
@@ -56,6 +59,13 @@ public class GraficosJFreeChart {
 		return new ChartPanel(grafico);
 	}
 	
+	/**
+	 * Configura o painel do gráfico de linha
+	 * @param tituloDoGrafico <code>String</code> com o título do gráfico
+	 * @param campos array de <code>String</code> com os dados do gráfico
+	 * @param valores array de <code>Double</code> com os valores do gráfico
+	 * @return retorna o painel criado
+	 */
 	public static JPanel painelGraficoLinha(String tituloDoGrafico, String[] campos, Double[] valores){
 		DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
 		
@@ -113,6 +123,13 @@ public class GraficosJFreeChart {
 		return painelGrafico;
 	}
 	
+	/**
+	 * Configura o painel do gráfico de barras
+	 * @param tituloDoGrafico <code>String</code> com o título do gráfico
+	 * @param campos array de <code>String</code> com os dados do gráfico
+	 * @param valores array de <code>Double</code> com os valores do gráfico
+	 * @return retorna o painel criado
+	 */
 	public static JPanel painelGraficoBarra(String tituloDoGrafico, String[] campos, Double[] valores){
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
