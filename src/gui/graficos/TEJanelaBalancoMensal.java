@@ -19,10 +19,23 @@ import persistencia.MetaMensalDAO;
 import persistencia.RendaDAO;
 import persistencia.RendaMensalDAO;
 
+/**
+ * Classe para tratar os eventos da janela balanco mensal.
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ *@see ActionListener
+ */
 public class TEJanelaBalancoMensal  implements ActionListener {
 	JanelaBalancoMensal janelaBalancoMensal;
 	
 
+	/**
+	 * Cria uma instância do tratador de eventos da janela.
+	 * 
+	 * @param janelaBalancoMensal janela de onde vem os eventos.
+	 */
 	public TEJanelaBalancoMensal(JanelaBalancoMensal janelaBalancoMensal) {
 		this.janelaBalancoMensal = janelaBalancoMensal;
 	}

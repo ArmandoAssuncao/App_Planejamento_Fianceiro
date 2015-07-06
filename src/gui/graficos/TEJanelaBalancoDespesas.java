@@ -11,10 +11,22 @@ import classes.Despesa;
 import funcoes.Converte;
 import persistencia.DespesaDAO;
 
+/**
+ * Classe para tratar os eventos da janela balanco despesas.
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ *
+ *@see ActionListener
+ */
 public class TEJanelaBalancoDespesas  implements ActionListener {
 	JanelaBalancoDespesas janelaBalancoDespesas;
 	
-
+	/**
+	 * Cria uma instância do tratador de eventos da janela.
+	 * 
+	 * @param janelaBalancoDespesas janela de onde vem os eventos.
+	 */
 	public TEJanelaBalancoDespesas(JanelaBalancoDespesas janelaBalancoDespesas) {
 		this.janelaBalancoDespesas= janelaBalancoDespesas;
 	}

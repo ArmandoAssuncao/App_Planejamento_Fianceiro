@@ -22,6 +22,8 @@ import java.awt.FlowLayout;
  *@see IgPainelDespesas
  */
 public class PainelTituloPainelDespesas extends JPanel {
+	private static final long serialVersionUID = -8137486001885831342L;
+	
 	private JLabel nomeCategoriaLabel;
 	private JProgressBar metaProgressBar;
 	private JPanel alertaPanel;

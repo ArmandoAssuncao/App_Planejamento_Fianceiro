@@ -35,14 +35,17 @@ import gui.JanelaMensagem;
 import gui.framePrincipal.GuiPrincipal;
 
 /**
-	Define o painel de <code>Despesa</code>.
-* @author Armando Assunção
-* @author Richardson William
-*
-*/
+ * Define o painel de <code>Despesa</code>.
+ * 
+ * @author Armando Assunção
+ * @author Richardson William
+ * 
+ * */
 public class IgPainelDespesas extends JPanel{
-	boolean avisoMetaTotal = false;
-	boolean avisoMetaDefinido = false;
+	private static final long serialVersionUID = 4558539328759573756L;
+	
+	private boolean avisoMetaTotal = false;
+	private boolean avisoMetaDefinido = false;
 	
 	private List<Categoria> arrayCategoria = new ArrayList<Categoria>();
 	private AbasCategoria abasCategoria;

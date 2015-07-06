@@ -28,6 +28,8 @@ import persistencia.MetaMensalDAO;
  *
  */
 public class JanelaBalancoDespesas extends JDialog {
+	private static final long serialVersionUID = 3434597019946747968L;
+	
 	private final String TITULO_JANELA= "Balanço Tipo de Despesas";
 	private final int TAM_JANELA_X = 900;
 	private final int TAM_JANELA_Y = 600;

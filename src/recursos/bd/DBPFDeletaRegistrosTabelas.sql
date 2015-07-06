@@ -13,4 +13,5 @@ ALTER SEQUENCE seq_renda RESTART WITH 1;
 ALTER SEQUENCE seq_forma_pagamento RESTART WITH 1;
 ALTER SEQUENCE seq_categoria RESTART WITH 1;
 ALTER SEQUENCE seq_despesa RESTART WITH 1;
+ALTER SEQUENCE seq_planejamento_mensal_despesa RESTART WITH 1;
 ALTER SEQUENCE seq_configuracoes RESTART WITH 1;

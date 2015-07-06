@@ -12,15 +12,10 @@ import javax.swing.JPanel;
  * @author Richardson William
  */
 public class PainelInicio extends JPanel{
-	/**
-	 * Largura do painel.
-	 */
-	public final int TAM_PAINEL_X = 800;
-	
-	/**
-	 * Altura do painel
-	 */
-	public final int TAM_PAINEL_Y = 600;
+	private static final long serialVersionUID = 6712709322873708218L;
+
+	private final int TAM_PAINEL_X = 800;
+	private final int TAM_PAINEL_Y = 600;
 
 	/** 
 	 * Construtor 

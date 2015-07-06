@@ -13,11 +13,10 @@ import enumeracoes.FormaPagamento;
 *
 */
 public class TabelaDaCategoria extends JTable{
-//	private final int TAM_TABELA_X = 500;
-//	private final int TAM_TABELA_Y = 500;
+	private static final long serialVersionUID = -4100658714180253251L;
 	
 	private final static String[] nomeColunas = {"Descrição", "Valor", "Data da Despesa", "Data do Pagamento", "Tipo Pagamento", "Parcelas", "Número do cheque"};
-	DefaultTableModel modelo;
+	private DefaultTableModel modelo;
 
 	/**
 	 * Construtor padrão;

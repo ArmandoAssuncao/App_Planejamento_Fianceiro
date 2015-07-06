@@ -39,6 +39,10 @@ Define o painel de <code>Renda</code>.
 *
 */
 public class IgPainelRenda extends JPanel {
+	private static final long serialVersionUID = -5820571568093892597L;
+	
+	private final int TAM_TABELA_X = 750;
+	private final int TAM_TABELA_Y = 500;
 	
 	ArrayList<RendaMensal> arrayListRendaMensal;
 	private TEPainelRenda trataEventosRenda;
@@ -69,7 +73,7 @@ public class IgPainelRenda extends JPanel {
 		//barra de rolagem da tabela
 		barraRolagem = new JScrollPane();
 		barraRolagem.setViewportView(tabelaRendaMensal);
-		barraRolagem.setPreferredSize(new Dimension(tabelaRendaMensal.TAM_TABELA_X, tabelaRendaMensal.TAM_TABELA_Y));
+		barraRolagem.setPreferredSize(new Dimension(TAM_TABELA_X, TAM_TABELA_Y));
 
 		painelSuperior.setLayout(new BorderLayout());
 		painelSuperior.setBackground(new Color(205, 205, 205));//TODO COR

@@ -94,8 +94,8 @@ public class Tema {
 	}
 
 	/**
-	 * ?????
-	 * @param temas
+	 * Muda o tema do aplicativo
+	 * @param temas <code>String[]</code>
 	 */
 	public static void mudaTema(String... temas){
 		if(temas == null){

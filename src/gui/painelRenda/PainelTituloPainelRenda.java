@@ -20,6 +20,7 @@ import net.miginfocom.swing.MigLayout;
  *@see IgPainelRenda
  */
 public class PainelTituloPainelRenda extends JPanel {
+	private static final long serialVersionUID = -425351177779379916L;
 	private JLabel rendaLabel;
 	private JPanel panel;
 	private JLabel valorQtdRendasLabel;

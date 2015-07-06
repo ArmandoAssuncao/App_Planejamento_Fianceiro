@@ -32,6 +32,8 @@ import gui.painelRenda.IgPainelRenda;
  *
  */
 public class JanelaCriarRenda extends JDialog{
+	private static final long serialVersionUID = 8735268402832070958L;
+	
 	private final String TITULO_JANELA= "Nova Renda";
 	private final int TAM_JANELA_X = 500;
 	private final int TAM_JANELA_Y = 500;

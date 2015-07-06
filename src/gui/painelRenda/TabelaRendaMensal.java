@@ -14,16 +14,10 @@ import javax.swing.table.DefaultTableModel;
 *
 */
 public class TabelaRendaMensal extends JTable{	
+	private static final long serialVersionUID = -1747064781487045370L;
+	
 	private final static String[] nomeColunas = {"Descrição","Data","Valor"};
-	DefaultTableModel modelo;
-	/**
-	 * Largura da tabela
-	 */
-	public final int TAM_TABELA_X = 750;
-	/**
-	 * Altura da tabela
-	 */
-	public final int TAM_TABELA_Y = 500;
+	private DefaultTableModel modelo;
 	
 	/**
 	 * Construtor padrão;

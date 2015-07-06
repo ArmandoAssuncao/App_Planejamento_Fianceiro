@@ -13,4 +13,5 @@ DROP SEQUENCE seq_renda IF EXISTS;
 DROP SEQUENCE seq_forma_pagamento IF EXISTS;
 DROP SEQUENCE seq_categoria IF EXISTS;
 DROP SEQUENCE seq_despesa IF EXISTS;
+DROP SEQUENCE seq_planejamento_mensal_despesa IF EXISTS;
 DROP SEQUENCE seq_configuracoes IF EXISTS;
