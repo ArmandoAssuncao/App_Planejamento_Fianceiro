@@ -13,7 +13,6 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
 
 import classes.Categoria;
 import classes.Despesa;
@@ -32,6 +31,8 @@ import net.miginfocom.swing.MigLayout;
  *@see PainelGraficos
  */
 public class PainelTituloPainelGraficos extends JPanel {
+	private static final long serialVersionUID = 6831525852903071581L;
+	
 	private JLabel tituloLabel;
 	private JPanel panel;
 	private JLabel valorDadosUmLabel;
@@ -56,59 +57,68 @@ public class PainelTituloPainelGraficos extends JPanel {
 	public PainelTituloPainelGraficos() {
 		setPreferredSize(new Dimension(750,140));
 		
-		setBorder(new LineBorder(Color.RED)); //TODO debug, apagar
-		
 		setLayout(new BorderLayout(0, 0));
 		
 		tituloLabel = new JLabel("Relatório");
-		tituloLabel.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		tituloLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		tituloLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		add(tituloLabel, BorderLayout.NORTH);
 		
 		JPanel centroPanel = new JPanel();
 		add(centroPanel, BorderLayout.CENTER);
 		centroPanel.setLayout(null);
+		centroPanel.setBackground(new Color(205, 205, 205));//TODO COR
 		
 		panel = new JPanel();
 		panel.setBounds(7, 0, 736, 85);
 		centroPanel.add(panel);
 		panel.setLayout(new MigLayout("", "[][][][][][][][][][][][][][][][][][][][]", "[][]"));
+		panel.setBackground(new Color(205, 205, 205));//TODO COR
+		
+		Font fontValores = new Font("Tahoma", Font.PLAIN, 18);
+		Font fontLabels = new Font("Tahoma", Font.PLAIN, 12);
 		
 		valorDadosUmLabel = new JLabel("");
-		valorDadosUmLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(valorDadosUmLabel, "cell 0 0,alignx right,aligny center");
+		valorDadosUmLabel.setFont(fontValores);
+		panel.add(valorDadosUmLabel, "cell 0 0");
 		
 		valorCamposUmLabel = new JLabel("");
-		panel.add(valorCamposUmLabel, "cell 1 0,alignx left,aligny center");
+		valorCamposUmLabel.setFont(fontLabels);
+		panel.add(valorCamposUmLabel, "cell 1 0");
 		
 		valorDadosDoisLabel = new JLabel("");
-		valorDadosDoisLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(valorDadosDoisLabel, "cell 9 0,alignx right,aligny center");
+		valorDadosDoisLabel.setFont(fontValores);
+		panel.add(valorDadosDoisLabel, "cell 9 0");
 		
 		valorCamposDoisLabel = new JLabel("");
-		panel.add(valorCamposDoisLabel, "cell 10 0,alignx left,aligny center");
+		valorCamposDoisLabel.setFont(fontLabels);
+		panel.add(valorCamposDoisLabel, "cell 10 0");
 		
 		valorDadosCincoLabel = new JLabel("");
-		valorDadosCincoLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(valorDadosCincoLabel, "cell 18 0,alignx right");
+		valorDadosCincoLabel.setFont(fontValores);
+		panel.add(valorDadosCincoLabel, "cell 18 0");
 		
 		valorCamposCincoLabel = new JLabel("");
-		panel.add(valorCamposCincoLabel, "cell 19 0,alignx left");
+		valorCamposCincoLabel.setFont(fontLabels);
+		panel.add(valorCamposCincoLabel, "cell 19 0");
 		
 		valorDadosTresLabel = new JLabel("");
-		valorDadosTresLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(valorDadosTresLabel, "cell 0 1,alignx right,aligny center");
+		valorDadosTresLabel.setFont(fontValores);
+		panel.add(valorDadosTresLabel, "cell 0 1");
 		
 		valorCamposTresLabel = new JLabel("");
-		panel.add(valorCamposTresLabel, "cell 1 1,alignx left,aligny center");
+		valorCamposTresLabel.setFont(fontLabels);
+		panel.add(valorCamposTresLabel, "cell 1 1");
 		
 		valorDadosQuatroLabel = new JLabel("");
-		valorDadosQuatroLabel.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		panel.add(valorDadosQuatroLabel, "cell 9 1,alignx right,aligny center");
+		valorDadosQuatroLabel.setFont(fontValores);
+		panel.add(valorDadosQuatroLabel, "cell 9 1");
 		
 		valorCamposQuatroLabel = new JLabel("");
-		panel.add(valorCamposQuatroLabel, "cell 10 1,alignx left,aligny center");
+		valorCamposQuatroLabel.setFont(fontLabels);
+		panel.add(valorCamposQuatroLabel, "cell 10 1");
 		
+		setBackground(new Color(205, 205, 205));//TODO COR
 		setVisible(true);
 	}//construtor
 	
@@ -191,7 +201,6 @@ public class PainelTituloPainelGraficos extends JPanel {
 			valorCamposCincoLabel.setText("categorias com meta estourada");
 			valorDadosCincoLabel.setText(Integer.toString(categoriasStatusVermelho));
 			
-			//System.out.println("status amarelo="+categoriasStatusAmarelo+"\nstatus vermelho="+categoriasStatusVermelho+"\nstatus azul="+categoriasStatusAzul);
 		} catch (SQLException e) {
 			System.out.println("Erro ao acessar o Banco de Dados");
 			return;

@@ -22,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -30,13 +32,14 @@ import classes.Categoria;
 import eventos.painelGraficos.TEPainelGraficos;
 
 /**
-Define o painel de relatórios e gráficos.
+ * Define o painel de relatórios e gráficos.
 * @author Armando Assunção
 * @author Richardson William
 *
 */
-//TODO revisar comentario acima
 public class PainelGraficos extends JPanel {
+	private static final long serialVersionUID = 1505457034202088340L;
+	
 	private PainelTituloPainelGraficos painelTitulo;
 	private JPanel painelDeGraficos;
 	private JPanel painelBotoes;
@@ -67,17 +70,17 @@ public class PainelGraficos extends JPanel {
 		criaPainelBotoes();
 		
 		painelSuperior.setLayout(new BorderLayout());
-		painelSuperior.setBorder(new LineBorder(Color.BLUE)); //TODO debug
-		painelTitulo.setBorder(new LineBorder(Color.RED));   //TODO debug
 		painelSuperior.add(painelTitulo, BorderLayout.WEST);
+		painelSuperior.setBackground(new Color(205, 205, 205));//TODO COR
 		
 		add(painelBotoes, BorderLayout.EAST);
 		add(painelDeGraficos, BorderLayout.CENTER);
 		add(painelSuperior, BorderLayout.NORTH);
 
 		painelDeGraficos.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		painelBotoes.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));//TODO BORDA
 		setPreferredSize(new Dimension(800,600));
-		setBackground(Color.WHITE);
+		setBackground(new Color(205, 205, 205));//TODO COR
 		setVisible(true);
 	}
 	
@@ -126,6 +129,7 @@ public class PainelGraficos extends JPanel {
 		botaoBalancoTotal.setHorizontalTextPosition(JButton.RIGHT);
 		botaoBalancoTotal.setPreferredSize(new Dimension(150,50));
 		botaoBalancoTotal.addActionListener(trataEventosGraficos);
+		botaoBalancoTotal.setBackground(null);
 		
 		
 		//botao Balanço mensal das despesas pela forma de pagamento
@@ -141,6 +145,7 @@ public class PainelGraficos extends JPanel {
 		botaoBalancoDespesa.setHorizontalTextPosition(JButton.RIGHT);
 		botaoBalancoDespesa.setPreferredSize(new Dimension(150,50));
 		botaoBalancoDespesa.addActionListener(trataEventosGraficos);
+		botaoBalancoDespesa.setBackground(null);
 		
 		//botao Grafico valores da receita
 		String labelGraficoPizzaTotal = "Receitas";
@@ -155,6 +160,7 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoPizzaTotal.setHorizontalTextPosition(JButton.RIGHT);
 		botaoGraficoPizzaTotal.setPreferredSize(new Dimension(150,50));
 		botaoGraficoPizzaTotal.addActionListener(trataEventosGraficos);
+		botaoGraficoPizzaTotal.setBackground(null);
 		
 		//Botao Grafico Forma de Pagamento
 		String labelGraficoPizzaFormaPagamento = "<html>Formas de Pagamento</html>";
@@ -169,6 +175,7 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoPizzaFormaPagamento.setHorizontalTextPosition(JButton.RIGHT);
 		botaoGraficoPizzaFormaPagamento.setPreferredSize(new Dimension(150,50));
 		botaoGraficoPizzaFormaPagamento.addActionListener(trataEventosGraficos);
+		botaoGraficoPizzaFormaPagamento.setBackground(null);
 		
 		//Botao Grafico categorias
 		String labelGraficoBarraCategoria = "Categorias";
@@ -183,15 +190,16 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoBarraCategoria.setHorizontalTextPosition(JButton.RIGHT);
 		botaoGraficoBarraCategoria.setPreferredSize(new Dimension(150,50));
 		botaoGraficoBarraCategoria.addActionListener(trataEventosGraficos);
+		botaoGraficoBarraCategoria.setBackground(null);
 		
 		radioButtonVerEmReal.setText("Real");
 		radioButtonVerEmReal.setMnemonic(KeyEvent.VK_L);
 		radioButtonVerEmReal.setSelected(true);
-		radioButtonVerEmReal.setBackground(Color.WHITE);
+		radioButtonVerEmReal.setBackground(null);
 		
 		radioButtonVerEmPorcentagem.setText("Porcentagem");
 		radioButtonVerEmPorcentagem.setMnemonic(KeyEvent.VK_P);
-		radioButtonVerEmPorcentagem.setBackground(Color.WHITE);
+		radioButtonVerEmPorcentagem.setBackground(null);
 		
 		ButtonGroup buttonGroupVer = new ButtonGroup();
 		buttonGroupVer.add(radioButtonVerEmReal);
@@ -199,9 +207,9 @@ public class PainelGraficos extends JPanel {
 		
 		//Painel com o botão e comboBox
 		JPanel painelBotaoGraficoCategoria = new JPanel();
-		painelBotaoGraficoCategoria.setBorder(new TitledBorder(""));
+		painelBotaoGraficoCategoria.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 		painelBotaoGraficoCategoria.setPreferredSize(new Dimension(180,90));
-		painelBotaoGraficoCategoria.setBackground(Color.WHITE);
+		painelBotaoGraficoCategoria.setBackground(null);
 		
 		painelBotaoGraficoCategoria.add(radioButtonVerEmReal);
 		painelBotaoGraficoCategoria.add(radioButtonVerEmPorcentagem);
@@ -220,12 +228,13 @@ public class PainelGraficos extends JPanel {
 		botaoGraficoLinhaMetaMensal.setHorizontalTextPosition(JButton.RIGHT);
 		botaoGraficoLinhaMetaMensal.setPreferredSize(new Dimension(150,50));
 		botaoGraficoLinhaMetaMensal.addActionListener(trataEventosGraficos);
+		botaoGraficoLinhaMetaMensal.setBackground(null);
 		
 		//Painel com o botão e comboBox
 		JPanel painelGraficoLinhas = new JPanel();
-		painelGraficoLinhas.setBorder(new TitledBorder(""));
+		painelGraficoLinhas.setBorder(new EtchedBorder(EtchedBorder.LOWERED));
 		painelGraficoLinhas.setPreferredSize(new Dimension(180,90));
-		painelGraficoLinhas.setBackground(Color.WHITE);
+		painelGraficoLinhas.setBackground(null);
 		JLabel labelCategoria = new JLabel("Categoria:");
 		labelCategoria.setDisplayedMnemonic(KeyEvent.VK_G);
 		labelCategoria.setLabelFor(jComboBoxCategorias);
@@ -267,8 +276,8 @@ public class PainelGraficos extends JPanel {
 		constraints.gridy = 5;
 		painelBotoes.add(painelGraficoLinhas, constraints);
 		
+		painelBotoes.setBackground(new Color(205, 205, 205));//TODO COR
 		painelBotoes.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-		painelBotoes.setBackground(Color.WHITE);
 		painelBotoes.setVisible(true);
 	}
 	
