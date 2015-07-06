@@ -1,5 +1,6 @@
 package gui.framePrincipal;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -25,6 +26,10 @@ public class GuiPrincipal extends JFrame{
 	 */
 	public GuiPrincipal() {
 		super(TITULO_PRINCIPAL);
+		
+		//Modifica o ícone do aplicativo
+		ImageIcon img = new ImageIcon("imagens/icone.png");
+		this.setIconImage(img.getImage());
 		
 		//adiciona o menu
 		setJMenuBar(guiMenu);
