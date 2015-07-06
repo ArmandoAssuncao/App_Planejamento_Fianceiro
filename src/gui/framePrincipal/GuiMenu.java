@@ -144,7 +144,7 @@ public class GuiMenu extends JMenuBar{
 		menuItemAutor.setMnemonic(KeyEvent.VK_A);
 		menuSobre.add(menuItemAutor);
 		
-		menuBalanco.setVisible(false);//
+		menuBalanco.setVisible(true);
 		menuConfiguracoes.setVisible(false);//
 		menuItemSair.setVisible(true);
 		menuItemApagarTudo.setVisible(true);
