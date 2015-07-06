@@ -1,5 +1,6 @@
 package eventos.menu;
 
+import gui.JanelaAutor;
 import gui.JanelaMensagem;
 import gui.categoria.JanelaCriarCategoria;
 import gui.categoria.JanelaEditarCategoria;
@@ -80,6 +81,9 @@ public class TEGuiMenu implements ActionListener{
 			new JanelaCriarDespesa(guiMenu.getIgPainelDespesas());
 		}
 		
+		else if(event.getSource() == guiMenu.getMenuItemAutor()){
+			new JanelaAutor();
+		}
 		
 		
 		else if(event.getSource() == guiMenu.getMenuItemAbrirBD()){
