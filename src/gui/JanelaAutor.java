@@ -38,7 +38,7 @@ public class JanelaAutor extends JDialog {
 	 */
 	public JanelaAutor() {
 		JPanel panelNorte = new JPanel();
-		panelNorte.setBackground(Color.DARK_GRAY);
+		panelNorte.setBackground(Color.GRAY);
 		getContentPane().add(panelNorte, BorderLayout.NORTH);
 		panelNorte.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
@@ -49,14 +49,14 @@ public class JanelaAutor extends JDialog {
 		
 		JPanel panelSul = new JPanel();
 		panelSul.setPreferredSize(new Dimension(10, 50));
-		panelSul.setBackground(Color.DARK_GRAY);
+		panelSul.setBackground(Color.GRAY);
 		getContentPane().add(panelSul, BorderLayout.SOUTH);
 		panelSul.setLayout(null);
 		
 		JButton botaoFechar = new JButton("Fechar");
 		botaoFechar.setBounds(173, 11, 71, 23);
 		botaoFechar.setFont(new Font("Tahoma", Font.BOLD, 11));
-		botaoFechar.setBackground(Color.DARK_GRAY);
+		botaoFechar.setBackground(Color.GRAY);
 		botaoFechar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -70,13 +70,13 @@ public class JanelaAutor extends JDialog {
 		panelSul.add(lblCopyright);
 		
 		JLabel lblBancadaNegra = new JLabel("Bancada Negra");
-		lblBancadaNegra.setVisible(false);
+		lblBancadaNegra.setVisible(true);
 		lblBancadaNegra.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblBancadaNegra.setBounds(10, 26, 108, 23);
 		panelSul.add(lblBancadaNegra);
 		
 		JPanel panelLeste = new JPanel();
-		panelLeste.setBackground(Color.DARK_GRAY);
+		panelLeste.setBackground(Color.GRAY);
 		panelLeste.setPreferredSize(new Dimension(70, 10));
 		getContentPane().add(panelLeste, BorderLayout.EAST);
 		
@@ -87,14 +87,14 @@ public class JanelaAutor extends JDialog {
 		panelCentro.setLayout(new BorderLayout(0, 0));
 		
 		JTextArea textFieldAutor = new JTextArea();
-		textFieldAutor.setText("Planejamento Financeiro\n\nCriado por:\n Armando Assunção\n Richardson Willian\n\nProjeto para diciplina da faculdade.\n\n\t\t\t      Bancada Negra");
+		textFieldAutor.setText("Planejamento Financeiro\n\nCriado por:\n Armando Assunção\n Richardson William\n\nProjeto para diciplina da faculdade.");
 		textFieldAutor.setEditable(false);
 		textFieldAutor.setOpaque(false);
 		panelCentro.add(textFieldAutor, BorderLayout.CENTER);
 		
 		JPanel panelOeste = new JPanel();
 		panelOeste.setPreferredSize(new Dimension(5, 10));
-		panelOeste.setBackground(Color.DARK_GRAY);
+		panelOeste.setBackground(Color.GRAY);
 		getContentPane().add(panelOeste, BorderLayout.WEST);
 		panelOeste.setLayout(new BorderLayout(0, 0));
 		

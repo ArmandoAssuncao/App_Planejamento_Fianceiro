@@ -5,7 +5,6 @@ import gui.painelGraficos.PainelGraficos;
 import gui.painelInicio.PainelInicio;
 import gui.painelRenda.IgPainelRenda;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 
@@ -59,8 +58,9 @@ public class AbasPrincipal extends JTabbedPane{
 		addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent event) {
-				if(getSelectedIndex() == 3){
+				if(getSelectedIndex() == 2){
 					painelGraficos.atualizaComponentes();
+					painelGraficos.getPainelTitulo().limpaPainelTitulo();
 				}
 				
 			}
@@ -68,7 +68,6 @@ public class AbasPrincipal extends JTabbedPane{
 		
 		setTabPlacement(JTabbedPane.LEFT);
 		setPreferredSize(new Dimension(TAM_PAINEL_X, TAM_PAINEL_Y));
-		setBackground(Color.RED);
 		setVisible(true);
 	}
 }

@@ -282,6 +282,26 @@ public class PainelTituloPainelGraficos extends JPanel {
 		return valores;
 	}
 	
+	/**
+	 * Limpa painel título da aba gráficos
+	 */
+	public void limpaPainelTitulo(){
+		valorCamposUmLabel.setText("");
+		valorDadosUmLabel.setText("");
+		
+		valorCamposDoisLabel.setText("");
+		valorDadosDoisLabel.setText("");
+		
+		valorCamposTresLabel.setText("");
+		valorDadosTresLabel.setText("");
+		
+		valorCamposQuatroLabel.setText("");
+		valorDadosQuatroLabel.setText("");
+		
+		valorCamposCincoLabel.setText("");
+		valorDadosCincoLabel.setText("");
+	}
+	
 	private enum STATUS{AZUL,AMARELO,VERMELHO};
 	private STATUS verificaStatus(String nomeCategoria){
 		Double[] infoCategoria = obtemValoresMetaCategoria(nomeCategoria);

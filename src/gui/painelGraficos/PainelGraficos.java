@@ -389,4 +389,12 @@ public class PainelGraficos extends JPanel {
 		return radioButtonVerEmPorcentagem;
 	}
 
+	/**
+	 * Obtém a referência do painelTitulo
+	 * @return PainelTituloPainelGraficos
+	 */
+	public PainelTituloPainelGraficos getPainelTitulo() {
+		return painelTitulo;
+	}
+
 }

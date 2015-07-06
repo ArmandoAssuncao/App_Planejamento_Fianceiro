@@ -19,8 +19,8 @@ public class PlanejamentoFinanceiro {
 	 */
 	public static void main(String[] args) { 
 		//inicia as threads
-		PlanejamentoFinanceiroDAO BancoDados = PlanejamentoFinanceiroDAO.getInstance();
-		Thread threadBancoDeDados = new Thread(BancoDados);
+		PlanejamentoFinanceiroDAO bancoDados = PlanejamentoFinanceiroDAO.getInstance();
+		Thread threadBancoDeDados = new Thread(bancoDados);
 		threadBancoDeDados.start();
 
 		try {
