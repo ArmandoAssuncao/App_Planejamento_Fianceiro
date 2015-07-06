@@ -12,10 +12,7 @@ import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,12 +22,8 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
-import persistencia.CategoriaDAO;
-import persistencia.MetaMensalDAO;
 import persistencia.RendaDAO;
 import persistencia.RendaMensalDAO;
-import classes.Categoria;
-import classes.MetaMensal;
 import classes.Renda;
 import classes.RendaMensal;
 import eventos.painelRenda.TEPainelRenda;
