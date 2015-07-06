@@ -6,6 +6,7 @@ import gui.renda.JanelaCriarRenda;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import persistencia.RendaDAO;
 import persistencia.RendaMensalDAO;
@@ -57,7 +58,11 @@ public class TEJanelaCriarRenda implements ActionListener {
 					else System.out.println("renda ja existente");
 					if(!rendaMensalDAO.exists(rm.getDataRenda(),renda.getDescricao())){
 						rendaMensalDAO.inserir(rm, renda.getDescricao());
-						igPainelRenda.criarRenda(renda,janelaCriarRenda.getDataJDateChooser().getCalendar());
+						Calendar dataAtual = Calendar.getInstance();
+						
+						if(dataAtual.get(Calendar.MONTH) == rm.getDataRenda().get(Calendar.MONTH) && dataAtual.get(Calendar.YEAR) == rm.getDataRenda().get(Calendar.YEAR))
+							igPainelRenda.criarRenda(renda,janelaCriarRenda.getDataJDateChooser().getCalendar());
+						
 						janelaCriarRenda.finalizaJanelaRenda();
 					}
 					else System.out.println("renda mensal ja existente");

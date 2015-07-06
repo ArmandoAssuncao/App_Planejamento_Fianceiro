@@ -6,6 +6,7 @@ import gui.painelDespesas.IgPainelDespesas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import persistencia.CategoriaDAO;
 import persistencia.DespesaDAO;
@@ -59,7 +60,11 @@ public class TEJanelaCriarDespesa implements ActionListener{
 				//não usa o primeiro arg
 				planejamentoMensalDAO.inserir(1, despesa.getDataDespesa());
 				
-				igPainelDespesas.criarDespesa(despesa);
+				Calendar dataAtual = Calendar.getInstance();
+				
+				if(dataAtual.get(Calendar.MONTH) == despesa.getDataDespesa().get(Calendar.MONTH) && dataAtual.get(Calendar.YEAR) == despesa.getDataDespesa().get(Calendar.YEAR))
+					igPainelDespesas.criarDespesa(despesa);
+				
 				janelaCriarDespesa.finalizaJanelaDespesa();
 			}
 		}
