@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
+import classes.Categoria;
 import classes.Despesa;
 import classes.MetaMensal;
 import persistencia.CategoriaDAO;
@@ -159,18 +160,54 @@ public class PainelTituloPainelGraficos extends JPanel {
 		valorDadosCincoLabel.setText("R$ "+ String.format("%.2f", valores[0]));
 	}
 
+	public void atualizarPainelTituloGc(){
+		try {
+			List<Categoria> todasCategorias = CategoriaDAO.todasAsCategorias();
+			int categoriasStatusAzul = 0,categoriasStatusVermelho=0,categoriasStatusAmarelo=0;
+			for(int i=0;i<todasCategorias.size();i++){
+				STATUS status = verificaStatus(todasCategorias.get(i).getDescricao());
+			
+				if(status == STATUS.AZUL) categoriasStatusAzul++;
+				else if(status == STATUS.AMARELO) categoriasStatusAmarelo++;
+				else if (status == STATUS.VERMELHO)	categoriasStatusVermelho++;
+			}
+			
+			
+			valorCamposUmLabel.setText("cadastradas");
+			valorDadosUmLabel.setText(Integer.toString(todasCategorias.size()));
+			
+			valorCamposDoisLabel.setText("categorias em aviso");
+			valorDadosDoisLabel.setText(Integer.toString(categoriasStatusAmarelo));
+			
+			valorCamposTresLabel.setText("");
+			valorDadosTresLabel.setText("");
+			
+			valorCamposQuatroLabel.setText("");
+			valorDadosQuatroLabel.setText("");
+			
+			valorCamposCincoLabel.setText("categorias com meta estourada");
+			valorDadosCincoLabel.setText(Integer.toString(categoriasStatusVermelho));
+			
+			//System.out.println("status amarelo="+categoriasStatusAmarelo+"\nstatus vermelho="+categoriasStatusVermelho+"\nstatus azul="+categoriasStatusAzul);
+		} catch (SQLException e) {
+			System.out.println("Erro ao acessar o Banco de Dados");
+			return;
+		}
+	}
+	
 	/**
 	 * 
 	 * @return Retorna um array de Double com as seguintes informações:
-	 *  	   posicao 0: valor da meta mensal.
-	 * 		   posicao 1: quanto falta para atingir a meta mensal.
+	 *  	   posicao 0: valor da meta mensal em dinheiro.
+	 * 		   posicao 1: quanto falta para atingir a meta mensal em dinheiro.
+	 * 		   posicao 2: valor percentual do alerta de gastos 
 	 */
 	private Double[] obtemValoresMetaCategoria(String nomeCategoria) {
-		Double[] valores = new Double[2];
+		Double[] valores = new Double[3];
 		
 		try {
-			
-			List<MetaMensal> listaMetasDoMes = MetaMensalDAO.metaMensalDoMesAno(Calendar.getInstance());
+			Calendar dataAtual = Calendar.getInstance();
+			List<MetaMensal> listaMetasDoMes = MetaMensalDAO.metaMensalDoMesAno(dataAtual);
 			
 			//Ordena as metas de acordo com o Id.
 			listaMetasDoMes.sort(new Comparator<MetaMensal>() {
@@ -195,7 +232,7 @@ public class PainelTituloPainelGraficos extends JPanel {
 			valores[0] = listaMetasDoMes.get(idCategoria-1).getValor();
 			
 			//TODO obter a soma dos gastos da categoria indicada pelo  ID.
-			List<Despesa> listaDespesas = DespesaDAO.despesasDoMesAno(Calendar.getInstance());
+			List<Despesa> listaDespesas = DespesaDAO.despesasDoMesAno(dataAtual);
 
 			listaDespesas.sort(new Comparator<Despesa>() {
 
@@ -208,9 +245,7 @@ public class PainelTituloPainelGraficos extends JPanel {
 						return 1;
 					return 0;
 				}
-			});
-//			
-			
+			});		
 			
 			double somaDespesasDaCategoria =0;
 			for(int i=0;i<listaDespesas.size();i++){
@@ -222,11 +257,32 @@ public class PainelTituloPainelGraficos extends JPanel {
 			
 			valores[1] = valores[0]- somaDespesasDaCategoria;
 			
+			//Obtém a meta mensal da categoria correspondente
+			MetaMensal metaMensal = MetaMensalDAO.pesquisaMetaMensal(idCategoria, dataAtual);
+			if( metaMensal == null) throw new SQLException();
+			valores[2] = metaMensal.getAlerta();
+			
 		} catch (SQLException e) {
 			System.out.println("Erro ao acessar metas mensais.");
 			return null;
 		}
 		System.out.println("valores="+valores[0]+"   "+valores[1]);
 		return valores;
+	}
+	
+	private enum STATUS{AZUL,AMARELO,VERMELHO};
+	private STATUS verificaStatus(String nomeCategoria){
+		Double[] infoCategoria = obtemValoresMetaCategoria(nomeCategoria);
+		if(infoCategoria != null){
+			if(infoCategoria[1] < 0) return STATUS.VERMELHO;
+			
+			double valorAlertaEmDinheiro = infoCategoria[0]*infoCategoria[2]/100;
+			
+			if(infoCategoria[0]-infoCategoria[1] > valorAlertaEmDinheiro)
+				return STATUS.AMARELO;
+			else 
+				return STATUS.AZUL;
+		}
+		return STATUS.VERMELHO;
 	}
 }//class PainelTituloPainelGraficos 
