@@ -124,7 +124,7 @@ public class JanelaCriarDespesa extends JDialog{
 		painelTitulo.add(labelSubTitulo, BorderLayout.SOUTH);
 		
 		painelTitulo.setPreferredSize(new Dimension(TAM_X, TAM_Y));
-		painelTitulo.setBackground(Color.GREEN);
+		painelTitulo.setBackground(Color.LIGHT_GRAY);
 		painelTitulo.setVisible(true);
 		
 		return painelTitulo;
