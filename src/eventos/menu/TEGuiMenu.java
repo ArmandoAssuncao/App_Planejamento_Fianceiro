@@ -6,6 +6,8 @@ import gui.categoria.JanelaCriarCategoria;
 import gui.categoria.JanelaEditarCategoria;
 import gui.despesa.JanelaCriarDespesa;
 import gui.framePrincipal.GuiMenu;
+import gui.graficos.JanelaBalancoDespesas;
+import gui.graficos.JanelaBalancoMensal;
 import gui.renda.JanelaCriarRenda;
 
 import java.awt.event.ActionEvent;
@@ -83,6 +85,14 @@ public class TEGuiMenu implements ActionListener{
 		
 		else if(event.getSource() == guiMenu.getMenuItemAutor()){
 			new JanelaAutor();
+		}
+		
+		else if(event.getSource() == guiMenu.getMenuItemBalancoMensal()){
+			new JanelaBalancoMensal();
+		}
+		
+		else if(event.getSource() == guiMenu.getMenuItemBalancoMensalDespesas()){
+			new JanelaBalancoDespesas();
 		}
 		
 		
