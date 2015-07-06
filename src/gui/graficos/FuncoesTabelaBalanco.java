@@ -77,7 +77,7 @@ public final class FuncoesTabelaBalanco {
 	/**
 	 * Adiciona uma linha vazia na tabela.
 	 * @param tabela <code>JTable</code> com a tabela
-	 * @param alturaLinha <int> em pixels da linha
+	 * @param alturaLinha <code>int</code> em pixels da linha
 	 */
 	public static void adicionarLinhaVaziaTabela(JTable tabela, int alturaLinha){
 		DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
