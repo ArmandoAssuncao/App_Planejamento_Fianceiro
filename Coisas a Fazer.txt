@@ -5,3 +5,9 @@ ou
 classe RendaMensal compor classe Categoria
 
 Exibir um icone na aba da categoria se a meta utrapassar o limite definido. icone amarelo meta>=70% , icone vermelho meta>=100%
+
+---------
+Consertar:
+- deveria ser gerado apenas um gráfico de linhas, como se fosse um gráfico de barras ( com a espessura menor).
+- arrumar a codificação do banco de dados hsqldb 
+- na tela de despesas, reorganizar as abas de categoria
