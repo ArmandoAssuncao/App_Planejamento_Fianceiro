@@ -85,7 +85,42 @@ public class TEPainelGraficos implements ActionListener{
 		}
 		
 		else if(event.getSource() == painelGraficos.getBotaoGraficoPizzaFormaPagamento()){
-			painelGraficos.adicionarGrafico("titulo Pizza forma pagamento", new String[]{"campo1", "campo2"}, new int[]{1,2}, 1);
+			List<Despesa> despesas = new ArrayList<Despesa>();
+			List<RendaMensal> rendasMensal = new ArrayList<RendaMensal>();
+			int valorTotalAVista = 0;
+			int valorTotalCartao = 0;
+			int valorTotalCheque = 0;
+			int valorTotalPrazo = 0;
+			
+			Calendar mesAno = Calendar.getInstance();
+			System.out.println(mesAno.get(Calendar.MONTH));
+			
+			try {
+				despesas.addAll(DespesaDAO.despesasDoMesAno(mesAno));
+				rendasMensal.addAll(RendaMensalDAO.rendaMensalDoMesAno(mesAno));
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+				return;
+			}
+			
+			for(int indice = 0; indice < despesas.size(); indice++){
+				Despesa despesa = despesas.get(indice);
+				if(despesa.getIdFormaPagamento() == 1){
+					valorTotalAVista += despesa.getValorDespesa();
+				}
+				else if(despesa.getIdFormaPagamento() == 2){
+					valorTotalCartao += despesa.getValorDespesa();
+				}
+				else if(despesa.getIdFormaPagamento() == 3){
+					valorTotalCheque += despesa.getValorDespesa();
+				}
+				else if(despesa.getIdFormaPagamento() == 4){
+					valorTotalPrazo += despesa.getValorDespesa();
+				}
+			}
+			
+			painelGraficos.adicionarGrafico("Balanço Mensal", new String[]{"À Vista", "Cartão de Credito", "Cheque", "Prazo"},
+					new int[]{valorTotalAVista, valorTotalCartao, valorTotalCheque, valorTotalPrazo}, 1);
 		}
 	}
 	
