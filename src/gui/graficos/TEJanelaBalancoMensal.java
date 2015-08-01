@@ -118,21 +118,20 @@ public class TEJanelaBalancoMensal  implements ActionListener {
 			System.out.println(valorTotalInvestimentos);
 			System.out.println(valorTotalRendas);
 			
-			String rendas[] = new String[]{"Saldo", "R$ " + valorTotalRendas};
-			String saldo[] = new String[]{"Saldo", "R$ " + valorSaldoAtual};
+			String rendas[] = new String[]{"Renda total:", "R$ " + valorTotalRendas};
+			String saldo[] = new String[]{"SaldoAtual", "R$ " + valorSaldoAtual};
 			String gastos[] = new String[]{"Gastos", "R$ " + valorTotalGastos};
 			String investimentos[] = new String[]{"Investimentos", "R$ " + valorTotalInvestimentos};
 			
-			janelaBalancoMensal.adicionarLinhaVaziaTabela(40);
+			janelaBalancoMensal.adicionarLinhaVaziaTabela(60);
 			janelaBalancoMensal.adicionarDadosTabela(rendas);
 			janelaBalancoMensal.adicionarDadosTabela(gastos);
 			janelaBalancoMensal.adicionarDadosTabela(investimentos);
 			janelaBalancoMensal.adicionarDadosTabela(saldo);
 			
 			//Adiciona as rendas
-			janelaBalancoMensal.adicionarLinhaVaziaTabela(40);
+			janelaBalancoMensal.adicionarLinhaVaziaTabela(60);
 			janelaBalancoMensal.adicionarTituloTabela("Receitas", 1);
-			janelaBalancoMensal.adicionarLinhaVaziaTabela(20);
 			janelaBalancoMensal.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data"});
 			for(int indice = 0; indice < arrayRendasMensal.size(); indice++){
 				String descricao = arrayRendas.get(indice).getDescricao();
@@ -142,9 +141,8 @@ public class TEJanelaBalancoMensal  implements ActionListener {
 			}
 			
 			//Adiciona os Investimentos
-			janelaBalancoMensal.adicionarLinhaVaziaTabela(40);
+			janelaBalancoMensal.adicionarLinhaVaziaTabela(60);
 			janelaBalancoMensal.adicionarTituloTabela("Investimentos", 1);
-			janelaBalancoMensal.adicionarLinhaVaziaTabela(20);
 			janelaBalancoMensal.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"});
 			for(int indice = 0; indice < arrayDespesasInvestimentos.size(); indice++){
 				String descricao = arrayDespesasInvestimentos.get(indice).getDescricao();
@@ -157,7 +155,7 @@ public class TEJanelaBalancoMensal  implements ActionListener {
 			}
 			
 			//Adiciona as Despesas
-			janelaBalancoMensal.adicionarLinhaVaziaTabela(40);
+			janelaBalancoMensal.adicionarLinhaVaziaTabela(60);
 			janelaBalancoMensal.adicionarTituloTabela("Gastos", 1);
 			//janelaBalancoMensal.adicionarLinhaVaziaTabela(20);
 			janelaBalancoMensal.adicionarDadosTabela(new String[]{"Descrição", "Valor", "Data", "Data Pagamento", "Nº de Parcelas", "Nº do Cheque"});

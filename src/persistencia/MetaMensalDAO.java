@@ -339,4 +339,55 @@ public class MetaMensalDAO extends PlanejamentoFinanceiroDAO {
 		
 		return id;
 	}
+	
+	/**
+	 *   Retorna a primeira data da MetaMensal no banco de dados
+	 * @return <code>Calendar</code> com a data da primeira meta mensal no banco de dados, caso não encontre retorna <code>null</code>
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public Calendar getPrimeiraData() throws SQLException{
+		Calendar data = null;
+		
+		this.abreConexao();
+		String comandoSql = "SELECT TOP 1 mesAnoMeta FROM meta_mensal";
+		ResultSet resultadoQuery = this.executaQuery(comandoSql);
+		
+		if(resultadoQuery.next())
+			data = Converte.stringToCalendar(resultadoQuery.getString("mesAnoMeta")); //valor da coluna um, unica coluna
+		
+		this.fechaConexao();
+		
+		return data;
+	}
+	
+	/**
+	 *   Retorna a primeira data da MetaMensal no banco de dados
+	 * @return {@code List<Calendar>} com todas as datas mensais do mês e ano da tabela
+	 * @throws SQLException possível erro gerado por má configuração do banco de dados
+	 */
+	public List<Calendar> getDatasMesAno() throws SQLException{
+		List<Calendar> datas = new ArrayList<>();
+		Calendar data = null;
+		
+		this.abreConexao();
+		String comandoSql = "SELECT mesAnoMeta FROM meta_mensal";
+		ResultSet resultadoQuery = this.executaQuery(comandoSql);
+		
+		while(resultadoQuery.next()){
+			data = Converte.stringToCalendar(resultadoQuery.getString("mesAnoMeta"));
+			System.out.println(data.get(Calendar.MONTH));
+			if(datas.size() == 0)
+				datas.add(data);
+			for(int i = 0; i < datas.size(); i++){
+				if(!(datas.get(i).get(Calendar.MONTH) == data.get(Calendar.MONTH) && datas.get(i).get(Calendar.YEAR) == data.get(Calendar.YEAR))){
+					datas.add(data);
+					break;
+				}
+			}
+		}
+		
+		this.fechaConexao();
+		
+		return datas;
+	}
 }//class MetaMensalDAO

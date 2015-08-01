@@ -2,7 +2,6 @@ package gui.graficos;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import funcoes.Converte;
 import persistencia.MetaMensalDAO;
 
 /**
@@ -29,13 +27,13 @@ import persistencia.MetaMensalDAO;
  * @author Richardson William
  *
  */
-public class JanelaBalancoMensal extends JDialog {
-	private final String TITULO_JANELA= "Balanço Mensal";
+public class JanelaBalancoDespesas extends JDialog {
+	private final String TITULO_JANELA= "Balanço Tipo de Despesas";
 	private final int TAM_JANELA_X = 900;
 	private final int TAM_JANELA_Y = 600;
 	private final int NUM_COLUNAS = 7;
 	
-	private TEJanelaBalancoMensal teJanelaBalancoMensal;
+	private TEJanelaBalancoDespesas teJanelaBalancoDespesas;
 	
 	private JTable tabela;
 	private DefaultTableModel modelo;
@@ -45,10 +43,10 @@ public class JanelaBalancoMensal extends JDialog {
 	/**
 	 * Cria uma instância do <code>JDialog</code>
 	 */
-	public JanelaBalancoMensal() {
+	public JanelaBalancoDespesas() {
 		setTitle(TITULO_JANELA);
 		
-		this.teJanelaBalancoMensal = new TEJanelaBalancoMensal(this);
+		this.teJanelaBalancoDespesas = new TEJanelaBalancoDespesas(this);
 		
 		//iniciaElementos();
 		
@@ -124,19 +122,7 @@ public class JanelaBalancoMensal extends JDialog {
 			jComboBoxMes.addItem("01/"+mes+"/"+ano);
 		}
 		
-		/*if(primeiraData != null){
-			int primeiroMes = primeiraData.get(Calendar.MONTH);
-			int primeiroAno = primeiraData.get(Calendar.YEAR);
-			int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
-			int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
-			for(int i = primeiroAno; i <= anoAtual; i++){
-				for(int j = primeiroMes; j <= mesAtual; j++){
-					jComboBoxMes.addItem(j+"/"+i);
-				}
-			}
-		}*/
-		
-		jComboBoxMes.addActionListener(teJanelaBalancoMensal);
+		jComboBoxMes.addActionListener(teJanelaBalancoDespesas);
 		
 		painelBotoes.add(labelData);
 		painelBotoes.add(jComboBoxMes);

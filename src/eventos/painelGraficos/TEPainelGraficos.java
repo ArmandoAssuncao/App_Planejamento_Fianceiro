@@ -1,5 +1,6 @@
 package eventos.painelGraficos;
 
+import gui.graficos.JanelaBalancoDespesas;
 import gui.graficos.JanelaBalancoMensal;
 import gui.painelGraficos.PainelGraficos;
 
@@ -32,6 +33,7 @@ public class TEPainelGraficos implements ActionListener{
 			new JanelaBalancoMensal();
 		}
 		else if(event.getSource() == painelGraficos.getBotaoBalancoDespesa()){
+			new JanelaBalancoDespesas();
 		}
 		else if(event.getSource() == painelGraficos.getBotaoGraficoPizzaTotal()){
 			List<Despesa> despesas = new ArrayList<Despesa>();
